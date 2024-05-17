@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.XR.Haptics;
 
 namespace Actor
@@ -18,16 +19,17 @@ namespace Actor
         
         private WrapBody _body;
 
-        public StateMachine(ActorStat stat, Transform tr, Rigidbody2D rigid)
+        public StateMachine(ActorField _field, WrapBody body)
         {
-            _body = new WrapBody(stat, tr, rigid);
-            InitStates(stat);
+            _body = body;
+            InitStates(_field);
         }
 
-        private void InitStates(ActorStat stat)
+        private void InitStates(ActorField _field)
         {
-            _states.Add(States.OnGround, new OnGroundState(stat, _body));
-            _states.Add(States.OnAir, new OnAirState(stat, _body));
+            BaseState.InitState(_field, _body);
+            _states.Add(States.OnGround, new OnGroundState());
+            _states.Add(States.OnAir, new OnAirState());
 
             CurrentState = States.OnGround;
         }
@@ -68,19 +70,19 @@ namespace Actor
             _states[CurrentState].ExitState();
         }
         
-        public void OnMove(Vector2 horizontal)
+        public void Move(Vector2 input)
         {
-            
+            _states[CurrentState].Move(input);
         }
 
-        public void OnJump()
+        public void Jump()
         {
-            
+            _states[CurrentState].Jump();
         }
 
-        public void OnDown()
+        public void Down()
         {
-
+            _states[CurrentState].Down();
         }
     }
 }

@@ -10,12 +10,14 @@ namespace Actor
     public class ActorController : MonoBehaviour
     {
         private ActorStat _stat;
+        private ActorField _field;
         private StateMachine _stateMachine;
 
         void Awake()
         {
             _stat = GetComponent<ActorStat>();
-            _stateMachine = new StateMachine(_stat, gameObject.transform, GetComponent<Rigidbody2D>());
+            _field = GetComponent<ActorField>();
+            _stateMachine = new StateMachine(_field, GetComponent<WrapBody>());
         }
         void Start()
         {
@@ -31,20 +33,20 @@ namespace Actor
         {
             _stateMachine.FixedUpdateState();
         }
-
+        
         public void OnMove(InputValue input)
         {
-            _stateMachine.OnMove(input.Get<Vector2>());
+            _stateMachine.Move(input.Get<Vector2>());
         }
 
         public void OnJump()
         {
-            _stateMachine.OnJump();
+            _stateMachine.Jump();
         }
 
         public void OnDown()
         {
-            _stateMachine.OnDown();
+            _stateMachine.Down();
         }
     }
 

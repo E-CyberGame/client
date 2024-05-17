@@ -5,30 +5,24 @@ using UnityEngine;
 
 public abstract class BaseState
 {
-    protected static ActorStat _stat;
+    protected static ActorField _field;
     protected static WrapBody _body;
 
-    protected BaseState() { }
-    protected BaseState(ActorStat stat, WrapBody body)
+    public static void InitState(ActorField field, WrapBody body)
     {
-        InitState(stat, body);
-    }
-
-    public void InitState(ActorStat stat, WrapBody body)
-    {
-        _stat = stat;
+        _field = field;
         _body = body;
     }
 
-    public abstract void Jump();
-    public abstract void Down();
-    public abstract void HorizontalMove(Vector2 Horizontal);
+    public virtual void Jump(){}
+    public virtual void Down(){}
+    public virtual void Move(Vector2 directionX){}
 
-    public abstract void EnterState();
+    public virtual void EnterState(){}
 
-    public abstract void UpdateState();
+    public virtual void UpdateState(){}
 
-    public abstract void FixedUpdateState();
+    public virtual void FixedUpdateState(){}
 
-    public abstract void ExitState();
+    public virtual void ExitState(){}
 }

@@ -6,35 +6,17 @@ namespace Actor
 {
     public class OnGroundState : BaseState
     {
-        public OnGroundState(ActorStat stat, WrapBody body) : base(stat, body) { }
-        
         public override void Jump()
         {
-            _stat.jumpCount++;
+            _body.Jump();
         }
 
-        public override void Down()
+        public override void Move(Vector2 directionX)
         {
-            
-        }
-
-
-        public override void HorizontalMove(Vector2 Horizontal)
-        {
-        
+            _body.Move(directionX);
         }
 
         public override void EnterState()
-        {
-
-        }
-
-        public override void UpdateState()
-        {
-
-        }
-
-        public override void FixedUpdateState()
         {
 
         }

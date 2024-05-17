@@ -1,50 +1,74 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class WrapBody
+public class WrapBody : MonoBehaviour
 {
     private ActorStat _stat;
-    private RaycastHit _hitGround;
     private Transform _transform;
     private Rigidbody2D _rigidbody;
-    
-    public WrapBody(ActorStat stat, Transform tr, Rigidbody2D rigid)
+    private RaycastHit2D _hitGround;
+    public Vector2 directionX = Vector2.zero;
+    private LayerMask groundLayer;
+    private Vector2 velocity;
+    private bool isPressing
     {
-        _stat = stat;
-        _transform = tr;
-        _rigidbody = rigid;
+        get { return directionX.x != 0 ? true : false;  }
     }
+    
+    public float groundCheckLine = 0.5f;
 
+    public void Awake()
+    {
+        _stat = GetComponent<ActorStat>();
+        _rigidbody = GetComponent<Rigidbody2D>();
+        _transform = transform;
+        groundLayer = LayerMask.GetMask("Ground");
+    }
+    
     public bool OnGround()
     {
-        //Physics2D 문제인듯. 그리고 Ray는 따로 빼두는 게 성능에 이로울듯
-        Debug.DrawRay(_transform.position, Vector3.down * _stat.groundCheckLine, Color.red);
-        if(Physics.Raycast(_transform.position, Vector3.down, out _hitGround, _stat.groundCheckLine))
-        {
-            Debug.Log(_hitGround.collider.gameObject.layer);
-            if(_hitGround.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
-            {
-                return true;
-            }
+        //?? 문제가 해결되지 않음.
+        Debug.DrawRay(_transform.position, Vector3.down * groundCheckLine, Color.red);
+        _hitGround = Physics2D.Raycast(_transform.position, Vector3.down, groundCheckLine
+            , groundLayer);
+        if(_hitGround) {
+            return true;
         }
-        
         return false;
     }
     
-    public void OnMove(Vector2 horizontal)
+    public void Move(Vector2 directionX)
     {
-        Debug.Log("Move" + horizontal);
+        this.directionX = directionX;
     }
 
-    public void OnJump()
+    public void FixedUpdate()
+    {
+        //가속 구현용(미완)
+        if (isPressing)
+        {
+            velocity = directionX * _stat.moveSpeed * Time.deltaTime;
+        }
+        else
+        {
+            velocity = directionX * _stat.moveSpeed * Time.deltaTime;
+        }
+        _rigidbody.velocity = new Vector2(velocity.x, _rigidbody.velocity.y);
+    }
+
+    public void Jump()
     {
         Debug.Log("Jump");
+        _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _stat.jumpSpeed);
     }
     
-    public void OnDown()
+    public void Down()
     {
+        _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _stat.downSpeed * -1);
         Debug.Log("Down");
     }
 }

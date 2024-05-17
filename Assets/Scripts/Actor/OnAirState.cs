@@ -4,45 +4,34 @@ using UnityEngine;
 
 public class OnAirState : BaseState
 {
-    public OnAirState(ActorStat stat, WrapBody body) : base(stat, body) { }
 
-        
+    public int jumpCount = 1;
+    
     public override void Jump()
     {
-        if (_stat.MaxJumpCount <= _stat.jumpCount)
+        if (_field.MaxJumpCount <= jumpCount)
             return;
-        _stat.jumpCount++;
-        _body.OnJump();
+        jumpCount++;
+        _body.Jump();
     }
 
     public override void Down()
     {
-            
+        _body.Down();
     }
 
-
-    public override void HorizontalMove(Vector2 Horizontal)
+    public override void Move(Vector2 directionX)
     {
-        
+        _body.Move(directionX);
     }
 
     public override void EnterState()
     {
-
-    }
-
-    public override void UpdateState()
-    {
-
-    }
-
-    public override void FixedUpdateState()
-    {
-
+        jumpCount = 1;
     }
 
     public override void ExitState()
     {
-        _stat.jumpCount = 0;
+        
     }
 }
