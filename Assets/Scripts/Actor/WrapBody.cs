@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+//도메인
 public class WrapBody : MonoBehaviour
 {
     private ActorStat _stat;
@@ -51,11 +52,11 @@ public class WrapBody : MonoBehaviour
         //가속 구현용(미완)
         if (isPressing)
         {
-            velocity = directionX * _stat.moveSpeed * Time.deltaTime;
+            velocity = directionX * _stat.MoveSpeed.Value * _stat.Speed.Value * Time.deltaTime;
         }
         else
         {
-            velocity = directionX * _stat.moveSpeed * Time.deltaTime;
+            velocity = directionX * _stat.MoveSpeed.Value * _stat.Speed.Value * Time.deltaTime;
         }
         _rigidbody.velocity = new Vector2(velocity.x, _rigidbody.velocity.y);
     }
@@ -63,12 +64,12 @@ public class WrapBody : MonoBehaviour
     public void Jump()
     {
         Debug.Log("Jump");
-        _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _stat.jumpSpeed);
+        _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _stat.Speed.Value * _stat.JumpSpeed.Value);
     }
     
     public void Down()
     {
-        _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _stat.downSpeed * -1);
+        _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _stat.Speed.Value * _stat.DownSpeed.Value * -1);
         Debug.Log("Down");
     }
 }
