@@ -12,11 +12,13 @@ namespace Actor
         private ActorStat _stat;
         private ActorField _field;
         private StateMachine _stateMachine;
+        private SkillController _skill;
 
         void Awake()
         {
             _stat = GetComponent<ActorStat>();
             _field = GetComponent<ActorField>();
+            _skill = GetComponent<SkillController>();
             _stateMachine = new StateMachine(_field, GetComponent<WrapBody>());
         }
         void Start()
