@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.XR.Haptics;
 
+//응용
 namespace Actor
 {
     public enum States{
@@ -30,6 +31,7 @@ namespace Actor
             BaseState.InitState(_field, _body);
             _states.Add(States.OnGround, new OnGroundState());
             _states.Add(States.OnAir, new OnAirState());
+            _states.Add(States.NoControl, new NoControlState());
 
             CurrentState = States.OnGround;
         }
