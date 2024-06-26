@@ -7,11 +7,11 @@ using TMPro;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
-public class UI_RaidWaitingCustomParty : UI_Popup
+public class UI_RaidReward : UI_Popup
 {
     enum Buttons
     {
-        BackButton
+        NextButton
     }
 
     private void Start()
@@ -24,12 +24,12 @@ public class UI_RaidWaitingCustomParty : UI_Popup
         base.Init();
         Bind<Button>(typeof(Buttons));
 
-        GetButton((int)Buttons.BackButton).gameObject.BindUIEvent(BackButtonClicked);
+        GetButton((int)Buttons.NextButton).gameObject.BindUIEvent(NextButtonClicked);
 
     }
-    public void BackButtonClicked(PointerEventData eventData)
+    public void NextButtonClicked(PointerEventData eventData)
     {
-        Debug.Log("BackButton Clicked");
-        SceneManager.LoadScene("Raid_Select");
+        Debug.Log("NextButton Clicked");
+        SceneManager.LoadScene("MainRoom");
     }
 }
