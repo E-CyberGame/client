@@ -2489,7 +2489,7 @@ GameObject:
   - component: {fileID: 1633840969}
   - component: {fileID: 1633840968}
   m_Layer: 5
-  m_Name: SPSK1
+  m_Name: SPSk1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
