@@ -13,12 +13,13 @@ public class WrapBody : MonoBehaviour
     private Rigidbody2D _rigidbody;
     private RaycastHit2D _hitGround;
     public Vector2 directionX = Vector2.zero;
+    public Vector2 beforeDirectionX = Vector2.zero;
     private LayerMask groundLayer;
     private Vector2 velocity;
-    private bool isPressing
-    {
-        get { return directionX.x != 0 ? true : false;  }
-    }
+    private float dashVelocity = 1.0f;
+    public int jumpCount { get; private set; } = 0;
+    private bool isPressing { get { return directionX.x != 0 ? true : false;  } }
+    private bool isDashing = false;
     
     public float groundCheckLine = 0.5f;
 
@@ -45,31 +46,60 @@ public class WrapBody : MonoBehaviour
     public void Move(Vector2 directionX)
     {
         this.directionX = directionX;
+        if (directionX != Vector2.zero)
+            beforeDirectionX = directionX;
     }
 
     public void FixedUpdate()
     {
-        //가속 구현용(미완)
-        if (isPressing)
+        //가속 구현 -> isPressing
+        velocity = directionX * _stat.moveSpeed * _stat.speed * Time.deltaTime;
+
+        if (isDashing)
         {
-            velocity = directionX * _stat.MoveSpeed.Value * _stat.Speed.Value * Time.deltaTime;
-        }
-        else
-        {
-            velocity = directionX * _stat.MoveSpeed.Value * _stat.Speed.Value * Time.deltaTime;
+            velocity = beforeDirectionX * _stat.moveSpeed * _stat.speed * Time.deltaTime * dashVelocity;
         }
         _rigidbody.velocity = new Vector2(velocity.x, _rigidbody.velocity.y);
     }
 
+    public void ResetJumpCount()
+    {
+        jumpCount = 0;
+    }
+
     public void Jump()
     {
-        Debug.Log("Jump");
-        _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _stat.Speed.Value * _stat.JumpSpeed.Value);
+        _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _stat.speed * _stat.jumpSpeed);
+        jumpCount++;
     }
     
     public void Down()
     {
-        _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _stat.Speed.Value * _stat.DownSpeed.Value * -1);
+        _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _stat.speed * _stat.downSpeed * -1);
         Debug.Log("Down");
+    }
+
+    public void GravityOFF()
+    {
+        _rigidbody.gravityScale = 1;
+    }
+
+    public void GravityOn()
+    {
+        _rigidbody.gravityScale = 3;
+    }
+
+    public void DashOn()
+    {
+        GravityOFF();
+        isDashing = true;
+        dashVelocity = _stat.dashSpeedRatio;
+    }
+
+    public void DashOff()
+    {
+        GravityOn();
+        isDashing = false;
+        dashVelocity = 1f;
     }
 }

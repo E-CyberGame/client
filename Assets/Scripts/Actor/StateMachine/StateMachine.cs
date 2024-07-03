@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Managers;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.XR.Haptics;
@@ -10,6 +11,7 @@ namespace Actor
     public enum States{
         OnGround,
         OnAir,
+        OnDash,
         NoControl,
     }
 
@@ -20,18 +22,21 @@ namespace Actor
         
         private WrapBody _body;
 
-        public StateMachine(ActorField _field, WrapBody body)
+        private Vector2 _directionX;
+
+        public StateMachine(ActorField _field, WrapBody body, Animator animator)
         {
             _body = body;
-            InitStates(_field);
+            InitStates(_field, animator);
         }
 
-        private void InitStates(ActorField _field)
+        private void InitStates(ActorField _field, Animator animator)
         {
-            BaseState.InitState(_field, _body);
+            BaseState.InitState(_field, _body, animator);
             _states.Add(States.OnGround, new OnGroundState());
             _states.Add(States.OnAir, new OnAirState());
             _states.Add(States.NoControl, new NoControlState());
+            _states.Add(States.OnDash, new OnDashState());
 
             CurrentState = States.OnGround;
         }
@@ -46,6 +51,8 @@ namespace Actor
 
         private void CheckChangeState()
         {
+            if (CurrentState == States.OnDash)
+                return;
             if (_body.OnGround())
             {
                 if(CurrentState != States.OnGround) ChangeState(States.OnGround);
@@ -74,7 +81,8 @@ namespace Actor
         
         public void Move(Vector2 input)
         {
-            _states[CurrentState].Move(input);
+            _directionX = input;
+            _states[CurrentState].Move(_directionX);
         }
 
         public void Jump()
@@ -85,6 +93,25 @@ namespace Actor
         public void Down()
         {
             _states[CurrentState].Down();
+        }
+
+        public void Dash()
+        {
+            ChangeState(States.OnDash);
+            CoroutineHelper.Instance.StartCoroutineHelper(EscapeDash());
+        }
+
+        IEnumerator EscapeDash()
+        {
+            yield return new WaitForSeconds(0.2f);
+            if (_body.OnGround())
+            {
+                ChangeState(States.OnGround);
+            }
+            else
+            {
+                ChangeState(States.OnAir);
+            }
         }
     }
 }

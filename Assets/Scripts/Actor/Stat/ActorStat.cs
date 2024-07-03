@@ -6,7 +6,7 @@ using UnityEngine.Serialization;
 
 public class ActorStat : MonoBehaviour
 {
-    public FluidStat HP { get; private set; }
+    /*public FluidStat HP { get; private set; }
     public FluidStat MP { get; private set; }
 
     public GameStat MaxHP { get; private set; }
@@ -21,6 +21,7 @@ public class ActorStat : MonoBehaviour
     public FixedStat MoveSpeed { get; private set; }
     public FixedStat JumpSpeed { get; private set; }
     public FixedStat DownSpeed { get; private set; }
+    public FixedStat DashSpeed { get; private set; }*/
 
     #region Inspector
 
@@ -41,6 +42,8 @@ public class ActorStat : MonoBehaviour
     public float moveSpeed = 200f;
     public float jumpSpeed = 10f;
     public float downSpeed = 15f;
+    public float dashSpeedRatio = 1.7f;
+    public float dashSecond = 0.3f;
 
     #endregion
 
@@ -51,7 +54,7 @@ public class ActorStat : MonoBehaviour
 
     void Init()
     {
-        HP = new FluidStat(hp);
+        /*HP = new FluidStat(hp);
         MP = new FluidStat(mp);
         MaxHP = new GameStat(maxHP);
         MaxMP = new GameStat(maxMP);
@@ -63,13 +66,14 @@ public class ActorStat : MonoBehaviour
         MoveSpeed = new FixedStat(moveSpeed);
         JumpSpeed = new FixedStat(jumpSpeed);
         DownSpeed = new FixedStat(downSpeed);
+        DashSpeed = new FixedStat(dashSpeed);*/
     }
 
     public void Update()
     {
-        if (moveSpeed != MoveSpeed.Value || jumpSpeed != JumpSpeed.Value || downSpeed != DownSpeed.Value)
+        /*if (moveSpeed != MoveSpeed.Value || jumpSpeed != JumpSpeed.Value || downSpeed != DownSpeed.Value)
         {
             Init();
-        }
+        }*/
     }
 }
