@@ -23,6 +23,8 @@ public class WrapBody : MonoBehaviour
     
     public float groundCheckLine = 0.5f;
 
+    public float jumpHeight = 2.0f;
+
     public void Awake()
     {
         _stat = GetComponent<ActorStat>();
@@ -41,6 +43,11 @@ public class WrapBody : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    public bool CanJump()
+    {
+        return _stat.MaxJumpCount <= jumpCount;
     }
     
     public void Move(Vector2 directionX)
@@ -69,7 +76,9 @@ public class WrapBody : MonoBehaviour
 
     public void Jump()
     {
-        _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _stat.speed * _stat.jumpSpeed);
+        float vel = (jumpHeight / _stat.jumpTime) * _rigidbody.gravityScale;
+        Debug.Log(vel);
+        _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, vel);
         jumpCount++;
     }
     
