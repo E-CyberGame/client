@@ -7,7 +7,7 @@ public class OnAirState : BaseState
 {
     public override void Jump()
     {
-        if (_field.MaxJumpCount <= _body.jumpCount)
+        if (_body.CanJump())
             return;
         _body.Jump();
         _anim.changeAnimation(ActorAnim.Jumping);
@@ -26,6 +26,14 @@ public class OnAirState : BaseState
 
     public override void EnterState()
     {
+    }
+    
+    public override void FixedUpdateState()
+    {
+        if (_body.OnGround())
+        {
+            _stateMachine.ChangeState(States.OnGround);
+        }
     }
 
     public override void ExitState()

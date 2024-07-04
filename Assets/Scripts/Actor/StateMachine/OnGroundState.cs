@@ -24,6 +24,14 @@ namespace Actor
             CheckRunning(_body.directionX);
             _body.ResetJumpCount();
         }
+        
+        public override void FixedUpdateState()
+        {
+            if (!_body.OnGround())
+            {
+                _stateMachine.ChangeState(States.OnAir);
+            }
+        }
 
         public override void ExitState()
         {

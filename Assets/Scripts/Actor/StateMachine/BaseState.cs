@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -7,14 +8,14 @@ namespace Actor
 {
     public abstract class BaseState
     {
-        protected static ActorField _field;
         protected static WrapBody _body;
         protected static ActorAnimController _anim;
+        protected static StateMachine _stateMachine;
 
-        public static void InitState(ActorField field, WrapBody body, Animator animator)
+        public static void InitState(WrapBody body, Animator animator, StateMachine stateMachine)
         {
-            _field = field;
             _body = body;
+            _stateMachine = stateMachine;
             _anim = new ActorAnimController(animator);
         }
 

@@ -24,15 +24,15 @@ namespace Actor
 
         private Vector2 _directionX;
 
-        public StateMachine(ActorField _field, WrapBody body, Animator animator)
+        public StateMachine(WrapBody body, Animator animator)
         {
             _body = body;
-            InitStates(_field, animator);
+            InitStates(animator);
         }
 
-        private void InitStates(ActorField _field, Animator animator)
+        private void InitStates(Animator animator)
         {
-            BaseState.InitState(_field, _body, animator);
+            BaseState.InitState(_body, animator, this);
             _states.Add(States.OnGround, new OnGroundState());
             _states.Add(States.OnAir, new OnAirState());
             _states.Add(States.NoControl, new NoControlState());
@@ -41,7 +41,7 @@ namespace Actor
             CurrentState = States.OnGround;
         }
         
-        private void ChangeState(States state)
+        public void ChangeState(States state)
         {
             ExitState();
             CurrentState = state;
@@ -49,24 +49,9 @@ namespace Actor
             Debug.Log("CurrentState:" + state);
         }
 
-        private void CheckChangeState()
-        {
-            if (CurrentState == States.OnDash)
-                return;
-            if (_body.OnGround())
-            {
-                if(CurrentState != States.OnGround) ChangeState(States.OnGround);
-            }
-            else
-            {
-                if(CurrentState != States.OnAir) ChangeState(States.OnAir);
-            }
-        }
-
         public void UpdateState()
         {
             _states[CurrentState].UpdateState();
-            CheckChangeState();
         }
 
         public void FixedUpdateState()
@@ -98,20 +83,6 @@ namespace Actor
         public void Dash()
         {
             ChangeState(States.OnDash);
-            CoroutineHelper.Instance.StartCoroutineHelper(EscapeDash());
-        }
-
-        IEnumerator EscapeDash()
-        {
-            yield return new WaitForSeconds(0.2f);
-            if (_body.OnGround())
-            {
-                ChangeState(States.OnGround);
-            }
-            else
-            {
-                ChangeState(States.OnAir);
-            }
         }
     }
 }
