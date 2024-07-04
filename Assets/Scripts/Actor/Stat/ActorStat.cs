@@ -41,9 +41,11 @@ public class ActorStat : MonoBehaviour
     [Header("Fixed Stat")]
     public float moveSpeed = 200f;
     public float jumpSpeed = 10f;
+    public float jumpTime = 0.3f;
     public float downSpeed = 15f;
     public float dashSpeedRatio = 1.7f;
     public float dashSecond = 0.3f;
+    public int MaxJumpCount = 2;
 
     #endregion
 
