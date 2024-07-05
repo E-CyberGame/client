@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 //도메인
 public class WrapBody : MonoBehaviour
 {
-    private ActorStat _stat;
+    public ActorStat _stat { get; private set; }
     private Transform _transform;
     private Rigidbody2D _rigidbody;
     private RaycastHit2D _hitGround;
@@ -24,6 +24,7 @@ public class WrapBody : MonoBehaviour
     public float groundCheckLine = 0.5f;
 
     public float jumpHeight = 2.0f;
+    public float dashLength = 3.0f;
 
     public void Awake()
     {
@@ -60,11 +61,11 @@ public class WrapBody : MonoBehaviour
     public void FixedUpdate()
     {
         //가속 구현 -> isPressing
-        velocity = directionX * _stat.moveSpeed * _stat.speed * Time.deltaTime;
+        velocity = directionX * _stat.moveSpeed * _stat.speed;
 
         if (isDashing)
         {
-            velocity = beforeDirectionX * _stat.moveSpeed * _stat.speed * Time.deltaTime * dashVelocity;
+            velocity = beforeDirectionX * _stat.speed * dashVelocity;
         }
         _rigidbody.velocity = new Vector2(velocity.x, _rigidbody.velocity.y);
     }
@@ -90,7 +91,7 @@ public class WrapBody : MonoBehaviour
 
     public void GravityOFF()
     {
-        _rigidbody.gravityScale = 1;
+        _rigidbody.gravityScale = 0f;
     }
 
     public void GravityOn()
@@ -102,7 +103,12 @@ public class WrapBody : MonoBehaviour
     {
         GravityOFF();
         isDashing = true;
-        dashVelocity = _stat.dashSpeedRatio;
+        dashVelocity = dashLength / _stat.dashTime;
+    }
+
+    public float GetDashTime()
+    {
+        return _stat.dashTime / _stat.speed;
     }
 
     public void DashOff()

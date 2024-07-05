@@ -21,7 +21,7 @@ namespace Actor
         
         IEnumerator EscapeDash()
         {
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(_body.GetDashTime());
             if (_body.OnGround())
             {
                 _stateMachine.ChangeState(States.OnGround);
