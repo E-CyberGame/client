@@ -11,16 +11,14 @@ namespace Actor
     public class ActorController : MonoBehaviour
     {
         private ActorStat _stat;
-        private ActorField _field;
         private StateMachine _stateMachine;
         private SkillController _skill;
 
         void Awake()
         {
             _stat = GetComponent<ActorStat>();
-            _field = GetComponent<ActorField>();
             _skill = GetComponent<SkillController>();
-            _stateMachine = new StateMachine(_field, GetComponent<WrapBody>(), GetComponent<Animator>());
+            _stateMachine = new StateMachine(GetComponent<WrapBody>(), GetComponent<Animator>());
         }
         void Start()
         {

@@ -1924,9 +1924,12 @@ MonoBehaviour:
   cri_damage: 0
   speed: 2
   moveSpeed: 200
-  jumpSpeed: 5
+  jumpSpeed: 4
+  jumpTime: 0.3
   downSpeed: 15
-  dashSpeed: 300
+  dashSpeedRatio: 1.7
+  dashSecond: 0.3
+  MaxJumpCount: 2
 --- !u!114 &1760593199
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1942,6 +1945,7 @@ MonoBehaviour:
   directionX: {x: 0, y: 0}
   beforeDirectionX: {x: 0, y: 0}
   groundCheckLine: 0.05
+  jumpHeight: 1
 --- !u!114 &1760593200
 MonoBehaviour:
   m_ObjectHideFlags: 0
