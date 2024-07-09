@@ -8,12 +8,14 @@ public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
     private static T _instance;
     public static T Instance { get { Init(); return _instance; } }
 
-    private void Awake()
+    public void Awake()
     {
-        Init();
+        //Safety Check
+        if(Init())
+            Destroy(gameObject);
     }
 
-    static void Init()
+    private static bool Init()
     {
         if (_instance == null)
         {
@@ -31,6 +33,10 @@ public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
             }
             
             DontDestroyOnLoad(obj);
+
+            return true;
         }
+
+        return false;
     }
 }

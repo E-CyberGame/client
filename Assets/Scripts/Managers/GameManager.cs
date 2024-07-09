@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using Managers;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class GameManager : Singleton<GameManager>
+public class GameManager : MonoSingleton<GameManager>
 {
     private void Awake()
     {

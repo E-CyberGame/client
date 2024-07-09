@@ -1,9 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace Managers
-{
-    public class CoroutineHelper : Singleton<CoroutineHelper>
+    public class CoroutineHelper : MonoSingleton<CoroutineHelper>
     {
         public Coroutine StartCoroutineHelper(IEnumerator coroutine)
         { 
@@ -16,4 +14,3 @@ namespace Managers
         }
 
     }
-}
