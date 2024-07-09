@@ -23,6 +23,16 @@ public class ResourceManager
 
         return obj;
     }
+    
+    public GameObject Instantiate(GameObject go, Vector3 vec)
+    {
+        return Object.Instantiate(go, vec, Quaternion.identity);
+    }
+        
+    public GameObject Instantiate(GameObject go, Transform parent)
+    {
+        return Object.Instantiate(go, parent);
+    }
 
     public void Destroy(GameObject _go, float _time = 0.0f) {
         if (_go == null)
