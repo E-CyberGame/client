@@ -3,12 +3,13 @@
 public class WaterBallSkill : ISkill
     {
         private ActorStat _stat;
-        public WaterBallSkill(ActorStat stat)
+        private WrapBody _body;
+        public WaterBallSkill(ActorStat stat, WrapBody body)
         {
-            Init(stat);
+            Init(stat, body);
         }
     
-        public void Init(ActorStat stat)
+        public void Init(ActorStat stat, WrapBody body)
         {
             _stat = stat;
         }

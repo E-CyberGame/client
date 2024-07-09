@@ -14,6 +14,7 @@ public class WrapBody : MonoBehaviour
     private RaycastHit2D _hitGround;
     public Vector2 directionX = Vector2.zero;
     public Vector2 beforeDirectionX = Vector2.zero;
+    public Vector2 currentDirectionX { get { return directionX == Vector2.zero ? beforeDirectionX : directionX; } }
     private LayerMask groundLayer;
     private Vector2 velocity;
     private float dashVelocity = 1.0f;

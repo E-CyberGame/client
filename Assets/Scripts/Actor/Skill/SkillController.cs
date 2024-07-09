@@ -22,9 +22,10 @@ public class SkillController : MonoBehaviour
     private void skillSlotInit()
     {
         ActorStat stat = GetComponent<ActorStat>();
+        WrapBody body = GetComponent<WrapBody>();
         skillSlotDict = new Dictionary<SkillSlot, ISkill>();
-        skillSlotDict.Add(SkillSlot.slot1, new FireBallSkill(stat));
-        skillSlotDict.Add(SkillSlot.slot2, new WaterBallSkill(stat));
+        //skillSlotDict.Add(SkillSlot.slot1, new FireBallSkill(stat, body));
+        //skillSlotDict.Add(SkillSlot.slot2, new WaterBallSkill(stat, body));
     }
 
     public void OnSkillSlot1()
