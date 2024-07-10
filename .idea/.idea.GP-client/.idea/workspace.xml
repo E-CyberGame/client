@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="48512494-4aeb-4d91-a298-89a062182807" name="Changes" comment="">
       <change afterPath="$PROJECT_DIR$/Assets/Prefabs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Actor/PlayerPrefab.prefab" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Actor/PlayerPrefab.prefab.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Animators/Player.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animators/Player.controller" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/KSY-test/ActorTest.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/KSY-test/ActorTest.unity" afterDir="false" />
@@ -49,7 +48,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "Skill",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -123,7 +122,7 @@
       <workItem from="1720167778850" duration="6033000" />
       <workItem from="1720322400662" duration="4128000" />
       <workItem from="1720419772049" duration="8417000" />
-      <workItem from="1720524439770" duration="1096000" />
+      <workItem from="1720524439770" duration="1546000" />
     </task>
     <servers />
   </component>
