@@ -8,8 +8,9 @@ public class ProjectileSkill : ISkill
 {
     private ActorStat _stat;
     private WrapBody _body;
-    private IProjectile _projectile;
-    public ProjectileSkill(ActorStat stat, WrapBody body, IProjectile projectile)
+    private Projectile _projectile;
+    
+    public ProjectileSkill(ActorStat stat, WrapBody body, Projectile projectile)
     {
         Init(stat, body);
         _projectile = projectile;
@@ -23,7 +24,7 @@ public class ProjectileSkill : ISkill
 
     public void Activate()
     {
-        //GameObject go = ResourceManager.Instantiate(_fireball, Vector3.zero, Quaternion.identity);
-        
+        _projectile.Generate();
+        _projectile.Fire();
     }
 }

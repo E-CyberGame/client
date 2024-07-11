@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Actor.Skill;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -24,7 +25,7 @@ public class SkillController : MonoBehaviour
         ActorStat stat = GetComponent<ActorStat>();
         WrapBody body = GetComponent<WrapBody>();
         skillSlotDict = new Dictionary<SkillSlot, ISkill>();
-        //skillSlotDict.Add(SkillSlot.slot1, new FireBallSkill(stat, body));
+        skillSlotDict.Add(SkillSlot.slot1, new ProjectileSkill(stat, body, new FireBall()));
         //skillSlotDict.Add(SkillSlot.slot2, new WaterBallSkill(stat, body));
     }
 
