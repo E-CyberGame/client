@@ -7,32 +7,34 @@ namespace Actor.Skill
 {
     public class FireBall : Projectile, IHit
     {
-        public FireBall()
+        public void Init (Vector3 startPoint, float destroyDelay, int distance)
         {
-            go = Resources.Load<GameObject>("TestPrefabs/testBall");
+            base.Init(startPoint, destroyDelay, distance);
+            startPoint = new Vector3(1f, 0.7f, 0f);
         }
         public void OnTriggerEnter2D(Collider2D other)
         {
-            Hit(other.GetComponent<IHitted>());
+            if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+            {
+                Hit(other.GetComponent<IHitted>());
+            }
         }
 
         public void Hit(IHitted target)
         {
             Debug.Log("때려버렷다");
-            target.Hitted();
-            Pierce(generated_go);
+            target.Hitted(); 
+            Pierce();
         }
-
-        //Generate랑 Fire이 Projectile Skill로 이동해야 하는 거 아님...?
-        public override void Generate()
+        public void MoveStartPoint()
         {
-            generated_go = Managers.Resources.Instantiate(go);
-            Managers.Resources.Destroy(generated_go, 1f);
+            transform.position += new Vector3(1f, 0.7f, 0f);
         }
-
         public override void Fire()
         {
-            generated_go.transform.DOLocalMove(new Vector3(10f, 0f, 0f), 1f);
+            Vector3 currentPosition = transform.position;
+            transform.DOLocalMove(new Vector3(currentPosition.x + 10f, currentPosition.y, 0f), 1f);
+            Managers.Resources.Destroy(gameObject, 1.2f);
         }
     }
 }
