@@ -40,7 +40,7 @@ namespace Actor.Skill
             int id = GetSkillId();
             projectileList[id] = new List<Projectile>();
             Generate(id, 0);
-            projectileList[id][0].Init(new Vector3(1f, 0.7f, 0f), 1.2f, new Vector3(10f, 0f, 0f));
+            projectileList[id][0].Init(_stat, new Vector3(1f, 0.7f, 0f), 1.2f, new Vector3(10f, 0f, 0f));
             projectileList[id][0].Fire();
         }
 

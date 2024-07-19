@@ -7,6 +7,7 @@ namespace Actor.Skill
     //현재 문제 : objectPath를 발사체 자체가 갖고 있음 안됨...
     public abstract class Projectile : MonoBehaviour
     {
+        protected ActorStat _stat;
         //관통 횟수
         protected int _piercingCount;
         //발사 거리
@@ -16,8 +17,9 @@ namespace Actor.Skill
         //생성 시작 포인트
         protected Vector3 _startPoint;
 
-        public void Init(Vector3 startPoint, float destroyDelay, Vector3 distance, int piercingCount)
+        public void Init(ActorStat stat, Vector3 startPoint, float destroyDelay, Vector3 distance, int piercingCount)
         {
+            _stat = stat;
             _startPoint = startPoint;
             _distance = distance;
             _destroyDelay = destroyDelay;
@@ -25,8 +27,9 @@ namespace Actor.Skill
             MoveStartPoint();
         }
         
-        public void Init(Vector3 startPoint, float destroyDelay, Vector3 distance)
+        public void Init(ActorStat stat, Vector3 startPoint, float destroyDelay, Vector3 distance)
         {
+            _stat = stat;
             _startPoint = startPoint;
             _distance = distance;
             _destroyDelay = destroyDelay;

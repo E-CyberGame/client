@@ -28,8 +28,9 @@ public class ActorStat : MonoBehaviour
     [Header("Fluid Stat")]
     public float hp;
     public float mp;
-    
-    [Header("Game Stat")]
+
+    [Header("Game Stat")] public GameStat MaxHP = new GameStat(100);
+    public GameStat ATK = new GameStat(10);
     public float maxHP;
     public float maxMP;
     public float atk;

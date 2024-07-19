@@ -65,9 +65,9 @@ namespace Actor
 
         #endregion
 
-        public void Hitted()
+        public void Hitted(float damage, IBuff buff = null)
         {
-            Debug.Log("맞아부럿성...");
+            Debug.Log($"{damage} 맞아부럿성...");
         }
     }
 
