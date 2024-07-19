@@ -1,29 +1,36 @@
 using System;
+using DG.Tweening;
 using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Actor.Skill
 {
-    public class FireBall : IProjectile, IHit
+    public class FireBall : Projectile, IHit
     {
-        public FireBall()
+        public void Init (Vector3 startPoint, float destroyDelay, Vector3 distance)
         {
-            go = Resources.Load<GameObject>("TestPrefabs/testBall");
+            base.Init(startPoint, destroyDelay, distance);
+            startPoint = new Vector3(1f, 0.7f, 0f);
         }
         public void OnTriggerEnter2D(Collider2D other)
         {
-            Hit(other.GetComponent<IHitted>());
+            if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+            {
+                Hit(other.GetComponent<IHitted>());
+            }
         }
 
         public void Hit(IHitted target)
         {
             Debug.Log("때려버렷다");
-            target.Hitted();
+            target.Hitted(); 
+            Pierce();
         }
-
         public override void Fire()
         {
-            
+            Vector3 currentPosition = transform.position;
+            transform.DOLocalMove(currentPosition + _distance, 1f);
+            Managers.Resources.Destroy(gameObject, _destroyDelay);
         }
     }
 }

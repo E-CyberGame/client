@@ -12,5 +12,9 @@ using UnityEngine;
         { 
             Instance.StopCoroutine(coroutine);
         }
-
+        
+        public IEnumerator DelayHelper(float seconds)
+        {
+            yield return new WaitForSeconds(seconds);
+        }
     }
