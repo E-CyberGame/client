@@ -10,13 +10,13 @@ namespace Actor.Skill
         //관통 횟수
         protected int _piercingCount;
         //발사 거리
-        protected int _distance;
+        protected Vector3 _distance;
         //소멸 딜레이
         protected float _destroyDelay;
         //생성 시작 포인트
         protected Vector3 _startPoint;
 
-        protected void Init(Vector3 startPoint, float destroyDelay, int distance, int piercingCount)
+        public void Init(Vector3 startPoint, float destroyDelay, Vector3 distance, int piercingCount)
         {
             _startPoint = startPoint;
             _distance = distance;
@@ -25,7 +25,7 @@ namespace Actor.Skill
             MoveStartPoint();
         }
         
-        protected void Init(Vector3 startPoint, float destroyDelay, int distance)
+        public void Init(Vector3 startPoint, float destroyDelay, Vector3 distance)
         {
             _startPoint = startPoint;
             _distance = distance;

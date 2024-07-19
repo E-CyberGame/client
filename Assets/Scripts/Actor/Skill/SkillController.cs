@@ -22,11 +22,10 @@ public class SkillController : MonoBehaviour
 
     private void skillSlotInit()
     {
-        ActorStat stat = GetComponent<ActorStat>();
-        WrapBody body = GetComponent<WrapBody>();
-        skillSlotDict = new Dictionary<SkillSlot, ISkill>();
-        skillSlotDict.Add(SkillSlot.slot1, new ProjectileSkill(stat, body, transform, "TestPrefabs/FireBall"));
-        //skillSlotDict.Add(SkillSlot.slot2, new WaterBallSkill(stat, body));
+        skillSlotDict = new Dictionary<SkillSlot, ISkill>()
+        {
+            { SkillSlot.slot1, gameObject.GetComponent<ChainFireBall>() }
+        };
     }
 
     //인풋 다르게 받는 방법 있으니 개선할 것

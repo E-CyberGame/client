@@ -7,7 +7,7 @@ namespace Actor.Skill
 {
     public class FireBall : Projectile, IHit
     {
-        public void Init (Vector3 startPoint, float destroyDelay, int distance)
+        public void Init (Vector3 startPoint, float destroyDelay, Vector3 distance)
         {
             base.Init(startPoint, destroyDelay, distance);
             startPoint = new Vector3(1f, 0.7f, 0f);
@@ -26,15 +26,11 @@ namespace Actor.Skill
             target.Hitted(); 
             Pierce();
         }
-        public void MoveStartPoint()
-        {
-            transform.position += new Vector3(1f, 0.7f, 0f);
-        }
         public override void Fire()
         {
             Vector3 currentPosition = transform.position;
-            transform.DOLocalMove(new Vector3(currentPosition.x + 10f, currentPosition.y, 0f), 1f);
-            Managers.Resources.Destroy(gameObject, 1.2f);
+            transform.DOLocalMove(currentPosition + _distance, 1f);
+            Managers.Resources.Destroy(gameObject, _destroyDelay);
         }
     }
 }

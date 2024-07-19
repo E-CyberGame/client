@@ -8,42 +8,47 @@ using DG.Tweening;
 namespace Actor.Skill
 {
     //Goal : Projectile을 만들어서 넣으면 스킬이 되도록!
-    public class ProjectileSkill : ISkill
+    public class ProjectileSkill : MonoBehaviour, ISkill
     {
+        private int skillId = 0;
         protected ActorStat _stat;
         protected WrapBody _body;
         protected Transform _player; //스킬을 실행시킨 플레이어
 
         //생성되지 않은 에셋으로의 발사체
-        public List<GameObject> goList { get; protected set; } = new List<GameObject>();
+        public List<GameObject> goList { get; protected set; } = new List<GameObject>(5);
         //생성된 발사체
-        protected List<Projectile> projectileList  = new List<Projectile>();
+        protected List<Projectile>[] projectileList = new List<Projectile>[100];
 
-        public ProjectileSkill(ActorStat stat, WrapBody body, Transform player, string projectilePath)
+        public void Awake()
         {
-            _stat = stat;
-            _body = body;
-            _player = player;
-            goList.Add(Resources.Load<GameObject>(projectilePath));
+            _stat = GetComponent<ActorStat>();
+            _body = GetComponent<WrapBody>();
+            _player = GetComponent<Transform>();
+            goList.Add(Resources.Load<GameObject>("TestPrefabs/Fireball"));
         }
-        
-        //go가 비는 문제 발생. -> 그냥 없앨까도...
-        public ProjectileSkill(ActorStat stat, WrapBody body, Transform player)
+
+        //추후 리팩토링용
+        protected int GetSkillId()
         {
-            _stat = stat;
-            _body = body;
-            _player = player;
+            skillId++;
+            return skillId;
         }
 
         public virtual void Activate()
         {
-            Generate();
-            projectileList[0].Fire(); //여러번 실행 시 최초 이후로 Fire 안되는 문제 있음
+            int id = GetSkillId();
+            projectileList[id] = new List<Projectile>();
+            Generate(id, 0);
+            projectileList[id][0].Init(new Vector3(1f, 0.7f, 0f), 1.2f, new Vector3(10f, 0f, 0f));
+            projectileList[id][0].Fire();
         }
 
-        public virtual void Generate()
+        public virtual void Generate(int id, int index)
         {
-            projectileList.Add(Managers.Resources.Instantiate(goList[0], _player.position).GetComponent<Projectile>());
+            projectileList[id].Add(Managers.Resources
+                .Instantiate(goList[index], _player.position)
+                .GetComponent<Projectile>());
         }
     }
 }
