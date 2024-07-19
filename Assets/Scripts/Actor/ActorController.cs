@@ -9,7 +9,7 @@ using UnityEngine.InputSystem;
 
 namespace Actor
 {
-    public class ActorController : MonoBehaviour
+    public class ActorController : MonoBehaviour, IHitted
     {
         private ActorStat _stat;
         private StateMachine _stateMachine;
@@ -64,6 +64,11 @@ namespace Actor
         }
 
         #endregion
+
+        public void Hitted()
+        {
+            Debug.Log("맞아부럿성...");
+        }
     }
 
 }
