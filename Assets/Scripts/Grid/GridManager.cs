@@ -18,7 +18,6 @@ public class GridManager : MonoBehaviour
         grid = GetComponent<Grid>();
         tilemap = GetComponent<Tilemap>();
         grid.Init(40,1);
-        UpdateTileMap();
     }
 
     void UpdateTileMap()
