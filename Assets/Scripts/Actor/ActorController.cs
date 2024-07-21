@@ -23,7 +23,8 @@ namespace Actor
         }
         void Start()
         {
-            
+            if(CompareTag("Player"))
+                _stat.HP.SetStat(50f);
         }
 
         void Update()

@@ -25,8 +25,7 @@ public class ActorStat : MonoBehaviour
 
     #region Inspector
 
-    [Header("Fluid Stat")]
-    public float hp;
+    [Header("Fluid Stat")] public FluidStat HP = new FluidStat(100);
     public float mp;
 
     [Header("Game Stat")] public GameStat MaxHP = new GameStat(100);
