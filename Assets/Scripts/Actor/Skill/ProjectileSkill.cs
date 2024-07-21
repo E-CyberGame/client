@@ -4,11 +4,12 @@ using System.Collections.Generic;
 using Actor.Skill;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.UI;
 
 namespace Actor.Skill
 {
     //Goal : Projectile을 만들어서 넣으면 스킬이 되도록!
-    public class ProjectileSkill : MonoBehaviour, ISkill
+    public class ProjectileSkill : ISkill
     {
         private int skillId = 0;
         protected ActorStat _stat;
@@ -35,7 +36,7 @@ namespace Actor.Skill
             return skillId;
         }
 
-        public virtual void Activate()
+        public override void Activate()
         {
             int id = GetSkillId();
             projectileList[id] = new List<Projectile>();

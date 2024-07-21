@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Actor.Skill
 {
@@ -10,13 +12,18 @@ namespace Actor.Skill
     {
         private BuffController _buff;
 
-        public void Awake()
+        public new void Awake()
         {
             base.Awake();
             _buff = GetComponent<BuffController>();
+            _icon = Resources.Load<Sprite>("SkillIcon/ChainFireBall");
+            _coolTime = 4f;
         }
+        //Activate에서 can use 막기
         public override void Activate()
         {
+            if (!_canUse) return;
+            StartCoroutine(CoolDown(_coolTime));
             Debug.Log("Chain Fire Ball");
             int id = GetSkillId();
             projectileList[id] = new List<Projectile>();
