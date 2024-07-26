@@ -12,8 +12,8 @@ public class WrapBody : MonoBehaviour
     private Transform _transform;
     private Rigidbody2D _rigidbody;
     private RaycastHit2D _hitGround;
-    public Vector2 directionX = Vector2.zero;
-    public Vector2 beforeDirectionX = Vector2.zero;
+    public Vector2 directionX = Vector2.left;
+    public Vector2 beforeDirectionX = Vector2.left;
     public Vector2 currentDirectionX { get { return directionX == Vector2.zero ? beforeDirectionX : directionX; } }
     private LayerMask groundLayer;
     private Vector2 velocity;
@@ -67,6 +67,7 @@ public class WrapBody : MonoBehaviour
         if (isDashing)
         {
             velocity = beforeDirectionX * _stat.speed * dashVelocity;
+            Debug.Log(velocity);
         }
         _rigidbody.velocity = new Vector2(velocity.x, _rigidbody.velocity.y);
     }
