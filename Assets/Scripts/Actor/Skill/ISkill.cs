@@ -17,10 +17,8 @@ public abstract class ISkill : MonoBehaviour
         _anim.speed = 1 / coolTime;
         _canUse = false;
         _anim.Play("CoolTime");
-        Debug.Log("Cant use");
         yield return new WaitForSeconds(coolTime);
         _canUse = true;
-        Debug.Log("Can use");
         _anim.Play("New State");
     }
 }

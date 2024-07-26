@@ -23,8 +23,8 @@ namespace Actor
         }
         void Start()
         {
-            if(CompareTag("Player"))
-                _stat.HP.SetStat(50f);
+            /*if(CompareTag("Player"))
+                _stat.HP.SetStat(50f);*/
         }
 
         void Update()
@@ -42,7 +42,7 @@ namespace Actor
         public void OnMove(InputValue input)
         {
             Vector2 direction = input.Get<Vector2>();
-            Debug.Log(direction);
+            Debug.Log(direction + tag);
             if (direction.x == -1.0f)
                 transform.eulerAngles = Vector3.down * -180f;
             else if (direction.x == 1.0f) transform.eulerAngles = Vector3.zero;

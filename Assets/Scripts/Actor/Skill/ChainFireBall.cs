@@ -22,20 +22,11 @@ namespace Actor.Skill
         //Activate에서 can use 막기
         public override void Activate()
         {
-            if (!_canUse) return;
-            StartCoroutine(CoolDown(_coolTime));
-            Debug.Log("Chain Fire Ball");
+            base.Activate();
             int id = GetSkillId();
             projectileList[id] = new List<Projectile>();
             StartCoroutine(Chain(id));
             _buff.AddBuff(new MaxHPUpBuff(_stat));
-        }
-        
-        public override void Generate(int id, int index)
-        {
-            projectileList[id]?.Add(Managers.Resources
-                .Instantiate(goList[index].gameObject, _player.position)
-                .GetComponent<Projectile>());
         }
         
         IEnumerator Chain(int id)

@@ -12,11 +12,8 @@ public class MaxHPUpBuff : IBuff
     public IEnumerator StartBuff()
     {
         OnBuff();
-        Debug.Log(_stat.MaxHP.Value);
         yield return new WaitForSeconds(4f);
-        Debug.Log(_stat.MaxHP.Value);
         OffBuff();
-        Debug.Log(_stat.MaxHP.Value);
     }
 
     public void OnBuff()
