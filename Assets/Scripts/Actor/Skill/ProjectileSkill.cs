@@ -13,10 +13,10 @@ namespace Actor.Skill
     {
         private int skillId = 0;
         protected ActorStat _stat;
-        protected WrapBody _body;
+        //protected WrapBody _body;
         protected Transform _player; //스킬을 실행시킨 플레이어
 
-        //생성되지 않은 에셋으로의 발사체
+        //생성되지 않은 에셋(Resources으로의 발사체
         public List<GameObject> goList { get; protected set; } = new List<GameObject>(5);
         //생성된 발사체
         protected List<Projectile>[] projectileList = new List<Projectile>[100];
@@ -24,7 +24,7 @@ namespace Actor.Skill
         public void Awake()
         {
             _stat = GetComponent<ActorStat>();
-            _body = GetComponent<WrapBody>();
+            //_body = GetComponent<WrapBody>();
             _player = GetComponent<Transform>();
             goList.Add(Resources.Load<GameObject>("TestPrefabs/Fireball"));
         }
@@ -38,16 +38,13 @@ namespace Actor.Skill
 
         public override void Activate()
         {
-            int id = GetSkillId();
-            projectileList[id] = new List<Projectile>();
-            Generate(id, 0);
-            projectileList[id][0].Init(_stat, new Vector3(1f, 0.7f, 0f), 1.2f, new Vector3(10f, 0f, 0f));
-            projectileList[id][0].Fire();
+            if (!_canUse) return;
+            StartCoroutine(CoolDown(_coolTime));
         }
 
-        public virtual void Generate(int id, int index)
+        public void Generate(int id, int index)
         {
-            projectileList[id].Add(Managers.Resources
+            projectileList[id]?.Add(Managers.Resources
                 .Instantiate(goList[index], _player.position)
                 .GetComponent<Projectile>());
         }
