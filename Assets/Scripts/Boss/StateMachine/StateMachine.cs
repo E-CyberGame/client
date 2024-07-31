@@ -8,7 +8,6 @@ namespace Boss
     public enum States {
         Idle, //대체어가 없다... 보스는 OnGround가 아닐 수도?
         Moving,
-        CoolDown, // 작명 고민... 스킬 사용 쿨타임 중
         UsingSkill,
         Groggy,
         // 기타 상태...
@@ -34,7 +33,6 @@ namespace Boss
             BaseState.InitState(_body, animator, this);
             _states.Add(States.Idle, new OnIdleState());
             _states.Add(States.Moving, new OnMovingState());
-            _states.Add(States.CoolDown, new OnCoolDownState());
             _states.Add(States.UsingSkill, new OnUsingSkillState());
             _states.Add(States.Groggy, new OnGroggyState());
 
