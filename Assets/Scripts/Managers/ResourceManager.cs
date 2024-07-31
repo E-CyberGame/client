@@ -28,6 +28,11 @@ public class ResourceManager
     {
         return Object.Instantiate(go, vec, Quaternion.identity);
     }
+    
+    public GameObject Instantiate(GameObject go)
+    {
+        return Object.Instantiate(go);
+    }
         
     public GameObject Instantiate(GameObject go, Transform parent)
     {
