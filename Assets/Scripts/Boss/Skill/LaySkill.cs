@@ -11,7 +11,9 @@ namespace Boss.Skill
     public class LaySkill : MonoBehaviour, BSkill
     {
         //임시 시리얼라이즈 필드
-        [SerializeField] float _distance = 20.0f;
+        [SerializeField] float _distanceX = 20.0f;
+        [SerializeField] float _distanceY = 0.0f;
+        [SerializeField] float _distanceZ = 0.0f;
         [SerializeField] float _pre_width = 0.1f;
         [SerializeField] float _width = 1.0f;
         [SerializeField] Color _pre_color = new Color(1, 0, 0, 0.5f);
@@ -52,7 +54,7 @@ namespace Boss.Skill
             lr.endWidth = _pre_width;
 
             lr.SetPosition(0, this.transform.position);
-            lr.SetPosition(1, new Vector3(this.transform.position.x + this._distance, this.transform.position.y, this.transform.position.z));
+            lr.SetPosition(1, new Vector3(this.transform.position.x + _distanceX, this.transform.position.y + _distanceY, this.transform.position.z + _distanceZ));
         }
 
         void AttackLay(LineRenderer lr)
@@ -64,7 +66,7 @@ namespace Boss.Skill
             lr.endWidth = _width;
 
             lr.SetPosition(0, this.transform.position);
-            lr.SetPosition(1, new Vector3(this.transform.position.x + this._distance, this.transform.position.y, this.transform.position.z));
+            lr.SetPosition(1, new Vector3(this.transform.position.x + _distanceX, this.transform.position.y + _distanceY, this.transform.position.z + _distanceZ));
 
             attacking = true;
         }
