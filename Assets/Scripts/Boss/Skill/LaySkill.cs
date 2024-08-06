@@ -8,7 +8,7 @@ namespace Boss.Skill
 {
     // 광선형 스킬들의 기본형
 
-    public class LaySkill : MonoBehaviour, BSkill
+    public class LaySkill : MonoBehaviour, BSkill, BHit
     {
         //임시 시리얼라이즈 필드
         [SerializeField] float _distanceX = 20.0f;
@@ -20,6 +20,7 @@ namespace Boss.Skill
         [SerializeField] Color _color = new Color(0, 1, 0, 1.0f);
         LineRenderer _lineRenderer;
         private bool attacking = false;
+        [SerializeField] int _lay_damage = 10;
 
 
         public void Start()
@@ -36,12 +37,12 @@ namespace Boss.Skill
         {
             //전조 레이저 빔
             PreLay(lr);
-            yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds(2.2f);
             DeactiveLay(lr);
 
             //실제 레이저 빔
             AttackLay(lr);
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.8f);
             DeactiveLay(lr);
         }
 
@@ -79,6 +80,11 @@ namespace Boss.Skill
             }
             lr.positionCount = 0;
             attacking = false;
+        }
+
+        public void Hit(BHitted target)
+        {
+
         }
     }
 }
