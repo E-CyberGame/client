@@ -7,6 +7,9 @@ namespace Boss.Skill
 {
     public class BossSubway : MonoBehaviour
     {
+        [SerializeField] LaySource horizontal;
+        [SerializeField] LaySource vertical;
+
         public void SkillStart()
         {
             StartCoroutine(SubwaySkill());
@@ -17,8 +20,10 @@ namespace Boss.Skill
             Debug.Log("게임 시작");
             yield return new WaitForSeconds(5.0f);
             Debug.Log("가로 빔");
+            horizontal.Lay(new int[] { 1, 6 });
             yield return new WaitForSeconds(7.0f);
             Debug.Log("가로 빔");
+            horizontal.Lay(new int[] { 0, 5 });
             yield return new WaitForSeconds(8.0f);
             Debug.Log("베기 or 찌르기");
             yield return new WaitForSeconds(8.0f);
