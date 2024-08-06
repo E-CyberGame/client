@@ -20,10 +20,10 @@ namespace Boss.Skill
             Debug.Log("게임 시작");
             yield return new WaitForSeconds(5.0f);
             Debug.Log("가로 빔");
-            horizontal.Lay(new int[] { 1, 6 });
+            horizontal.Lay(new int[] { 0, 5 });
             yield return new WaitForSeconds(7.0f);
             Debug.Log("가로 빔");
-            horizontal.Lay(new int[] { 0, 5 });
+            horizontal.Lay(new int[] { 2, 4 });
             yield return new WaitForSeconds(8.0f);
             Debug.Log("베기 or 찌르기");
             yield return new WaitForSeconds(8.0f);
@@ -35,7 +35,7 @@ namespace Boss.Skill
             Debug.Log("베기 or 찌르기");
             yield return new WaitForSeconds(8.0f);
             Debug.Log("가로 빔");
-            horizontal.Lay(new int[] { 2, 4 });
+            horizontal.Lay(new int[] { 0, 1 });
             yield return new WaitForSeconds(12.0f);
             Debug.Log("밀치기 시작");
             yield return new WaitForSeconds(6.0f);
@@ -102,7 +102,7 @@ namespace Boss.Skill
             Debug.Log("베기 or 찌르기");
             yield return new WaitForSeconds(5.0f);
             Debug.Log("가로 빔");
-            horizontal.Lay(new int[] { 1, 6 });
+            horizontal.Lay(new int[] { 0, 5 });
             yield return new WaitForSeconds(7.0f);
             Debug.Log("폭탄 + 지연술 or 급행");
             yield return new WaitForSeconds(10.0f);
