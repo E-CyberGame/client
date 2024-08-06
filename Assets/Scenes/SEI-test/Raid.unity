@@ -420,6 +420,7 @@ MonoBehaviour:
   _width: 1
   _pre_color: {r: 1, g: 0, b: 0, a: 0.5}
   _color: {r: 0, g: 1, b: 0, a: 0.5}
+  _lay_damage: 10
 --- !u!120 &95385153
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -1181,6 +1182,7 @@ MonoBehaviour:
   _width: 1
   _pre_color: {r: 1, g: 0, b: 0, a: 0.5}
   _color: {r: 0, g: 1, b: 0, a: 0.5}
+  _lay_damage: 10
 --- !u!120 &530308914
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -1357,6 +1359,7 @@ MonoBehaviour:
   _width: 1
   _pre_color: {r: 1, g: 0, b: 0, a: 0.5}
   _color: {r: 0, g: 1, b: 0, a: 0.5}
+  _lay_damage: 10
 --- !u!120 &581115142
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -4124,6 +4127,7 @@ MonoBehaviour:
   _width: 1
   _pre_color: {r: 1, g: 0, b: 0, a: 0.5}
   _color: {r: 0, g: 1, b: 0, a: 0.5}
+  _lay_damage: 10
 --- !u!120 &630610570
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -4300,6 +4304,7 @@ MonoBehaviour:
   _width: 1
   _pre_color: {r: 1, g: 0, b: 0, a: 0.5}
   _color: {r: 0, g: 1, b: 0, a: 0.5}
+  _lay_damage: 10
 --- !u!120 &643272485
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -4476,6 +4481,7 @@ MonoBehaviour:
   _width: 1
   _pre_color: {r: 1, g: 0, b: 0, a: 0.5}
   _color: {r: 0, g: 1, b: 0, a: 0.5}
+  _lay_damage: 10
 --- !u!120 &759416347
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -4652,6 +4658,7 @@ MonoBehaviour:
   _width: 1
   _pre_color: {r: 1, g: 0, b: 0, a: 0.5}
   _color: {r: 0, g: 1, b: 0, a: 0.5}
+  _lay_damage: 10
 --- !u!120 &959821144
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -4828,6 +4835,7 @@ MonoBehaviour:
   _width: 1
   _pre_color: {r: 1, g: 0, b: 0, a: 0.5}
   _color: {r: 0, g: 1, b: 0, a: 0.5}
+  _lay_damage: 10
 --- !u!120 &974584253
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -5072,6 +5080,7 @@ MonoBehaviour:
   _width: 1
   _pre_color: {r: 1, g: 0, b: 0, a: 0.5}
   _color: {r: 0, g: 1, b: 0, a: 0.5}
+  _lay_damage: 10
 --- !u!120 &1122029077
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -5299,6 +5308,7 @@ MonoBehaviour:
   _width: 1
   _pre_color: {r: 1, g: 0, b: 0, a: 0.5}
   _color: {r: 0, g: 1, b: 0, a: 0.5}
+  _lay_damage: 10
 --- !u!120 &1209297843
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -5475,6 +5485,7 @@ MonoBehaviour:
   _width: 1
   _pre_color: {r: 1, g: 0, b: 0, a: 0.5}
   _color: {r: 0, g: 1, b: 0, a: 0.5}
+  _lay_damage: 10
 --- !u!120 &1261407950
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -5651,6 +5662,7 @@ MonoBehaviour:
   _width: 1
   _pre_color: {r: 1, g: 0, b: 0, a: 0.5}
   _color: {r: 0, g: 1, b: 0, a: 0.5}
+  _lay_damage: 10
 --- !u!120 &1282597199
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -5962,6 +5974,7 @@ MonoBehaviour:
   _width: 1
   _pre_color: {r: 1, g: 0, b: 0, a: 0.5}
   _color: {r: 0, g: 1, b: 0, a: 0.5}
+  _lay_damage: 10
 --- !u!120 &1306119223
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -6185,6 +6198,7 @@ MonoBehaviour:
   _width: 1
   _pre_color: {r: 1, g: 0, b: 0, a: 0.5}
   _color: {r: 0, g: 1, b: 0, a: 0.5}
+  _lay_damage: 10
 --- !u!120 &1307951451
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -6361,6 +6375,7 @@ MonoBehaviour:
   _width: 1
   _pre_color: {r: 1, g: 0, b: 0, a: 0.5}
   _color: {r: 0, g: 1, b: 0, a: 0.5}
+  _lay_damage: 10
 --- !u!120 &1325214064
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -6537,6 +6552,7 @@ MonoBehaviour:
   _width: 1
   _pre_color: {r: 1, g: 0, b: 0, a: 0.5}
   _color: {r: 0, g: 1, b: 0, a: 0.5}
+  _lay_damage: 10
 --- !u!120 &1435456765
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -6973,6 +6989,7 @@ MonoBehaviour:
   _width: 1
   _pre_color: {r: 1, g: 0, b: 0, a: 0.5}
   _color: {r: 0, g: 1, b: 0, a: 0.5}
+  _lay_damage: 10
 --- !u!120 &1556317757
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -7149,6 +7166,7 @@ MonoBehaviour:
   _width: 1
   _pre_color: {r: 1, g: 0, b: 0, a: 0.5}
   _color: {r: 0, g: 1, b: 0, a: 0.5}
+  _lay_damage: 10
 --- !u!120 &1599453436
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -7409,6 +7427,7 @@ MonoBehaviour:
   _width: 1
   _pre_color: {r: 1, g: 0, b: 0, a: 0.5}
   _color: {r: 0, g: 1, b: 0, a: 0.5}
+  _lay_damage: 10
 --- !u!120 &1604591090
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -7752,6 +7771,7 @@ MonoBehaviour:
   _width: 1
   _pre_color: {r: 1, g: 0, b: 0, a: 0.5}
   _color: {r: 0, g: 1, b: 0, a: 0.5}
+  _lay_damage: 10
 --- !u!120 &1660994779
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -7928,6 +7948,7 @@ MonoBehaviour:
   _width: 1
   _pre_color: {r: 1, g: 0, b: 0, a: 0.5}
   _color: {r: 0, g: 1, b: 0, a: 0.5}
+  _lay_damage: 10
 --- !u!120 &1705308743
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -8104,6 +8125,7 @@ MonoBehaviour:
   _width: 1
   _pre_color: {r: 1, g: 0, b: 0, a: 0.5}
   _color: {r: 0, g: 1, b: 0, a: 0.5}
+  _lay_damage: 10
 --- !u!120 &1735785925
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -8280,6 +8302,7 @@ MonoBehaviour:
   _width: 1
   _pre_color: {r: 1, g: 0, b: 0, a: 0.5}
   _color: {r: 0, g: 1, b: 0, a: 0.5}
+  _lay_damage: 10
 --- !u!120 &1737737020
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -8456,6 +8479,7 @@ MonoBehaviour:
   _width: 1
   _pre_color: {r: 1, g: 0, b: 0, a: 0.5}
   _color: {r: 0, g: 1, b: 0, a: 0.5}
+  _lay_damage: 10
 --- !u!120 &1861616087
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -8909,6 +8933,7 @@ MonoBehaviour:
   _width: 1
   _pre_color: {r: 1, g: 0, b: 0, a: 0.5}
   _color: {r: 0, g: 1, b: 0, a: 0.5}
+  _lay_damage: 10
 --- !u!120 &1899926115
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -9111,6 +9136,7 @@ MonoBehaviour:
   _width: 1
   _pre_color: {r: 1, g: 0, b: 0, a: 0.5}
   _color: {r: 0, g: 1, b: 0, a: 0.5}
+  _lay_damage: 10
 --- !u!120 &2048610305
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -9287,6 +9313,7 @@ MonoBehaviour:
   _width: 1
   _pre_color: {r: 1, g: 0, b: 0, a: 0.5}
   _color: {r: 0, g: 1, b: 0, a: 0.5}
+  _lay_damage: 10
 --- !u!120 &2062730749
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -9581,6 +9608,7 @@ MonoBehaviour:
   _width: 1
   _pre_color: {r: 1, g: 0, b: 0, a: 0.5}
   _color: {r: 0, g: 1, b: 0, a: 0.5}
+  _lay_damage: 10
 --- !u!120 &2089245431
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -9757,6 +9785,7 @@ MonoBehaviour:
   _width: 1
   _pre_color: {r: 1, g: 0, b: 0, a: 0.5}
   _color: {r: 0, g: 1, b: 0, a: 0.5}
+  _lay_damage: 10
 --- !u!120 &2116057271
 LineRenderer:
   m_ObjectHideFlags: 0
