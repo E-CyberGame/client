@@ -7,7 +7,7 @@ public class Falling : MonoBehaviour
     private Transform _transform;
     private Rigidbody2D _rigidbody;
     private RaycastHit2D _hitGround;
-    public float groundCheckLine = 0.7f;
+    private float groundCheckLine = 1.0f;
     private LayerMask groundLayer;
     GameObject _rock;
 
@@ -23,6 +23,7 @@ public class Falling : MonoBehaviour
         _hitGround = Physics2D.Raycast(_transform.position, Vector3.down, groundCheckLine, groundLayer);
         if (_hitGround)
         {
+            Debug.Log("¹Ù´Ú Hit");
             StartCoroutine(HitGround());
         }
     }

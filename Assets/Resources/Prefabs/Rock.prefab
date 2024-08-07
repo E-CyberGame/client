@@ -146,4 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f0d8e8ae44598a42b24ca93e9953eff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundCheckLine: 0.5
+  groundCheckLine: 1
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0

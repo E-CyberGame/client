@@ -10,7 +10,7 @@ namespace Boss.Skill
         public GameObject _rock;
         public void Activate()
         {
-            _rock = Managers.Resources.Instantiate(Managers.Resources.Load<GameObject>("Prefabs/Rock"), new Vector3(0, 8, 0));
+            _rock = Managers.Resources.Instantiate(Managers.Resources.Load<GameObject>("Prefabs/Rock"), transform.position);
             Falling falling = _rock.GetComponent<Falling>();
             falling.Init(_rock);
         }

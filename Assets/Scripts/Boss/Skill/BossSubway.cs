@@ -7,8 +7,10 @@ namespace Boss.Skill
 {
     public class BossSubway : MonoBehaviour
     {
+        // 임시 시리얼라이즈 필드
         [SerializeField] LaySource horizontal;
         [SerializeField] LaySource vertical;
+        [SerializeField] FallSource fall;
 
         public void SkillStart()
         {
@@ -18,15 +20,20 @@ namespace Boss.Skill
         IEnumerator SubwaySkill()
         {
             Debug.Log("게임 시작");
+            Debug.Log("운석");
+            fall.Fall(new int[] { 0, 1, 2, 6, 9, 12, 14, 15, 17, 19, 21 });
             yield return new WaitForSeconds(5.0f);
             Debug.Log("가로 빔");
             horizontal.Lay(new int[] { 0, 5 });
             yield return new WaitForSeconds(7.0f);
             Debug.Log("가로 빔");
             horizontal.Lay(new int[] { 2, 4 });
-            yield return new WaitForSeconds(8.0f);
+            yield return new WaitForSeconds(3.0f);
+            Debug.Log("운석");
+            fall.Fall(new int[] { 0, 1, 2, 6, 14, 15, 17, 19, 21 });
+            yield return new WaitForSeconds(3.0f);
             Debug.Log("베기 or 찌르기");
-            yield return new WaitForSeconds(8.0f);
+            yield return new WaitForSeconds(6.0f);
             Debug.Log("세로 빔");
             vertical.Lay(new int[] { 0, 3, 12, 15, 19 });
             yield return new WaitForSeconds(5.0f);
@@ -61,6 +68,7 @@ namespace Boss.Skill
             Debug.Log("보스 회복");
             yield return new WaitForSeconds(5.0f);
             Debug.Log("운석");
+            fall.Fall(new int[] { 0, 1, 2, 6, 14, 15, 17, 19, 21 });
             yield return new WaitForSeconds(20.0f);
             Debug.Log("가로 빔");
             horizontal.Lay(new int[] { 0, 5 });
