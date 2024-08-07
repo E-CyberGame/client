@@ -13,7 +13,7 @@ namespace Boss.Skill
 
         public void Activate()
         {
-            _bomb = Managers.Resources.Instantiate(Managers.Resources.Load<GameObject>("Prefabs/Bomb"), new Vector3(0, 0, 0));
+            _bomb = Managers.Resources.Instantiate(Managers.Resources.Load<GameObject>("Prefabs/Bomb"), transform.position);
             StartCoroutine(Explosion());
         }
 

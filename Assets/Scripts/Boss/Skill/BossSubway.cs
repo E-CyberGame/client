@@ -11,6 +11,7 @@ namespace Boss.Skill
         [SerializeField] LaySource horizontal;
         [SerializeField] LaySource vertical;
         [SerializeField] FallSource fall;
+        [SerializeField] BombSource bomb;
 
         public void SkillStart()
         {
@@ -25,7 +26,7 @@ namespace Boss.Skill
             yield return new WaitForSeconds(5.0f);
             Debug.Log("°¡·Î ºö");
             horizontal.Lay(new int[] { 0, 5 });
-            yield return new WaitForSeconds(7.0f);
+            yield return new WaitForSeconds(5.0f);
             Debug.Log("°¡·Î ºö");
             horizontal.Lay(new int[] { 2, 4 });
             yield return new WaitForSeconds(3.0f);
@@ -33,11 +34,12 @@ namespace Boss.Skill
             fall.Fall(new int[] { 0, 1, 2, 6, 14, 15, 17, 19, 21 });
             yield return new WaitForSeconds(3.0f);
             Debug.Log("º£±â or Âî¸£±â");
-            yield return new WaitForSeconds(6.0f);
+            yield return new WaitForSeconds(5.0f);
             Debug.Log("¼¼·Î ºö");
             vertical.Lay(new int[] { 0, 3, 12, 15, 19 });
             yield return new WaitForSeconds(5.0f);
             Debug.Log("ÆøÅº ¼ÒÈ¯");
+            bomb.Bomb(new int[] { 0, 5, 10, 15, 20 });
             yield return new WaitForSeconds(7.0f);
             Debug.Log("º£±â or Âî¸£±â");
             yield return new WaitForSeconds(8.0f);
