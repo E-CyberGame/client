@@ -7,11 +7,6 @@ namespace Actor.Skill
 {
     public class FireBall : Projectile, IHit
     {
-        public void Init (ActorStat stat, Vector3 startPoint, float destroyDelay, Vector3 distance)
-        {
-            base.Init(stat, startPoint, destroyDelay, distance);
-            startPoint = new Vector3(1f, 0.7f, 0f);
-        }
         public void OnTriggerEnter2D(Collider2D other)
         {
             if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
@@ -24,12 +19,13 @@ namespace Actor.Skill
         {
             Debug.Log("때려버렷다");
             target.Hitted(_stat.ATK.Value); 
-            Pierce();
+            //Pierce();
+            Managers.Resources.Destroy(gameObject);
         }
         public override void Fire()
         {
             Vector3 currentPosition = transform.position;
-            transform.DOLocalMove(currentPosition + _distance, 1f);
+            transform.DOLocalMove(currentPosition + (Vector3)(_distance * _body.currentDirectionX), 1f);
             Managers.Resources.Destroy(gameObject, _destroyDelay);
         }
     }

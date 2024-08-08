@@ -4,23 +4,21 @@ using UnityEngine;
 
 namespace Actor
 {
-    public class OnDashState : BaseState
+    public class OnHitState : BaseState
     {
         public override void EnterState()
         {
-            _body.DashOn();
-            _anim.ChangeAnimation(ActorAnim.Dash);
-            CoroutineHelper.Instance.StartCoroutineHelper(EscapeDash());
+            _anim.ChangeAnimation(ActorAnim.Hit);
+            CoroutineHelper.Instance.StartCoroutineHelper(EscapeHit());
         }
 
         public override void ExitState()
         {
-            _body.DashOff();
         }
         
-        IEnumerator EscapeDash()
+        IEnumerator EscapeHit()
         {
-            yield return new WaitForSeconds(_body.GetDashTime());
+            yield return new WaitForSeconds(1f);
             if (_body.OnGround())
             {
                 _stateMachine.ChangeState(States.OnGround);

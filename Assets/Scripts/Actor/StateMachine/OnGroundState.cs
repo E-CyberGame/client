@@ -10,7 +10,7 @@ namespace Actor
         public override void Jump()
         {
             _body.Jump();
-            _anim.changeAnimation(ActorAnim.Jumping);
+            _anim.ChangeAnimation(ActorAnim.Jumping);
         }
 
         public override void Move(Vector2 directionX)
@@ -40,8 +40,8 @@ namespace Actor
         private void CheckRunning(Vector2 directionX)
         {
             if(directionX.Equals(Vector2.zero))
-                _anim.changeAnimation(ActorAnim.Idle);
-            else _anim.changeAnimation(ActorAnim.Running);
+                _anim.ChangeAnimation(ActorAnim.Idle);
+            else _anim.ChangeAnimation(ActorAnim.Running);
         }
     }
 }

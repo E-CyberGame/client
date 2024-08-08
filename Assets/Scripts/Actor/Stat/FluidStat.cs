@@ -9,6 +9,11 @@ public class FluidStat : Stat
     public Action StatChanged = null;
     public FluidStat(float value) : base(value){}
 
+    public void AddStat(float value)
+    {
+        SetStat(_value + value);
+    }
+
     public void SetStat(float value)
     {
         this._value = value;

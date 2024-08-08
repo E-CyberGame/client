@@ -25,9 +25,11 @@ public class ActorStat : MonoBehaviour
 
     #region Inspector
 
+    //게임 시 영구적인 증감이 일어나는 스탯
     [Header("Fluid Stat")] public FluidStat HP = new FluidStat(100);
     public float mp;
 
+    //버프 적용을 받을 수 있는 스탯
     [Header("Game Stat")] public GameStat MaxHP = new GameStat(100);
     public GameStat ATK = new GameStat(10);
     public float maxHP;
@@ -38,6 +40,7 @@ public class ActorStat : MonoBehaviour
     public float cri_damage;
     public float speed;
     
+    //캐릭터마다 다른 거. (움직임에 영향 주는 것.)
     [Header("Fixed Stat")]
     public float moveSpeed = 2f;
     public float jumpTime = 0.3f;

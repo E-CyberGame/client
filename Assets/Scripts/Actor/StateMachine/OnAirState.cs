@@ -10,13 +10,13 @@ public class OnAirState : BaseState
         if (_body.CanJump())
             return;
         _body.Jump();
-        _anim.changeAnimation(ActorAnim.Jumping);
+        _anim.ChangeAnimation(ActorAnim.Jumping);
     }
 
     public override void Down()
     {
         _body.Down();
-        _anim.changeAnimation(ActorAnim.Falling);
+        _anim.ChangeAnimation(ActorAnim.Down);
     }
 
     public override void Move(Vector2 directionX)
@@ -39,7 +39,7 @@ public class OnAirState : BaseState
     public override void ExitState()
     {
         if(_anim.CurrentAnim == ActorAnim.Jumping)
-            _anim.changeAnimation(ActorAnim.Idle);
+            _anim.ChangeAnimation(ActorAnim.Idle);
     }
 }
 }

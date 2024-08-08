@@ -34,7 +34,7 @@ namespace Actor.Skill
             for (int i = 0; i < 3; i++)
             {
                 Generate(id, 0);
-                projectileList[id][i].Init(_stat, new Vector3(1f, 0.7f, 0f), 1.2f, new Vector3(10f, 0f, 0f));
+                projectileList[id][i].Init(_body, _stat, new Vector3(1f, 0.7f, 0f), 1.2f, new Vector3(10f, 0f, 0f));
                 projectileList[id][i].Fire();
                 yield return new WaitForSeconds(0.7f);
             }

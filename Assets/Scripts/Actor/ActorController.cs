@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Actor.Skill;
 using DG.Tweening;
+using ExitGames.Client.Photon.StructWrapping;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -12,7 +13,7 @@ namespace Actor
     public class ActorController : MonoBehaviour, IHitted
     {
         private ActorStat _stat;
-        private StateMachine _stateMachine;
+        public StateMachine _stateMachine { get; private set; }
         private SkillController _skill;
 
         void Awake()
@@ -43,9 +44,9 @@ namespace Actor
         {
             Vector2 direction = input.Get<Vector2>();
             Debug.Log(direction + tag);
-            if (direction.x == -1.0f)
+            if (direction.x == 1.0f)
                 transform.eulerAngles = Vector3.down * -180f;
-            else if (direction.x == 1.0f) transform.eulerAngles = Vector3.zero;
+            else if (direction.x == -1.0f) transform.eulerAngles = Vector3.zero;
             _stateMachine.Move(direction);
         }
 
@@ -69,6 +70,8 @@ namespace Actor
         public void Hitted(float damage, IBuff buff = null)
         {
             Debug.Log($"{damage} 맞아부럿성...");
+            _stat.HP.AddStat(-damage);
+            _stateMachine.ChangeState(States.OnHitted);
         }
     }
 
