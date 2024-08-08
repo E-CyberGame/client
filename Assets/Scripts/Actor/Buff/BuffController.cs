@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BuffController : MonoBehaviour
 {
-    private LinkedList<IBuff> _buffList;
+    private LinkedList<IBuff> _buffList = new LinkedList<IBuff>();
 
     public void AddBuff(IBuff buff)
     {

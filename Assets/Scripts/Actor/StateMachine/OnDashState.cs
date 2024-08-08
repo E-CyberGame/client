@@ -9,7 +9,7 @@ namespace Actor
         public override void EnterState()
         {
             _body.DashOn();
-            _anim.changeAnimation(ActorAnim.Dashing);
+            _anim.ChangeAnimation(ActorAnim.Dash);
             CoroutineHelper.Instance.StartCoroutineHelper(EscapeDash());
         }
 

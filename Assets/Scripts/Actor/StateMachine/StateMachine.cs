@@ -11,6 +11,7 @@ namespace Actor
         OnGround,
         OnAir,
         OnDash,
+        OnHitted,
         NoControl,
     }
 
@@ -36,6 +37,7 @@ namespace Actor
             _states.Add(States.OnAir, new OnAirState());
             _states.Add(States.NoControl, new NoControlState());
             _states.Add(States.OnDash, new OnDashState());
+            _states.Add(States.OnHitted, new OnHittedState());
 
             CurrentState = States.OnGround;
         }
@@ -67,6 +69,9 @@ namespace Actor
         {
             _directionX = input;
             _states[CurrentState].Move(_directionX);
+            if (_directionX.x != 0)
+                _body.isPressing = true;
+            else _body.isPressing = false;
         }
 
         public void Jump()

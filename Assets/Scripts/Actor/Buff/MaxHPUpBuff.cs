@@ -4,8 +4,27 @@ using UnityEngine;
 
 public class MaxHPUpBuff : IBuff
 {
+    private ActorStat _stat;
+    public MaxHPUpBuff(ActorStat stat)
+    {
+        _stat = stat;
+    }
     public IEnumerator StartBuff()
     {
-        yield return null;
+        OnBuff();
+        yield return new WaitForSeconds(4f);
+        OffBuff();
+    }
+
+    public void OnBuff()
+    {
+        _stat.MaxHP.percent += 0.1f;
+        _stat.ATK.percent += 0.1f;
+    }
+
+    public void OffBuff()
+    {
+        _stat.MaxHP.percent -= 0.1f;
+        _stat.ATK.percent -= 0.1f;
     }
 }

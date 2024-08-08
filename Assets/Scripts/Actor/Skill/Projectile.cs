@@ -1,3 +1,4 @@
+using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
 
 namespace Actor.Skill
@@ -7,8 +8,10 @@ namespace Actor.Skill
     //현재 문제 : objectPath를 발사체 자체가 갖고 있음 안됨...
     public abstract class Projectile : MonoBehaviour
     {
+        protected WrapBody _body;
+        protected ActorStat _stat;
         //관통 횟수
-        protected int _piercingCount;
+        protected int _piercingCount = 0;
         //발사 거리
         protected Vector3 _distance;
         //소멸 딜레이
@@ -16,8 +19,10 @@ namespace Actor.Skill
         //생성 시작 포인트
         protected Vector3 _startPoint;
 
-        public void Init(Vector3 startPoint, float destroyDelay, Vector3 distance, int piercingCount)
+        public void Init(WrapBody body, ActorStat stat, Vector3 startPoint, float destroyDelay, Vector3 distance, int piercingCount)
         {
+            _body = body;
+            _stat = stat;
             _startPoint = startPoint;
             _distance = distance;
             _destroyDelay = destroyDelay;
@@ -25,8 +30,10 @@ namespace Actor.Skill
             MoveStartPoint();
         }
         
-        public void Init(Vector3 startPoint, float destroyDelay, Vector3 distance)
+        public void Init(WrapBody body, ActorStat stat, Vector3 startPoint, float destroyDelay, Vector3 distance)
         {
+            _body = body;
+            _stat = stat;
             _startPoint = startPoint;
             _distance = distance;
             _destroyDelay = destroyDelay;

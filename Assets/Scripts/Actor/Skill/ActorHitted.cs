@@ -4,9 +4,9 @@ namespace Actor.Skill
 {
     public class ActorHitted : MonoBehaviour, IHitted
     {
-        public void Hitted()
+        public void Hitted(float damage, IBuff buff = null)
         {
-            Debug.Log("맞아버렷다");
+            Debug.Log($"{damage} 맞아버렷다");
         }
     }
 }

@@ -14,7 +14,7 @@ public class WaterBallSkill : ISkill
             _stat = stat;
         }
 
-        public void Activate()
+        public override void Activate()
         {
             Debug.Log("워터볼 발사~!");
         }
