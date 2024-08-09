@@ -12,11 +12,11 @@ namespace Actor
         protected static ActorAnimController _anim;
         protected static StateMachine _stateMachine;
 
-        public static void InitState(WrapBody body, Animator animator, StateMachine stateMachine)
+        public static void InitState(WrapBody body, Animator animator, ActorAnimController animController, StateMachine stateMachine)
         {
             _body = body;
             _stateMachine = stateMachine;
-            _anim = new ActorAnimController(animator);
+            _anim = animController;
         }
 
         public virtual void Jump()

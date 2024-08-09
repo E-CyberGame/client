@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Actor.Skill;
 using UnityEngine;
 using DG.Tweening;
+using Fusion;
 using UnityEngine.UI;
 
 namespace Actor.Skill
@@ -47,9 +48,10 @@ namespace Actor.Skill
 
         public void Generate(int id, int index)
         {
-            projectileList[id]?.Add(Managers.Resources
-                .Instantiate(goList[index], _player.position)
-                .GetComponent<Projectile>());
+            NetworkObject networkObject = goList[index].GetComponent<NetworkObject>();
+            Runner.Spawn(networkObject, _player.position, Quaternion.identity);
+            Debug.Log("스폰됨");
+            projectileList[id]?.Add(networkObject.GetComponent<Projectile>());
         }
     }
 }

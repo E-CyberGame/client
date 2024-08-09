@@ -54,6 +54,9 @@ MonoBehaviour:
   - {fileID: 8546747636810162874}
   NetworkedBehaviours:
   - {fileID: 7934940870158798579}
+  - {fileID: 6185126499534717578}
+  - {fileID: 6649941496914848128}
+  - {fileID: 2574012784851704653}
 --- !u!143 &7934940870158798576
 CharacterController:
   m_ObjectHideFlags: 0
@@ -159,11 +162,44 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 95d9baa50493ce24983ffdafe5be9087, type: 3}
+--- !u!114 &2574012784851704653 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8855668427063899889, guid: 95d9baa50493ce24983ffdafe5be9087, type: 3}
+  m_PrefabInstance: {fileID: 6439335471958945212}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29f79c1064c11454393ce42bfb726e9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6185126499534717578 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 903225408943566646, guid: 95d9baa50493ce24983ffdafe5be9087, type: 3}
+  m_PrefabInstance: {fileID: 6439335471958945212}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0762505ba94e234c92664ddf64b5e33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &6205865697971425155 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1099639747739984447, guid: 95d9baa50493ce24983ffdafe5be9087, type: 3}
   m_PrefabInstance: {fileID: 6439335471958945212}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6649941496914848128 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 366000965483119676, guid: 95d9baa50493ce24983ffdafe5be9087, type: 3}
+  m_PrefabInstance: {fileID: 6439335471958945212}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5318f6652b8a79749ad973dacdd63b4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &8546747636810162874 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3441094055475662598, guid: 95d9baa50493ce24983ffdafe5be9087, type: 3}
