@@ -24,7 +24,7 @@ public class UI_Raid : UI_Popup
         base.Init();
         Bind<Button>(typeof(Buttons));
 
-        GetButton((int)Buttons.NextButton).gameObject.BindUIEvent(NextButtonClicked);
+        //GetButton((int)Buttons.NextButton).gameObject.BindUIEvent(NextButtonClicked);
 
     }
     public void NextButtonClicked(PointerEventData eventData)
