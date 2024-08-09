@@ -32,7 +32,7 @@ public class UI_RaidSelect : UI_Popup
         for (int i = 0; i < raidnum; i++)
         {
             GameObject raidObject = Resources.Load<GameObject>("Prefabs/RaidCard");
-            GameObject instance = PrefabUtility.InstantiatePrefab(raidObject) as GameObject;
+            GameObject instance = Instantiate(raidObject);
             instance.BindUIEvent(NextButtonClicked);
             instance.transform.SetParent(scrollRect.content);
             instance.transform.localScale = Vector3.one;

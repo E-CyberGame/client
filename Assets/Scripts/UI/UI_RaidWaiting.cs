@@ -60,7 +60,7 @@ public class UI_RaidWaiting : UI_Popup
     {
         // Instance 생성
         GameObject playerObject = Resources.Load<GameObject>("Prefabs/PlayerWaiting");
-        GameObject playerInstance = PrefabUtility.InstantiatePrefab(playerObject) as GameObject;
+        GameObject playerInstance = Instantiate(playerObject);
 
         // UI 이벤트 bind
         playerInstance.BindUIEvent(NextButtonClicked);
