@@ -1,26 +1,26 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using System.Numerics;
 using Actor.Skill;
-using DG.Tweening;
-using ExitGames.Client.Photon.StructWrapping;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Fusion;
+using Vector2 = UnityEngine.Vector2;
+using Vector3 = UnityEngine.Vector3;
 
 namespace Actor
 {
-    public class ActorController : MonoBehaviour, IHitted
+    public class ActorController : NetworkBehaviour, IHitted
     {
+        private NetworkTransform _transform;
         private ActorStat _stat;
         public StateMachine _stateMachine { get; private set; }
         private SkillController _skill;
 
         void Awake()
         {
+            _transform = GetComponent<NetworkTransform>();
             _stat = GetComponent<ActorStat>();
             _skill = GetComponent<SkillController>();
-            _stateMachine = new StateMachine(GetComponent<WrapBody>(), GetComponent<Animator>());
+            _stateMachine = new StateMachine(GetComponent<WrapBody>(), GetComponent<Animator>(), GetComponent<ActorAnimController>());
         }
         void Start()
         {
@@ -33,9 +33,14 @@ namespace Actor
             _stateMachine.UpdateState();
         }
 
-        void FixedUpdate()
+        public override void FixedUpdateNetwork()
         {
+            if (HasStateAuthority == false)
+            {
+                return;
+            }
             _stateMachine.FixedUpdateState();
+            _transform.transform.position = transform.position;
         }
 
         #region Additional Input
@@ -44,24 +49,41 @@ namespace Actor
         {
             Vector2 direction = input.Get<Vector2>();
             Debug.Log(direction + tag);
-            if (direction.x == 1.0f)
-                transform.eulerAngles = Vector3.down * -180f;
-            else if (direction.x == -1.0f) transform.eulerAngles = Vector3.zero;
-            _stateMachine.Move(direction);
+
+            if (HasStateAuthority)
+            {
+                if (direction.x == 1.0f)
+                    transform.eulerAngles = Vector3.down * -180f;
+                else if (direction.x == -1.0f) transform.eulerAngles = Vector3.zero;
+            
+                _stateMachine.Move(direction);
+            }
         }
 
         public void OnJump()
         {
+            if (HasStateAuthority == false)
+            {
+                return;
+            }
             _stateMachine.Jump();
         }
 
         public void OnDown()
         {
+            if (HasStateAuthority == false)
+            {
+                return;
+            }
             _stateMachine.Down();
         }
 
         public void OnDash()
         {
+            if (HasStateAuthority == false)
+            {
+                return;
+            }
             _stateMachine.Dash();
         }
 

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Fusion;
 using UnityEngine;
 
 namespace Actor
@@ -13,21 +14,25 @@ namespace Actor
         Hit = 5,
         Hitted = 6,
     }
-    public class ActorAnimController
+    public class ActorAnimController : NetworkBehaviour
     {
         private Animator _animator;
         public ActorAnim CurrentAnim { get; private set; } = ActorAnim.Idle;
+
+        public void Awake()
+        {
+            _animator = GetComponent<Animator>();
+        }
         
         public ActorAnimController(Animator animator)
         {
             _animator = animator;
         }
 
+        //[Rpc]
         public void ChangeAnimation(ActorAnim animation)
         {
-            Debug.Log(animation);
             CurrentAnim = animation;
-            //_animator.Play(animation.ToString());
             _animator.SetInteger("currentAnimation", (int)animation);
         }
     }

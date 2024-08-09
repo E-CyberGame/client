@@ -1,4 +1,4 @@
-using Microsoft.Unity.VisualStudio.Editor;
+using Fusion;
 using UnityEngine;
 
 namespace Actor.Skill
@@ -6,7 +6,7 @@ namespace Actor.Skill
     using DG.Tweening;
     //발사체에 붙는 컴포넌트
     //현재 문제 : objectPath를 발사체 자체가 갖고 있음 안됨...
-    public abstract class Projectile : MonoBehaviour
+    public abstract class Projectile : NetworkBehaviour
     {
         protected WrapBody _body;
         protected ActorStat _stat;

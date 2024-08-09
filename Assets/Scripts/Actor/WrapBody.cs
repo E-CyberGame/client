@@ -1,17 +1,23 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Fusion;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 //도메인
-public class WrapBody : MonoBehaviour
+public class WrapBody : NetworkBehaviour
 {
     #region Reference
     private ActorStat _stat;
     private Transform _transform;
     private Rigidbody2D _rigidbody;
+    #endregion
+    
+    #region Network
+    [Networked]
+    public Vector2 Position { get; set; }
     #endregion
     
     private LayerMask groundLayer;
@@ -75,17 +81,26 @@ public class WrapBody : MonoBehaviour
         this.directionX = directionX;
     }
 
-    public void FixedUpdate()
+    public override void FixedUpdateNetwork()
     {
-        //가속 구현 -> isPressing
-        velocity = directionX * _stat.moveSpeed * _stat.speed;
-
-        if (isDashing)
+        if (HasStateAuthority)
         {
-            velocity = beforeDirectionX * _stat.speed * dashVelocity;
-            Debug.Log(velocity);
+            //가속 구현 -> isPressing
+            velocity = directionX * _stat.moveSpeed * _stat.speed * Runner.DeltaTime;
+
+            if (isDashing)
+            {
+                velocity = beforeDirectionX * _stat.speed * dashVelocity * Runner.DeltaTime;
+                Debug.Log(velocity);
+            }
+            _rigidbody.velocity = new Vector2(velocity.x, _rigidbody.velocity.y);
+            Position = _rigidbody.position;
         }
-        _rigidbody.velocity = new Vector2(velocity.x, _rigidbody.velocity.y);
+        else
+        {
+            //다른 클라에서의 위치를 업데이트
+            _rigidbody.position = Position;
+        }
     }
 
     public void ResetJumpCount()
@@ -95,15 +110,14 @@ public class WrapBody : MonoBehaviour
 
     public void Jump()
     {
-        float vel = (jumpHeight / _stat.jumpTime) * _rigidbody.gravityScale;
-        Debug.Log(vel);
+        float vel = (jumpHeight / _stat.jumpTime) + _rigidbody.gravityScale;
         _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, vel);
         jumpCount++;
     }
     
     public void Down()
     {
-        _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _stat.speed * _stat.downSpeed * -1);
+        _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _stat.downSpeed * -1);
         Debug.Log("Down");
     }
 

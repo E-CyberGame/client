@@ -24,15 +24,15 @@ namespace Actor
 
         private Vector2 _directionX;
 
-        public StateMachine(WrapBody body, Animator animator)
+        public StateMachine(WrapBody body, Animator animator, ActorAnimController animController)
         {
             _body = body;
-            InitStates(animator);
+            InitStates(animator, animController);
         }
 
-        private void InitStates(Animator animator)
+        private void InitStates(Animator animator, ActorAnimController animController)
         {
-            BaseState.InitState(_body, animator, this);
+            BaseState.InitState(_body, animator, animController, this);
             _states.Add(States.OnGround, new OnGroundState());
             _states.Add(States.OnAir, new OnAirState());
             _states.Add(States.NoControl, new NoControlState());

@@ -21,6 +21,7 @@ namespace Actor
 
         public override void EnterState()
         {
+            Debug.Log("Ground State로 넘어오고는 있나요?");
             CheckRunning(_body.directionX);
             _body.ResetJumpCount();
         }

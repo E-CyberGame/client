@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class GameManager : MonoSingleton<GameManager>
 {
-    private void Awake()
+    private new void Awake()
     {
         base.Awake();
     }
