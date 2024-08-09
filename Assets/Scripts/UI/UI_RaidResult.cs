@@ -24,7 +24,7 @@ public class UI_RaidResult : UI_Popup
         for (int i = 0; i < playernum; i++)
         {
             GameObject raidObject = Resources.Load<GameObject>("Prefabs/PlayerResult");
-            GameObject instance = PrefabUtility.InstantiatePrefab(raidObject) as GameObject;
+            GameObject instance = Instantiate(raidObject);
             instance.transform.SetParent(playerProfileBG.transform);
             instance.transform.localScale = Vector3.one;
         }
