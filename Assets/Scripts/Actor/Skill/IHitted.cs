@@ -6,6 +6,6 @@ namespace Actor.Skill
 {
     public interface IHitted
     {
-        public void Hitted();
+        public void Hitted(float damage, IBuff buff = null);
     }
 }

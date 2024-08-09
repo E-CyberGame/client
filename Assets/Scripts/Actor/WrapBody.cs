@@ -1,31 +1,56 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Fusion;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 //도메인
-public class WrapBody : MonoBehaviour
+public class WrapBody : NetworkBehaviour
 {
-    public ActorStat _stat { get; private set; }
+    #region Reference
+    private ActorStat _stat;
     private Transform _transform;
     private Rigidbody2D _rigidbody;
-    private RaycastHit2D _hitGround;
-    public Vector2 directionX = Vector2.zero;
-    public Vector2 beforeDirectionX = Vector2.zero;
-    public Vector2 currentDirectionX { get { return directionX == Vector2.zero ? beforeDirectionX : directionX; } }
+    #endregion
+    
+    #region Network
+    [Networked]
+    public Vector2 Position { get; set; }
+    #endregion
+    
     private LayerMask groundLayer;
     private Vector2 velocity;
     private float dashVelocity = 1.0f;
-    public int jumpCount { get; private set; } = 0;
-    private bool isPressing { get { return directionX.x != 0 ? true : false;  } }
-    private bool isDashing = false;
+    private RaycastHit2D _hitGround;
     
-    public float groundCheckLine = 0.5f;
-
+    public int jumpCount { get; private set; } = 0;
+    public float groundCheckLine = 1.05f;
     public float jumpHeight = 2.0f;
     public float dashLength = 3.0f;
+    
+    #region CurrentState(is ~ing)
+
+    public bool isPressing = false;
+    private bool isDashing = false;
+    
+    public Vector2 currentDirectionX { get { return directionX == Vector2.zero ? beforeDirectionX : directionX; } }
+    [SerializeField]
+    private Vector2 _directionX = Vector2.zero;
+    public Vector2 directionX
+    {
+        get { return _directionX;}
+        set
+        {
+            _directionX = value;
+            if (directionX != Vector2.zero)
+                beforeDirectionX = directionX;
+        }
+    }
+
+    public Vector2 beforeDirectionX = Vector2.left;
+    #endregion
 
     public void Awake()
     {
@@ -37,8 +62,7 @@ public class WrapBody : MonoBehaviour
     
     public bool OnGround()
     {
-        //?? 문제가 해결되지 않음.
-        Debug.DrawRay(_transform.position, Vector3.down * groundCheckLine, Color.red);
+        Debug.DrawRay(_transform.position, Vector3.down * 1.05f, Color.red);
         _hitGround = Physics2D.Raycast(_transform.position, Vector3.down, groundCheckLine
             , groundLayer);
         if(_hitGround) {
@@ -55,20 +79,28 @@ public class WrapBody : MonoBehaviour
     public void Move(Vector2 directionX)
     {
         this.directionX = directionX;
-        if (directionX != Vector2.zero)
-            beforeDirectionX = directionX;
     }
 
-    public void FixedUpdate()
+    public override void FixedUpdateNetwork()
     {
-        //가속 구현 -> isPressing
-        velocity = directionX * _stat.moveSpeed * _stat.speed;
-
-        if (isDashing)
+        if (HasStateAuthority)
         {
-            velocity = beforeDirectionX * _stat.speed * dashVelocity;
+            //가속 구현 -> isPressing
+            velocity = directionX * _stat.moveSpeed * _stat.speed * Runner.DeltaTime;
+
+            if (isDashing)
+            {
+                velocity = beforeDirectionX * _stat.speed * dashVelocity * Runner.DeltaTime;
+                Debug.Log(velocity);
+            }
+            _rigidbody.velocity = new Vector2(velocity.x, _rigidbody.velocity.y);
+            Position = _rigidbody.position;
         }
-        _rigidbody.velocity = new Vector2(velocity.x, _rigidbody.velocity.y);
+        else
+        {
+            //다른 클라에서의 위치를 업데이트
+            _rigidbody.position = Position;
+        }
     }
 
     public void ResetJumpCount()
@@ -78,16 +110,27 @@ public class WrapBody : MonoBehaviour
 
     public void Jump()
     {
-        float vel = (jumpHeight / _stat.jumpTime) * _rigidbody.gravityScale;
-        Debug.Log(vel);
+        float vel = (jumpHeight / _stat.jumpTime) + _rigidbody.gravityScale;
         _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, vel);
         jumpCount++;
     }
     
     public void Down()
     {
-        _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _stat.speed * _stat.downSpeed * -1);
+        _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _stat.downSpeed * -1);
         Debug.Log("Down");
+    }
+
+    public void StartHitted()
+    {
+        _transform.position = new Vector3(_transform.position.x + currentDirectionX.x * -1.0f, _transform.position.y, 0f);
+        directionX = Vector2.zero;
+    }
+
+    public void EndHitted()
+    {
+        if(isPressing)
+            directionX = beforeDirectionX;
     }
 
     public void GravityOFF()

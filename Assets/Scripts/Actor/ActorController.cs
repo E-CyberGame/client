@@ -1,29 +1,31 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using System.Numerics;
 using Actor.Skill;
-using DG.Tweening;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Fusion;
+using Vector2 = UnityEngine.Vector2;
+using Vector3 = UnityEngine.Vector3;
 
 namespace Actor
 {
-    public class ActorController : MonoBehaviour, IHitted
+    public class ActorController : NetworkBehaviour, IHitted
     {
+        private NetworkTransform _transform;
         private ActorStat _stat;
-        private StateMachine _stateMachine;
+        public StateMachine _stateMachine { get; private set; }
         private SkillController _skill;
 
         void Awake()
         {
+            _transform = GetComponent<NetworkTransform>();
             _stat = GetComponent<ActorStat>();
             _skill = GetComponent<SkillController>();
-            _stateMachine = new StateMachine(GetComponent<WrapBody>(), GetComponent<Animator>());
+            _stateMachine = new StateMachine(GetComponent<WrapBody>(), GetComponent<Animator>(), GetComponent<ActorAnimController>());
         }
         void Start()
         {
-            
+            /*if(CompareTag("Player"))
+                _stat.HP.SetStat(50f);*/
         }
 
         void Update()
@@ -31,9 +33,14 @@ namespace Actor
             _stateMachine.UpdateState();
         }
 
-        void FixedUpdate()
+        public override void FixedUpdateNetwork()
         {
+            if (HasStateAuthority == false)
+            {
+                return;
+            }
             _stateMachine.FixedUpdateState();
+            _transform.transform.position = transform.position;
         }
 
         #region Additional Input
@@ -41,33 +48,52 @@ namespace Actor
         public void OnMove(InputValue input)
         {
             Vector2 direction = input.Get<Vector2>();
-            Debug.Log(direction);
-            if (direction.x == -1.0f)
-                transform.eulerAngles = Vector3.down * -180f;
-            else if (direction.x == 1.0f) transform.eulerAngles = Vector3.zero;
-            _stateMachine.Move(direction);
+            Debug.Log(direction + tag);
+
+            if (HasStateAuthority)
+            {
+                if (direction.x == 1.0f)
+                    transform.eulerAngles = Vector3.down * -180f;
+                else if (direction.x == -1.0f) transform.eulerAngles = Vector3.zero;
+            
+                _stateMachine.Move(direction);
+            }
         }
 
         public void OnJump()
         {
+            if (HasStateAuthority == false)
+            {
+                return;
+            }
             _stateMachine.Jump();
         }
 
         public void OnDown()
         {
+            if (HasStateAuthority == false)
+            {
+                return;
+            }
             _stateMachine.Down();
         }
 
         public void OnDash()
         {
+            if (HasStateAuthority == false)
+            {
+                return;
+            }
             _stateMachine.Dash();
         }
 
         #endregion
 
-        public void Hitted()
+        public void Hitted(float damage, IBuff buff = null)
         {
-            Debug.Log("맞아부럿성...");
+            Debug.Log($"{damage} 맞아부럿성...");
+            _stat.HP.AddStat(-damage);
+            _stateMachine.ChangeState(States.OnHitted);
         }
     }
 

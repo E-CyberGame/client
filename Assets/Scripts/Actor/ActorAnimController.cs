@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Fusion;
 using UnityEngine;
 
 namespace Actor
@@ -8,22 +9,29 @@ namespace Actor
         Idle = 0,
         Running = 1,
         Jumping = 2,
-        Dashing = 3,
-        Falling = 4,
+        Dash = 3,
+        Down = 4,
+        Hit = 5,
+        Hitted = 6,
     }
-    public class ActorAnimController
+    public class ActorAnimController : NetworkBehaviour
     {
         private Animator _animator;
         public ActorAnim CurrentAnim { get; private set; } = ActorAnim.Idle;
+
+        public void Awake()
+        {
+            _animator = GetComponent<Animator>();
+        }
         
         public ActorAnimController(Animator animator)
         {
             _animator = animator;
         }
 
-        public void changeAnimation(ActorAnim animation)
+        //[Rpc]
+        public void ChangeAnimation(ActorAnim animation)
         {
-            Debug.Log(animation);
             CurrentAnim = animation;
             _animator.SetInteger("currentAnimation", (int)animation);
         }

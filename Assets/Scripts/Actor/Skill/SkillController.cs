@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Actor.Skill;
+using Fusion;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,7 +12,7 @@ public enum SkillSlot
     slot3,
     slot4
 }
-public class SkillController : MonoBehaviour
+public class SkillController : NetworkBehaviour
 {
     public Dictionary<SkillSlot, ISkill> skillSlotDict;
 
@@ -40,6 +41,10 @@ public class SkillController : MonoBehaviour
 
     public void UseSkill(SkillSlot slot)
     {
+        if (HasStateAuthority == false)
+        {
+            return;
+        }
         skillSlotDict[slot].Activate();
     }
 }
