@@ -15,13 +15,12 @@ public class WrapBody : NetworkBehaviour
     private Rigidbody2D _rigidbody;
     #endregion
     
-    #region Network
-    [Networked]
-    public Vector2 Position { get; set; }
-    #endregion
+    private NetworkTransform _nettransform;
     
     private LayerMask groundLayer;
-    private Vector2 velocity;
+    
+    [Networked]
+    private Vector2 velocity { get; set; }
     private float dashVelocity = 1.0f;
     private RaycastHit2D _hitGround;
     
@@ -38,6 +37,7 @@ public class WrapBody : NetworkBehaviour
     public Vector2 currentDirectionX { get { return directionX == Vector2.zero ? beforeDirectionX : directionX; } }
     [SerializeField]
     private Vector2 _directionX = Vector2.zero;
+    
     public Vector2 directionX
     {
         get { return _directionX;}
@@ -62,6 +62,8 @@ public class WrapBody : NetworkBehaviour
     
     public bool OnGround()
     {
+        if (!HasStateAuthority) return false;
+        
         Debug.DrawRay(_transform.position, Vector3.down * 1.05f, Color.red);
         _hitGround = Physics2D.Raycast(_transform.position, Vector3.down, groundCheckLine
             , groundLayer);
@@ -78,7 +80,9 @@ public class WrapBody : NetworkBehaviour
     
     public void Move(Vector2 directionX)
     {
+        if (!HasStateAuthority) return;
         this.directionX = directionX;
+        Debug.Log("눌리고잇으신지요" + this.directionX);
     }
 
     public override void FixedUpdateNetwork()
@@ -91,15 +95,9 @@ public class WrapBody : NetworkBehaviour
             if (isDashing)
             {
                 velocity = beforeDirectionX * _stat.speed * dashVelocity * Runner.DeltaTime;
-                Debug.Log(velocity);
             }
-            _rigidbody.velocity = new Vector2(velocity.x, _rigidbody.velocity.y);
-            Position = _rigidbody.position;
-        }
-        else
-        {
-            //다른 클라에서의 위치를 업데이트
-            _rigidbody.position = Position;
+
+            _transform.position += new Vector3(velocity.x, 0, 0);
         }
     }
 
@@ -110,13 +108,15 @@ public class WrapBody : NetworkBehaviour
 
     public void Jump()
     {
-        float vel = (jumpHeight / _stat.jumpTime) + _rigidbody.gravityScale;
+        if (!HasStateAuthority) return;
+        float vel = ((jumpHeight / _stat.jumpTime) + _rigidbody.gravityScale);
         _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, vel);
         jumpCount++;
     }
     
     public void Down()
     {
+        if (!HasStateAuthority) return;
         _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _stat.downSpeed * -1);
         Debug.Log("Down");
     }

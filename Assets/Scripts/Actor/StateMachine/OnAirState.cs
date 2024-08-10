@@ -5,6 +5,13 @@ namespace Actor{
     
 public class OnAirState : BaseState
 {
+    
+    public OnAirState(WrapBody body, Animator animator, ActorAnimController animController, StateMachine stateMachine)
+        : base(body, animator, animController, stateMachine)
+    {
+        
+    }
+    
     public override void Jump()
     {
         if (_body.CanJump())
@@ -21,6 +28,8 @@ public class OnAirState : BaseState
 
     public override void Move(Vector2 directionX)
     {
+        Debug.Log(directionX + "OnAir");
+
         _body.Move(directionX);
     }
 
