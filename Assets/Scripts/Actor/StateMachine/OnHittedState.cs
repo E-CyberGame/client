@@ -6,6 +6,12 @@ namespace Actor
 {
     public class OnHittedState : BaseState
     {
+        
+        public OnHittedState(WrapBody body, Animator animator, ActorAnimController animController, StateMachine stateMachine)
+            : base(body, animator, animController, stateMachine)
+        {
+        
+        }
         public override void EnterState()
         {
             _body.StartHitted();

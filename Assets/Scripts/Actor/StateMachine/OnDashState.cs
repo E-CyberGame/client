@@ -6,6 +6,12 @@ namespace Actor
 {
     public class OnDashState : BaseState
     {
+        
+        public OnDashState(WrapBody body, Animator animator, ActorAnimController animController, StateMachine stateMachine)
+            : base(body, animator, animController, stateMachine)
+        {
+        
+        }
         public override void EnterState()
         {
             _body.DashOn();

@@ -7,6 +7,12 @@ namespace Actor
 {
     public class OnGroundState : BaseState
     {
+        
+        public OnGroundState(WrapBody body, Animator animator, ActorAnimController animController, StateMachine stateMachine)
+            : base(body, animator, animController, stateMachine)
+        {
+        
+        }
         public override void Jump()
         {
             _body.Jump();
@@ -15,13 +21,13 @@ namespace Actor
 
         public override void Move(Vector2 directionX)
         {
+
             _body.Move(directionX);
             CheckRunning(directionX);
         }
 
         public override void EnterState()
         {
-            Debug.Log("Ground State로 넘어오고는 있나요?");
             CheckRunning(_body.directionX);
             _body.ResetJumpCount();
         }
