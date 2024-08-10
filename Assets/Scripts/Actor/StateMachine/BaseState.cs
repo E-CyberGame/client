@@ -8,11 +8,11 @@ namespace Actor
 {
     public abstract class BaseState
     {
-        protected static WrapBody _body;
-        protected static ActorAnimController _anim;
-        protected static StateMachine _stateMachine;
+        protected WrapBody _body;
+        protected ActorAnimController _anim;
+        protected StateMachine _stateMachine;
 
-        public static void InitState(WrapBody body, Animator animator, ActorAnimController animController, StateMachine stateMachine)
+        public BaseState(WrapBody body, Animator animator, ActorAnimController animController, StateMachine stateMachine)
         {
             _body = body;
             _stateMachine = stateMachine;

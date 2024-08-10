@@ -179,8 +179,8 @@ MonoBehaviour:
   def: 0
   cri_percent: 0
   cri_damage: 0
-  speed: 50
-  moveSpeed: 8
+  speed: 3
+  moveSpeed: 4
   jumpTime: 0.3
   downSpeed: 15
   dashSpeedRatio: 1.7
@@ -198,10 +198,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5318f6652b8a79749ad973dacdd63b4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _Position: {x: 0, y: 0}
   groundCheckLine: 1.05
   jumpHeight: 3
-  dashLength: 10
+  dashLength: 5
   isPressing: 0
   _directionX: {x: 0, y: 0}
   beforeDirectionX: {x: 0, y: 0}
@@ -296,7 +295,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 7
+  m_GravityScale: 9
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1

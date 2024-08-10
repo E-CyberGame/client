@@ -41,6 +41,7 @@ namespace Actor
             }
             _stateMachine.FixedUpdateState();
             _transform.transform.position = transform.position;
+
         }
 
         #region Additional Input
@@ -48,7 +49,6 @@ namespace Actor
         public void OnMove(InputValue input)
         {
             Vector2 direction = input.Get<Vector2>();
-            Debug.Log(direction + tag);
 
             if (HasStateAuthority)
             {
@@ -56,7 +56,8 @@ namespace Actor
                     transform.eulerAngles = Vector3.down * -180f;
                 else if (direction.x == -1.0f) transform.eulerAngles = Vector3.zero;
             
-                _stateMachine.Move(direction);
+                Debug.Log(direction + name);
+               _stateMachine.Move(direction);
             }
         }
 
