@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 2852878929368029844}
   - component: {fileID: 806149037562277683}
   m_Layer: 7
-  m_Name: NetworkPlayer
+  m_Name: NetworkYoutuber
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -86,7 +86,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 500061029, guid: 7fb58a141cf631c448d99d269461d632, type: 3}
+  m_Sprite: {fileID: 1185156765, guid: 359fb8eec61e2514fb2403324a1306d5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -253,7 +253,7 @@ MonoBehaviour:
   m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SortKey: 3651070716
+  SortKey: 643086456
   ObjectInterest: 1
   Flags: 262145
   NestedObjects: []
@@ -318,7 +318,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.42, y: 0.62}
+    oldSize: {x: 0.56, y: 0.63}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

@@ -9,6 +9,8 @@ namespace Actor.Skill
     public class FireBall : Projectile, IHit
     {
         private NetworkTransform _transform;
+        private bool isFiring = false;
+        private Vector2 StartDirection;
         public void OnTriggerEnter2D(Collider2D other)
         {
             if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
@@ -27,11 +29,17 @@ namespace Actor.Skill
 
         public void Awake()
         {
+            Debug.Log(Runner is null);
             _transform = GetComponent<NetworkTransform>();
         }
 
         public override void FixedUpdateNetwork()
         {
+            if (!HasStateAuthority) return;
+            if (isFiring)
+            {
+                transform.position += (Vector3)(_distance * StartDirection) * Runner.DeltaTime;
+            }
             _transform.transform.position = transform.position;
         }
 
@@ -39,11 +47,12 @@ namespace Actor.Skill
         {
             Vector3 currentPosition = transform.position;
             if (!HasStateAuthority) return;
-            
-            Debug.Log("발사가되고는있니?");
+            StartDirection = _body.currentDirectionX;
+            isFiring = true;
 
-            transform.DOLocalMove(currentPosition + (Vector3)(_distance * _body.currentDirectionX), 1f).OnComplete(() =>
+            transform.DOMove(currentPosition + (Vector3)(_distance * _body.currentDirectionX), 1f).OnComplete(() =>
             {
+                isFiring = false;
                 NetworkObject networkObject = gameObject.GetComponent<NetworkObject>();
                 if (networkObject is not null && Runner is not null)
                     Runner.Despawn(networkObject);
