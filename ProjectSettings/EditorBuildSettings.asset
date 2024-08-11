@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/KSY-test/ActorTest.unity
     guid: b1e765050eeca044c92fc7b31a77a53d
   - enabled: 0
@@ -26,7 +26,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SEI-test/Raid_Waiting_CustomParty.unity
     guid: c58f8ed55768c0a4db69932807754e70
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/SEI-test/Raid.unity
     guid: 44aa50cc7a095594d9a406e8f9fdeb01
   - enabled: 0
