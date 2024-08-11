@@ -14,7 +14,6 @@ public enum GameState
 public class NetworkGameLogic : NetworkBehaviour, IPlayerLeft
 {
     [Networked, Capacity(5)] private NetworkDictionary<PlayerRef, NetPlayer> Players => default;
-    [SerializeField] BossSubway bossSubway;
     [Networked, OnChangedRender(nameof(GameStateChanged))] private GameState State {  get; set; }
 
     public override void Spawned()
@@ -22,7 +21,7 @@ public class NetworkGameLogic : NetworkBehaviour, IPlayerLeft
         State = GameState.Waiting;
         NetUIMananger.Singleton.SetWaitUI(State);
     }
-
+    
     public override void FixedUpdateNetwork()
     {
         if(Players.Count < 0)
@@ -43,7 +42,6 @@ public class NetworkGameLogic : NetworkBehaviour, IPlayerLeft
             }
             if (areAllReady)
             {
-                bossSubway.SkillStart();
                 State = GameState.Playing;
                 PreparePlayers();
             }
@@ -76,5 +74,6 @@ public class NetworkGameLogic : NetworkBehaviour, IPlayerLeft
     private void GameStateChanged()
     {
         NetUIMananger.Singleton.SetWaitUI(State);
+        BossSubway.Singleton.SkillStart();
     }
 }

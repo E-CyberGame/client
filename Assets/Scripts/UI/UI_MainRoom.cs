@@ -29,7 +29,7 @@ public class UI_MainRoom : UI_Popup
         Bind<Button>(typeof(Buttons));
 
         GetButton((int)Buttons.RaidButton).gameObject.BindUIEvent(RaidButtonClicked);
-        GetButton((int)Buttons.PVPButton).gameObject.BindUIEvent(PVPButtonClicked);
+        //GetButton((int)Buttons.PVPButton).gameObject.BindUIEvent(PVPButtonClicked);
         //GetButton((int)Buttons.CharacterButton).gameObject.BindUIEvent(CharacterButtonClicked);
         //GetButton((int)Buttons.SpecialRaidButton).gameObject.BindUIEvent(SpecialRaidButtonClicked);
         //GetButton((int)Buttons.SettingButton).gameObject.BindUIEvent(SpecialRaidButtonClicked);
