@@ -30,21 +30,22 @@ public class UI_MainRoom : UI_Popup
 
         GetButton((int)Buttons.RaidButton).gameObject.BindUIEvent(RaidButtonClicked);
         GetButton((int)Buttons.PVPButton).gameObject.BindUIEvent(PVPButtonClicked);
-        GetButton((int)Buttons.CharacterButton).gameObject.BindUIEvent(CharacterButtonClicked);
-        GetButton((int)Buttons.SpecialRaidButton).gameObject.BindUIEvent(SpecialRaidButtonClicked);
+        //GetButton((int)Buttons.CharacterButton).gameObject.BindUIEvent(CharacterButtonClicked);
+        //GetButton((int)Buttons.SpecialRaidButton).gameObject.BindUIEvent(SpecialRaidButtonClicked);
         //GetButton((int)Buttons.SettingButton).gameObject.BindUIEvent(SpecialRaidButtonClicked);
 
     }
     public void RaidButtonClicked(PointerEventData eventData)
     {
+        //나중에 변경
         Debug.Log("RaidButton Clicked");
-        SceneManager.LoadScene("Raid_Select");
+        SceneManager.LoadScene("Raid");
     }
 
     public void PVPButtonClicked(PointerEventData eventData)
     {
         Debug.Log("PVPButton Clicked");
-        SceneManager.LoadScene("PVP");
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void CharacterButtonClicked(PointerEventData eventData)
