@@ -39,6 +39,7 @@ namespace Actor.Skill
             _destroyDelay = destroyDelay;
             MoveStartPoint();
         }
+        
 
         public abstract void Fire();
 

@@ -17,6 +17,7 @@ namespace Actor
     public class ActorAnimController : NetworkBehaviour
     {
         private Animator _animator;
+        [Networked, OnChangedRender(nameof(UpdateAnimation))] 
         public ActorAnim CurrentAnim { get; private set; } = ActorAnim.Idle;
 
         public void Awake()
@@ -29,11 +30,17 @@ namespace Actor
             _animator = animator;
         }
 
-        //[Rpc]
         public void ChangeAnimation(ActorAnim animation)
         {
             CurrentAnim = animation;
             _animator.SetInteger("currentAnimation", (int)animation);
+        }
+
+        private void UpdateAnimation()
+        {
+            // 애니메이션 상태에 따라 애니메이션을 업데이트
+            _animator.SetInteger("currentAnimation", (int)CurrentAnim);
+            Debug.Log(CurrentAnim.ToString() + name);
         }
     }
 }

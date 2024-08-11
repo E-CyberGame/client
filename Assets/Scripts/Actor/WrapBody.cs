@@ -82,7 +82,6 @@ public class WrapBody : NetworkBehaviour
     {
         if (!HasStateAuthority) return;
         this.directionX = directionX;
-        Debug.Log("눌리고잇으신지요" + this.directionX);
     }
 
     public override void FixedUpdateNetwork()

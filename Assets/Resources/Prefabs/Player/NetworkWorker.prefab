@@ -23,9 +23,8 @@ GameObject:
   - component: {fileID: 609365612162539355}
   - component: {fileID: 2852878929368029844}
   - component: {fileID: 806149037562277683}
-  - component: {fileID: 4174025548518721282}
   m_Layer: 7
-  m_Name: NetworkPlayer
+  m_Name: NetworkWorker
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -108,7 +107,7 @@ Animator:
   m_GameObject: {fileID: 407036373728366916}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ca16b1cac8129d549845eda3ad9386ed, type: 2}
+  m_Controller: {fileID: 9100000, guid: a53d39309ebde67479755f18cea86113, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -254,7 +253,7 @@ MonoBehaviour:
   m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SortKey: 3651070716
+  SortKey: 2146876768
   ObjectInterest: 1
   Flags: 262145
   NestedObjects: []
@@ -265,7 +264,6 @@ MonoBehaviour:
   - {fileID: 407036373728366928}
   - {fileID: 407036373728366900}
   - {fileID: 806149037562277683}
-  - {fileID: 4174025548518721282}
 --- !u!114 &407036373728366900
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -341,3 +339,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b91f1b1564fb0834fb100142a7810f54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _CurrentAnim: 0
