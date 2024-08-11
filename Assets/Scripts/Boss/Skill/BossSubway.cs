@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 
@@ -12,6 +13,40 @@ namespace Boss.Skill
         [SerializeField] LaySource vertical;
         [SerializeField] FallSource fall;
         [SerializeField] BombSource bomb;
+        [SerializeField] GameObject Boss_Subway;
+
+
+        public static BossSubway Singleton
+        {
+            get => _subwaysingleton;
+            set
+            {
+                if (value == null)
+                    _subwaysingleton = null;
+                else if (_subwaysingleton == null)
+                    _subwaysingleton = value;
+                else if (_subwaysingleton != value)
+                {
+                    Destroy(value);
+                    Debug.LogError($"There should only ever be one instance of {nameof(NetUIMananger)}!");
+                }
+            }
+        }
+        private static BossSubway _subwaysingleton;
+
+
+        public void Awake()
+        {
+            Singleton = this;
+        }
+
+        private void OnDestroy()
+        {
+            if (Singleton == this)
+                Singleton = null;
+        }
+
+
 
         public void SkillStart()
         {
@@ -21,8 +56,7 @@ namespace Boss.Skill
         IEnumerator SubwaySkill()
         {
             Debug.Log("게임 시작");
-            Debug.Log("운석");
-            fall.Fall(new int[] { 0, 1, 2, 6, 9, 12, 14, 15, 17, 19, 21 });
+            Boss_Subway.SetActive(true);
             yield return new WaitForSeconds(5.0f);
             Debug.Log("가로 빔");
             horizontal.Lay(new int[] { 0, 5 });
