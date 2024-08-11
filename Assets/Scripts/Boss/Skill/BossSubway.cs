@@ -12,6 +12,7 @@ namespace Boss.Skill
         [SerializeField] LaySource vertical;
         [SerializeField] FallSource fall;
         [SerializeField] BombSource bomb;
+        [SerializeField] GameObject Boss_Subway;
 
         public void SkillStart()
         {
@@ -21,8 +22,7 @@ namespace Boss.Skill
         IEnumerator SubwaySkill()
         {
             Debug.Log("게임 시작");
-            Debug.Log("운석");
-            fall.Fall(new int[] { 0, 1, 2, 6, 9, 12, 14, 15, 17, 19, 21 });
+            Boss_Subway.SetActive(true);
             yield return new WaitForSeconds(5.0f);
             Debug.Log("가로 빔");
             horizontal.Lay(new int[] { 0, 5 });

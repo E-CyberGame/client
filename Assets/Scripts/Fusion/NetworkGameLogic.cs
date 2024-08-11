@@ -1,39 +1,80 @@
+using Boss.Skill;
 using Fusion;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem.LowLevel;
 
-public class NetworkGameLogic : NetworkBehaviour, IPlayerJoined, IPlayerLeft
+public enum GameState
 {
-    [SerializeField] private NetworkPrefabRef playerPrefab;
-    [Networked, Capacity(5)] private NetworkDictionary<PlayerRef, NetPlayer> Players => default;
+    Waiting,
+    Playing
+}
 
+public class NetworkGameLogic : NetworkBehaviour, IPlayerLeft
+{
+    [Networked, Capacity(5)] private NetworkDictionary<PlayerRef, NetPlayer> Players => default;
+    [SerializeField] BossSubway bossSubway;
+    [Networked, OnChangedRender(nameof(GameStateChanged))] private GameState State {  get; set; }
+
+    public override void Spawned()
+    {
+        State = GameState.Waiting;
+        NetUIMananger.Singleton.SetWaitUI(State);
+    }
 
     public override void FixedUpdateNetwork()
     {
-        bool areAllReady = true;
+        if(Players.Count < 0)
+        {
+            return;
+        }
+
+        if (State == GameState.Waiting)
+        {
+            bool areAllReady = true;
+            foreach (KeyValuePair<PlayerRef, NetPlayer> player in Players)
+            {
+                if (!player.Value.IsReady)
+                {
+                    areAllReady = false;
+                    break;
+                }
+            }
+            if (areAllReady)
+            {
+                bossSubway.SkillStart();
+                State = GameState.Playing;
+                PreparePlayers();
+            }
+
+        }
+    }
+    
+    private void PreparePlayers()
+    {
+        Debug.Log("게임이 시작하므로 플레이어들은 준비하세요");
     }
 
-    public void PlayerJoined(PlayerRef player)
+    public void SetPlayer(PlayerRef player, NetworkObject playerObject)
     {
-        if (HasStateAuthority)
+        if (player == Runner.LocalPlayer)
         {
-            NetworkObject playerObject = Runner.Spawn(playerPrefab, Vector3.up, Quaternion.identity, player);
             Players.Add(player, playerObject.GetComponent<NetPlayer>());
         }
     }
 
     public void PlayerLeft(PlayerRef player)
     {
-        if(!HasStateAuthority)
-        {
-            return;
-        }
         if (Players.TryGet(player, out NetPlayer playerBehaviour))
         {
             Players.Remove(player);
             Runner.Despawn(playerBehaviour.Object);
         }
+    }
+
+    private void GameStateChanged()
+    {
+        NetUIMananger.Singleton.SetWaitUI(State);
     }
 }

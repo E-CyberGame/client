@@ -5,15 +5,24 @@ using UnityEngine;
 
 public class NetPlayer : NetworkBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [Networked]
+    public bool IsReady { get; set; }
+
+    public override void Spawned()
     {
-        
+        if (HasInputAuthority)
+        {
+            Runner.GetComponent<InputManager>().LocalPlayer = this;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    [Rpc(RpcSources.InputAuthority, RpcTargets.InputAuthority | RpcTargets.StateAuthority)]
+    public void RPC_SetReady()
     {
-        
+        IsReady = true;
+        if (HasInputAuthority)
+        {
+            NetUIMananger.Singleton.DidSetReady();
+        }
     }
 }

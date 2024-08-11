@@ -10,6 +10,7 @@ public class InputManager : SimulationBehaviour, IBeforeUpdate, INetworkRunnerCa
 {
     private NetInput accumulatedInput;
     private bool resetInput;
+    public NetPlayer LocalPlayer;
 
     public void BeforeUpdate()
     {
@@ -40,6 +41,17 @@ public class InputManager : SimulationBehaviour, IBeforeUpdate, INetworkRunnerCa
             return;
         }
 
+        NetworkButtons networkbuttons = default;
+
+        if(keyboard != null)
+        {
+            if(keyboard.rKey.wasPressedThisFrame && LocalPlayer != null)
+            {
+                Debug.Log("R key Pressed");
+                LocalPlayer.RPC_SetReady();
+            }
+        }
+
     }
 
     public void OnConnectedToServer(NetworkRunner runner)
@@ -68,6 +80,9 @@ public class InputManager : SimulationBehaviour, IBeforeUpdate, INetworkRunnerCa
 
     public void OnInput(NetworkRunner runner, NetworkInput input)
     {
+        accumulatedInput.Direction.Normalize();
+        input.Set(accumulatedInput);
+        resetInput = true;
     }
 
     public void OnInputMissing(NetworkRunner runner, PlayerRef player, NetworkInput input)

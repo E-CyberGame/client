@@ -5,7 +5,7 @@ using UnityEngine;
 
 public enum InputButton
 {
-    Jump,
+    Ready,
 }
 
 
