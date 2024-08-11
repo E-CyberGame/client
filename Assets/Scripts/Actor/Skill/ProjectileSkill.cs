@@ -48,9 +48,10 @@ namespace Actor.Skill
 
         public void Generate(int id, int index)
         {
-            NetworkObject networkObject = goList[index].GetComponent<NetworkObject>();
-            Runner.Spawn(networkObject, _player.position, Quaternion.identity);
-            Debug.Log("스폰됨");
+            if (!HasStateAuthority) return;
+
+            NetworkObject networkObject = Runner.Spawn(goList[index].GetComponent<NetworkObject>(), _player.position, Quaternion.identity, Runner.LocalPlayer);
+            Debug.Log(networkObject.StateAuthority);
             projectileList[id]?.Add(networkObject.GetComponent<Projectile>());
         }
     }

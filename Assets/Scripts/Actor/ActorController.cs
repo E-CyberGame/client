@@ -55,36 +55,23 @@ namespace Actor
                 if (direction.x == 1.0f)
                     transform.eulerAngles = Vector3.down * -180f;
                 else if (direction.x == -1.0f) transform.eulerAngles = Vector3.zero;
-            
-                Debug.Log(direction + name);
-               _stateMachine.Move(direction);
             }
+            
+            _stateMachine.Move(direction);
         }
 
         public void OnJump()
         {
-            if (HasStateAuthority == false)
-            {
-                return;
-            }
             _stateMachine.Jump();
         }
 
         public void OnDown()
         {
-            if (HasStateAuthority == false)
-            {
-                return;
-            }
             _stateMachine.Down();
         }
 
         public void OnDash()
         {
-            if (HasStateAuthority == false)
-            {
-                return;
-            }
             _stateMachine.Dash();
         }
 

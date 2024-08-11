@@ -16,6 +16,7 @@ public class OnAirState : BaseState
     {
         if (_body.CanJump())
             return;
+
         _body.Jump();
         _anim.ChangeAnimation(ActorAnim.Jumping);
     }
