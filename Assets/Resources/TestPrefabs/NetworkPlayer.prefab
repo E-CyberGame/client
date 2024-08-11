@@ -23,7 +23,6 @@ GameObject:
   - component: {fileID: 609365612162539355}
   - component: {fileID: 2852878929368029844}
   - component: {fileID: 806149037562277683}
-  - component: {fileID: 4174025548518721282}
   m_Layer: 7
   m_Name: NetworkPlayer
   m_TagString: Player
@@ -265,7 +264,6 @@ MonoBehaviour:
   - {fileID: 407036373728366928}
   - {fileID: 407036373728366900}
   - {fileID: 806149037562277683}
-  - {fileID: 4174025548518721282}
 --- !u!114 &407036373728366900
 MonoBehaviour:
   m_ObjectHideFlags: 0

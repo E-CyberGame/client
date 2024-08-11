@@ -47,13 +47,13 @@ public class PVPSpawner : SimulationBehaviour, IPlayerJoined
                                       Matching.SetActive(true);
                                       if (Runner.ActivePlayers.Count() == 1)
                                       {
-                                          NetworkObject networkObject = Runner.Spawn(Player1Prefab, new Vector3(0, 1, 0), Quaternion.identity);
+                                          NetworkObject networkObject = Runner.Spawn(Player1Prefab, new Vector3(-7, 1, 0), Quaternion.identity);
                                           networkObject.name = "MyPlayer";
                                           isWorker = true;
                                       }
                                       else
                                       {
-                                          NetworkObject networkObject = Runner.Spawn(Player2Prefab, new Vector3(0, 1, 0), Quaternion.identity);
+                                          NetworkObject networkObject = Runner.Spawn(Player2Prefab, new Vector3(7, 1, 0), Quaternion.identity);
                                           networkObject.name = "MyPlayer";
                                           isWorker = false;
                                       }
