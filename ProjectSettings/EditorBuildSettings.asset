@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/KSY-test/ActorTest.unity
     guid: b1e765050eeca044c92fc7b31a77a53d
   - enabled: 0
@@ -47,4 +47,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SEI-test/SkillManaging.unity
     guid: ae589618cf2cd384587dde7b540264ef
+  - enabled: 1
+    path: Assets/Scenes/KSY-test/MainMenu.unity
+    guid: 2f89f0f3e35d88847912e8b3342ebf36
   m_configObjects: {}
