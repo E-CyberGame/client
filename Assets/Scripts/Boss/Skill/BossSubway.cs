@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 
@@ -13,6 +14,39 @@ namespace Boss.Skill
         [SerializeField] FallSource fall;
         [SerializeField] BombSource bomb;
         [SerializeField] GameObject Boss_Subway;
+
+
+        public static BossSubway Singleton
+        {
+            get => _subwaysingleton;
+            set
+            {
+                if (value == null)
+                    _subwaysingleton = null;
+                else if (_subwaysingleton == null)
+                    _subwaysingleton = value;
+                else if (_subwaysingleton != value)
+                {
+                    Destroy(value);
+                    Debug.LogError($"There should only ever be one instance of {nameof(NetUIMananger)}!");
+                }
+            }
+        }
+        private static BossSubway _subwaysingleton;
+
+
+        public void Awake()
+        {
+            Singleton = this;
+        }
+
+        private void OnDestroy()
+        {
+            if (Singleton == this)
+                Singleton = null;
+        }
+
+
 
         public void SkillStart()
         {

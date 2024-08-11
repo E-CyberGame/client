@@ -8,7 +8,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/KSY-test/ActorTest.unity
     guid: b1e765050eeca044c92fc7b31a77a53d
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/main.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 0
