@@ -142,31 +142,6 @@ public class SessionSetup : MonoBehaviour
             GameManager.Instance.Runner.SessionInfo.IsVisible = !IsPrivate;
         */
     }
-    
-    private PVPData _data;
-
-    public void SetPVPData(PVPData data)
-    {
-        _data = data;
-    }
-    
-    public void StartPVPGame(PVPData data)
-    {
-        if (Matchmaker.Instance.Runner == null)
-        {
-            Instantiate(new GameObject("GameSettingData")).AddComponent<GameSettingData>().SetData(data);
-            Matchmaker.Instance.TryHostSession();
-        }
-    }
-
-    public void JoinPVPGame(string roomCode = null)
-    {
-        if (roomCode is null)
-        {
-            Matchmaker.Instance.TryJoinRandomSession();
-        }
-        else Matchmaker.Instance.TryJoinSession(roomCode);
-    }
 
     #endregion
 }

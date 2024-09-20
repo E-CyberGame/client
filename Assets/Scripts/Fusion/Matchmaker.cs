@@ -71,8 +71,7 @@ public class Matchmaker : MonoBehaviour, INetworkRunnerCallbacks
             Runner.AddCallbacks(this);
         }
 
-        // string code = string.IsNullOrWhiteSpace(_roomCode) ? RoomCode.Create(6) : _roomCode;
-        string code = "abcd";
+        string code = string.IsNullOrWhiteSpace(_roomCode) ? RoomCode.Create(6) : _roomCode;
         Debug.Log(code);
 
         Task <StartGameResult> task = Runner.StartGame(new StartGameArgs()
@@ -135,7 +134,7 @@ public class Matchmaker : MonoBehaviour, INetworkRunnerCallbacks
         {
             GameMode = GameMode.Client,
             SessionName = sessionCode,
-            SceneManager = Runner.GetComponent<INetworkSceneManager>(),
+            //SceneManager = Runner.GetComponent<INetworkSceneManager>(),
             EnableClientSessionCreation = false,
             //DisableClientSessionCreation = true (Assuming this has been swapped?)
         });
