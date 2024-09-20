@@ -297,17 +297,33 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1760530282 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4629835831144659523, guid: b0d5c72faa91db74b94298ad570c50c3, type: 3}
+--- !u!1 &1025628252 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4629835832093426264, guid: b0d5c72faa91db74b94298ad570c50c3, type: 3}
   m_PrefabInstance: {fileID: 4629835832000170211}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+--- !u!114 &1025628255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1025628252}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 601a78275a27e004fb17dad32afc60ce, type: 3}
+  m_Script: {fileID: 11500000, guid: 98646f1104e3c424a8b381231a86070c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lengthDropdowns: []
+  timesDropdowns: []
+  shotsDropdowns: []
+  collisionToggles: []
+  onTryCreateSession:
+    m_PersistentCalls:
+      m_Calls: []
+  onSessionCreated:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1809745575
 GameObject:
   m_ObjectHideFlags: 0
@@ -411,6 +427,18 @@ PrefabInstance:
       propertyPath: managerPrefab
       value: 
       objectReference: {fileID: 4126650120695403013, guid: a1b6544d6d8b1be47a3d659945146560, type: 3}
+    - target: {fileID: 3771871929901355133, guid: b0d5c72faa91db74b94298ad570c50c3, type: 3}
+      propertyPath: gameScene
+      value: Assets/Scenes/MatchingRoom.unity
+      objectReference: {fileID: 0}
+    - target: {fileID: 3771871929901355133, guid: b0d5c72faa91db74b94298ad570c50c3, type: 3}
+      propertyPath: runnerPrefab
+      value: 
+      objectReference: {fileID: 6391942863821925722, guid: 01d4a3ac41e7961429ef137e1265ad9c, type: 3}
+    - target: {fileID: 3771871929901355133, guid: b0d5c72faa91db74b94298ad570c50c3, type: 3}
+      propertyPath: managerPrefab
+      value: 
+      objectReference: {fileID: 4126650120695403013, guid: a1b6544d6d8b1be47a3d659945146560, type: 3}
     - target: {fileID: 4629835831945503431, guid: b0d5c72faa91db74b94298ad570c50c3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 2
@@ -422,7 +450,7 @@ PrefabInstance:
     - target: {fileID: 4629835831945503431, guid: b0d5c72faa91db74b94298ad570c50c3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 1760530282}
+      objectReference: {fileID: 0}
     - target: {fileID: 4629835831945503431, guid: b0d5c72faa91db74b94298ad570c50c3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
       value: 2
