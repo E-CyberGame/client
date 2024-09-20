@@ -10,9 +10,6 @@ public class LobbyPresenter : MonoBehaviour
     private SessionSetup model;
     public PVPSettingPanel settingView;
     public PVPJoinSetting joinView;
-
-    public UIScreen Screen;
-
     public void Awake()
     {
         model = GetComponent<SessionSetup>();
@@ -28,19 +25,19 @@ public class LobbyPresenter : MonoBehaviour
     public void StartRoom()
     {
         model.SetPVPData(settingView.GetSettingData());
-        model.StartGame(settingView.GetSettingData());
+        model.StartPVPGame(settingView.GetSettingData());
     }
 
     //룸 코드로 룸에 참여하는 코드.
     //만약 roomCode가 Null일 시 랜덤 참여
     public void CodeEnter(string roomCode = null)
     {
-        model.JoinGame(roomCode);
+        model.JoinPVPGame(roomCode);
     }
 
     public void RandomEnter()
     {
-        model.JoinGame();
+        model.JoinPVPGame();
     }
 
     //룸 데이터 세팅(다른 요소들로 확장해도 되고...) -> RPC여도 될 듯

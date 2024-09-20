@@ -442,8 +442,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8484286078999075121}
   - component: {fileID: 8484286078999075123}
-  - component: {fileID: 8484286078999075120}
   - component: {fileID: 8484286078999075122}
+  - component: {fileID: 1956025833947931199}
   m_Layer: 5
   m_Name: PVPJoinSetting
   m_TagString: Untagged
@@ -486,27 +486,6 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &8484286078999075120
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8484286078999075126}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 601a78275a27e004fb17dad32afc60ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isModal: 0
-  initialSelected: {fileID: 0}
-  onFocused:
-    m_PersistentCalls:
-      m_Calls: []
-  onDefocused:
-    m_PersistentCalls:
-      m_Calls: []
-  previousScreen: {fileID: 0}
 --- !u!114 &8484286078999075122
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -522,6 +501,27 @@ MonoBehaviour:
   RandomEnter: {fileID: 8484286078597034562}
   CodeEnter: {fileID: 8484286078243218349}
   input: {fileID: 8484286079961960456}
+--- !u!114 &1956025833947931199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8484286078999075126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94638db81eaf5b34d8a8c5c6967fc9cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isModal: 0
+  initialSelected: {fileID: 0}
+  onFocused:
+    m_PersistentCalls:
+      m_Calls: []
+  onDefocused:
+    m_PersistentCalls:
+      m_Calls: []
+  previousScreen: {fileID: 0}
 --- !u!1 &8484286079266356437
 GameObject:
   m_ObjectHideFlags: 0
