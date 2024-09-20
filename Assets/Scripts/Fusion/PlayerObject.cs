@@ -5,6 +5,17 @@ using UnityEngine;
 using Fusion;
 using UnityEngine.InputSystem.HID;
 
+public enum CharacterType
+{
+    Worker,
+    Youtuber,
+}
+
+public enum TeamType{
+    Red,
+    Blue,
+}
+
 public class PlayerObject : NetworkBehaviour
 {
     public const float TIME_UNSET = -1f;
