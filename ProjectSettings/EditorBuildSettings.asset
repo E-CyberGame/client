@@ -20,7 +20,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SEI-test/Raid_Select.unity
     guid: e5cba158dea590e47b64b983eb4af494
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/SEI-test/Raid_Waiting.unity
     guid: 5c635e96f467630428d1f43d2c7c4d04
   - enabled: 0

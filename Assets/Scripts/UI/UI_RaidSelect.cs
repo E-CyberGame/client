@@ -13,6 +13,9 @@ public class UI_RaidSelect : UI_Popup
     //*****************************
     private int raidnum = 6;
     public ScrollRect scrollRect;
+    public SessionSetup sessionSetup;
+    public UIScreen SelectScreen;
+    public UIScreen RoomScreen;
     //*****************************
 
     enum Buttons
@@ -27,6 +30,12 @@ public class UI_RaidSelect : UI_Popup
     private void Start()
     {
         Init();
+    }
+
+    public override void Init()
+    {
+        Bind<Button>(typeof(Buttons));
+        GetButton((int)Buttons.BackButton).gameObject.BindUIEvent(BackButtonClicked);
 
         //Raid Card를 스크롤 뷰에 추가
         for (int i = 0; i < raidnum; i++)
@@ -39,22 +48,16 @@ public class UI_RaidSelect : UI_Popup
         }
     }
 
-    public override void Init()
-    {
-        base.Init();
-        Bind<Button>(typeof(Buttons));
-
-        GetButton((int)Buttons.BackButton).gameObject.BindUIEvent(BackButtonClicked);
-
-    }
     public void BackButtonClicked(PointerEventData eventData)
     {
         Debug.Log("BackButton Clicked");
         SceneManager.LoadScene("MainRoom");
     }
+
     public void NextButtonClicked(PointerEventData eventData)
     {
         Debug.Log("NextButton Clicked");
-        SceneManager.LoadScene("Raid_Waiting");
+        sessionSetup.TryCreateSession();
+        SelectScreen.FocusScreen(RoomScreen);
     }
 }

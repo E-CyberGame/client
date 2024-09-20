@@ -400,6 +400,8 @@ GameObject:
   - component: {fileID: 215517693}
   - component: {fileID: 215517692}
   - component: {fileID: 215517696}
+  - component: {fileID: 215517697}
+  - component: {fileID: 215517698}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -507,6 +509,57 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scrollRect: {fileID: 1881736780}
+  sessionSetup: {fileID: 215517697}
+--- !u!114 &215517697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 215517690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98646f1104e3c424a8b381231a86070c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lengthDropdowns: []
+  timesDropdowns: []
+  shotsDropdowns: []
+  collisionToggles: []
+  onTryCreateSession:
+    m_PersistentCalls:
+      m_Calls: []
+  onSessionCreated:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &215517698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 215517690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17927b09c6249b941b1780e0e6566b44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameScene: 
+  runnerPrefab: {fileID: 6391942863821925722, guid: 01d4a3ac41e7961429ef137e1265ad9c, type: 3}
+  managerPrefab: {fileID: 707497257126116838, guid: 6475914453d693948baed7adf93057e9, type: 3}
+  sessionItemHolder: {fileID: 0}
+  onTryJoinLobby:
+    m_PersistentCalls:
+      m_Calls: []
+  onLobbyConnected:
+    m_PersistentCalls:
+      m_Calls: []
+  onCloseLobby_Before:
+    m_PersistentCalls:
+      m_Calls: []
+  onCloseLobby_After:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!224 &236708215 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1004995633724377075, guid: 48867b3a18ade6b4085fe6658a30af05, type: 3}
