@@ -28,7 +28,7 @@ namespace Boss.Skill
                 else if (_subwaysingleton != value)
                 {
                     Destroy(value);
-                    Debug.LogError($"There should only ever be one instance of {nameof(NetUIMananger)}!");
+                    //Debug.LogError($"There should only ever be one instance of {nameof(NetUIMananger)}!");
                 }
             }
         }
