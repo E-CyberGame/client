@@ -32,7 +32,6 @@ public class UI_RaidWaiting : UI_Popup
 
     public override void Init()
     {
-        base.Init();
         Bind<Button>(typeof(Buttons));
 
         GetButton((int)Buttons.BackButton).gameObject.BindUIEvent(BackButtonClicked);
