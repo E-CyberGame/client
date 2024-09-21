@@ -17,8 +17,7 @@ public class PlayerRegistry : NetworkBehaviour, INetworkRunnerCallbacks
     public static event System.Action<NetworkRunner, PlayerRef> OnPlayerJoined;
     public static event System.Action<NetworkRunner, PlayerRef> OnPlayerLeft;
 
-    public static IEnumerable<PlayerObject> Everyone => Instance?.Object?.IsValid == true ? Instance.ObjectByRef.Select(kvp => kvp.Value) : Enumerable.Empty<PlayerObject>();
-    public static IEnumerable<PlayerObject> Players => Instance?.Object?.IsValid == true ? Instance.ObjectByRef.Where(kvp => kvp.Value && !kvp.Value.IsSpectator).Select(kvp => kvp.Value) : Enumerable.Empty<PlayerObject>();
+    public static IEnumerable<PlayerObject> Players => Instance?.Object?.IsValid == true ? Instance.ObjectByRef.Where(kvp => kvp.Value).Select(kvp => kvp.Value) : Enumerable.Empty<PlayerObject>();
 
     [Networked, Capacity(CAPACITY)]
     NetworkDictionary<PlayerRef, PlayerObject> ObjectByRef { get; }
@@ -124,55 +123,41 @@ public class PlayerRegistry : NetworkBehaviour, INetworkRunnerCallbacks
 
     #region Utility Methods
 
-    public static IEnumerable<PlayerObject> Where(System.Predicate<PlayerObject> match, bool includeSpectators = false)
+    public static IEnumerable<PlayerObject> Where(System.Predicate<PlayerObject> match)
     {
-        return (includeSpectators ? Everyone : Players).Where(p => match.Invoke(p));
-
-        //return Instance.ObjectByRef.Where(kvp => match.Invoke(kvp.Value)).Select(kvp => kvp.Value);
+        return Players.Where(p => match.Invoke(p)); 
     }
 
-    public static PlayerObject First(System.Predicate<PlayerObject> match, bool includeSpectators = false)
+    public static PlayerObject First(System.Predicate<PlayerObject> match)
     {
-        return (includeSpectators ? Everyone : Players).First(p => match.Invoke(p));
+        return Players.First(p => match.Invoke(p));
     }
 
-    public static void ForEach(System.Action<PlayerObject> action, bool includeSpectators = false)
+    public static void ForEach(System.Action<PlayerObject> action)
     {
-        (includeSpectators ? Everyone : Players).ForEach(p => action.Invoke(p));
+        Players.ForEach(p => action.Invoke(p));
     }
 
-    public static void ForEach(System.Action<PlayerObject, int> action, bool includeSpectators = false)
+    public static void ForEach(System.Action<PlayerObject, int> action)
     {
         int i = 0;
-        (includeSpectators ? Everyone : Players).ForEach(p => action.Invoke(p, i++));
+        Players.ForEach(p => action.Invoke(p, i++));
     }
 
-    public static void ForEachWhere(System.Predicate<PlayerObject> match, System.Action<PlayerObject> action, bool includeSpectators = false)
+    public static void ForEachWhere(System.Predicate<PlayerObject> match, System.Action<PlayerObject> action)
     {
-        (includeSpectators ? Everyone : Players).Where(p => match.Invoke(p)).ForEach(p => action.Invoke(p));
-        //foreach (PlayerObject p in (includeSpectators ? Everyone : Players).Where(p => match.Invoke(p)))
-        //{
-        //	action.Invoke(p);
-        //}
+        Players.Where(p => match.Invoke(p)).ForEach(p => action.Invoke(p));
     }
 
-    public static int CountWhere(System.Predicate<PlayerObject> match, bool includeSpectators = false)
+    public static int CountWhere(System.Predicate<PlayerObject> match)
     {
-        return (includeSpectators ? Everyone : Players).Where(p => match.Invoke(p)).Count();
-
-        //int count = 0;
-        //foreach (var kvp in Instance.ObjectByRef)
-        //{
-        //	if (match.Invoke(kvp.Value))
-        //		count++;
-        //}
-        //return count;
+        return Players.Where(p => match.Invoke(p)).Count();
     }
 
-    public static bool Any(System.Predicate<PlayerObject> match, bool includeSpectators = false)
+    public static bool Any(System.Predicate<PlayerObject> match)
     {
         if (Instance == null) return false;
-        return (includeSpectators ? Everyone : Players).Where(p => match.Invoke(p)).Count() > 0;
+        return Players.Where(p => match.Invoke(p)).Count() > 0;
 
         //foreach (var kvp in Instance.ObjectByRef)
         //{
@@ -181,9 +166,9 @@ public class PlayerRegistry : NetworkBehaviour, INetworkRunnerCallbacks
         //return false;
     }
 
-    public static bool All(System.Predicate<PlayerObject> match, bool includeSpectators = false)
+    public static bool All(System.Predicate<PlayerObject> match)
     {
-        return (includeSpectators ? Everyone : Players).Where(p => !match.Invoke(p)).Count() == 0;
+        return Players.Where(p => !match.Invoke(p)).Count() == 0;
 
         //foreach (var kvp in Instance.ObjectByRef)
         //{
@@ -194,34 +179,32 @@ public class PlayerRegistry : NetworkBehaviour, INetworkRunnerCallbacks
 
     public static IOrderedEnumerable<PlayerObject> OrderAsc<T>(
         System.Func<PlayerObject, T> selector,
-        System.Predicate<PlayerObject> match = null,
-        bool includeSpectators = false) where T : System.IComparable<T>
+        System.Predicate<PlayerObject> match = null) where T : System.IComparable<T>
     {
-        if (match != null) return (includeSpectators ? Everyone : Players).Where(p => match.Invoke(p)).OrderBy(selector);
-        return (includeSpectators ? Everyone : Players).OrderBy(selector);
+        if (match != null) return Players.Where(p => match.Invoke(p)).OrderBy(selector);
+        return Players.OrderBy(selector);
     }
 
     public static IOrderedEnumerable<PlayerObject> OrderDesc<T>(
         System.Func<PlayerObject, T> selector,
-        System.Predicate<PlayerObject> match = null,
-        bool includeSpectators = false) where T : System.IComparable<T>
+        System.Predicate<PlayerObject> match = null) where T : System.IComparable<T>
     {
-        if (match != null) return (includeSpectators ? Everyone : Players).Where(p => match.Invoke(p)).OrderByDescending(selector);
-        return (includeSpectators ? Everyone : Players).OrderByDescending(selector);
+        if (match != null) return Players.Where(p => match.Invoke(p)).OrderByDescending(selector);
+        return Players.OrderByDescending(selector);
     }
 
-    public static PlayerObject Next(PlayerObject current, bool includeSpectators = false)
+    public static PlayerObject Next(PlayerObject current)
     {
-        IEnumerable<PlayerObject> collection = (includeSpectators ? Everyone : Players);
+        IEnumerable<PlayerObject> collection = Players;
         int index = collection.FirstIndex(current);
         if (index == -1) return current;
         int length = collection.Count();
         return collection.ElementAt((int)Mathf.Repeat(index + 1, length));
     }
 
-    public static PlayerObject NextWhere(PlayerObject current, System.Predicate<PlayerObject> match, bool includeSpectators = false)
+    public static PlayerObject NextWhere(PlayerObject current, System.Predicate<PlayerObject> match)
     {
-        IEnumerable<PlayerObject> collection = (includeSpectators ? Everyone : Players).Where(p => match.Invoke(p));
+        IEnumerable<PlayerObject> collection = Players.Where(p => match.Invoke(p));
         int index = collection.FirstIndex(current);
         if (index == -1) return current;
         int length = collection.Count();
