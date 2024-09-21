@@ -70,9 +70,15 @@ public class PVPSettingPanel : MonoBehaviour
         _decay.onValueChanged.AddListener(action);
     }
 
-    public PVPData GetSettingData()
+    public PVPData GetGameData()
     {
         return new PVPData(GetCurrentMap().SceneType, _decay.isOn, _crystal.isOn);
+    }
+    
+    [Rpc(RpcSources.StateAuthority, RpcTargets.InputAuthority)]
+    public void RPC_SetGameData(PVPData data)
+    {
+        SetData(data);
     }
 
     #region Utility Method

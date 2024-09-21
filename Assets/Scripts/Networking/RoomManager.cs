@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 using Data;
 using Fusion;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class RoomManager : NetworkBehaviour
 {
@@ -30,18 +31,5 @@ public class RoomManager : NetworkBehaviour
     public override void Spawned()
     {
         Instance = this;
-        FindObjectOfType<GameSettingData>().RPC_SetGameData();
-    }
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
