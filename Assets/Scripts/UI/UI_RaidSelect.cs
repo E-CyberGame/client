@@ -58,6 +58,5 @@ public class UI_RaidSelect : UI_Popup
     {
         Debug.Log("NextButton Clicked");
         sessionSetup.TryCreateSession();
-        SelectScreen.FocusScreen(RoomScreen);
     }
 }

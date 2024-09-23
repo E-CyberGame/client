@@ -14,6 +14,35 @@ public class GameManager : NetworkBehaviour, INetworkRunnerCallbacks
 
     public static GameManager Instance { get; private set; }
 
+
+    void OnSessionConfigChanged()
+    {
+        InterfaceManager.Instance.sessionScreen.UpdateSessionConfig();
+    }
+
+    public override void Spawned()
+    {
+        Instance = this;
+        Runner.AddCallbacks(this);
+        if (Runner.IsServer)
+        {
+            if (Runner.SessionInfo.IsVisible != !SessionSetup.isPrivate)
+                Runner.SessionInfo.IsVisible = !SessionSetup.isPrivate;
+        }
+        /*
+        if (State.Current < GameState.EGameState.Loading)
+        {
+            UIScreen.Focus(InterfaceManager.Instance.sessionScreen.screen);
+        }
+        */
+    }
+
+    public override void Despawned(NetworkRunner runner, bool hasState)
+    {
+        Instance = null;
+    }
+
+
     public void OnSceneLoadDone(NetworkRunner runner)
     {
         if (runner.SimulationUnityScene.name == "Game")
@@ -22,6 +51,11 @@ public class GameManager : NetworkBehaviour, INetworkRunnerCallbacks
         }
     }
 
+    [Rpc(RpcSources.All, RpcTargets.StateAuthority, HostMode = RpcHostMode.SourceIsHostPlayer)]
+    public void Rpc_LoadDone(RpcInfo info = default)
+    {
+        PlayerRegistry.GetPlayer(info.Source).IsLoaded = true;
+    }
 
     public void OnShutdown(NetworkRunner runner, ShutdownReason shutdownReason)
     {

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6391942863821925723}
   - component: {fileID: 6391942863821925722}
   - component: {fileID: 6391942863821925701}
+  - component: {fileID: 5084688269618814940}
   m_Layer: 0
   m_Name: NetworkRun
   m_TagString: Untagged
@@ -114,3 +115,16 @@ MonoBehaviour:
   OnObjectExitAOI:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5084688269618814940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6391942863821925700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1632ca988613586418758ed3e8b61458, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerObject: {fileID: 5571095646431097888, guid: 58d9ca37b240a324fabadd46a1c0c664, type: 3}
