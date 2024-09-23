@@ -11,12 +11,13 @@ public class ScriptManager : MonoBehaviour
     public Putter playerControllerPrefab;
     public PlayerScoreboardUI playerScoreUI;
     public ScoreItem scoreItem;
-    public PlayerSessionItemUI playerSessionItemUI;
     public WorldNickname worldNicknamePrefab;
     public GameObject splashEffect;
 
     public Level[] levels;
     */
+
+    public PlayerSessionItemUI playerSessionItemUI;
 
     private void Awake()
     {

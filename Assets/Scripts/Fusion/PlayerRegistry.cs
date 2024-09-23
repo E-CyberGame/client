@@ -76,6 +76,7 @@ public class PlayerRegistry : NetworkBehaviour, INetworkRunnerCallbacks
 
         if (Instance.GetAvailable(out byte index))
         {
+            Debug.Log("Instance. Add");
             Instance.ObjectByRef.Add(pRef, pObj);
             DontDestroyOnLoad(pObj.gameObject);
             pObj.Server_Init(pRef, index);

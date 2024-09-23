@@ -66,6 +66,7 @@ public class PlayerObject : NetworkBehaviour
 
     public override void Spawned()
     {
+        Debug.Log(" Player Object Spawned");
         if (Object.HasStateAuthority)
         {
             PlayerRegistry.Server_Add(Runner, Object.InputAuthority, this);

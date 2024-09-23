@@ -10,7 +10,7 @@ public class InterfaceManager : MonoBehaviour
     
     // public OptionScreen optionScreen;
     public SessionSetup sessionSetup;
-    // public SessionScreenUI sessionScreen;
+    public UI_RaidWaiting sessionScreen;
     // public ResultsScreenUI resultsScreen;
     // public PerformanceUI performance;
     // public PauseMenuUI pauseMenu;
@@ -41,11 +41,11 @@ public class InterfaceManager : MonoBehaviour
 
     private void Update()
     {
+        /*
         if (GameManager.Instance?.Object?.IsValid == true && GameManager.State.Current == GameState.EGameState.Game)
         {
             if (Input.GetKeyDown(KeyCode.Tab))
             {
-                /*
                 if (UIScreen.activeScreen == scoreboard || UIScreen.activeScreen == hud)
                 {
                     if (UIScreen.activeScreen == scoreboard)
@@ -54,8 +54,8 @@ public class InterfaceManager : MonoBehaviour
                     }
                     UIScreen.Focus(pauseMenu.Screen);
                 }
-                */
             }
         }
+                */
     }
 }

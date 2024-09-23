@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 42276575}
   - component: {fileID: 42276574}
   m_Layer: 0
-  m_Name: PlayerProfileNull
+  m_Name: PlayerProfileBG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -489,7 +489,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 220883136477958305, guid: 6558eb2b520814c4399d50bc717187cb, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 220883136477958305, guid: 6558eb2b520814c4399d50bc717187cb, type: 3}
       propertyPath: m_AnchorMax.x
@@ -943,7 +943,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17927b09c6249b941b1780e0e6566b44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sessionScreen: {fileID: 0}
+  sessionScreen: {fileID: 894384225}
   gameScene: 
   runnerPrefab: {fileID: 6391942863821925722, guid: 01d4a3ac41e7961429ef137e1265ad9c, type: 3}
   managerPrefab: {fileID: 707497257126116838, guid: 6475914453d693948baed7adf93057e9, type: 3}
@@ -973,6 +973,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sessionSetup: {fileID: 857198479}
+  sessionScreen: {fileID: 894384227}
   worldCanvas: {fileID: 2100557616}
   mainScreen: {fileID: 857198476}
   RoomScreen: {fileID: 894384225}
@@ -1287,7 +1288,7 @@ GameObject:
   - component: {fileID: 804692296}
   - component: {fileID: 804692295}
   m_Layer: 5
-  m_Name: PlayerProfbg2
+  m_Name: PlayerProfbg1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1728,7 +1729,6 @@ RectTransform:
   - {fileID: 2118435004}
   - {fileID: 42276573}
   - {fileID: 383390562}
-  - {fileID: 2045485518}
   - {fileID: 386749164}
   m_Father: {fileID: 1710762472}
   m_RootOrder: 5
@@ -1783,7 +1783,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0f722b00b5b93541ac38d2aaee31817, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerProfileBG: {fileID: 0}
+  screen: {fileID: 894384225}
+  playerProfileBG: {fileID: 42276572}
+  playerItemHolder:
+  - {fileID: 1068478961}
+  - {fileID: 804692294}
+  - {fileID: 1769076242}
+  - {fileID: 1529661295}
+  - {fileID: 2137912456}
+  startGameButton: {fileID: 383390563}
 --- !u!1001 &1036723027
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1910,7 +1918,7 @@ GameObject:
   - component: {fileID: 1068478963}
   - component: {fileID: 1068478962}
   m_Layer: 5
-  m_Name: PlayerProfbg1
+  m_Name: PlayerProfbg0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2263,7 +2271,7 @@ GameObject:
   - component: {fileID: 1529661297}
   - component: {fileID: 1529661296}
   m_Layer: 5
-  m_Name: PlayerProfbg4
+  m_Name: PlayerProfbg3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2421,6 +2429,38 @@ PrefabInstance:
     - target: {fileID: 6637377608110825021, guid: ce69c04ecb35ef44da0aa65d0f1e153e, type: 3}
       propertyPath: m_Name
       value: BackButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 6637377608110825023, guid: ce69c04ecb35ef44da0aa65d0f1e153e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6637377608110825023, guid: ce69c04ecb35ef44da0aa65d0f1e153e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6637377608110825023, guid: ce69c04ecb35ef44da0aa65d0f1e153e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 894384225}
+    - target: {fileID: 6637377608110825023, guid: ce69c04ecb35ef44da0aa65d0f1e153e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6637377608110825023, guid: ce69c04ecb35ef44da0aa65d0f1e153e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Focus
+      objectReference: {fileID: 0}
+    - target: {fileID: 6637377608110825023, guid: ce69c04ecb35ef44da0aa65d0f1e153e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UIScreen, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6637377608110825023, guid: ce69c04ecb35ef44da0aa65d0f1e153e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 857198476}
+    - target: {fileID: 6637377608110825023, guid: ce69c04ecb35ef44da0aa65d0f1e153e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UIScreen, Assembly-CSharp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce69c04ecb35ef44da0aa65d0f1e153e, type: 3}
@@ -2908,7 +2948,7 @@ GameObject:
   - component: {fileID: 1769076244}
   - component: {fileID: 1769076243}
   m_Layer: 5
-  m_Name: PlayerProfbg3
+  m_Name: PlayerProfbg2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3082,42 +3122,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 608661703926233628, guid: b85d4a56c9ce1b44789b13b1a7fee0ca, type: 3}
   m_PrefabInstance: {fileID: 2005940882}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2045485517
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2045485518}
-  m_Layer: 0
-  m_Name: PlayerProfileBG
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &2045485518
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2045485517}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.00926, y: 0.00926, z: 0.00926}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 894384224}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1700, y: 600}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2100557612
 GameObject:
   m_ObjectHideFlags: 0
@@ -3352,7 +3356,7 @@ GameObject:
   - component: {fileID: 2137912458}
   - component: {fileID: 2137912457}
   m_Layer: 5
-  m_Name: PlayerProfbg5
+  m_Name: PlayerProfbg4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3572,5 +3576,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: ScriptManager
       objectReference: {fileID: 0}
+    - target: {fileID: 2549806323073815273, guid: 363e56f7262b16341b97f49c35287129, type: 3}
+      propertyPath: playerSessionItemUI
+      value: 
+      objectReference: {fileID: 5364763104826683987, guid: bacd22520abe6cf43be02511f4c788e0, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 363e56f7262b16341b97f49c35287129, type: 3}
