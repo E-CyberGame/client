@@ -81,7 +81,7 @@ public class GameState : NetworkBehaviour
         {
             if (Runner.IsServer)
             {
-                if (PlayerRegistry.All(p => p.IsLoaded, true))
+                if (PlayerRegistry.All(p => p.IsLoaded))
                 {
                     Server_SetState(EGameState.Intro);
                 }
@@ -92,7 +92,7 @@ public class GameState : NetworkBehaviour
         {
             if (Runner.IsServer)
             {
-                PlayerRegistry.ForEach(p => p.IsLoaded = false, true);
+                PlayerRegistry.ForEach(p => p.IsLoaded = false);
                 PlayerRegistry.ForEach((p, i) =>
                 {
                     /*
