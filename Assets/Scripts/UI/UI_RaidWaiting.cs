@@ -8,20 +8,31 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using System.Runtime.InteropServices;
 using UnityEditor;
+using Fusion;
+using System.Resources;
+using UnityEngine.UIElements;
+using System.Linq;
+using Helpers.Linq;
+using System.Threading.Tasks;
 
 public class UI_RaidWaiting : UI_Popup
 {
 
+    public UIScreen screen;
     private int playernum = 0; // 현재 입장한 플레이어 인원 수
     public GameObject playerProfileBG;
     //*******************************
-    private float[,] positions = { { -680.0f, 0.0f }, { -340.0f, 0.0f }, { 0.0f, 0.0f }, { 340.0f, 0.0f }, { 680.0f, 0.0f } };
+    public float[,] positions = { { -680.0f, 0.0f }, { -340.0f, 0.0f }, { 0.0f, 0.0f }, { 340.0f, 0.0f }, { 680.0f, 0.0f } };
     //*******************************
-    
+
+    public Transform[] playerItemHolder;
+    readonly Dictionary<PlayerRef, PlayerSessionItemUI> playerItems = new Dictionary<PlayerRef, PlayerSessionItemUI>();
+
+    bool isUpdatingSession = false;
+    public UnityEngine.UI.Button startGameButton;
+
     enum Buttons
     {
-        BackButton,
-        NextButton,
         PlayerEnterButton
     }
 
@@ -32,23 +43,9 @@ public class UI_RaidWaiting : UI_Popup
 
     public override void Init()
     {
-        Bind<Button>(typeof(Buttons));
+        //GetButton((int)Buttons.PlayerEnterButton).gameObject.BindUIEvent(PEButtonClicked);
+    }
 
-        GetButton((int)Buttons.BackButton).gameObject.BindUIEvent(BackButtonClicked);
-        GetButton((int)Buttons.NextButton).gameObject.BindUIEvent(NextButtonClicked);
-        GetButton((int)Buttons.PlayerEnterButton).gameObject.BindUIEvent(PEButtonClicked);
-
-    }
-    public void BackButtonClicked(PointerEventData eventData)
-    {
-        Debug.Log("BackButton Clicked");
-        SceneManager.LoadScene("Raid_Select");
-    }
-    public void NextButtonClicked(PointerEventData eventData)
-    {
-        Debug.Log("NextButton Clicked");
-        SceneManager.LoadScene("Raid");
-    }
     public void PEButtonClicked(PointerEventData eventData)
     {
         Debug.Log("PlayerEnterButton Clicked");
@@ -61,9 +58,6 @@ public class UI_RaidWaiting : UI_Popup
         GameObject playerObject = Resources.Load<GameObject>("Prefabs/PlayerWaiting");
         GameObject playerInstance = Instantiate(playerObject);
 
-        // UI 이벤트 bind
-        playerInstance.BindUIEvent(NextButtonClicked);
-
         // position 위치 지정
         playerInstance.transform.SetParent(playerProfileBG.transform);
         playerInstance.transform.localScale = Vector3.one;
@@ -71,5 +65,150 @@ public class UI_RaidWaiting : UI_Popup
         
         // player가 입장했으므로 playernum 증가
         playernum++;
+    }
+
+    // UI hook
+    public void AddSubscriptions()
+    {
+        PlayerRegistry.OnPlayerJoined += PlayerJoined;
+        PlayerRegistry.OnPlayerLeft += PlayerLeft;
+    }
+
+    private void OnEnable()
+    {
+        PlayerRegistry.OnPlayerJoined -= PlayerJoined;
+        PlayerRegistry.OnPlayerLeft -= PlayerLeft;
+        PlayerRegistry.OnPlayerJoined += PlayerJoined;
+        PlayerRegistry.OnPlayerLeft += PlayerLeft;
+
+        UpdateSessionConfig();
+    }
+
+    private void OnDisable()
+    {
+        playerItems.Clear();
+
+        PlayerRegistry.OnPlayerJoined -= PlayerJoined;
+        PlayerRegistry.OnPlayerLeft -= PlayerLeft;
+    }
+
+    private void Update()
+    {
+        if (GameManager.Instance?.Runner?.SessionInfo == true)
+        {
+            UpdateSessionConfig();
+        }
+    }
+
+    public void UpdateSessionConfig()
+    {
+        if (!isUpdatingSession && gameObject.activeInHierarchy)
+        {
+            isUpdatingSession = true;
+            StartCoroutine(UpdateSessionConfigRoutine());
+        }
+    }
+
+    IEnumerator UpdateSessionConfigRoutine()
+    {
+        if (!(GameManager.Instance?.Runner?.SessionInfo == true))
+        {
+            yield return new WaitUntil(() => GameManager.Instance?.Runner?.SessionInfo == true);
+        }
+
+        if (GameManager.Instance.Runner.IsServer)
+        {
+            //Debug.Log(PlayerRegistry.CountAll);
+            PlayerRegistry.ForEach(p =>
+            {
+                if (!playerItems.ContainsKey(p.Ref))
+                {
+                    CreatePlayerItem(p.Ref);
+                }
+            }, true);
+        }
+
+        startGameButton.gameObject.SetActive(GameManager.Instance.Runner.IsServer);
+
+        isUpdatingSession = false;
+    }
+
+    public void PlayerJoined(NetworkRunner runner, PlayerRef player)
+    {
+        CreatePlayerItem(player);
+    }
+
+    private void CreatePlayerItem(PlayerRef pRef)
+    {
+        if (!playerItems.ContainsKey(pRef))
+        {
+            if (GameManager.Instance.Runner.CanSpawn)
+            {
+                PlayerSessionItemUI item = GameManager.Instance.Runner.Spawn(
+                    prefab: ScriptManager.Instance.playerSessionItemUI,
+                    inputAuthority: pRef);
+                playerItems.Add(pRef, item);
+            }
+        }
+        else
+        {
+            Debug.LogWarning($"{pRef} already in dictionary");
+        }
+    }
+
+    public void PlayerLeft(NetworkRunner runner, PlayerRef player)
+    {
+        if (playerItems.TryGetValue(player, out PlayerSessionItemUI item))
+        {
+            if (item)
+            {
+                Debug.Log($"Removing {nameof(PlayerSessionItemUI)} for {player}");
+                runner.Despawn(item.Object);
+            }
+            else
+            {
+                Debug.Log($"{nameof(PlayerSessionItemUI)} for {player} was null.");
+            }
+            playerItems.Remove(player);
+        }
+        else
+        {
+            Debug.LogWarning($"{player} not found");
+        }
+    }
+
+    public void StartGame()
+    {
+        if (PlayerRegistry.CountPlayers > 0)
+        {
+            GameManager.State.Server_SetState(GameState.EGameState.Loading);
+        }
+    }
+
+    public void ToggleSpectate()
+    {
+        PlayerObject.Local.Rpc_ToggleSpectate();
+    }
+
+    public void Leave()
+    {
+        StartCoroutine(LeaveRoutine());
+    }
+
+    IEnumerator LeaveRoutine()
+    {
+        Task task = Matchmaker.Instance.Runner.Shutdown();
+        while (!task.IsCompleted)
+        {
+            yield return null;
+        }
+        UIScreen.BackToInitial();
+    }
+
+    public Transform getPlayerHolder()
+    {
+        Transform playerHolder = playerItemHolder[playernum];
+
+        return playerHolder;
     }
 }
