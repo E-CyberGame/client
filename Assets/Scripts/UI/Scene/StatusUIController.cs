@@ -15,9 +15,9 @@ namespace UI.Scene
             _model.HP.StatChanged += delegate { _view.UpdateHp(_model.MaxHP.Value, _model.HP.Value); };
         }
         
-        public void Start()
+        public override void Spawned()
         {
-            //RoomManager.Instance.Rpc_LoadDone(Runner.LocalPlayer);
+            RoomManager.Instance.Rpc_LoadDone(Runner.LocalPlayer);
         }
     }
 }

@@ -997,6 +997,8 @@ MonoBehaviour:
   BlueTeamPanel: {fileID: 588961925}
   CharacterPanel: {fileID: 8921933135880518964, guid: b1c174f5ac83ddd4bb4a52f255f1bbc0, type: 3}
   SettingPanel: {fileID: 1486351982}
+  _RedTeam: []
+  _BlueTeam: []
 --- !u!1 &2038998997
 GameObject:
   m_ObjectHideFlags: 0

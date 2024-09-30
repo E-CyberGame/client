@@ -46,7 +46,7 @@ public class RoomManager : NetworkBehaviour
         if(Runner.IsServer) SetGameSettting(FindObjectOfType<GameSettingData>().Data);
     }
     
-    [Rpc(RpcSources.All, RpcTargets.StateAuthority, HostMode = RpcHostMode.SourceIsHostPlayer)]
+    [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
     public void Rpc_LoadDone(PlayerRef player)
     {
         PlayerRegistry.GetPlayer(player).IsLoaded = true;
