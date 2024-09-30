@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 707497257126116837}
   - component: {fileID: 707497257126116836}
-  - component: {fileID: 707497257126116839}
   - component: {fileID: 707497257126116838}
   - component: {fileID: 707497257126116833}
+  - component: {fileID: 1336093101031396279}
   m_Layer: 0
   m_Name: NetworkManager
   m_TagString: Untagged
@@ -47,19 +47,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1478d78519fbd0647a1fd1ddb50643cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &707497257126116839
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 707497257126116832}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e851b2c484beee74f887e5f37ebff33e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _gameState: {fileID: 707497257126116833}
 --- !u!114 &707497257126116838
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -72,14 +59,14 @@ MonoBehaviour:
   m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SortKey: 325572199
+  SortKey: 2985325309
   ObjectInterest: 1
   Flags: 262145
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: 707497257126116836}
-  - {fileID: 707497257126116839}
   - {fileID: 707497257126116833}
+  - {fileID: 1336093101031396279}
 --- !u!114 &707497257126116833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94,3 +81,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Previous: 0
   _Current: 0
+--- !u!114 &1336093101031396279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 707497257126116832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0620f47aaf4ee0f4b859411eff7aecac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameState: {fileID: 707497257126116833}
+  _MapType: 0
+  _BetCrystal: 0
+  _BetDecay: 0
