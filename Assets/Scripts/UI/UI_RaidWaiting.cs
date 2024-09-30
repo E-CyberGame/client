@@ -124,8 +124,7 @@ public class UI_RaidWaiting : UI_Popup
                 if (!playerItems.ContainsKey(p.Ref))
                 {
                     CreatePlayerItem(p.Ref);
-                }
-            }, true);*/
+                }*/
         }
 
         startGameButton.gameObject.SetActive(GameManager.Instance.Runner.IsServer);
