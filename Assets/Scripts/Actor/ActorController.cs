@@ -15,6 +15,9 @@ namespace Actor
         public StateMachine _stateMachine { get; private set; }
         private SkillController _skill;
 
+        [Networked]
+        public TickTimer PlayerTimer { get; set; }
+
         void Awake()
         {
             _transform = GetComponent<NetworkTransform>();
@@ -41,7 +44,11 @@ namespace Actor
             }
             _stateMachine.FixedUpdateState();
             _transform.transform.position = transform.position;
+        }
 
+        public void SetPlayerLocation(Vector3 location)
+        {
+            transform.position = location;
         }
 
         #region Additional Input

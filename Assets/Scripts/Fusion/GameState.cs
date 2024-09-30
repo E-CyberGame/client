@@ -6,11 +6,6 @@ using UnityEngine;
 
 public class GameState : NetworkBehaviour
 {
-    //처음 스폰 시 Pregame. (매칭룸에서 첫 스폰)
-    //GameStart 클릭 시 Loading(로딩씬에서)
-    //로딩씬에서 본게임 씬으로 이동 시 Intro.
-    //Intro 끝나면 Game 시작.
-    //(이건 3초 뒤 시작되게 구현되어 있음. 3초 동안 세팅하고 Start 이런 거 지나가게 하면 됨. )
     public enum EGameState { Off, Pregame, Loading, Intro, Game, Outro, Postgame }
 
     [Networked][field: ReadOnly] public EGameState Previous { get; set; }
@@ -40,7 +35,6 @@ public class GameState : NetworkBehaviour
                 }
                 //UIScreen.activeScreen.BackTo(InterfaceManager.Instance.sessionScreen.screen);
             }
-
             //if (Runner.IsServer)
             //{
             //	//GameManager.Instance.CourseLength = SessionSetup.courseLength;
@@ -49,7 +43,6 @@ public class GameState : NetworkBehaviour
             //	//GameManager.Instance.DoCollisions =
             //	//GameManager.Instance.DoCollisions = SessionSetup.doCollisions;
             //}
-
         };
 
         StateMachine[EGameState.Pregame].onExit = next =>
@@ -97,36 +90,25 @@ public class GameState : NetworkBehaviour
             {
                 PlayerRegistry.ForEach(p =>
                 {
-                    //p.Controller.PuttTimer = TickTimer.CreateFromSeconds(Runner, 3);
+                    p.Controller.PlayerTimer = TickTimer.CreateFromSeconds(Runner, 3);
                 });
+                
+                foreach (var player in PlayerRegistry.Players)
+                {
+                    player.Controller.SetPlayerLocation(Vector3.zero);
+                }
             }
-            /*
-            CameraController.Recenter();
-            HUD.SetLevelName(GameManager.Instance.CurrentHole);
-            HUD.SetStrokeCount(0);
-            HUD.SetTimerText(0);
-            InterfaceManager.Instance.StartCountdown();
+            
             Server_DelaySetState(EGameState.Game, 3);
-            */
         };
 
         StateMachine[EGameState.Game].onEnter = prev =>
         {
             Debug.Log("Enter Game");
-
-            //GameManager.Instance.TickStarted = Runner.Tick;
         };
 
         StateMachine[EGameState.Game].onUpdate = () =>
         {
-            /*
-            HUD.SetTimerText(GameManager.Time);
-            if (Runner.IsServer && GameManager.Time >= GameManager.MaxTime)
-            {
-                Debug.Log("Time's up");
-                PlayerRegistry.ForEachWhere(p => p.Controller, p => GameManager.PlayerDNF(p));
-            }
-            */
         };
 
         StateMachine[EGameState.Outro].onEnter = prev =>

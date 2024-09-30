@@ -69,7 +69,9 @@ public class PVPMatchingPresenter : NetworkBehaviour, IPlayerJoined, IPlayerLeft
 
     public void GameStart()
     {
-        LoadingScene.SetGameScene("GameScene");
+        RoomManager.State.Server_SetState(GameState.EGameState.Loading);
+        Runner.LoadScene("GameScene");
+        //LoadingScene.SetGameScene("GameScene");
     }
 
     public void PlayerJoined(PlayerRef player)

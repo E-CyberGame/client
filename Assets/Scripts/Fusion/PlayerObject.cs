@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Actor;
 using Data;
 using UnityEngine;
 using Fusion;
@@ -25,7 +26,7 @@ public class PlayerObject : NetworkBehaviour
     [Networked]
     public byte Index { get; set; }
     [Networked]
-    public Player Controller { get; set; }
+    public ActorController Controller { get; set; }
 
     // User Settings
     [Networked, OnChangedRender(nameof(StatChanged))]
@@ -64,9 +65,10 @@ public class PlayerObject : NetworkBehaviour
     public override void Spawned()
     {
         Debug.Log(" Player Object Spawned");
+        Controller = GetComponent<ActorController>();
         if (Object.HasStateAuthority)
         {
-            PlayerRegistry.Server_Add(Runner, Object.InputAuthority, this);
+            PlayerRegistry.Server_Add(Runner, Runner.LocalPlayer, this);
         }
 
         //if (Local) AudioManager.Play("joinedSessionSFX");
