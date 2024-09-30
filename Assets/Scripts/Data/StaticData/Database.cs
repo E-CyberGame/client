@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Data
@@ -40,12 +41,14 @@ namespace Data
         }
     }
 
+    [Serializable]
     public class PVPData
     {
         public MapType SceneType;
         public bool Decay;
         public bool Crystal;
         
+        public PVPData() {}
         public PVPData(MapType sceneType, bool decay, bool crystal)
         {
             SceneType = sceneType;

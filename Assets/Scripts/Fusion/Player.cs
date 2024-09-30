@@ -11,7 +11,7 @@ public class Player : NetworkBehaviour
     public override void Spawned()
     {
         PlayerObj = PlayerRegistry.GetPlayer(Object.InputAuthority);
-        PlayerObj.Controller = this;
+        //PlayerObj.Controller = this;
 
         if (Object.HasInputAuthority)
         {

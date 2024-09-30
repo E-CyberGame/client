@@ -19,7 +19,7 @@ public class UI_RaidWaiting : UI_Popup
 {
 
     public UIScreen screen;
-    private int playernum = 0; // ÇöÀç ÀÔÀåÇÑ ÇÃ·¹ÀÌ¾î ÀÎ¿ø ¼ö
+    private int playernum = 0; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½Î¿ï¿½ ï¿½ï¿½
     public GameObject playerProfileBG;
     //*******************************
     public float[,] positions = { { -680.0f, 0.0f }, { -340.0f, 0.0f }, { 0.0f, 0.0f }, { 340.0f, 0.0f }, { 680.0f, 0.0f } };
@@ -54,16 +54,16 @@ public class UI_RaidWaiting : UI_Popup
 
     public void PlayerEntered()
     {
-        // Instance »ý¼º
+        // Instance ï¿½ï¿½ï¿½ï¿½
         GameObject playerObject = Resources.Load<GameObject>("Prefabs/PlayerWaiting");
         GameObject playerInstance = Instantiate(playerObject);
 
-        // position À§Ä¡ ÁöÁ¤
+        // position ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½
         playerInstance.transform.SetParent(playerProfileBG.transform);
         playerInstance.transform.localScale = Vector3.one;
         playerInstance.transform.localPosition = new Vector3(positions[playernum, 0], positions[playernum, 1],0);
         
-        // player°¡ ÀÔÀåÇßÀ¸¹Ç·Î playernum Áõ°¡
+        // playerï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ playernum ï¿½ï¿½ï¿½ï¿½
         playernum++;
     }
 
@@ -118,14 +118,13 @@ public class UI_RaidWaiting : UI_Popup
 
         if (GameManager.Instance.Runner.IsServer)
         {
-            //Debug.Log(PlayerRegistry.CountAll);
+            /*//Debug.Log(PlayerRegistry.CountAll);
             PlayerRegistry.ForEach(p =>
             {
                 if (!playerItems.ContainsKey(p.Ref))
                 {
                     CreatePlayerItem(p.Ref);
-                }
-            });
+                }*/
         }
 
         startGameButton.gameObject.SetActive(GameManager.Instance.Runner.IsServer);

@@ -25,6 +25,7 @@ public class GameState : NetworkBehaviour
 
         StateMachine[EGameState.Pregame].onEnter = prev =>
         {
+            Debug.Log("Pregame");
             if (prev == EGameState.Postgame)
             {
                 if (Runner.IsServer)
@@ -34,7 +35,6 @@ public class GameState : NetworkBehaviour
                 }
                 //UIScreen.activeScreen.BackTo(InterfaceManager.Instance.sessionScreen.screen);
             }
-
             //if (Runner.IsServer)
             //{
             //	//GameManager.Instance.CourseLength = SessionSetup.courseLength;
@@ -43,8 +43,6 @@ public class GameState : NetworkBehaviour
             //	//GameManager.Instance.DoCollisions =
             //	//GameManager.Instance.DoCollisions = SessionSetup.doCollisions;
             //}
-
-
         };
 
         StateMachine[EGameState.Pregame].onExit = next =>
@@ -54,27 +52,7 @@ public class GameState : NetworkBehaviour
 
         StateMachine[EGameState.Loading].onEnter = prev =>
         {
-            int layer = LayerMask.NameToLayer("Ball");
-            //Physics.IgnoreLayerCollision(layer, layer, !GameManager.Instance.DoCollisions);
-
-            PlayerRegistry.ForEach(p =>
-            {
-                p.Strokes = 0;
-                p.TimeTaken = PlayerObject.TIME_UNSET;
-            });
-
-            if (prev == EGameState.Pregame)
-            {
-                //InterfaceManager.Instance.resultsScreen.Init();
-                if (Runner.IsServer) Runner.LoadScene("Game");
-            }
-            else
-            {
-               // GameManager.Instance.CurrentHole++;
-                //if (Runner.IsServer) Level.Load(ResourcesManager.Instance.levels[GameManager.Instance.CurrentHole]);
-            }
-
-            //UIScreen.Focus(InterfaceManager.Instance.hud);
+            Debug.Log("Loading Game");
         };
 
         StateMachine[EGameState.Loading].onUpdate = () =>
@@ -106,38 +84,31 @@ public class GameState : NetworkBehaviour
 
         StateMachine[EGameState.Intro].onEnter = prev =>
         {
+            Debug.Log("Intro Game");
+
             if (Runner.IsServer)
             {
                 PlayerRegistry.ForEach(p =>
                 {
-                    //p.Controller.PuttTimer = TickTimer.CreateFromSeconds(Runner, 3);
+                    p.Controller.PlayerTimer = TickTimer.CreateFromSeconds(Runner, 3);
                 });
+                
+                foreach (var player in PlayerRegistry.Players)
+                {
+                    player.Controller.SetPlayerLocation(Vector3.zero);
+                }
             }
-            /*
-            CameraController.Recenter();
-            HUD.SetLevelName(GameManager.Instance.CurrentHole);
-            HUD.SetStrokeCount(0);
-            HUD.SetTimerText(0);
-            InterfaceManager.Instance.StartCountdown();
+            
             Server_DelaySetState(EGameState.Game, 3);
-            */
         };
 
         StateMachine[EGameState.Game].onEnter = prev =>
         {
-            //GameManager.Instance.TickStarted = Runner.Tick;
+            Debug.Log("Enter Game");
         };
 
         StateMachine[EGameState.Game].onUpdate = () =>
         {
-            /*
-            HUD.SetTimerText(GameManager.Time);
-            if (Runner.IsServer && GameManager.Time >= GameManager.MaxTime)
-            {
-                Debug.Log("Time's up");
-                PlayerRegistry.ForEachWhere(p => p.Controller, p => GameManager.PlayerDNF(p));
-            }
-            */
         };
 
         StateMachine[EGameState.Outro].onEnter = prev =>

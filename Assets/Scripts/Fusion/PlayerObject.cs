@@ -1,15 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Actor;
+using Data;
 using UnityEngine;
 using Fusion;
 using UnityEngine.InputSystem.HID;
-
-public enum CharacterType
-{
-    Worker,
-    Youtuber,
-}
 
 public enum TeamType{
     Red,
@@ -30,13 +26,15 @@ public class PlayerObject : NetworkBehaviour
     [Networked]
     public byte Index { get; set; }
     [Networked]
-    public Player Controller { get; set; }
+    public ActorController Controller { get; set; }
 
     // User Settings
     [Networked, OnChangedRender(nameof(StatChanged))]
     public string Nickname { get; set; }
     [Networked, OnChangedRender(nameof(StatChanged))]
     public Color Color { get; set; }
+
+    [Networked] public CharacterType Character { get; set; }
 
     // State & Gameplay Info
     [Networked]
@@ -67,9 +65,10 @@ public class PlayerObject : NetworkBehaviour
     public override void Spawned()
     {
         Debug.Log(" Player Object Spawned");
+        Controller = GetComponent<ActorController>();
         if (Object.HasStateAuthority)
         {
-            PlayerRegistry.Server_Add(Runner, Object.InputAuthority, this);
+            PlayerRegistry.Server_Add(Runner, Runner.LocalPlayer, this);
         }
 
         //if (Local) AudioManager.Play("joinedSessionSFX");
@@ -81,6 +80,8 @@ public class PlayerObject : NetworkBehaviour
         }
 
         PlayerRegistry.PlayerJoined(Object.InputAuthority);
+        
+        DontDestroyOnLoad(this);
     }
 
     public override void Despawned(NetworkRunner runner, bool hasState)

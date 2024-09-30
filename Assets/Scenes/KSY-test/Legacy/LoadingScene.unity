@@ -640,7 +640,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   progressBar: {fileID: 1592279091}
-  _runnerPrefab: {fileID: 0}
 --- !u!1 &1484894932
 GameObject:
   m_ObjectHideFlags: 0

@@ -256,6 +256,7 @@ public class Matchmaker : MonoBehaviour, INetworkRunnerCallbacks
         {
             GameMode = GameMode.AutoHostOrClient,
         });
+
         while (!task.IsCompleted)
         {
             yield return null;
@@ -266,8 +267,8 @@ public class Matchmaker : MonoBehaviour, INetworkRunnerCallbacks
         {
             if (successCallback != null)
                 successCallback.Invoke();
-            else
-                Runner.LoadScene(gameScene);
+            //else
+                //Runner.LoadScene(gameScene);
         }
     }
 

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerSpawner : SimulationBehaviour, IPlayerJoined, IPlayerLeft
+public class Network_PlayerSpawner : SimulationBehaviour, IPlayerJoined, IPlayerLeft
 {
     public NetworkObject playerObject;
 

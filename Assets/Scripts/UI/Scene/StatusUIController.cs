@@ -1,8 +1,9 @@
+using Fusion;
 using UnityEngine;
 
 namespace UI.Scene
 {
-    public class StatusUIController : MonoBehaviour
+    public class StatusUIController : NetworkBehaviour
     {
         private UI_Status _view;
         private ActorStat _model;
@@ -13,9 +14,10 @@ namespace UI.Scene
             _model = GameObject.FindWithTag("Player").GetOrAddComponent<ActorStat>();
             _model.HP.StatChanged += delegate { _view.UpdateHp(_model.MaxHP.Value, _model.HP.Value); };
         }
-
-        public void Start()
+        
+        public override void Spawned()
         {
+            RoomManager.Instance.Rpc_LoadDone(Runner.LocalPlayer);
         }
     }
 }
