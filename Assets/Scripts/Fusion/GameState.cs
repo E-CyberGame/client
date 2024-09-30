@@ -6,6 +6,11 @@ using UnityEngine;
 
 public class GameState : NetworkBehaviour
 {
+    //처음 스폰 시 Pregame. (매칭룸에서 첫 스폰)
+    //GameStart 클릭 시 Loading(로딩씬에서)
+    //로딩씬에서 본게임 씬으로 이동 시 Intro.
+    //Intro 끝나면 Game 시작.
+    //(이건 3초 뒤 시작되게 구현되어 있음. 3초 동안 세팅하고 Start 이런 거 지나가게 하면 됨. )
     public enum EGameState { Off, Pregame, Loading, Intro, Game, Outro, Postgame }
 
     [Networked][field: ReadOnly] public EGameState Previous { get; set; }
@@ -25,6 +30,7 @@ public class GameState : NetworkBehaviour
 
         StateMachine[EGameState.Pregame].onEnter = prev =>
         {
+            Debug.Log("Pregame");
             if (prev == EGameState.Postgame)
             {
                 if (Runner.IsServer)
@@ -44,7 +50,6 @@ public class GameState : NetworkBehaviour
             //	//GameManager.Instance.DoCollisions = SessionSetup.doCollisions;
             //}
 
-
         };
 
         StateMachine[EGameState.Pregame].onExit = next =>
@@ -54,34 +59,14 @@ public class GameState : NetworkBehaviour
 
         StateMachine[EGameState.Loading].onEnter = prev =>
         {
-            int layer = LayerMask.NameToLayer("Ball");
-            //Physics.IgnoreLayerCollision(layer, layer, !GameManager.Instance.DoCollisions);
-
-            PlayerRegistry.ForEach(p =>
-            {
-                p.Strokes = 0;
-                p.TimeTaken = PlayerObject.TIME_UNSET;
-            });
-
-            if (prev == EGameState.Pregame)
-            {
-                //InterfaceManager.Instance.resultsScreen.Init();
-                if (Runner.IsServer) Runner.LoadScene("Game");
-            }
-            else
-            {
-               // GameManager.Instance.CurrentHole++;
-                //if (Runner.IsServer) Level.Load(ResourcesManager.Instance.levels[GameManager.Instance.CurrentHole]);
-            }
-
-            //UIScreen.Focus(InterfaceManager.Instance.hud);
+            Debug.Log("Loading Game");
         };
 
         StateMachine[EGameState.Loading].onUpdate = () =>
         {
             if (Runner.IsServer)
             {
-                if (PlayerRegistry.All(p => p.IsLoaded, true))
+                if (PlayerRegistry.All(p => p.IsLoaded))
                 {
                     Server_SetState(EGameState.Intro);
                 }
@@ -92,7 +77,7 @@ public class GameState : NetworkBehaviour
         {
             if (Runner.IsServer)
             {
-                PlayerRegistry.ForEach(p => p.IsLoaded = false, true);
+                PlayerRegistry.ForEach(p => p.IsLoaded = false);
                 PlayerRegistry.ForEach((p, i) =>
                 {
                     /*
@@ -106,6 +91,8 @@ public class GameState : NetworkBehaviour
 
         StateMachine[EGameState.Intro].onEnter = prev =>
         {
+            Debug.Log("Intro Game");
+
             if (Runner.IsServer)
             {
                 PlayerRegistry.ForEach(p =>
@@ -125,6 +112,8 @@ public class GameState : NetworkBehaviour
 
         StateMachine[EGameState.Game].onEnter = prev =>
         {
+            Debug.Log("Enter Game");
+
             //GameManager.Instance.TickStarted = Runner.Tick;
         };
 

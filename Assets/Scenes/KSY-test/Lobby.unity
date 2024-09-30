@@ -196,6 +196,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &514525697 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1615288908039241480, guid: b0d5c72faa91db74b94298ad570c50c3, type: 3}
+  m_PrefabInstance: {fileID: 4629835832000170211}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94638db81eaf5b34d8a8c5c6967fc9cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &824020713
 GameObject:
   m_ObjectHideFlags: 0
@@ -398,6 +409,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1906639330 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5939621191816003145, guid: b0d5c72faa91db74b94298ad570c50c3, type: 3}
+  m_PrefabInstance: {fileID: 4629835832000170211}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94638db81eaf5b34d8a8c5c6967fc9cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4629835832000170211
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -419,7 +441,7 @@ PrefabInstance:
       objectReference: {fileID: 4126650120695403013, guid: a1b6544d6d8b1be47a3d659945146560, type: 3}
     - target: {fileID: 3771871929901355133, guid: b0d5c72faa91db74b94298ad570c50c3, type: 3}
       propertyPath: gameScene
-      value: Assets/Scenes/MatchingRoom.unity
+      value: Assets/Scenes/KSY-test/MatchingRoom.unity
       objectReference: {fileID: 0}
     - target: {fileID: 3771871929901355133, guid: b0d5c72faa91db74b94298ad570c50c3, type: 3}
       propertyPath: runnerPrefab
@@ -428,7 +450,11 @@ PrefabInstance:
     - target: {fileID: 3771871929901355133, guid: b0d5c72faa91db74b94298ad570c50c3, type: 3}
       propertyPath: managerPrefab
       value: 
-      objectReference: {fileID: 4126650120695403013, guid: a1b6544d6d8b1be47a3d659945146560, type: 3}
+      objectReference: {fileID: 707497257126116838, guid: e90fd78bf5d6f364c8f03d9634068c64, type: 3}
+    - target: {fileID: 4629835831144659581, guid: b0d5c72faa91db74b94298ad570c50c3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4629835831945503431, guid: b0d5c72faa91db74b94298ad570c50c3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 2
@@ -549,6 +575,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4629835832764197842, guid: b0d5c72faa91db74b94298ad570c50c3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1906639330}
+    - target: {fileID: 4629835832764197842, guid: b0d5c72faa91db74b94298ad570c50c3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Focus
+      objectReference: {fileID: 0}
+    - target: {fileID: 4629835832764197842, guid: b0d5c72faa91db74b94298ad570c50c3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 514525697}
     - target: {fileID: 7511367017507459283, guid: b0d5c72faa91db74b94298ad570c50c3, type: 3}
       propertyPath: SettingPanel
       value: 

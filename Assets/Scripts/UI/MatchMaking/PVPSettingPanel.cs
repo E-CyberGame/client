@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Data;
@@ -25,6 +26,8 @@ public class PVPSettingPanel : MonoBehaviour
     
     private int MapSelectionIndex = 0;
 
+    public Action<MapType, bool, bool> ChangeSetting = null;
+
     //해당 클래스 내에 반드시 존재해야 함.
     //맵 좌우로 움직이는 거.
     //최종 데이터 반환.
@@ -32,8 +35,10 @@ public class PVPSettingPanel : MonoBehaviour
     public void Start()
     {
         InitView();
-        _leftButton.onClick.AddListener(MoveMapLeft);
-        _rightButton.onClick.AddListener(MoveMapRight);
+        ClickLeftButton(MoveMapLeft);
+        ClickRightButton(MoveMapRight);
+        OnCrystal(delegate { ChangeSetting?.Invoke(GetCurrentMap().SceneType, _crystal.isOn, _decay.isOn);});
+        OnDecay(delegate { ChangeSetting?.Invoke(GetCurrentMap().SceneType, _crystal.isOn, _decay.isOn);});
     }
     
     public void InitView()
@@ -74,12 +79,6 @@ public class PVPSettingPanel : MonoBehaviour
     {
         return new PVPData(GetCurrentMap().SceneType, _decay.isOn, _crystal.isOn);
     }
-    
-    [Rpc(RpcSources.StateAuthority, RpcTargets.InputAuthority)]
-    public void RPC_SetGameData(PVPData data)
-    {
-        SetData(data);
-    }
 
     #region Utility Method
     private void MoveMapRight()
@@ -104,9 +103,10 @@ public class PVPSettingPanel : MonoBehaviour
     private void ChangeMap(MapData data)
     {
         _mapImage.sprite = data.CardImage;
-        this._mapTitle.text = data.SceneType.ToString();
+        _mapTitle.text = data.SceneType.ToString();
+        
+        ChangeSetting?.Invoke(GetCurrentMap().SceneType, _crystal.isOn, _decay.isOn);
     }
 
     #endregion
-
 }
