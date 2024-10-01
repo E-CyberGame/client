@@ -4110,6 +4110,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7695072403731521009, guid: 69d741ec734d9c145874fdd3ce60e4b5, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7695072403731521023, guid: 69d741ec734d9c145874fdd3ce60e4b5, type: 3}
       propertyPath: m_Name
       value: Boss_Cyber

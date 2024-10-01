@@ -14,9 +14,15 @@ public class Falling : MonoBehaviour
     public void Init(GameObject rock)
     {
         _transform = transform;
+        _rigidbody = GetComponent<Rigidbody2D>();
         groundLayer = LayerMask.GetMask("Ground");
         _rock = rock;
     }
+    public void Wake()
+    {
+        _rigidbody.WakeUp();
+    }
+
     public void FixedUpdate()
     {
         Debug.DrawRay(_transform.position, Vector3.down * groundCheckLine, Color.red);
