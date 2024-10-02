@@ -69,6 +69,20 @@ public class PVPMatchingPresenter : NetworkBehaviour, IPlayerJoined, IPlayerLeft
 
     public void GameStart()
     {
+        for(int i = 0; i < RedTeam.Count; i++)
+        {
+            PlayerObject po = PlayerRegistry.GetPlayer(RedTeam[i]);
+            po.SetLayer(LayerMask.NameToLayer("RedTeam"));
+            po.TeamNumber = i;
+        }
+
+        for (int i = 0; i < BlueTeam.Count; i++)
+        {
+            PlayerObject po = PlayerRegistry.GetPlayer(BlueTeam[i]);
+            po.SetLayer(LayerMask.NameToLayer("BlueTeam"));
+            po.TeamNumber = i;
+        }
+        
         RoomManager.State.Server_SetState(GameState.EGameState.Loading);
         Runner.LoadScene("GameScene");
         //LoadingScene.SetGameScene("GameScene");
@@ -84,14 +98,30 @@ public class PVPMatchingPresenter : NetworkBehaviour, IPlayerJoined, IPlayerLeft
     {
         int redTeam = RedTeamPanel.childCount;
         int blueTeam = BlueTeamPanel.childCount;
+
+        PlayerObject po = PlayerRegistry.GetPlayer(player);
         
         if (redTeam < blueTeam)
         {
             RedTeam.Add(player);
+            /*po.SetLayer(LayerMask.NameToLayer("RedTeam"));
+            if(RedTeam.Count is 0) po.TeamNumber = 0;
+            else
+            {
+                PlayerRegistry.GetPlayer(RedTeam[0]).TeamNumber = 0;
+                po.TeamNumber = 1;
+            }*/
         }
         else
         {
             BlueTeam.Add(player);
+            /*po.SetLayer(LayerMask.NameToLayer("BlueTeam"));
+            if(BlueTeam.Count is 0) po.TeamNumber = 0;
+            else
+            {
+                PlayerRegistry.GetPlayer(BlueTeam[0]).TeamNumber = 0;
+                po.TeamNumber = 1;
+            }*/
         }
     }
 

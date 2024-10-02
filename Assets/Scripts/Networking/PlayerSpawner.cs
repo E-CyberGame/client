@@ -9,9 +9,9 @@ public class PlayerSpawner : SimulationBehaviour, IPlayerJoined
 
     public void PlayerJoined(PlayerRef player)
     {
-        if (Runner.IsServer && player == Runner.LocalPlayer)
+        if (Runner.CanSpawn)
         {
-            Runner.Spawn(PlayerPrefab);
+            Runner.Spawn(PlayerPrefab, inputAuthority: player);
         }
     }
 }
