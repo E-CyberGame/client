@@ -18,6 +18,8 @@ namespace Actor
         [Networked]
         public TickTimer PlayerTimer { get; set; }
 
+        private bool _startTimer = false;
+
         void Awake()
         {
             _transform = GetComponent<NetworkTransform>();
@@ -43,12 +45,26 @@ namespace Actor
                 return;
             }
             _stateMachine.FixedUpdateState();
+
+            if (_startTimer && PlayerTimer.Expired(Runner))
+            {
+                _startTimer = false;
+                _stateMachine.ChangeState(States.OnGround);
+            }
+            
             _transform.transform.position = transform.position;
         }
 
         public void SetPlayerLocation(Vector3 location)
         {
             transform.position = location;
+        }
+
+        public void SetTimer(TickTimer timer)
+        {
+            _startTimer = true;
+            PlayerTimer = timer;
+            _stateMachine.ChangeState(States.NoControl);
         }
 
         #region Additional Input
