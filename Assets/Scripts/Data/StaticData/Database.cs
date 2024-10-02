@@ -34,10 +34,24 @@ namespace Data
     {
         public MapType SceneType;
         public Sprite CardImage;
+        //최초 맵 입장 시 플레이어 스폰 위치
+        public Dictionary<TeamType, List<Vector3>> PlayerPosition;
         public MapData(MapType sceneType)
         {
             SceneType = sceneType;
             CardImage = Resources.Load<Sprite>("Arts/Map/card_" + sceneType.ToString().ToLower());
+            PlayerPosition = new Dictionary<TeamType, List<Vector3>>();
+            PlayerPosition.Add(TeamType.RedTeam, new List<Vector3>()
+            {
+                new Vector3(-6.5f, 0f, 0f),
+                new Vector3(-6.5f, 0f, 0f)
+            });
+            
+            PlayerPosition.Add(TeamType.BlueTeam, new List<Vector3>()
+            {
+                new Vector3(6.5f, 0f, 0f),
+                new Vector3(6.5f, 0f, 0f)
+            });
         }
     }
 

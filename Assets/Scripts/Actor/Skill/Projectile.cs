@@ -8,6 +8,8 @@ namespace Actor.Skill
     //현재 문제 : objectPath를 발사체 자체가 갖고 있음 안됨...
     public abstract class Projectile : NetworkBehaviour
     {
+        //발사한 플레이어의 LayerMask
+        protected LayerMask _playerLayer;
         protected WrapBody _body;
         protected ActorStat _stat;
         //관통 횟수
@@ -37,6 +39,7 @@ namespace Actor.Skill
             _startPoint = startPoint;
             _distance = distance;
             _destroyDelay = destroyDelay;
+            _playerLayer = body.gameObject.layer;
             MoveStartPoint();
         }
         
