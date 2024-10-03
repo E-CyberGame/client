@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 123440955281702611}
   - component: {fileID: 2308310478444830168}
   - component: {fileID: 5107195197929796240}
+  - component: {fileID: 514113450}
+  - component: {fileID: 1664414235}
   m_Layer: 0
   m_Name: Boss_Subway
   m_TagString: Untagged
@@ -107,6 +109,37 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &514113450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1730893477929581293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0def24c32d7c5142b4d75ad23c8a7ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vertical: {fileID: 0}
+  horizontal: {fileID: 0}
+  fall: {fileID: 0}
+  explosion: {fileID: 0}
+  bomb: {fileID: 0}
+  Boss_Subway: {fileID: 1730893477929581293}
+--- !u!114 &1664414235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1730893477929581293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04bd843f3b54b2c458edb6055dc1c901, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explode: {fileID: 7990850236794966579}
 --- !u!1 &7990850236794966579
 GameObject:
   m_ObjectHideFlags: 0

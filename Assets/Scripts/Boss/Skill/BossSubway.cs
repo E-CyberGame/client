@@ -12,9 +12,8 @@ namespace Boss.Skill
         [SerializeField] LaySource vertical;
         [SerializeField] LaySource horizontal;
         [SerializeField] FallSource fall;
+        [SerializeField] ExplosionSkill explosion;
         [SerializeField] BombSource bomb;
-        [SerializeField] GameObject Boss_Subway;
-        [SerializeField] GameObject Explosion;
 
 
         public static BossSubway Singleton
@@ -109,11 +108,8 @@ namespace Boss.Skill
         IEnumerator ExplosionSkill()
         {
             Debug.Log("Æø¹ß");
-            yield return new WaitForSeconds(1.0f);
-            Explosion.SetActive(true);
-            yield return new WaitForSeconds(0.8f);
-            Explosion.SetActive(false);
-            yield return new WaitForSeconds(1.0f);
+            explosion.Activate();
+            yield return new WaitForSeconds(3.0f);
             SubwaySkill();
         }
     }

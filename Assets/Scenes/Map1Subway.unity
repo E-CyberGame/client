@@ -1565,6 +1565,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 514113450, guid: 7dfbc4c37b9423448a7ad70a0b0d0d23, type: 3}
+      propertyPath: bomb
+      value: 
+      objectReference: {fileID: 496124051}
+    - target: {fileID: 514113450, guid: 7dfbc4c37b9423448a7ad70a0b0d0d23, type: 3}
+      propertyPath: fall
+      value: 
+      objectReference: {fileID: 182946049}
+    - target: {fileID: 514113450, guid: 7dfbc4c37b9423448a7ad70a0b0d0d23, type: 3}
+      propertyPath: vertical
+      value: 
+      objectReference: {fileID: 867413589}
+    - target: {fileID: 514113450, guid: 7dfbc4c37b9423448a7ad70a0b0d0d23, type: 3}
+      propertyPath: Explosion
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 514113450, guid: 7dfbc4c37b9423448a7ad70a0b0d0d23, type: 3}
+      propertyPath: explosion
+      value: 
+      objectReference: {fileID: 1664414235}
+    - target: {fileID: 514113450, guid: 7dfbc4c37b9423448a7ad70a0b0d0d23, type: 3}
+      propertyPath: horizontal
+      value: 
+      objectReference: {fileID: 416793629}
     - target: {fileID: 123440955281702611, guid: 7dfbc4c37b9423448a7ad70a0b0d0d23, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -1615,29 +1639,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7dfbc4c37b9423448a7ad70a0b0d0d23, type: 3}
---- !u!1 &514113449 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1730893477929581293, guid: 7dfbc4c37b9423448a7ad70a0b0d0d23, type: 3}
-  m_PrefabInstance: {fileID: 514113448}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &514113450
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 514113449}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0def24c32d7c5142b4d75ad23c8a7ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  vertical: {fileID: 867413589}
-  horizontal: {fileID: 416793629}
-  fall: {fileID: 182946049}
-  bomb: {fileID: 496124051}
-  Boss_Subway: {fileID: 514113449}
-  Explosion: {fileID: 805416163}
 --- !u!1001 &580987554
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2187,11 +2188,6 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 8734883634509507356, guid: b0356985e96c26740aafc80fb5004fd4, type: 3}
   m_PrefabInstance: {fileID: 801258677}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &805416163 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7990850236794966579, guid: 7dfbc4c37b9423448a7ad70a0b0d0d23, type: 3}
-  m_PrefabInstance: {fileID: 514113448}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &867413588
 GameObject:
@@ -5575,6 +5571,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1664414235 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1664414235, guid: 7dfbc4c37b9423448a7ad70a0b0d0d23, type: 3}
+  m_PrefabInstance: {fileID: 514113448}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04bd843f3b54b2c458edb6055dc1c901, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1671325172
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -21,6 +21,8 @@ namespace Boss.Skill
         LineRenderer _lineRenderer;
         private bool attacking = false;
         [SerializeField] int _lay_damage = 10;
+        [SerializeField] int _lay_min = 0;
+        [SerializeField] int _lay_max = 10;
 
 
         public void Start()
@@ -70,6 +72,15 @@ namespace Boss.Skill
             lr.SetPosition(1, new Vector3(this.transform.position.x + _distanceX, this.transform.position.y + _distanceY, this.transform.position.z + _distanceZ));
 
             attacking = true;
+        }
+
+        public void SetRandomX()
+        {
+            _distanceX = Random.Range(_lay_min, _lay_max);
+        }
+        public void SetRandomY()
+        {
+            _distanceY = Random.Range(_lay_min, _lay_max);
         }
 
         void DeactiveLay(LineRenderer lr)

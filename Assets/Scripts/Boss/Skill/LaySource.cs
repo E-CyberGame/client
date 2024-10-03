@@ -33,6 +33,21 @@ namespace Boss.Skill {
                 _lay[list[i]].Activate();
             }
         }
+
+        public void SetRandomX()
+        {
+            for (int i = 0; i < _layLen; i++)
+            {
+                _lay[i].SetRandomX();
+            }
+        }
+        public void SetRandomY()
+        {
+            for (int i = 0; i < _layLen; i++)
+            {
+                _lay[i].SetRandomY();
+            }
+        }
     }
 
 
