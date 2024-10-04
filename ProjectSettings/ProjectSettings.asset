@@ -677,6 +677,7 @@ PlayerSettings:
     Nintendo Switch: DOTWEEN
     PS4: DOTWEEN
     PS5: DOTWEEN
+    Server: FUSION_WEAVER;FUSION2
     Stadia: DOTWEEN
     Standalone: DOTWEEN;FUSION_WEAVER;FUSION2
     WebGL: DOTWEEN
