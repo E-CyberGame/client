@@ -10,10 +10,13 @@ namespace Actor
 {
     public class ActorController : NetworkBehaviour, IHitted
     {
-        private NetworkTransform _transform;
         private ActorStat _stat;
         public StateMachine _stateMachine { get; private set; }
         private SkillController _skill;
+
+        [Networked] private NetworkButtons PreviousMoveButtons { get; set; }
+        [Networked] private NetworkButtons PreviousSkillButtons { get; set; }
+
 
         [Networked]
         public TickTimer PlayerTimer { get; set; }
@@ -22,7 +25,6 @@ namespace Actor
 
         void Awake()
         {
-            _transform = GetComponent<NetworkTransform>();
             _stat = GetComponent<ActorStat>();
             _skill = GetComponent<SkillController>();
             _stateMachine = new StateMachine(GetComponent<WrapBody>(), GetComponent<Animator>(), GetComponent<ActorAnimController>());
@@ -40,10 +42,29 @@ namespace Actor
 
         public override void FixedUpdateNetwork()
         {
-            if (HasStateAuthority == false)
+            if (GetInput(out PlayerNetworkInput input))
             {
-                return;
+                if (input.MoveButtons.WasPressed(PreviousMoveButtons, InputButton.Jump))
+                    _stateMachine.Jump();
+                if (input.MoveButtons.WasPressed(PreviousMoveButtons, InputButton.Dash))
+                    _stateMachine.Dash();
+                if (input.MoveButtons.WasPressed(PreviousMoveButtons, InputButton.Down))
+                    _stateMachine.Down();
+                
+                if (input.SkillButtons.WasPressed(PreviousSkillButtons, SkillButton.A))
+                    _skill.UseSkill(SkillSlot.slot1);
+                if (input.SkillButtons.WasPressed(PreviousSkillButtons, SkillButton.S))
+                    _skill.UseSkill(SkillSlot.slot2);
+                
+                if (input.Direction.x == 1.0f)
+                    transform.eulerAngles = Vector3.down * -180f;
+                else if (input.Direction.x == -1.0f) transform.eulerAngles = Vector3.zero;
+
+                _stateMachine.Move(input.Direction);
             }
+            
+            PreviousMoveButtons = input.MoveButtons;
+            
             _stateMachine.FixedUpdateState();
 
             if (_startTimer && PlayerTimer.Expired(Runner))
@@ -51,8 +72,6 @@ namespace Actor
                 _startTimer = false;
                 _stateMachine.ChangeState(States.OnGround);
             }
-            
-            _transform.transform.position = transform.position;
         }
 
         public void SetPlayerLocation(Vector3 location)
@@ -71,7 +90,7 @@ namespace Actor
 
         #region Additional Input
 
-        public void OnMove(InputValue input)
+        /*public void OnMove(InputValue input)
         {
             Vector2 direction = input.Get<Vector2>();
 
@@ -98,7 +117,7 @@ namespace Actor
         public void OnDash()
         {
             _stateMachine.Dash();
-        }
+        }*/
 
         #endregion
 

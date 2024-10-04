@@ -11,6 +11,7 @@ public class PlayerSpawner : SimulationBehaviour, IPlayerJoined
     {
         if (Runner.CanSpawn)
         {
+            PlayerPrefab.name = player.ToString();
             Runner.Spawn(PlayerPrefab, inputAuthority: player);
         }
     }
