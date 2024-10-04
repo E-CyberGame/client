@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 2852878929368029844}
   - component: {fileID: 806149037562277683}
   - component: {fileID: 6784414518362849059}
+  - component: {fileID: -7752352387587892610}
   m_Layer: 7
   m_Name: NetworkWorker
   m_TagString: Player
@@ -176,7 +177,7 @@ MonoBehaviour:
   mp: 0
   maxHP: 0
   maxMP: 0
-  atk: 0
+  atk: 10
   def: 0
   cri_percent: 0
   cri_damage: 0
@@ -266,6 +267,7 @@ MonoBehaviour:
   - {fileID: 407036373728366900}
   - {fileID: 806149037562277683}
   - {fileID: 6784414518362849059}
+  - {fileID: -7752352387587892610}
 --- !u!114 &407036373728366900
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -297,7 +299,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 9
+  m_GravityScale: 3
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -358,8 +360,23 @@ MonoBehaviour:
   _Controller: {fileID: 0}
   _Nickname: 
   _Color: {r: 0, g: 0, b: 0, a: 0}
+  _Character: 0
+  _TeamNumber: 0
   _IsLoaded: 0
   _IsSpectator: 0
   _Strokes: 0
   _TimeTaken: 0
   _Scores: 
+--- !u!114 &-7752352387587892610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 407036373728366916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0027b1b613328644288118793af9f861, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _anim: {fileID: 0}

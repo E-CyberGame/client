@@ -15,6 +15,7 @@ public enum SkillSlot
 public class SkillController : NetworkBehaviour
 {
     public Dictionary<SkillSlot, ISkill> skillSlotDict;
+    
 
     void Awake()
     {
@@ -30,14 +31,14 @@ public class SkillController : NetworkBehaviour
     }
 
     //인풋 다르게 받는 방법 있으니 개선할 것
-    public void OnSkillSlot1()
+    /*public void OnSkillSlot1()
     {
         UseSkill(SkillSlot.slot1);
     }
     public void OnSkillSlot2()
     {
         UseSkill(SkillSlot.slot2);
-    }
+    }*/
 
     public void UseSkill(SkillSlot slot)
     {

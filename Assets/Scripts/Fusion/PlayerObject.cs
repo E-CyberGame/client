@@ -8,8 +8,8 @@ using Fusion;
 using UnityEngine.InputSystem.HID;
 
 public enum TeamType{
-    Red,
-    Blue,
+    RedTeam = 10,
+    BlueTeam = 11
 }
 
 public class PlayerObject : NetworkBehaviour
@@ -37,6 +37,10 @@ public class PlayerObject : NetworkBehaviour
     [Networked] public CharacterType Character { get; set; }
 
     // State & Gameplay Info
+    
+    //팀에서 몇번째 플레이어인지
+    [Networked] public int TeamNumber { get; set; }
+    
     [Networked]
     public bool IsLoaded { get; set; }
     [Networked, OnChangedRender(nameof(SpectatorChanged))]
@@ -64,11 +68,11 @@ public class PlayerObject : NetworkBehaviour
 
     public override void Spawned()
     {
-        Debug.Log(" Player Object Spawned");
         Controller = GetComponent<ActorController>();
         if (Object.HasStateAuthority)
         {
-            PlayerRegistry.Server_Add(Runner, Runner.LocalPlayer, this);
+            PlayerRegistry.Server_Add(Runner, Object.InputAuthority, this);
+            Debug.Log("PlayerRegistry 등록이 완료되었습니다" + Ref);
         }
 
         //if (Local) AudioManager.Play("joinedSessionSFX");
@@ -111,6 +115,17 @@ public class PlayerObject : NetworkBehaviour
         {
             Scores.Set(i, 0);
         }
+    }
+
+    public void SetLayer(int layer)
+    {
+        gameObject.layer = layer;
+    }
+
+    public void InitPlayerPosition(MapType type)
+    {
+        Controller.SetPlayerLocation(Database.MapData.GetData(type)
+            .PlayerPosition[(TeamType)gameObject.layer][TeamNumber]);
     }
 
     [Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority)]

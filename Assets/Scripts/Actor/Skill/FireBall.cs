@@ -13,7 +13,7 @@ namespace Actor.Skill
         private Vector2 StartDirection;
         public void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+            if (other.gameObject.layer != _playerLayer)
             {
                 Hit(other.GetComponent<IHitted>());
             }

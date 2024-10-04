@@ -90,16 +90,19 @@ public class GameState : NetworkBehaviour
             {
                 PlayerRegistry.ForEach(p =>
                 {
-                    p.Controller.PlayerTimer = TickTimer.CreateFromSeconds(Runner, 3);
+                    p.Controller.SetTimer(TickTimer.CreateFromSeconds(Runner, 1.6f));
                 });
-                
+            }
+
+            if (HasStateAuthority)
+            {
                 foreach (var player in PlayerRegistry.Players)
                 {
-                    player.Controller.SetPlayerLocation(Vector3.zero);
+                    player.InitPlayerPosition(RoomManager.Instance.MapType);
                 }
             }
             
-            Server_DelaySetState(EGameState.Game, 3);
+            Server_DelaySetState(EGameState.Game, 1.6f);
         };
 
         StateMachine[EGameState.Game].onEnter = prev =>
