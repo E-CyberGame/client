@@ -15,14 +15,14 @@ public enum SkillSlot
 public class SkillController : NetworkBehaviour
 {
     public Dictionary<SkillSlot, ISkill> skillSlotDict;
-    
-
     void Awake()
     {
         skillSlotInit();
     }
-
-    private void skillSlotInit()
+    
+    //Network Behaviour은 스폰 전에 부착해야 함.
+    //만약 스킬 설정 때문에 뭐... 어케 해야 하면 새로 오브젝트 파서 게임 시작할 때 생성
+    public void skillSlotInit()
     {
         skillSlotDict = new Dictionary<SkillSlot, ISkill>()
         {
@@ -30,22 +30,10 @@ public class SkillController : NetworkBehaviour
         };
     }
 
-    //인풋 다르게 받는 방법 있으니 개선할 것
-    /*public void OnSkillSlot1()
-    {
-        UseSkill(SkillSlot.slot1);
-    }
-    public void OnSkillSlot2()
-    {
-        UseSkill(SkillSlot.slot2);
-    }*/
-
     public void UseSkill(SkillSlot slot)
     {
-        if (HasStateAuthority == false)
-        {
-            return;
-        }
+        if (!HasStateAuthority) return;
+        Debug.Log("아니 실행은 여기서 했잖니");
         skillSlotDict[slot].Activate();
     }
 }
