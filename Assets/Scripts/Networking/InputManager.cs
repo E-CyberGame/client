@@ -60,10 +60,10 @@ public class InputManager : SimulationBehaviour, IBeforeUpdate, INetworkRunnerCa
             moveButtons.Set(InputButton.Down, Input.GetKey(KeyCode.DownArrow));
             moveButtons.Set(InputButton.Dash, Input.GetKey(KeyCode.LeftControl));
         //}
-            skillButtons.Set(SkillButton.A, Input.GetKey(KeyCode.A));
-            skillButtons.Set(SkillButton.S, Input.GetKey(KeyCode.S));
-            skillButtons.Set(SkillButton.D, Input.GetKey(KeyCode.D));
-            skillButtons.Set(SkillButton.C, Input.GetKey(KeyCode.C));
+            skillButtons.Set(SkillButton.A, Input.GetKeyDown(KeyCode.A));
+            skillButtons.Set(SkillButton.S, Input.GetKeyDown(KeyCode.S));
+            skillButtons.Set(SkillButton.D, Input.GetKeyDown(KeyCode.D));
+            skillButtons.Set(SkillButton.C, Input.GetKeyDown(KeyCode.C));
 
         accumulatedInput.MoveButtons = new NetworkButtons(accumulatedInput.MoveButtons.Bits | moveButtons.Bits);
         accumulatedInput.SkillButtons = new NetworkButtons(accumulatedInput.SkillButtons.Bits | skillButtons.Bits);

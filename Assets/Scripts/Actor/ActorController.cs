@@ -76,9 +76,7 @@ namespace Actor
 
         public void SetPlayerLocation(Vector3 location)
         {
-            Debug.Log("위치 좀 옮겨줘요... " + location);
             transform.position = location;
-            Debug.Log("옮겨짐...? " + transform.position);
         }
 
         public void SetTimer(TickTimer timer)
@@ -87,39 +85,6 @@ namespace Actor
             PlayerTimer = timer;
             _stateMachine.ChangeState(States.NoControl);
         }
-
-        #region Additional Input
-
-        /*public void OnMove(InputValue input)
-        {
-            Vector2 direction = input.Get<Vector2>();
-
-            if (HasStateAuthority)
-            {
-                if (direction.x == 1.0f)
-                    transform.eulerAngles = Vector3.down * -180f;
-                else if (direction.x == -1.0f) transform.eulerAngles = Vector3.zero;
-            }
-            
-            _stateMachine.Move(direction);
-        }
-
-        public void OnJump()
-        {
-            _stateMachine.Jump();
-        }
-
-        public void OnDown()
-        {
-            _stateMachine.Down();
-        }
-
-        public void OnDash()
-        {
-            _stateMachine.Dash();
-        }*/
-
-        #endregion
 
         public void Hitted(float damage, IBuff buff = null)
         {

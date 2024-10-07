@@ -62,8 +62,6 @@ public class WrapBody : NetworkBehaviour
     
     public bool OnGround()
     {
-        if (!HasStateAuthority) return false;
-        
         Debug.DrawRay(_transform.position, Vector3.down * 1.05f, Color.red);
         _hitGround = Physics2D.Raycast(_transform.position, Vector3.down, groundCheckLine
             , groundLayer);
@@ -80,7 +78,6 @@ public class WrapBody : NetworkBehaviour
     
     public void Move(Vector2 directionX)
     {
-        if (!HasStateAuthority) return;
         this.directionX = directionX;
     }
 
@@ -107,7 +104,6 @@ public class WrapBody : NetworkBehaviour
 
     public void Jump()
     {
-        if (!HasStateAuthority) return;
         float vel = ((jumpHeight / _stat.jumpTime) + _rigidbody.gravityScale);
         _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, vel);
         jumpCount++;
@@ -115,9 +111,7 @@ public class WrapBody : NetworkBehaviour
     
     public void Down()
     {
-        if (!HasStateAuthority) return;
         _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _stat.downSpeed * -1);
-        Debug.Log("Down");
     }
 
     public void StartHitted()

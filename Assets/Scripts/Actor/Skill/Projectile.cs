@@ -10,7 +10,7 @@ namespace Actor.Skill
     {
         //발사한 플레이어의 LayerMask
         protected LayerMask _playerLayer;
-        protected WrapBody _body;
+        //protected WrapBody _body;
         protected ActorStat _stat;
         //관통 횟수
         protected int _piercingCount = 0;
@@ -18,29 +18,29 @@ namespace Actor.Skill
         protected Vector3 _distance;
         //소멸 딜레이
         protected float _destroyDelay;
+        //스킬 시전 시 플레이어 위치
+        protected Vector3 _startPlayerPosition;
+        //스킬 시전 시 플레이어 방향
+        protected Vector2 _startDirection;
         //생성 시작 포인트
         protected Vector3 _startPoint;
 
-        public void Init(WrapBody body, ActorStat stat, Vector3 startPoint, float destroyDelay, Vector3 distance, int piercingCount)
+        public void Init(ActorStat stat, Vector2 startDirection, Vector3 startPlayerPosition, Vector3 startPoint, float destroyDelay)
         {
-            _body = body;
             _stat = stat;
+            Debug.Log("초기화... 되었나요?;;");
+            _startDirection = startDirection;
+            _startPlayerPosition = startPlayerPosition;
             _startPoint = startPoint;
-            _distance = distance;
             _destroyDelay = destroyDelay;
-            _piercingCount = piercingCount;
+            _playerLayer = _stat.gameObject.layer;
             MoveStartPoint();
         }
         
-        public void Init(WrapBody body, ActorStat stat, Vector3 startPoint, float destroyDelay, Vector3 distance)
+        public void Init(ActorStat stat, Vector2 startDirection, Vector3 startPlayerPosition, Vector3 startPoint, float destroyDelay, Vector3 distance)
         {
-            _body = body;
-            _stat = stat;
-            _startPoint = startPoint;
+            Init(stat, startDirection, startPlayerPosition, startPoint, destroyDelay);
             _distance = distance;
-            _destroyDelay = destroyDelay;
-            _playerLayer = body.gameObject.layer;
-            MoveStartPoint();
         }
         
 
@@ -50,7 +50,7 @@ namespace Actor.Skill
         //월드 좌표는 쓰일 일 없을 것 같아서 안 만들어둠. 필요 시 생성.
         protected void MoveStartPoint()
         {
-            transform.position += _startPoint;
+            transform.position = _startPlayerPosition + _startPoint;
         }
         
         //관통처리
