@@ -10,9 +10,9 @@ namespace Actor.Skill
     {
         private NetworkTransform _transform;
         private bool isFiring = false;
-        private Vector2 StartDirection;
         public void OnTriggerEnter2D(Collider2D other)
         {
+            //추후 때려야 할 애들 레이어로...
             if (other.gameObject.layer != _playerLayer)
             {
                 Hit(other.GetComponent<IHitted>());
@@ -21,15 +21,15 @@ namespace Actor.Skill
 
         public void Hit(IHitted target)
         {
-            Debug.Log("때려버렷다");
-            target.Hitted(_stat.ATK.Value); 
+            if (!HasStateAuthority) return;
+            if (target == null) return;
+            target.Hitted(_stat.ATK.Value);
             //Pierce();
             Runner.Despawn(gameObject.GetComponent<NetworkObject>());
         }
 
         public void Awake()
         {
-            Debug.Log(Runner is null);
             _transform = GetComponent<NetworkTransform>();
         }
 
@@ -38,7 +38,7 @@ namespace Actor.Skill
             if (!HasStateAuthority) return;
             if (isFiring)
             {
-                transform.position += (Vector3)(_distance * StartDirection) * Runner.DeltaTime;
+                transform.position += (Vector3)(_distance * _startDirection) * Runner.DeltaTime;
             }
             _transform.transform.position = transform.position;
         }
@@ -47,10 +47,9 @@ namespace Actor.Skill
         {
             Vector3 currentPosition = transform.position;
             if (!HasStateAuthority) return;
-            StartDirection = _body.currentDirectionX;
             isFiring = true;
 
-            transform.DOMove(currentPosition + (Vector3)(_distance * _body.currentDirectionX), 1f).OnComplete(() =>
+            transform.DOMove(currentPosition + (Vector3)(_distance * _startDirection), _destroyDelay).OnComplete(() =>
             {
                 isFiring = false;
                 NetworkObject networkObject = gameObject.GetComponent<NetworkObject>();

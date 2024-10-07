@@ -26,6 +26,7 @@ namespace Actor.Skill
         public void Awake()
         {
             _stat = GetComponent<ActorStat>();
+            Debug.Log(_stat is null);
             _body = GetComponent<WrapBody>();
             _player = GetComponent<Transform>();
             _actorController = GetComponent<ActorController>();
@@ -41,17 +42,16 @@ namespace Actor.Skill
 
         public override void Activate()
         {
-            if (!_canUse) return;
             StartCoroutine(CoolDown(_coolTime));
-            _actorController._stateMachine.ChangeState(States.OnHitted);
+            _actorController._stateMachine.ChangeState(States.OnHitted); //추후 공격모션으로 변경 + 각 스킬에 위임
         }
 
-        public void Generate(int id, int index)
+        //스킬 아이디, 발사할 발사체 아이디(index)
+        protected void Generate(int id, int index)
         {
             if (!HasStateAuthority) return;
 
             NetworkObject networkObject = Runner.Spawn(goList[index].GetComponent<NetworkObject>(), _player.position, Quaternion.identity, Runner.LocalPlayer);
-            Debug.Log(networkObject.StateAuthority);
             projectileList[id]?.Add(networkObject.GetComponent<Projectile>());
         }
     }
