@@ -36,22 +36,11 @@ namespace Data
         public Sprite CardImage;
         //최초 맵 입장 시 플레이어 스폰 위치
         public Dictionary<TeamType, List<Vector3>> PlayerPosition;
-        public MapData(MapType sceneType)
+        public MapData(MapType sceneType, Dictionary<TeamType, List<Vector3>> playerPosition)
         {
             SceneType = sceneType;
             CardImage = Resources.Load<Sprite>("Arts/Map/card_" + sceneType.ToString().ToLower());
-            PlayerPosition = new Dictionary<TeamType, List<Vector3>>();
-            PlayerPosition.Add(TeamType.RedTeam, new List<Vector3>()
-            {
-                new Vector3(-6.5f, 0f, 0f),
-                new Vector3(-6.5f, 0f, 0f)
-            });
-            
-            PlayerPosition.Add(TeamType.BlueTeam, new List<Vector3>()
-            {
-                new Vector3(6.5f, 0f, 0f),
-                new Vector3(6.5f, 0f, 0f)
-            });
+            PlayerPosition = playerPosition;
         }
     }
 
@@ -80,8 +69,16 @@ namespace Data
         });
         public static readonly MapDB MapData = new MapDB(new Dictionary<MapType, MapData>()
         {
-            {MapType.Cyber, new MapData(MapType.Cyber)},
-            {MapType.Subway, new MapData(MapType.Subway)}
+            {MapType.Cyber, new MapData(MapType.Cyber, new Dictionary<TeamType, List<Vector3>>()
+            {
+                { TeamType.RedTeam, new List<Vector3> { new Vector3(-6.75f, 2.5f, 0), new Vector3(-5f, 4f, 0) } },
+                { TeamType.BlueTeam, new List<Vector3> { new Vector3(6.75f, 2.5f, 0), new Vector3(5f, 4f, 0) } }
+            })},
+            {MapType.Subway, new MapData(MapType.Subway, new Dictionary<TeamType, List<Vector3>>()
+            {
+                { TeamType.RedTeam, new List<Vector3> { new Vector3(-6.5f, 0f, 0f), new Vector3(-5f, 0f, 0f) } },
+                { TeamType.BlueTeam, new List<Vector3> { new Vector3(6.5f, 0f, 0f), new Vector3(5f, 0f, 0f) } }
+            })}
         });
     }
 }
