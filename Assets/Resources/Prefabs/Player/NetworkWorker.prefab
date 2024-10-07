@@ -231,6 +231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _anim: {fileID: 0}
+  __canUse: 1
 --- !u!114 &407036373728366929
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -380,3 +381,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _anim: {fileID: 0}
+  __canUse: 1
