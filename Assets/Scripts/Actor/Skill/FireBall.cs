@@ -23,7 +23,7 @@ namespace Actor.Skill
         {
             if (!HasStateAuthority) return;
             if (target == null) return;
-            target.Hitted(_stat.ATK.Value);
+            target.Hitted(_stat.atk);
             //Pierce();
             Runner.Despawn(gameObject.GetComponent<NetworkObject>());
         }

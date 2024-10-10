@@ -1,45 +1,53 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Fusion;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class ActorStat : MonoBehaviour
+public class ActorStat : NetworkBehaviour
 {
-    /*public FluidStat HP { get; private set; }
-    public FluidStat MP { get; private set; }
-
-    public GameStat MaxHP { get; private set; }
-    public GameStat MaxMP { get; private set; }
-    public GameStat ATK { get; private set; }
-    public GameStat DEF { get; private set; }
-    public GameStat Critical_Percentage { get; private set; }
-    public GameStat Critical_Damage { get; private set; }
-    public GameStat Speed { get; private set; }
-
-    //Fixed Stat 개선 필요. 반드시 Speed와 곱해서 나오는 결과인데 Wrap Body 에서 그냥 하드코딩 되어있음
-    public FixedStat MoveSpeed { get; private set; }
-    public FixedStat JumpSpeed { get; private set; }
-    public FixedStat DownSpeed { get; private set; }
-    public FixedStat DashSpeed { get; private set; }*/
-
     #region Inspector
 
-    //게임 시 영구적인 증감이 일어나는 스탯
-    [Header("Fluid Stat")] public FluidStat HP = new FluidStat(100);
-    public float mp;
+    private ChangeDetector _changeDetector;
 
-    //버프 적용을 받을 수 있는 스탯
-    [Header("Game Stat")] public GameStat MaxHP = new GameStat(100);
-    public GameStat ATK = new GameStat(10);
-    public float maxHP;
-    public float maxMP;
-    public float atk;
-    public float def;
-    public float cri_percent;
-    public float cri_damage;
-    public float speed;
+    public Action HpStatChanged = null;
+    public Action MpStatChanged = null;
+    public Action MaxHpStatChanged = null;
+    public Action MaxMpStatChanged = null;
+    public Action AtkStatChanged = null;
+    public Action DefStatChanged = null;
+    public Action CriPercentStatChanged = null;
+    public Action CriDamageStatChanged = null;
+    public Action SpeedStatChanged = null;
     
+    //Fluid Stat : 게임 중 유동적인 변화가 가장 큰 스탯
+    [Networked] public float hp { get; set; }
+    [Networked] public float mp { get; set; }
+    
+    //Game Stat : Read > Write
+    //get, buff 등은 MaxHP 사용하고, set은 maxHP 사용하는 방식으로 ㄱㄱ
+    public GameStat MaxHP;
+    [Networked] public float maxHP { get; set; }
+    public GameStat MaxMP;
+    [Networked] public float maxMP { get; set; }
+
+    public GameStat Atk;
+    [Networked] public float atk { get; set; }
+
+    public GameStat Def;
+    [Networked] public float def { get; set; }
+
+    public GameStat CriPercent;
+    [Networked] public float cri_percent { get; set; }
+
+    public GameStat CriDamage;
+    [Networked] public float cri_damage { get; set; }
+
+    public GameStat Speed;
+    [Networked] public float speed { get; set; }
+
+
     //캐릭터마다 다른 거. (움직임에 영향 주는 것.)
     [Header("Fixed Stat")]
     public float moveSpeed = 2f;
@@ -49,35 +57,84 @@ public class ActorStat : MonoBehaviour
     public float dashTime = 0.3f;
     public int MaxJumpCount = 2;
 
-    #endregion
-
-    public void Awake()
+    private void InitStat()
     {
-        Init();
-    }
+        maxHP = 150;         // 최대 HP
+        maxMP = 100;         // 최대 MP
+        atk = 15;            // 공격력
+        def = 5;             // 방어력
+        cri_percent = 20;    // 치명타 확률
+        cri_damage = 1.5f;   // 치명타 피해 배율
+        speed = 3;           // 속도
+        hp = maxHP;          // 현재 HP를 최대 HP로 초기화
+        mp = maxMP;          // 현재 MP를 최대 MP로 초기화
 
-    void Init()
-    {
-        /*HP = new FluidStat(hp);
-        MP = new FluidStat(mp);
         MaxHP = new GameStat(maxHP);
         MaxMP = new GameStat(maxMP);
-        ATK = new GameStat(atk);
-        DEF = new GameStat(def);
-        Critical_Percentage = new GameStat(cri_percent);
-        Critical_Damage = new GameStat(cri_damage);
+        Atk = new GameStat(atk);
+        Def = new GameStat(def);
+        CriPercent = new GameStat(cri_percent);
+        CriDamage = new GameStat(cri_damage);
         Speed = new GameStat(speed);
-        MoveSpeed = new FixedStat(moveSpeed);
-        JumpSpeed = new FixedStat(jumpSpeed);
-        DownSpeed = new FixedStat(downSpeed);
-        DashSpeed = new FixedStat(dashSpeed);*/
     }
 
-    public void Update()
+    #endregion
+
+    public override void Spawned()
     {
-        /*if (moveSpeed != MoveSpeed.Value || jumpSpeed != JumpSpeed.Value || downSpeed != DownSpeed.Value)
-        {
-            Init();
-        }*/
+        _changeDetector = GetChangeDetector(ChangeDetector.Source.SimulationState);
+        InitStat();
     }
+    
+    public override void Render()
+    {
+        foreach (var change in _changeDetector.DetectChanges(this))
+        {
+            switch (change)
+            {
+                case nameof(hp):
+                    HpStatChanged?.Invoke();
+                    break;
+                case nameof(mp):
+                    MpStatChanged?.Invoke();
+                    break;
+                case nameof(maxHP):
+                    MaxHpStatChanged?.Invoke();
+                    MaxHP.SetValue(maxHP);
+                    break;
+
+                case nameof(maxMP):
+                    MaxMpStatChanged?.Invoke();
+                    MaxMP.SetValue(maxMP);
+                    break;
+
+                case nameof(atk):
+                    AtkStatChanged?.Invoke();
+                    Atk.SetValue(atk);
+                    break;
+
+                case nameof(def):
+                    DefStatChanged?.Invoke();
+                    Def.SetValue(def);
+                    break;
+
+                case nameof(cri_percent):
+                    CriPercentStatChanged?.Invoke();
+                    CriPercent.SetValue(cri_percent);
+                    break;
+
+                case nameof(cri_damage):
+                    CriDamageStatChanged?.Invoke();
+                    CriDamage.SetValue(cri_damage);
+                    break;
+
+                case nameof(speed):
+                    SpeedStatChanged?.Invoke();
+                    Speed.SetValue(speed);
+                    break;
+            }
+            
+        }
+    }
+
 }
