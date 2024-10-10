@@ -16,11 +16,11 @@ public abstract class ISkill : NetworkBehaviour
     //너무 결합도 높은가 싶음... 쿨타임 UI를 그냥 Action으로 옮기는 것도 괜찮을지도...
     protected IEnumerator CoolDown(float coolTime)
     {
+        if(HasStateAuthority) _canUse = false;
         _anim.speed = 1 / coolTime;
-        _canUse = false;
         _anim.Play("CoolTime");
         yield return new WaitForSeconds(coolTime);
-        _canUse = true;
+        if(HasStateAuthority) _canUse = true;
         _anim.Play("New State");
     }
 }
