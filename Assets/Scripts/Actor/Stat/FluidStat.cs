@@ -11,10 +11,10 @@ public class FluidStat : Stat
 
     public void AddStat(float value)
     {
-        SetStat(_value + value);
+        SetValue(_value + value);
     }
 
-    public void SetStat(float value)
+    public override void SetValue(float value)
     {
         this._value = value;
         StatChanged?.Invoke();

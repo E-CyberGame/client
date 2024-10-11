@@ -88,6 +88,7 @@ public class WrapBody : NetworkBehaviour
             //가속 구현 -> isPressing
             velocity = directionX * _stat.moveSpeed * _stat.speed * Runner.DeltaTime;
 
+            Debug.Log(velocity);
             if (isDashing)
             {
                 velocity = beforeDirectionX * _stat.speed * dashVelocity * Runner.DeltaTime;

@@ -14,6 +14,11 @@ public class Stat
         }
     }
 
+    public virtual void SetValue(float value)
+    {
+        _value = value;
+    }
+
     public Stat(float value)
     {
         _value = value;

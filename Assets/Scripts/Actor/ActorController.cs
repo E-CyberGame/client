@@ -89,7 +89,8 @@ namespace Actor
         public void Hitted(float damage, IBuff buff = null)
         {
             Debug.Log($"{damage} 맞아부럿성...");
-            _stat.HP.AddStat(-damage);
+            _stat.hp -= damage;
+            Debug.Log("값이우찌되오" + _stat.hp);
             _stateMachine.ChangeState(States.OnHitted);
         }
     }
