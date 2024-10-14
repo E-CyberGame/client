@@ -52,7 +52,26 @@ public class PVPMatchingPresenter : NetworkBehaviour, IPlayerJoined, IPlayerLeft
             SetPlayerPanel(player);
         }
     }
-    
+
+    public override void FixedUpdateNetwork()
+    {
+        if (PlayerRegistry.CountPlayers < 1) { return; }
+
+        bool areAllReady = true;
+        foreach (KeyValuePair<PlayerRef, PlayerObject> player in PlayerRegistry.Instance.ObjectByRef)
+        {
+            if (!player.Value.IsReady)
+            {
+                areAllReady = false;
+                break;
+            }
+        }
+        if (areAllReady)
+        {
+            GameStart();
+        }
+    }
+
     [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
     public void RPC_ChangeData(MapType mapType, bool crystal, bool decay)
     {
@@ -85,7 +104,20 @@ public class PVPMatchingPresenter : NetworkBehaviour, IPlayerJoined, IPlayerLeft
         
         RoomManager.State.Server_SetState(GameState.EGameState.Loading);
         Runner.LoadScene(RoomManager.Instance.MapType.ToString());
-        //LoadingScene.SetGameScene("GameScene");
+        LoadingScene.SetGameScene("GameScene");
+    }
+
+    [Rpc(RpcSources.All, RpcTargets.All)]
+    public void RPC_PlayerReady(PlayerObject caller)
+    {
+        caller.IsReady = !caller.IsReady;
+        panels.TryGetValue(caller.Ref, out GameObject playerpanel);
+        playerpanel.GetComponent<CharacterSlot>().SetReady(caller.IsReady);
+    }
+    public void CallReady()
+    {
+        PlayerObject _local = PlayerObject.Local;
+        RPC_PlayerReady(_local);
     }
 
     public void PlayerJoined(PlayerRef player)
@@ -152,4 +184,6 @@ public class PVPMatchingPresenter : NetworkBehaviour, IPlayerJoined, IPlayerLeft
             BlueTeam.Remove(player);
         }
     }
+
+
 }
