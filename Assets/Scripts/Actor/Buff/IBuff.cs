@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface IBuff
 {
-    public IEnumerator StartBuff();
+    public IEnumerator StartBuff(float time);
     public void OnBuff();
     public void OffBuff();
 }
