@@ -25,6 +25,17 @@ namespace UI.Scene
             cool[0] = Get<Animator>((int)CoolAnimators.cool1);
         }
 
+        public void StartCoolTimeAnimation(int slot, float coolTime)
+        {
+            cool[slot].speed = 1 / coolTime;
+            cool[slot].Play("CoolTime");
+        }
+
+        public void EndCoolTimeAnimation(int slot)
+        {
+            cool[slot].Play("New State");
+        }
+
         public void SetSkillImage(SkillSlot slot, Sprite image)
         {
             GetImage((int)slot).sprite = image;

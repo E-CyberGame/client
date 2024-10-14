@@ -13,7 +13,6 @@ namespace Actor.Skill
     public class ProjectileSkill : ISkill
     {
         private int skillId = 0;
-        protected ActorStat _stat;
         protected WrapBody _body;
         protected Transform _player; //스킬을 실행시킨 플레이어
         protected ActorController _actorController;
@@ -21,16 +20,14 @@ namespace Actor.Skill
         //생성되지 않은 에셋(Resources)으로의 발사체
         public List<GameObject> goList { get; protected set; } = new List<GameObject>(5);
         //생성된 발사체
-        protected List<Projectile>[] projectileList = new List<Projectile>[100];
+        //protected List<Projectile>[] projectileList = new List<Projectile>[100];
 
         public void Awake()
         {
             _stat = GetComponent<ActorStat>();
-            Debug.Log(_stat is null);
             _body = GetComponent<WrapBody>();
             _player = GetComponent<Transform>();
             _actorController = GetComponent<ActorController>();
-            goList.Add(Resources.Load<GameObject>("TestPrefabs/Fireball"));
         }
 
         //추후 리팩토링용
@@ -47,12 +44,11 @@ namespace Actor.Skill
         }
 
         //스킬 아이디, 발사할 발사체 아이디(index)
-        protected void Generate(int id, int index)
+        protected Projectile Generate(int index)
         {
-            if (!HasStateAuthority) return;
-
+            if (!HasStateAuthority) return null;
             NetworkObject networkObject = Runner.Spawn(goList[index].GetComponent<NetworkObject>(), _player.position, Quaternion.identity, Runner.LocalPlayer);
-            projectileList[id]?.Add(networkObject.GetComponent<Projectile>());
+            return networkObject.GetComponent<Projectile>();
         }
     }
 }

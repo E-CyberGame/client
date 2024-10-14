@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Actor.Skill;
 using Fusion;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -15,9 +16,35 @@ public enum SkillSlot
 public class SkillController : NetworkBehaviour
 {
     public Dictionary<SkillSlot, ISkill> skillSlotDict;
+    public List<PassiveSkill> PassiveSkills;
+    public ISkill PlainSkill;
+    
     void Awake()
     {
+        PlainSkill = GetComponent<PlainAttack>();
         skillSlotInit();
+        PassiveSkillinit();
+    }
+
+    public override void Spawned()
+    {
+        RoomManager.Instance.BeforeGameStart -= OnPassiveSkills;
+        RoomManager.Instance.BeforeGameStart += OnPassiveSkills;
+    }
+
+    private void OnPassiveSkills()
+    {
+        foreach (var skill in PassiveSkills)
+        {
+            skill.OnSkill();
+        }
+    }
+
+    //이거 봐서 가능하면... 그냥 끌어오기로 바꾸기... 그냥 component로 찾아서... 하는 걸로...
+    public void PassiveSkillinit()
+    {
+        PassiveSkills.Add(gameObject.GetComponent<TwoHeartSkill>());
+        PassiveSkills.Add(gameObject.GetComponent<RapidMovementSkill>());
     }
     
     //Network Behaviour은 스폰 전에 부착해야 함.
@@ -33,7 +60,12 @@ public class SkillController : NetworkBehaviour
     public void UseSkill(SkillSlot slot)
     {
         if (!HasStateAuthority) return;
-        Debug.Log("아니 실행은 여기서 했잖니");
         skillSlotDict[slot].Activate();
+    }
+
+    public void PlainAttack()
+    {
+        if (!HasStateAuthority) return;
+        PlainSkill.Activate();
     }
 }

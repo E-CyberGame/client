@@ -20,6 +20,7 @@ public class ActorStat : NetworkBehaviour
     public Action CriPercentStatChanged = null;
     public Action CriDamageStatChanged = null;
     public Action SpeedStatChanged = null;
+    public Action CoolTimePercentStatChanged = null;
     
     //Fluid Stat : 게임 중 유동적인 변화가 가장 큰 스탯
     [Networked] public float hp { get; set; }
@@ -47,6 +48,9 @@ public class ActorStat : NetworkBehaviour
     public GameStat Speed;
     [Networked] public float speed { get; set; }
 
+    public GameStat CoolTimePercent;
+    [Networked] public float coolTimePercent { get; set; }
+
 
     //캐릭터마다 다른 거. (움직임에 영향 주는 것.)
     [Header("Fixed Stat")]
@@ -68,6 +72,7 @@ public class ActorStat : NetworkBehaviour
         speed = 3;           // 속도
         hp = maxHP;          // 현재 HP를 최대 HP로 초기화
         mp = maxMP;          // 현재 MP를 최대 MP로 초기화
+        coolTimePercent = 1.0f;
 
         MaxHP = new GameStat(maxHP);
         MaxMP = new GameStat(maxMP);
@@ -76,6 +81,7 @@ public class ActorStat : NetworkBehaviour
         CriPercent = new GameStat(cri_percent);
         CriDamage = new GameStat(cri_damage);
         Speed = new GameStat(speed);
+        CoolTimePercent = new GameStat(coolTimePercent);
     }
 
     #endregion
@@ -102,7 +108,6 @@ public class ActorStat : NetworkBehaviour
                     MaxHpStatChanged?.Invoke();
                     MaxHP.SetValue(maxHP);
                     break;
-
                 case nameof(maxMP):
                     MaxMpStatChanged?.Invoke();
                     MaxMP.SetValue(maxMP);
@@ -131,6 +136,11 @@ public class ActorStat : NetworkBehaviour
                 case nameof(speed):
                     SpeedStatChanged?.Invoke();
                     Speed.SetValue(speed);
+                    break;
+                
+                case nameof(coolTimePercent):
+                    CoolTimePercentStatChanged?.Invoke();
+                    CoolTimePercent.SetValue(coolTimePercent);
                     break;
             }
             

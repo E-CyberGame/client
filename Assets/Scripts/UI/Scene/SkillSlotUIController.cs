@@ -1,6 +1,5 @@
 using Actor;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 
 namespace UI.Scene
 {
@@ -18,7 +17,10 @@ namespace UI.Scene
         public void Start()
         {
             UpdateSkillSlot();
-            _skill.skillSlotDict[SkillSlot.slot1]._anim = _uiSkillSlot.GetAnimator(SkillSlot.slot1);
+            _skill.skillSlotDict[SkillSlot.slot1].SkillStart +=
+                (f => _uiSkillSlot.StartCoolTimeAnimation((int)SkillSlot.slot1, f));
+            _skill.skillSlotDict[SkillSlot.slot1].CoolTimeEnd +=
+                () => _uiSkillSlot.EndCoolTimeAnimation((int)SkillSlot.slot1);
         }
 
         public void TakeDamage(int damage)

@@ -24,7 +24,9 @@ GameObject:
   - component: {fileID: 2852878929368029844}
   - component: {fileID: 806149037562277683}
   - component: {fileID: 6784414518362849059}
-  - component: {fileID: -7752352387587892610}
+  - component: {fileID: -8633920017045009467}
+  - component: {fileID: -8339149361459259821}
+  - component: {fileID: 3159761440178221969}
   m_Layer: 7
   m_Name: NetworkWorker
   m_TagString: Player
@@ -174,14 +176,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff79d9a7c0c2bd24bbc25d6c043daf27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mp: 0
-  maxHP: 0
-  maxMP: 0
-  atk: 10
-  def: 0
-  cri_percent: 0
-  cri_damage: 0
-  speed: 3
+  _hp: 0
+  _mp: 0
+  _maxHP: 0
+  _maxMP: 0
+  _atk: 0
+  _def: 0
+  _cri_percent: 0
+  _cri_damage: 0
+  _speed: 0
+  _coolTimePercent: 0
   moveSpeed: 4
   jumpTime: 0.3
   downSpeed: 15
@@ -218,6 +222,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29f79c1064c11454393ce42bfb726e9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PassiveSkills: []
+  PlainSkill: {fileID: 0}
 --- !u!114 &407036373728366928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -262,13 +268,16 @@ MonoBehaviour:
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: 407036373728366927}
+  - {fileID: 407036373728366924}
   - {fileID: 407036373728366925}
   - {fileID: 407036373728366931}
   - {fileID: 407036373728366928}
   - {fileID: 407036373728366900}
   - {fileID: 806149037562277683}
   - {fileID: 6784414518362849059}
-  - {fileID: -7752352387587892610}
+  - {fileID: -8633920017045009467}
+  - {fileID: -8339149361459259821}
+  - {fileID: 3159761440178221969}
 --- !u!114 &407036373728366900
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -369,7 +378,7 @@ MonoBehaviour:
   _Strokes: 0
   _TimeTaken: 0
   _Scores: 
---- !u!114 &-7752352387587892610
+--- !u!114 &-8633920017045009467
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -378,7 +387,31 @@ MonoBehaviour:
   m_GameObject: {fileID: 407036373728366916}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0027b1b613328644288118793af9f861, type: 3}
+  m_Script: {fileID: 11500000, guid: ff9fa24f9ed5437d91b450e1fadffb1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-8339149361459259821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 407036373728366916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da25b16303cf465ab9e60144e3d01ee7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3159761440178221969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 407036373728366916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c983e2e23f2540209fbac6573734bcc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _anim: {fileID: 0}

@@ -20,6 +20,7 @@ public class RoomManager : NetworkBehaviour
     [Networked] public bool BetDecay { get; set; }
     
     public Action<PVPData> ChangeGameSetting = null;
+    public Action BeforeGameStart = null;
     
     public void UpdateGameSetting()
     {

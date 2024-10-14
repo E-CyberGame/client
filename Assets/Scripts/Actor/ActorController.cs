@@ -55,6 +55,8 @@ namespace Actor
                     _skill.UseSkill(SkillSlot.slot1);
                 if (input.SkillButtons.WasPressed(PreviousSkillButtons, SkillButton.S))
                     _skill.UseSkill(SkillSlot.slot2);
+                if (input.SkillButtons.WasPressed(PreviousSkillButtons, SkillButton.Attack))
+                    _skill.PlainAttack();
                 
                 if (input.Direction.x == 1.0f)
                     transform.eulerAngles = Vector3.down * -180f;
