@@ -9,12 +9,6 @@ public class MaxHPUpBuff : IBuff
     {
         _stat = stat;
     }
-    public IEnumerator StartBuff(float time)
-    {
-        OnBuff();
-        yield return new WaitForSeconds(time);
-        OffBuff();
-    }
 
     public void OnBuff()
     {

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Actor.Buff;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -27,7 +28,7 @@ namespace Actor.Skill
             int id = GetSkillId();
             projectileList[id] = new List<Projectile>();
             StartCoroutine(Chain(id));
-            _buff.AddBuff(new MaxHPUpBuff(_stat));
+            _buff.AddBuff(new StatDurationBuff(_stat.MaxHP, 10, 0.1f), 10f);
         }
         
         IEnumerator Chain()
