@@ -102,6 +102,7 @@ public class GameState : NetworkBehaviour
                 }
             }
             
+            RoomManager.Instance.BeforeGameStart?.Invoke();
             Server_DelaySetState(EGameState.Game, 1.6f);
         };
 
