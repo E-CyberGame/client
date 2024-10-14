@@ -54,6 +54,7 @@ MonoBehaviour:
   NetworkedBehaviours:
   - {fileID: 4603747828492414488}
   - {fileID: 4603747830046722518}
+  - {fileID: 4603747830046722517}
   - {fileID: 4603747830046722516}
   - {fileID: 4603747830046722506}
   - {fileID: 4603747830046722505}
@@ -307,14 +308,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff79d9a7c0c2bd24bbc25d6c043daf27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mp: 0
-  maxHP: 0
-  maxMP: 0
-  atk: 0
-  def: 0
-  cri_percent: 0
-  cri_damage: 0
-  speed: 2
+  _hp: 0
+  _mp: 0
+  _maxHP: 0
+  _maxMP: 0
+  _atk: 0
+  _def: 0
+  _cri_percent: 0
+  _cri_damage: 0
+  _speed: 0
   moveSpeed: 4
   jumpTime: 0.3
   downSpeed: 15
@@ -364,6 +366,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _anim: {fileID: 0}
+  __canUse: 1
 --- !u!114 &4603747830046722504
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -19,11 +19,11 @@ public class WrapBody : NetworkBehaviour
     
     private LayerMask groundLayer;
     
-    [Networked]
-    private Vector2 velocity { get; set; }
     private float dashVelocity = 1.0f;
     private RaycastHit2D _hitGround;
-    
+
+    public bool onGound = false;
+    public bool isJumping = false;
     public int jumpCount { get; private set; } = 0;
     public float groundCheckLine = 1.05f;
     public float jumpHeight = 2.0f;
@@ -59,13 +59,20 @@ public class WrapBody : NetworkBehaviour
         _transform = transform;
         groundLayer = LayerMask.GetMask("Ground");
     }
-    
+
     public bool OnGround()
+    {
+        return onGound;
+    }
+    
+    private bool GroundCheck()
     {
         Debug.DrawRay(_transform.position, Vector3.down * 1.05f, Color.red);
         _hitGround = Physics2D.Raycast(_transform.position, Vector3.down, groundCheckLine
             , groundLayer);
-        if(_hitGround) {
+        if(_hitGround)
+        {
+            isJumping = false;
             return true;
         }
         return false;
@@ -85,16 +92,37 @@ public class WrapBody : NetworkBehaviour
     {
         if (HasStateAuthority)
         {
-            //가속 구현 -> isPressing
-            velocity = directionX * _stat.moveSpeed * _stat.speed * Runner.DeltaTime;
-
-            Debug.Log(velocity);
+            float velocityX = directionX.x * (_stat.moveSpeed * _stat.speed * Runner.DeltaTime);
+            float velocityY = 0f;
+            
+            if (isJumping)
+            {
+                //사실 로직이 말이 안되긴 함... 시간이 갈 수록 속도가 줄어야... 줄기는 하는데... 하...
+                //계산상으로는 에반데 프로그램이라 돌아가는 것 같음. (GroundCheck이랑 틱 이슈)
+                //하... 물리tlqkf새끼야....
+                //그냥 최초 힘... 최초 힘 부여하고 ... 하.. Gravity 로 떨어지는 걸로 계산 수정하자
+                velocityY = (jumpHeight / _stat.jumpTime) * Runner.DeltaTime * 3f;
+            }
+            
             if (isDashing)
             {
-                velocity = beforeDirectionX * _stat.speed * dashVelocity * Runner.DeltaTime;
+                velocityX = beforeDirectionX.x * _stat.speed * dashVelocity * Runner.DeltaTime;
             }
 
-            _transform.position += new Vector3(velocity.x, 0, 0);
+            if (GroundCheck())
+            {
+                Debug.Log("아니 그라운드 들어왔으면 멈추라고 쫌");
+                onGound = true;
+            }
+            else
+            {
+                velocityY -= _stat.gravity * Runner.DeltaTime;
+                onGound = false;
+            }
+            
+            Debug.Log(velocityY);
+
+            _transform.position += new Vector3(velocityX, velocityY, 0);
         }
     }
 
@@ -105,8 +133,7 @@ public class WrapBody : NetworkBehaviour
 
     public void Jump()
     {
-        float vel = ((jumpHeight / _stat.jumpTime) + _rigidbody.gravityScale);
-        _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, vel);
+        isJumping = true;
         jumpCount++;
     }
     
