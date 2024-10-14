@@ -15,7 +15,8 @@ public enum SkillButton
     A,
     S,
     D,
-    C
+    C,
+    Attack,
 }
 
 public struct PlayerNetworkInput : INetworkInput

@@ -64,6 +64,7 @@ public class InputManager : SimulationBehaviour, IBeforeUpdate, INetworkRunnerCa
             skillButtons.Set(SkillButton.S, Input.GetKeyDown(KeyCode.S));
             skillButtons.Set(SkillButton.D, Input.GetKeyDown(KeyCode.D));
             skillButtons.Set(SkillButton.C, Input.GetKeyDown(KeyCode.C));
+            skillButtons.Set(SkillButton.Attack, Input.GetKeyDown(KeyCode.X));
 
         accumulatedInput.MoveButtons = new NetworkButtons(accumulatedInput.MoveButtons.Bits | moveButtons.Bits);
         accumulatedInput.SkillButtons = new NetworkButtons(accumulatedInput.SkillButtons.Bits | skillButtons.Bits);
