@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Actor.Buff;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -18,15 +19,16 @@ namespace Actor.Skill
             _buff = GetComponent<BuffController>();
             _icon = Resources.Load<Sprite>("SkillIcon/ChainFireBall");
             _coolTime = 4f;
-            goList.Add(Resources.Load<GameObject>("TestPrefabs/Fireball"));
         }
         //Activate에서 can use 막기
         public override void Activate()
         {
             if (!_canUse) return;
             base.Activate();
-            StartCoroutine(Chain());
-            _buff.AddBuff(new MaxHPUpBuff(_stat));
+            int id = GetSkillId();
+            projectileList[id] = new List<Projectile>();
+            StartCoroutine(Chain(id));
+            _buff.AddBuff(new StatDurationBuff(_stat.MaxHP, 10, 0.1f), 10f);
         }
         
         IEnumerator Chain()
