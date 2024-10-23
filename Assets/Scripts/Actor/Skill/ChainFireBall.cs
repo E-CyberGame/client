@@ -25,9 +25,7 @@ namespace Actor.Skill
         {
             if (!_canUse) return;
             base.Activate();
-            int id = GetSkillId();
-            projectileList[id] = new List<Projectile>();
-            StartCoroutine(Chain(id));
+            StartCoroutine(Chain());
             _buff.AddBuff(new StatDurationBuff(_stat.MaxHP, 10, 0.1f), 10f);
         }
         
