@@ -33,6 +33,8 @@ public class WrapBody : NetworkBehaviour
     
     #region CurrentState
     public bool onGound = true;
+    
+    [SerializeField]
     public int jumpCount { get; private set; } = 0;
     public bool isJumping = false;
     public bool isPressing = false;
@@ -95,7 +97,8 @@ public class WrapBody : NetworkBehaviour
     {
         if (HasStateAuthority)
         {
-            _velocity.x = directionX.x * (_stat.moveSpeed * _stat.speed * Runner.DeltaTime);
+            if(!isDashing)
+                _velocity.x = directionX.x * (_stat.moveSpeed * Runner.DeltaTime);
 
             if (GroundCheck())
             {
@@ -113,8 +116,10 @@ public class WrapBody : NetworkBehaviour
                 _acceleration.y -= 9.8f * Runner.DeltaTime;
                 onGound = false;
             }
-
+            
             _velocity += _acceleration * Runner.DeltaTime;
+            if (isDashing) _velocity.y = 0;
+
             _transform.position += _velocity;
 
             CheckFalling();
@@ -146,7 +151,7 @@ public class WrapBody : NetworkBehaviour
     {
         isJumping = true;
         jumpCount++;
-        _velocity.y = 0;
+        _velocity.y = 0.1f;
         _acceleration.y = 0.8f;
     }
     
@@ -182,7 +187,7 @@ public class WrapBody : NetworkBehaviour
     {
         GravityOFF();
         isDashing = true;
-        dashVelocity = dashLength / _stat.dashTime;
+        _acceleration.x = currentDirectionX.x * (dashLength / _stat.dashTime);
     }
 
     public float GetDashTime()
@@ -194,6 +199,6 @@ public class WrapBody : NetworkBehaviour
     {
         GravityOn();
         isDashing = false;
-        dashVelocity = 1f;
+        _acceleration.x = 0;
     }
 }

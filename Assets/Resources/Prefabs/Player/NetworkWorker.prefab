@@ -185,7 +185,8 @@ MonoBehaviour:
   _cri_percent: 0
   _cri_damage: 0
   _speed: 0
-  moveSpeed: 4
+  _coolTimePercent: 0
+  moveSpeed: 10
   jumpTime: 0.3
   downSpeed: 15
   dashSpeedRatio: 1.7
@@ -204,11 +205,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5318f6652b8a79749ad973dacdd63b4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onGound: 0
-  isJumping: 0
   groundCheckLine: 0.35
   jumpHeight: 3
-  dashLength: 5
+  dashLength: 3
+  _velocity: {x: 0, y: 0, z: 0}
+  _acceleration: {x: 0, y: 0, z: 0}
+  onGound: 0
+  isJumping: 0
   isPressing: 0
   _directionX: {x: 0, y: 0}
   beforeDirectionX: {x: 0, y: 0}
