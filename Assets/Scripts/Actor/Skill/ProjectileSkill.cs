@@ -12,13 +12,12 @@ namespace Actor.Skill
     //Goal : Projectile을 만들어서 넣으면 스킬이 되도록!
     public class ProjectileSkill : ISkill
     {
-        private int skillId = 0;
         protected WrapBody _body;
         protected Transform _player; //스킬을 실행시킨 플레이어
         protected ActorController _actorController;
 
         //생성되지 않은 에셋(Resources)으로의 발사체
-        public List<GameObject> goList { get; protected set; } = new List<GameObject>(5);
+        public List<GameObject> projectileList { get; protected set; } = new List<GameObject>(5);
         //생성된 발사체
         //protected List<Projectile>[] projectileList = new List<Projectile>[100];
 
@@ -28,13 +27,6 @@ namespace Actor.Skill
             _body = GetComponent<WrapBody>();
             _player = GetComponent<Transform>();
             _actorController = GetComponent<ActorController>();
-        }
-
-        //추후 리팩토링용
-        protected int GetSkillId()
-        {
-            skillId++;
-            return skillId;
         }
 
         public override void Activate()
@@ -47,7 +39,7 @@ namespace Actor.Skill
         protected Projectile Generate(int index)
         {
             if (!HasStateAuthority) return null;
-            NetworkObject networkObject = Runner.Spawn(goList[index].GetComponent<NetworkObject>(), _player.position, Quaternion.identity, Runner.LocalPlayer);
+            NetworkObject networkObject = Runner.Spawn(projectileList[index].GetComponent<NetworkObject>(), _player.position, Quaternion.identity, Runner.LocalPlayer);
             return networkObject.GetComponent<Projectile>();
         }
     }

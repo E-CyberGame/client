@@ -19,18 +19,24 @@ public class WrapBody : NetworkBehaviour
     
     private LayerMask groundLayer;
     
-    [Networked]
-    private Vector2 velocity { get; set; }
     private float dashVelocity = 1.0f;
     private RaycastHit2D _hitGround;
-    
-    public int jumpCount { get; private set; } = 0;
-    public float groundCheckLine = 1.05f;
+
+    public float groundCheckLine = 1f;
     public float jumpHeight = 2.0f;
     public float dashLength = 3.0f;
-    
-    #region CurrentState(is ~ing)
 
+    [SerializeField]
+    private Vector3 _velocity = new Vector3(0f, 0f, 0f);
+    [SerializeField]
+    private Vector3 _acceleration = new Vector3(0f, 0f, 0f);
+    
+    #region CurrentState
+    public bool onGound = true;
+    
+    [SerializeField]
+    public int jumpCount { get; private set; } = 0;
+    public bool isJumping = false;
     public bool isPressing = false;
     private bool isDashing = false;
     
@@ -59,13 +65,19 @@ public class WrapBody : NetworkBehaviour
         _transform = transform;
         groundLayer = LayerMask.GetMask("Ground");
     }
-    
+
     public bool OnGround()
     {
-        Debug.DrawRay(_transform.position, Vector3.down * 1.05f, Color.red);
+        return onGound;
+    }
+    
+    private bool GroundCheck()
+    {
+        Debug.DrawRay(_transform.position, Vector3.down * groundCheckLine, Color.red);
         _hitGround = Physics2D.Raycast(_transform.position, Vector3.down, groundCheckLine
             , groundLayer);
-        if(_hitGround) {
+        if(_hitGround)
+        {
             return true;
         }
         return false;
@@ -85,17 +97,49 @@ public class WrapBody : NetworkBehaviour
     {
         if (HasStateAuthority)
         {
-            //가속 구현 -> isPressing
-            velocity = directionX * _stat.moveSpeed * _stat.speed * Runner.DeltaTime;
+            if(!isDashing)
+                _velocity.x = directionX.x * (_stat.moveSpeed * Runner.DeltaTime);
 
-            Debug.Log(velocity);
-            if (isDashing)
+            if (GroundCheck())
             {
-                velocity = beforeDirectionX * _stat.speed * dashVelocity * Runner.DeltaTime;
+                if (!onGound)
+                {
+                    _acceleration.y = 0f;
+                    isJumping = false;
+                }
+                if(!isJumping)
+                    _velocity.y = 0f;
+                onGound = true;
             }
+            else
+            {
+                _acceleration.y -= 9.8f * Runner.DeltaTime;
+                onGound = false;
+            }
+            
+            _velocity += _acceleration * Runner.DeltaTime;
+            if (isDashing) _velocity.y = 0;
 
-            _transform.position += new Vector3(velocity.x, 0, 0);
+            _transform.position += _velocity;
+
+            CheckFalling();
         }
+    }
+
+    private void CheckFalling()
+    {
+        if (_velocity.y <= -3f)
+        {
+            transform.position = new Vector3(0, 0, 0);
+            _velocity.y = 0;
+            _acceleration.y = 0;
+        }
+    }
+
+    public void StopPlayer()
+    {
+        _velocity = Vector3.zero;
+        _acceleration = Vector3.zero;
     }
 
     public void ResetJumpCount()
@@ -105,14 +149,16 @@ public class WrapBody : NetworkBehaviour
 
     public void Jump()
     {
-        float vel = ((jumpHeight / _stat.jumpTime) + _rigidbody.gravityScale);
-        _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, vel);
+        isJumping = true;
         jumpCount++;
+        _velocity.y = 0.1f;
+        _acceleration.y = 0.8f;
     }
     
     public void Down()
     {
-        _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _stat.downSpeed * -1);
+        _velocity.y -= 0.5f;
+        //_rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _stat.downSpeed * -1);
     }
 
     public void StartHitted()
@@ -141,7 +187,7 @@ public class WrapBody : NetworkBehaviour
     {
         GravityOFF();
         isDashing = true;
-        dashVelocity = dashLength / _stat.dashTime;
+        _acceleration.x = currentDirectionX.x * (dashLength / _stat.dashTime);
     }
 
     public float GetDashTime()
@@ -153,6 +199,6 @@ public class WrapBody : NetworkBehaviour
     {
         GravityOn();
         isDashing = false;
-        dashVelocity = 1f;
+        _acceleration.x = 0;
     }
 }

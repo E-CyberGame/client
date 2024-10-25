@@ -29,8 +29,6 @@ public class OnAirState : BaseState
 
     public override void Move(Vector2 directionX)
     {
-        Debug.Log(directionX + "OnAir");
-
         _body.Move(directionX);
     }
 

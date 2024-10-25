@@ -59,6 +59,7 @@ public class ActorStat : NetworkBehaviour
     public float downSpeed = 15f;
     public float dashSpeedRatio = 1.7f;
     public float dashTime = 0.3f;
+    public float gravity = 1f;
     public int MaxJumpCount = 2;
 
     private void InitStat()
