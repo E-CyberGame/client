@@ -9,10 +9,14 @@ using UnityEngine.SceneManagement;
 
 public class UI_MainRoom : UI_Popup
 {
+    private string _name = "Test-Player", _level = "10", _crystal = "987654321", _gold = "123456789";
+
+    [SerializeField] private TextMeshProUGUI _playername, _playerlevel, _playercrystal, _playergold; 
+
     enum Buttons
     {
-        RaidButton,
-        PVPButton,
+        SoloButton,
+        MultiButton,
         CharacterButton,
         SpecialRaidButton,
         SettingButton
@@ -28,23 +32,28 @@ public class UI_MainRoom : UI_Popup
         base.Init();
         Bind<Button>(typeof(Buttons));
 
-        GetButton((int)Buttons.RaidButton).gameObject.BindUIEvent(RaidButtonClicked);
-        GetButton((int)Buttons.PVPButton).gameObject.BindUIEvent(PVPButtonClicked);
+        GetButton((int)Buttons.SoloButton).gameObject.BindUIEvent(SoloButtonClicked);
+        GetButton((int)Buttons.MultiButton).gameObject.BindUIEvent(MultiButtonClicked);
         //GetButton((int)Buttons.CharacterButton).gameObject.BindUIEvent(CharacterButtonClicked);
         //GetButton((int)Buttons.SpecialRaidButton).gameObject.BindUIEvent(SpecialRaidButtonClicked);
         //GetButton((int)Buttons.SettingButton).gameObject.BindUIEvent(SpecialRaidButtonClicked);
 
+        _playername.text = _name;
+        _playerlevel.text = _level;
+        _playercrystal.text = _crystal;
+        _playergold.text = _gold;
+
     }
-    public void RaidButtonClicked(PointerEventData eventData)
+    public void SoloButtonClicked(PointerEventData eventData)
     {
         //나중에 변경
-        Debug.Log("RaidButton Clicked");
+        Debug.Log("SoloButton Clicked");
         SceneManager.LoadScene("Raid");
     }
 
-    public void PVPButtonClicked(PointerEventData eventData)
+    public void MultiButtonClicked(PointerEventData eventData)
     {
-        Debug.Log("PVPButton Clicked");
+        Debug.Log("MultiButton Clicked");
         SceneManager.LoadScene("MainMenu");
     }
 
