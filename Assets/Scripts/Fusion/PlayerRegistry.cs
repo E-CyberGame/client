@@ -6,6 +6,8 @@ using System.Linq;
 using Helpers.Linq;
 using Fusion.Sockets;
 using System;
+using static GameState;
+using UnityEngine.UI;
 
 public class PlayerRegistry : NetworkBehaviour, INetworkRunnerCallbacks
 {
@@ -20,7 +22,7 @@ public class PlayerRegistry : NetworkBehaviour, INetworkRunnerCallbacks
     public static IEnumerable<PlayerObject> Players => Instance?.Object?.IsValid == true ? Instance.ObjectByRef.Where(kvp => kvp.Value).Select(kvp => kvp.Value) : Enumerable.Empty<PlayerObject>();
 
     [Networked, Capacity(CAPACITY)]
-    NetworkDictionary<PlayerRef, PlayerObject> ObjectByRef { get; }
+    public NetworkDictionary<PlayerRef, PlayerObject> ObjectByRef { get; }
 
     void Awake()
     {

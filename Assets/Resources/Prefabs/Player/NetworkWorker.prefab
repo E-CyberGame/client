@@ -377,6 +377,7 @@ MonoBehaviour:
   _Controller: {fileID: 0}
   _Nickname: 
   _Color: {r: 0, g: 0, b: 0, a: 0}
+  IsReady: 0
   _Character: 0
   _TeamNumber: 0
   _IsLoaded: 0

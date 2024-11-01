@@ -10,6 +10,7 @@ public class CharacterSlot : NetworkBehaviour
 {
     [SerializeField] private Image characterImage;
     [SerializeField] private TextMeshProUGUI nickName;
+    [SerializeField] private GameObject ready;
 
     PlayerObject _player = null;
     PlayerObject Player
@@ -23,7 +24,12 @@ public class CharacterSlot : NetworkBehaviour
 
     public override void Spawned()
     {
-        characterImage.sprite = Database.CharacterData.GetData(Player.Character).CardImage;
-        nickName.name = Player.name;
+        // characterImage.sprite = Database.CharacterData.GetData(Player.Character).CardImage;
+        // nickName.name = Player.name;
+    }
+
+    public void SetReady(bool areReady)
+    {
+        ready.SetActive(areReady);
     }
 }

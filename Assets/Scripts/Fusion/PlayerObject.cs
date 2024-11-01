@@ -33,6 +33,7 @@ public class PlayerObject : NetworkBehaviour
     public string Nickname { get; set; }
     [Networked, OnChangedRender(nameof(StatChanged))]
     public Color Color { get; set; }
+    public bool IsReady;
 
     [Networked] public CharacterType Character { get; set; }
 
@@ -80,6 +81,7 @@ public class PlayerObject : NetworkBehaviour
         if (Object.HasInputAuthority)
         {
             Local = this;
+            IsReady = false;
             //Rpc_SetNickname(!string.IsNullOrWhiteSpace(UserData.Nickname) ? UserData.Nickname : $"Golfer{Random.Range(100, 1000)}");
         }
 
