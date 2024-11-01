@@ -104,7 +104,6 @@ public class PVPMatchingPresenter : NetworkBehaviour, IPlayerJoined, IPlayerLeft
         
         RoomManager.State.Server_SetState(GameState.EGameState.Loading);
         Runner.LoadScene(RoomManager.Instance.MapType.ToString());
-        LoadingScene.SetGameScene("GameScene");
     }
 
     [Rpc(RpcSources.All, RpcTargets.All)]
