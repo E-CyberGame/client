@@ -16,6 +16,9 @@ public class Login : MonoBehaviour
     [SerializeField]
     GameObject _errorScreen;
 
+    private string id_admin = "admin";
+    private string ps_admin = "admin";
+
     public void TryLogin()
     {
         if (_id.text == "" || _id.text == null)
@@ -28,13 +31,13 @@ public class Login : MonoBehaviour
             _errortext.text = "Login Error!\n Need Password";
             _errorScreen.SetActive(true); return;
         }
-        else if (false)
+        else if (_id.text != id_admin)
         {
             // 아이디가 DB에 없을 시
             _errortext.text = "Login Error!\n Invalid ID";
             _errorScreen.SetActive(true); return;
         }
-        else if (false)
+        else if (_password.text != ps_admin)
         {
             // 비밀번호가 다를 시
             _errortext.text = "Login Error!\n Invalid Password";

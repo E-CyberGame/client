@@ -114,6 +114,7 @@ public class PVPMatchingPresenter : NetworkBehaviour, IPlayerJoined, IPlayerLeft
         panels.TryGetValue(caller.Ref, out GameObject playerpanel);
         playerpanel.GetComponent<CharacterSlot>().SetReady(caller.IsReady);
     }
+
     public void CallReady()
     {
         PlayerObject _local = PlayerObject.Local;
