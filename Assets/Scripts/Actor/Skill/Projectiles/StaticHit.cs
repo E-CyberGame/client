@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Actor.Skill
 {
-    public class Burn : Projectile
+    public class StaticHit : Projectile
     {
         public override void Fire()
         {
