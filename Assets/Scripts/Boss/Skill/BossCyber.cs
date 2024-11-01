@@ -36,7 +36,7 @@ namespace Boss.Skill
         private int skill_num = 4;
         private int vlaynum = 2;
         private int hlaynum = 2;
-        private int fallnum = 10;
+        private bool is_Cloud = false;
 
 
         public void Awake()
@@ -67,8 +67,7 @@ namespace Boss.Skill
             switch (r) { 
                 case 0: StartCoroutine(LaySkill()); break;
                 case 1: StartCoroutine(ExplosionSkill()); break;
-                case 2: StartCoroutine(MirrorSkill()); break;
-                case 3: StartCoroutine(CloudSkill()); break;
+                case 2: StartCoroutine(CloudSkill()); break;
                 default: CyberSkill(); break; 
             }
 
@@ -87,16 +86,15 @@ namespace Boss.Skill
 
         IEnumerator CloudSkill()
         {
+            if (is_Cloud)
+            {
+                CyberSkill();
+                yield break;
+            }
+
             Debug.Log("구름 소환");
             cloud.CloudSpawn();
-            yield return new WaitForSeconds(3.0f);
-            CyberSkill();
-        }
-
-        IEnumerator MirrorSkill()
-        {
-            Debug.Log("거울");
-            mirror.Activate();
+            is_Cloud = true;
             yield return new WaitForSeconds(3.0f);
             CyberSkill();
         }
@@ -112,6 +110,11 @@ namespace Boss.Skill
         public Vector3 GetTransform()
         {
             return transform.position;
+        }
+
+        public void CloudReady()
+        {
+            is_Cloud = false;
         }
     }
 }

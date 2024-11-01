@@ -13,6 +13,7 @@ public class CloudMove : MonoBehaviour
         Vector3 target = BossCyber.Singleton.GetTransform() + new Vector3 (0, -1.0f,0);
         if(current == target)
         {
+            BossCyber.Singleton.CloudReady();
             Destroy (gameObject);
         }
         transform.position = Vector3.MoveTowards(current, target, speed);
