@@ -21,6 +21,10 @@ namespace UI.Scene
                 (f => _uiSkillSlot.StartCoolTimeAnimation((int)SkillSlot.slot1, f));
             _skill.skillSlotDict[SkillSlot.slot1].CoolTimeEnd +=
                 () => _uiSkillSlot.EndCoolTimeAnimation((int)SkillSlot.slot1);
+            _skill.skillSlotDict[SkillSlot.slot2].SkillStart +=
+                (f => _uiSkillSlot.StartCoolTimeAnimation((int)SkillSlot.slot2, f));
+            _skill.skillSlotDict[SkillSlot.slot2].CoolTimeEnd +=
+                () => _uiSkillSlot.EndCoolTimeAnimation((int)SkillSlot.slot2);
         }
 
         public void TakeDamage(int damage)
@@ -30,8 +34,8 @@ namespace UI.Scene
 
         public void UpdateSkillSlot()
         {
-            Debug.Log(_skill.skillSlotDict[SkillSlot.slot1]._icon);
             _uiSkillSlot.SetSkillImage(SkillSlot.slot1, _skill.skillSlotDict[SkillSlot.slot1]._icon);
+            _uiSkillSlot.SetSkillImage(SkillSlot.slot2, _skill.skillSlotDict[SkillSlot.slot2]._icon);
         }
     }
 }

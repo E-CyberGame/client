@@ -44,7 +44,7 @@ namespace Actor.Skill
             {
                 isFiring = false;
                 NetworkObject networkObject = gameObject.GetComponent<NetworkObject>();
-                _animator.SetTrigger("isEnded");
+                _animator.SetTrigger("isHitted");
             });
         }
     }
