@@ -9,6 +9,7 @@ namespace UI.Scene
         enum CoolAnimators
         {
             cool1,
+            cool2,
         }
         private Animator[] cool = new Animator[4];
         private void Awake()
@@ -23,6 +24,7 @@ namespace UI.Scene
             Bind<Animator>(typeof(CoolAnimators));
 
             cool[0] = Get<Animator>((int)CoolAnimators.cool1);
+            cool[1] = Get<Animator>((int)CoolAnimators.cool2);
         }
 
         public void StartCoolTimeAnimation(int slot, float coolTime)
@@ -39,11 +41,6 @@ namespace UI.Scene
         public void SetSkillImage(SkillSlot slot, Sprite image)
         {
             GetImage((int)slot).sprite = image;
-        }
-
-        public Animator GetAnimator(SkillSlot slot)
-        {
-            return cool[(int)slot];
         }
     }
 }

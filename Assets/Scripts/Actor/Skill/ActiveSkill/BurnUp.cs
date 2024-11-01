@@ -7,11 +7,19 @@ namespace Actor.Skill
     public class BurnUp : ProjectileSkill
     {
         [SerializeField] private List<Vector3> explodePosition;
+
+        public new void Awake()
+        {
+            base.Awake();
+            _coolTime = 2f;
+            _icon = Resources.Load<Sprite>("SkillIcon/BurnUp");
+            projectileList.Add(Resources.Load<GameObject>("TestPrefabs/Burn"));
+        }
+
         public override void Activate()
         {
             if (!_canUse) return;
             base.Activate();
-            projectileList.Add(Resources.Load<GameObject>("TestPrefabs/Burn"));
             Explode();
         }
 
