@@ -20,6 +20,9 @@ public class PVPMatchingPresenter : NetworkBehaviour, IPlayerJoined, IPlayerLeft
 
     private Dictionary<PlayerRef, GameObject> panels = new Dictionary<PlayerRef, GameObject>();
 
+    //임시. Ready하면 바로 고하게 설정해뒀는데 이렇게 했더니 씬이 여러번 불려와서 에러남.
+    private bool GameIsStarted = false;
+    
     public override void Spawned()
     {
         Debug.Log("MatchingPresenter");
@@ -66,8 +69,9 @@ public class PVPMatchingPresenter : NetworkBehaviour, IPlayerJoined, IPlayerLeft
                 break;
             }
         }
-        if (areAllReady)
+        if (areAllReady && !GameIsStarted)
         {
+            GameIsStarted = true;
             GameStart();
         }
     }
@@ -101,6 +105,8 @@ public class PVPMatchingPresenter : NetworkBehaviour, IPlayerJoined, IPlayerLeft
             po.SetLayer(LayerMask.NameToLayer("BlueTeam"));
             po.TeamNumber = i;
         }
+
+        Debug.Log("설마이게여러번실행됨? 그럴리가");
         
         RoomManager.State.Server_SetState(GameState.EGameState.Loading);
         Runner.LoadScene(RoomManager.Instance.MapType.ToString());
