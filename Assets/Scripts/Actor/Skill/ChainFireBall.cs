@@ -19,6 +19,7 @@ namespace Actor.Skill
             _buff = GetComponent<BuffController>();
             _icon = Resources.Load<Sprite>("SkillIcon/ChainFireBall");
             _coolTime = 4f;
+            projectileList.Add(Resources.Load<GameObject>("TestPrefabs/Fireball"));
         }
         //Activate에서 can use 막기
         public override void Activate()

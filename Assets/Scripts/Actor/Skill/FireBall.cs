@@ -10,22 +10,13 @@ namespace Actor.Skill
     {
         private NetworkTransform _transform;
         private bool isFiring = false;
-        public void OnTriggerEnter2D(Collider2D other)
-        {
-            //추후 때려야 할 애들 레이어로...
-            if (other.gameObject.layer != _playerLayer)
-            {
-                Hit(other.GetComponent<IHitted>());
-            }
-        }
 
-        public void Hit(IHitted target)
+        public override void Hit(IHitted target)
         {
             if (!HasStateAuthority) return;
             if (target == null) return;
             target.Hitted(_stat.atk);
-            //Pierce();
-            Runner.Despawn(gameObject.GetComponent<NetworkObject>());
+            _animator.SetTrigger("isHitted");
         }
 
         public void Awake()
@@ -53,9 +44,7 @@ namespace Actor.Skill
             {
                 isFiring = false;
                 NetworkObject networkObject = gameObject.GetComponent<NetworkObject>();
-                if (networkObject is not null && Runner is not null)
-                    Runner.Despawn(networkObject);
-                else Debug.Log("삭제가 이루어지지 않음");
+                _animator.SetTrigger("isHitted");
             });
         }
     }
