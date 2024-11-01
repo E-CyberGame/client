@@ -8,12 +8,11 @@ namespace Actor.Skill
     //현재 문제 : objectPath를 발사체 자체가 갖고 있음 안됨...
     public abstract class Projectile : NetworkBehaviour
     {
+        protected Animator _animator;
         //발사한 플레이어의 LayerMask
         protected LayerMask _playerLayer;
         //protected WrapBody _body;
         protected ActorStat _stat;
-        //관통 횟수
-        protected int _piercingCount = 0;
         //발사 거리
         protected Vector3 _distance;
         //소멸 딜레이
@@ -25,13 +24,19 @@ namespace Actor.Skill
         //생성 시작 포인트
         protected Vector3 _startPoint;
 
-        public void Init(ActorStat stat, Vector2 startDirection, Vector3 startPlayerPosition, Vector3 startPoint, float destroyDelay)
+        public void Init(ActorStat stat, Vector3 startPlayerPosition, Vector3 startPoint)
         {
             _stat = stat;
-            Debug.Log("초기화... 되었나요?;;");
-            _startDirection = startDirection;
             _startPlayerPosition = startPlayerPosition;
             _startPoint = startPoint;
+            _animator = GetComponent<Animator>();
+            MoveStartPoint();
+        }
+
+        public void Init(ActorStat stat, Vector2 startDirection, Vector3 startPlayerPosition, Vector3 startPoint, float destroyDelay)
+        {
+            Init(stat, startPlayerPosition, startPoint);
+            _startDirection = startDirection;
             _destroyDelay = destroyDelay;
             _playerLayer = _stat.gameObject.layer;
             MoveStartPoint();
@@ -46,25 +51,27 @@ namespace Actor.Skill
 
         public abstract void Fire();
 
+        public abstract void Hit(IHitted target);
+        
+        public void OnTriggerEnter2D(Collider2D other)
+        {
+            //추후 때려야 할 애들 레이어로...
+            if (other.gameObject.layer != _playerLayer)
+            {
+                Hit(other.GetComponent<IHitted>());
+            }
+        }
+
         //로컬(Player 좌표 기준으로 이동)
         //월드 좌표는 쓰일 일 없을 것 같아서 안 만들어둠. 필요 시 생성.
-        protected void MoveStartPoint()
+        private void MoveStartPoint()
         {
             transform.position = _startPlayerPosition + _startPoint;
         }
         
-        //관통처리
-        protected void Pierce()
+        public void DestroyObject()
         {
-            if (_piercingCount > 0)
-            {
-                //관통은 int 횟수로 해야겠다 ㅋㅋ
-                _piercingCount--;
-            }
-            else
-            {
-                Managers.Resources.Destroy(gameObject, 1f);
-            }
+            Runner.Despawn(gameObject.GetComponent<NetworkObject>());
         }
     }
 }

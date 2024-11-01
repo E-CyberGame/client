@@ -10,13 +10,13 @@ GameObject:
   m_Component:
   - component: {fileID: 6625043293988948765}
   - component: {fileID: 8834786090042133756}
-  - component: {fileID: 4585860256532580369}
   - component: {fileID: -881912005553137825}
   - component: {fileID: 1207498294892890696}
   - component: {fileID: 760781394568562051}
   - component: {fileID: 8130127987347589661}
+  - component: {fileID: 3849532006664858029}
   m_Layer: 0
-  m_Name: Fireball
+  m_Name: Burn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -89,18 +89,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4585860256532580369
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1740546997033046140}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c905985528444152b0dc33caf192a33f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &-881912005553137825
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -139,13 +127,13 @@ MonoBehaviour:
   m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SortKey: 1889298554
+  SortKey: 3760900644
   ObjectInterest: 1
   Flags: 262145
   NestedObjects: []
   NetworkedBehaviours:
-  - {fileID: 4585860256532580369}
   - {fileID: 760781394568562051}
+  - {fileID: 3849532006664858029}
 --- !u!114 &760781394568562051
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,7 +160,7 @@ Animator:
   m_GameObject: {fileID: 1740546997033046140}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 6b07e8eab535f9342b21297fc1ab2213, type: 2}
+  m_Controller: {fileID: 9100000, guid: f44754f00de3fda40892cda7671596e6, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -183,3 +171,16 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3849532006664858029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1740546997033046140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a14a87bc38c144148536b302ac498b14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 0}
