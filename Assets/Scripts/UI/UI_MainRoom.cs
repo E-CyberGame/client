@@ -48,13 +48,13 @@ public class UI_MainRoom : UI_Popup
     {
         //나중에 변경
         Debug.Log("SoloButton Clicked");
-        SceneManager.LoadScene("Raid");
+        SceneManager.LoadScene("Lobby");
     }
 
     public void MultiButtonClicked(PointerEventData eventData)
     {
         Debug.Log("MultiButton Clicked");
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("Lobby");
     }
 
     public void CharacterButtonClicked(PointerEventData eventData)
