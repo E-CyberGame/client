@@ -36,10 +36,13 @@ namespace Data
         public Sprite CardImage;
         //최초 맵 입장 시 플레이어 스폰 위치
         public Dictionary<TeamType, List<Vector3>> PlayerPosition;
+        public GameObject BossPrefab;
+
         public MapData(MapType sceneType, Dictionary<TeamType, List<Vector3>> playerPosition)
         {
             SceneType = sceneType;
             CardImage = Resources.Load<Sprite>("Arts/Map/card_" + sceneType.ToString().ToLower());
+            BossPrefab = Resources.Load<GameObject>("Prefabs/Boss/Boss_"+sceneType.ToString());
             PlayerPosition = playerPosition;
         }
     }

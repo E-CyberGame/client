@@ -100,6 +100,7 @@ public class GameState : NetworkBehaviour
                 {
                     player.InitPlayerPosition(RoomManager.Instance.MapType);
                 }
+                BossManager.Instance.SetBoss(RoomManager.Instance.MapType);
             }
             
             RoomManager.Instance.BeforeGameStart?.Invoke();
@@ -109,6 +110,10 @@ public class GameState : NetworkBehaviour
         StateMachine[EGameState.Game].onEnter = prev =>
         {
             Debug.Log("Enter Game");
+            if (Runner.IsServer)
+            {
+                BossManager.Instance.GameStart();
+            }
         };
 
         StateMachine[EGameState.Game].onUpdate = () =>

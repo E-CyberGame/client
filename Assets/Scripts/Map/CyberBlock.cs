@@ -1,9 +1,10 @@
+using Fusion;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CyberBlock : MonoBehaviour
+public class CyberBlock : NetworkBehaviour
 {
     [SerializeField]
     public bool fixedBlock;
@@ -12,14 +13,17 @@ public class CyberBlock : MonoBehaviour
     public SpriteRenderer blockColor;
     public BoxCollider2D box;
 
+    [Networked] int randomcolor { get; set; }
+
     // Start is called before the first frame update
     void Start()
     {
         blockColor = GetComponent<SpriteRenderer>();
         box = GetComponent<BoxCollider2D>();
+
         if (!fixedBlock)
         {
-            newBlock();
+            StartCoroutine(StartBlock());
         }
     }
 
@@ -46,15 +50,31 @@ public class CyberBlock : MonoBehaviour
         yield return new WaitForSeconds(4.0f);
         blockColor.enabled = false;
         box.enabled = false;
+        SetRandom();
         yield return new WaitForSeconds(2.0f);
-        newBlock();
+        Rpc_newBlock();
     }
 
-    public void newBlock()
+
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    private void Rpc_newBlock()
     {
-        int t = Random.Range(0, 2);
-        if(t == 0) StartCoroutine(BlueBlock());
-        else if(t == 1) StartCoroutine(GreenBlock());
-        box.enabled = true;
+        if (randomcolor == 0) StartCoroutine(BlueBlock());
+        else if(randomcolor == 1) StartCoroutine(GreenBlock());
+    }
+
+    IEnumerator StartBlock()
+    {
+        yield return new WaitForSeconds(2.0f);
+        SetRandom();
+        Rpc_newBlock();
+    }
+
+    public void SetRandom()
+    {
+        if (HasStateAuthority)
+        {
+            randomcolor = Random.Range(0, 2);
+        }
     }
 }

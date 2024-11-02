@@ -199,6 +199,7 @@ GameObject:
   - component: {fileID: 1085959770}
   - component: {fileID: 3723833571960952168}
   - component: {fileID: 1796871002516251822}
+  - component: {fileID: -8655299244865670646}
   m_Layer: 0
   m_Name: Boss_Cyber
   m_TagString: Untagged
@@ -313,8 +314,6 @@ MonoBehaviour:
   mirror: {fileID: 3723833571960952168}
   explosion: {fileID: 1796871002516251822}
   cloud: {fileID: 0}
-  Boss_Cyber: {fileID: 0}
-  Explosion: {fileID: 0}
 --- !u!114 &3723833571960952168
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -341,3 +340,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explode: {fileID: 5104689669029980138}
+--- !u!114 &-8655299244865670646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7695072403731521023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SortKey: 605485636
+  ObjectInterest: 1
+  Flags: 262145
+  NestedObjects: []
+  NetworkedBehaviours:
+  - {fileID: 1085959770}

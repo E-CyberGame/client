@@ -1,3 +1,4 @@
+using Fusion;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -6,7 +7,7 @@ using UnityEngine;
 
 namespace Boss.Skill
 {
-    public class BossCyber : MonoBehaviour
+    public class BossCyber : NetworkBehaviour
     {
         // 임시 시리얼라이즈 필드
         [SerializeField] LaySource vertical;
@@ -46,6 +47,12 @@ namespace Boss.Skill
 
         public void Start()
         {
+            /*
+            if(Runner.IsServer)
+            {
+                Debug.Log("나는 서버");
+            }
+            */
             SkillStart();
         }
 
