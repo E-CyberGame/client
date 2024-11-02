@@ -226,7 +226,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 2
+  orthographic size: 2.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -4268,7 +4268,7 @@ MonoBehaviour:
   m_Follow: {fileID: 0}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 2
+    OrthographicSize: 2.5
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -6418,7 +6418,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SortKey: 401678769
   ObjectInterest: 1
-  Flags: 1
+  Flags: 262145
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: 1745812899}
@@ -7105,7 +7105,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 407036373728366901, guid: 80ff3e1323ecdce4dbe8149e4f686839, type: 3}
       propertyPath: NetworkedBehaviours.Array.size
-      value: 8
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 407036373728366916, guid: 80ff3e1323ecdce4dbe8149e4f686839, type: 3}
       propertyPath: m_Name
