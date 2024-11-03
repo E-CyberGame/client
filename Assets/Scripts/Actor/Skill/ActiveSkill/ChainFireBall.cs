@@ -38,7 +38,7 @@ namespace Actor.Skill
             { 
                 Projectile ball = Generate(0);
                 if (ball is null) continue;
-                ball.Init(_stat, primaryDirection, primaryPosition, new Vector3(1f, 0.7f, 0f), 1.2f, new Vector3(10f, 0f, 0f));
+                ball.Init(_stat, primaryDirection, primaryPosition, new Vector3(1f, 0.7f, 0f), 1.2f, new Vector3(10f, 0f, 0f), 2f);
                 ball.Fire();
                 yield return new WaitForSeconds(0.7f);
             }

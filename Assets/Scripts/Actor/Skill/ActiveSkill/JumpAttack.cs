@@ -26,7 +26,7 @@ namespace Actor.Skill
             Vector3 primaryPosition = _stat.transform.position;
             _buff.AddBuff(new StatDurationBuff(_stat.Atk, 0, 0.1f), 15f);
             Projectile ball = Generate(0);
-            ball.Init(_stat, primaryPosition, Vector3.zero);
+            ball.Init(_stat, primaryPosition, Vector3.zero, 4f);
         }
     }
 }

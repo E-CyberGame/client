@@ -35,7 +35,7 @@ namespace Actor.Skill
         {
             if (!HasStateAuthority) return;
             if (target == null) return;
-            target.Hitted(-_stat.atk);
+            target.Hitted(-(_stat.atk * 2));
         }
     }
 }

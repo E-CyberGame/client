@@ -31,7 +31,7 @@ namespace Actor.Skill
             { 
                 Projectile ball = Generate(0);
                 if (ball is null) continue;
-                ball.Init(_stat, primaryPosition, explodePosition[i]);
+                ball.Init(_stat, primaryPosition, explodePosition[i], 1.5f);
             }
         }
     }
