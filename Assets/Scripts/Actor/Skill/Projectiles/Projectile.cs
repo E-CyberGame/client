@@ -3,12 +3,9 @@ using UnityEngine;
 
 namespace Actor.Skill
 {
-    using DG.Tweening;
-    //발사체에 붙는 컴포넌트
-    //현재 문제 : objectPath를 발사체 자체가 갖고 있음 안됨...
     public abstract class Projectile : NetworkBehaviour
     {
-        protected Animator _animator;
+        protected NetworkMecanimAnimator _animator;
         //발사한 플레이어의 LayerMask
         protected LayerMask _playerLayer;
         //protected WrapBody _body;
@@ -29,7 +26,8 @@ namespace Actor.Skill
             _stat = stat;
             _startPlayerPosition = startPlayerPosition;
             _startPoint = startPoint;
-            _animator = GetComponent<Animator>();
+            _animator = GetComponent<NetworkMecanimAnimator>();
+            _playerLayer = _stat.gameObject.layer;
             MoveStartPoint();
         }
 
@@ -38,7 +36,6 @@ namespace Actor.Skill
             Init(stat, startPlayerPosition, startPoint);
             _startDirection = startDirection;
             _destroyDelay = destroyDelay;
-            _playerLayer = _stat.gameObject.layer;
             MoveStartPoint();
         }
         
@@ -53,7 +50,7 @@ namespace Actor.Skill
 
         public abstract void Hit(IHitted target);
         
-        public void OnTriggerEnter2D(Collider2D other)
+        public virtual void OnTriggerEnter2D(Collider2D other)
         {
             //추후 때려야 할 애들 레이어로...
             if (other.gameObject.layer != _playerLayer)

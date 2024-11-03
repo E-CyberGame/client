@@ -17,9 +17,9 @@ namespace Actor.Skill
         {
             base.Awake();
             _buff = GetComponent<BuffController>();
-            _icon = Resources.Load<Sprite>("SkillIcon/ChainFireBall");
+            _icon = Resources.Load<Sprite>("Skill/Icons/ChainFireBall");
             _coolTime = 4f;
-            projectileList.Add(Resources.Load<GameObject>("TestPrefabs/Fireball"));
+            projectileList.Add(Resources.Load<GameObject>("Skill/Projectiles/Fireball"));
         }
         //Activate에서 can use 막기
         public override void Activate()

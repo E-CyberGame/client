@@ -54,7 +54,9 @@ public class SkillController : NetworkBehaviour
         skillSlotDict = new Dictionary<SkillSlot, ISkill>()
         {
             { SkillSlot.slot1, gameObject.GetComponent<ChainFireBall>() },
-            { SkillSlot.slot2, gameObject.GetComponent<BurnUp>() }
+            { SkillSlot.slot2, gameObject.GetComponent<BurnUp>() },
+            { SkillSlot.slot3, gameObject.GetComponent<HealSpace>() },
+            { SkillSlot.slot4, gameObject.GetComponent<JumpAttack>() }
         };
     }
 

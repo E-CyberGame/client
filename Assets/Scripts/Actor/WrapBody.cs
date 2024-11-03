@@ -33,6 +33,7 @@ public class WrapBody : NetworkBehaviour
     
     #region CurrentState
     public bool onGound = true;
+    public bool onGravity = true;
     
     [SerializeField]
     public int jumpCount { get; private set; } = 0;
@@ -113,12 +114,15 @@ public class WrapBody : NetworkBehaviour
             }
             else
             {
-                _acceleration.y -= 9.8f * Runner.DeltaTime;
+                if (onGravity) 
+                    _acceleration.y -= 9.8f * Runner.DeltaTime;
                 onGound = false;
             }
             
+            
             _velocity += _acceleration * Runner.DeltaTime;
-            if (isDashing) _velocity.y = 0;
+            if (isDashing || !onGravity) 
+                _velocity.y = 0;
 
             _transform.position += _velocity;
 
@@ -134,12 +138,6 @@ public class WrapBody : NetworkBehaviour
             _velocity.y = 0;
             _acceleration.y = 0;
         }
-    }
-
-    public void StopPlayer()
-    {
-        _velocity = Vector3.zero;
-        _acceleration = Vector3.zero;
     }
 
     public void ResetJumpCount()
@@ -175,12 +173,12 @@ public class WrapBody : NetworkBehaviour
 
     public void GravityOFF()
     {
-        _rigidbody.gravityScale = 0f;
+        onGravity = false;
     }
 
     public void GravityOn()
     {
-        _rigidbody.gravityScale = 3;
+        onGravity = true;
     }
 
     public void DashOn()

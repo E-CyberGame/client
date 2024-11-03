@@ -12,8 +12,8 @@ namespace Actor.Skill
         {
             base.Awake();
             _coolTime = 2f;
-            _icon = Resources.Load<Sprite>("SkillIcon/BurnUp");
-            projectileList.Add(Resources.Load<GameObject>("TestPrefabs/Burn"));
+            _icon = Resources.Load<Sprite>("Skill/Icons/BurnUp");
+            projectileList.Add(Resources.Load<GameObject>("Skill/Projectiles/Burn"));
         }
 
         public override void Activate()

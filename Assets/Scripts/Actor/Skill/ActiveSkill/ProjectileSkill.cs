@@ -32,7 +32,7 @@ namespace Actor.Skill
         public override void Activate()
         {
             StartCoroutine(CoolDown(_coolTime));
-            _actorController._stateMachine.ChangeState(States.OnHitted); //추후 공격모션으로 변경 + 각 스킬에 위임
+            _actorController._stateMachine.ChangeState(States.OnHit); //추후 공격모션으로 변경 + 각 스킬에 위임
         }
 
         //스킬 아이디, 발사할 발사체 아이디(index)

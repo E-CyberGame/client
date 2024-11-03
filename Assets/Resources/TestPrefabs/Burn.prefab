@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 760781394568562051}
   - component: {fileID: 8130127987347589661}
   - component: {fileID: 3849532006664858029}
+  - component: {fileID: 2369604343301001329}
   m_Layer: 0
   m_Name: Burn
   m_TagString: Untagged
@@ -134,6 +135,7 @@ MonoBehaviour:
   NetworkedBehaviours:
   - {fileID: 760781394568562051}
   - {fileID: 3849532006664858029}
+  - {fileID: 2369604343301001329}
 --- !u!114 &760781394568562051
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,4 +185,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a14a87bc38c144148536b302ac498b14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animator: {fileID: 0}
+--- !u!114 &2369604343301001329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1740546997033046140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 506319458, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Animator: {fileID: 8130127987347589661}
+  TotalWords: 0
+  ApplyTiming: 2
+  SyncSettings: 79
+  StateHashes: 0000000022ff2dfda6dcfb12
+  TriggerHashes: 00000000

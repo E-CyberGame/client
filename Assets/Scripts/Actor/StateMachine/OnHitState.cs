@@ -6,7 +6,6 @@ namespace Actor
 {
     public class OnHitState : BaseState
     {
-        
         public OnHitState(WrapBody body, Animator animator, ActorAnimController animController, StateMachine stateMachine)
             : base(body, animator, animController, stateMachine)
         {
@@ -14,12 +13,15 @@ namespace Actor
         }
         public override void EnterState()
         {
+            _body.directionX = Vector2.zero;
+            _body.GravityOFF();
             _anim.ChangeAnimation(ActorAnim.Hit);
             CoroutineHelper.Instance.StartCoroutineHelper(EscapeHit());
         }
 
         public override void ExitState()
         {
+            _body.GravityOn();
         }
         
         IEnumerator EscapeHit()
