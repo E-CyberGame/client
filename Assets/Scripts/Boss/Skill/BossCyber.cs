@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Boss.Skill
 {
-    public class BossCyber : NetworkBehaviour, ISpawned
+    public class BossCyber : NetworkBehaviour, ISpawned, IDespawned
     {
         // 임시 시리얼라이즈 필드
         LaySource vertical;
@@ -60,7 +60,7 @@ namespace Boss.Skill
             }
         }
 
-        private void OnDestroy()
+        public override void Despawned(NetworkRunner runner, bool hasState)
         {
             if (Singleton == this)
                 Singleton = null;
@@ -81,7 +81,6 @@ namespace Boss.Skill
                 case 2: StartCoroutine(CloudSkill()); break;
                 default: CyberSkill(); break; 
             }
-
         }
 
         IEnumerator LaySkill()

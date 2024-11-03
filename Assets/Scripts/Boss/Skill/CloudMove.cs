@@ -8,13 +8,12 @@ using UnityEngine.SocialPlatforms;
 
 public class CloudMove : NetworkBehaviour
 {
-    float speed = 0.002f;
-    NetworkObject cloud;
-    [Networked] Vector3 cloud_position { get; set; }
+    float speed = 0.005f;
+    NetworkObject cloud_net;
 
     public override void Spawned()
     {
-        cloud = GetComponent<NetworkObject>();
+        cloud_net = GetComponent<NetworkObject>();
     }
 
     public override void FixedUpdateNetwork()
@@ -24,10 +23,9 @@ public class CloudMove : NetworkBehaviour
         if(current == target && HasStateAuthority)
         {
             BossCyber.Singleton.CloudReady();
-            Runner.Despawn(cloud);
+            Runner.Despawn(cloud_net);
         }
-        cloud_position = Vector3.MoveTowards(current, target, speed);
-        transform.position = cloud_position;
+        transform.position = Vector3.MoveTowards(current, target, speed);
     }
 
 }

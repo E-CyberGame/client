@@ -1,3 +1,4 @@
+using Fusion;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -6,14 +7,13 @@ using UnityEngine;
 
 namespace Boss.Skill
 {
-    public class BossSubway : MonoBehaviour
+    public class BossSubway : NetworkBehaviour, ISpawned
     {
         // 임시 시리얼라이즈 필드
-        [SerializeField] LaySource vertical;
-        [SerializeField] LaySource horizontal;
-        [SerializeField] FallSource fall;
-        [SerializeField] ExplosionSkill explosion;
-        [SerializeField] BombSource bomb;
+        LaySource vertical;
+        LaySource horizontal;
+        FallSource fall;
+        ExplosionSkill explosion;
 
 
         public static BossSubway Singleton
@@ -32,24 +32,35 @@ namespace Boss.Skill
                 }
             }
         }
+        
         private static BossSubway _subwaysingleton;
-        private int skill_num = 5;
+        private int skill_num = 4;
         private int vlaynum = 5;
         private int hlaynum = 3;
         private int fallnum = 10;
 
 
-        public void Awake()
+        public override void Spawned()
         {
+            Init();
+        }
+
+        private void Init()
+        {
+            explosion = GetComponent<ExplosionSkill>();
+            fall = FindObjectOfType<FallSource>();
+            LaySource[] lays = FindObjectsOfType<LaySource>();
+            horizontal = lays[0];
+            vertical = lays[1];
+
             Singleton = this;
+            if (HasStateAuthority)
+            {
+                SkillStart();
+            }
         }
 
-        public void Start()
-        {
-            SkillStart();
-        }
-
-        private void OnDestroy()
+        public override void Despawned(NetworkRunner runner, bool hasState)
         {
             if (Singleton == this)
                 Singleton = null;
@@ -72,7 +83,6 @@ namespace Boss.Skill
                 case 4: StartCoroutine(VLaySkill()); break;
                 default: break; 
             }
-
         }
 
         IEnumerator HLaySkill()
@@ -108,9 +118,19 @@ namespace Boss.Skill
         IEnumerator ExplosionSkill()
         {
             Debug.Log("폭발");
-            explosion.Activate();
+            Rpc_ActivateExplosion();
             yield return new WaitForSeconds(3.0f);
             SubwaySkill();
+        }
+
+        [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+        private void Rpc_ActivateExplosion()
+        {
+            explosion.Activate();
+        }
+        public Vector3 GetTransform()
+        {
+            return transform.position;
         }
     }
 }
