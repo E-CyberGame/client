@@ -32,4 +32,13 @@ public class BossManager : NetworkBehaviour
         yield return new WaitForSeconds(10.0f);
         Runner.Spawn(BossPrefab);
     }
+
+    public void SpawnBossObj(GameObject spawnObj)
+    {
+
+    }
+    public void DeSpawnBossObj(GameObject despawnObj)
+    {
+
+    }
 }

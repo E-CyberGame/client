@@ -1,4 +1,5 @@
 using Actor.Skill;
+using Fusion;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,12 +9,12 @@ namespace Boss.Skill
 {
     // 광선형 스킬들의 기본형
 
-    public class LaySkill : MonoBehaviour, BSkill, BHit
+    public class LaySkill : NetworkBehaviour, BSkill, BHit
     {
-        //임시 시리얼라이즈 필드
-        [SerializeField] float _distanceX = 20.0f;
-        [SerializeField] float _distanceY = 0.0f;
-        [SerializeField] float _distanceZ = 0.0f;
+        [Networked][SerializeField] float _distanceX { get; set; }
+        [Networked][SerializeField] float _distanceY { get; set; }
+        [Networked][SerializeField] float _distanceZ { get; set; }
+
         [SerializeField] float _pre_width = 0.1f;
         [SerializeField] float _width = 1.0f;
         [SerializeField] Color _pre_color = new Color(1, 0, 0, 0.5f);
@@ -31,6 +32,12 @@ namespace Boss.Skill
         }
 
         public void Activate()
+        {
+            Rpc_StartRay();
+        }
+
+        [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+        private void Rpc_StartRay()
         {
             StartCoroutine(ShootingLay(_lineRenderer));
         }
