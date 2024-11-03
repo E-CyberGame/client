@@ -94,12 +94,15 @@ namespace Actor
             _stateMachine.ChangeState(States.NoControl);
         }
 
-        public void Hitted(float damage, IBuff buff = null)
+        public void Hitted(float damage)
         {
             _stat.hp -= damage;
-            if(buff is not null)
-                _buff.AddBuff(buff, 5f);
             _stateMachine.ChangeState(States.OnHitted);
+        }
+
+        public void Hitted(IBuff buff, float time)
+        {
+            _buff?.AddBuff(buff, time);
         }
     }
 
