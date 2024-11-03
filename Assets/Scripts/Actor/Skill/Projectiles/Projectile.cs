@@ -8,7 +8,7 @@ namespace Actor.Skill
     //현재 문제 : objectPath를 발사체 자체가 갖고 있음 안됨...
     public abstract class Projectile : NetworkBehaviour
     {
-        protected Animator _animator;
+        protected NetworkMecanimAnimator _animator;
         //발사한 플레이어의 LayerMask
         protected LayerMask _playerLayer;
         //protected WrapBody _body;
@@ -29,7 +29,7 @@ namespace Actor.Skill
             _stat = stat;
             _startPlayerPosition = startPlayerPosition;
             _startPoint = startPoint;
-            _animator = GetComponent<Animator>();
+            _animator = GetComponent<NetworkMecanimAnimator>();
             MoveStartPoint();
         }
 

@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1207498294892890696}
   - component: {fileID: 760781394568562051}
   - component: {fileID: 8130127987347589661}
+  - component: {fileID: 230950088615122865}
   m_Layer: 0
   m_Name: Fireball
   m_TagString: Untagged
@@ -146,6 +147,7 @@ MonoBehaviour:
   NetworkedBehaviours:
   - {fileID: 4585860256532580369}
   - {fileID: 760781394568562051}
+  - {fileID: 230950088615122865}
 --- !u!114 &760781394568562051
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,3 +185,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &230950088615122865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1740546997033046140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 506319458, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Animator: {fileID: 8130127987347589661}
+  TotalWords: 1
+  ApplyTiming: 2
+  SyncSettings: 79
+  StateHashes: 000000000e9e23138abdf5fc8647f1840264276b
+  TriggerHashes: 0000000096fedfe571a79558
