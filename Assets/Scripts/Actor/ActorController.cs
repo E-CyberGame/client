@@ -10,6 +10,7 @@ namespace Actor
 {
     public class ActorController : NetworkBehaviour, IHitted
     {
+        private BuffController _buff;
         private ActorStat _stat;
         public StateMachine _stateMachine { get; private set; }
         private SkillController _skill;
@@ -25,6 +26,7 @@ namespace Actor
 
         void Awake()
         {
+            _buff = GetComponent<BuffController>();
             _stat = GetComponent<ActorStat>();
             _skill = GetComponent<SkillController>();
             _stateMachine = new StateMachine(GetComponent<WrapBody>(), GetComponent<Animator>(), GetComponent<ActorAnimController>());
@@ -55,6 +57,8 @@ namespace Actor
                     _skill.UseSkill(SkillSlot.slot1);
                 if (input.SkillButtons.WasPressed(PreviousSkillButtons, SkillButton.S))
                     _skill.UseSkill(SkillSlot.slot2);
+                if (input.SkillButtons.WasPressed(PreviousSkillButtons, SkillButton.D))
+                    _skill.UseSkill(SkillSlot.slot3);
                 if (input.SkillButtons.WasPressed(PreviousSkillButtons, SkillButton.Attack))
                     _skill.PlainAttack();
                 
@@ -90,9 +94,9 @@ namespace Actor
 
         public void Hitted(float damage, IBuff buff = null)
         {
-            Debug.Log($"{damage} 맞아부럿성...");
             _stat.hp -= damage;
-            Debug.Log("값이우찌되오" + _stat.hp);
+            if(buff is not null)
+                _buff.AddBuff(buff, 5f);
             _stateMachine.ChangeState(States.OnHitted);
         }
     }

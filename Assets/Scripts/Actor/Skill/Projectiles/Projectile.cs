@@ -50,7 +50,7 @@ namespace Actor.Skill
 
         public abstract void Hit(IHitted target);
         
-        public void OnTriggerEnter2D(Collider2D other)
+        public virtual void OnTriggerEnter2D(Collider2D other)
         {
             //추후 때려야 할 애들 레이어로...
             if (other.gameObject.layer != _playerLayer)
