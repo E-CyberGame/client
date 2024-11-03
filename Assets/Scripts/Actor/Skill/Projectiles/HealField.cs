@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Actor.Buff;
 using UnityEngine;
 
@@ -6,6 +7,7 @@ namespace Actor.Skill
 {
     public class HealField : Projectile
     {
+        private List<string> _receivedPlayer = new List<string>();
         public override void Fire()
         {
             
@@ -15,7 +17,17 @@ namespace Actor.Skill
         {
             if (other.gameObject.layer == _playerLayer)
             {
+                string playerName = other.gameObject.name;
+                foreach(var player in _receivedPlayer)
+                {
+                    if (playerName == player)
+                    {
+                        return;
+                    }
+                }
                 Hit(other.GetComponent<IHitted>());
+
+                _receivedPlayer.Add(other.gameObject.name);
             }
         }
         
