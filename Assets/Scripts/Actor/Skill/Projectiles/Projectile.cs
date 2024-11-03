@@ -3,9 +3,11 @@ using UnityEngine;
 
 namespace Actor.Skill
 {
-    public abstract class Projectile : NetworkBehaviour
+    public abstract class Projectile : NetworkBehaviour, IHit
     {
-        protected NetworkMecanimAnimator _animator;
+        //데미지 퍼센트
+        protected float _damage = 1f;
+        public NetworkMecanimAnimator _animator;
         //발사한 플레이어의 LayerMask
         protected LayerMask _playerLayer;
         //protected WrapBody _body;
@@ -21,7 +23,7 @@ namespace Actor.Skill
         //생성 시작 포인트
         protected Vector3 _startPoint;
 
-        public void Init(ActorStat stat, Vector3 startPlayerPosition, Vector3 startPoint)
+        public void Init(ActorStat stat, Vector3 startPlayerPosition, Vector3 startPoint, float damage)
         {
             _stat = stat;
             _startPlayerPosition = startPlayerPosition;
@@ -31,24 +33,22 @@ namespace Actor.Skill
             MoveStartPoint();
         }
 
-        public void Init(ActorStat stat, Vector2 startDirection, Vector3 startPlayerPosition, Vector3 startPoint, float destroyDelay)
+        public void Init(ActorStat stat, Vector2 startDirection, Vector3 startPlayerPosition, Vector3 startPoint, float destroyDelay, float damage)
         {
-            Init(stat, startPlayerPosition, startPoint);
+            Init(stat, startPlayerPosition, startPoint, damage);
             _startDirection = startDirection;
             _destroyDelay = destroyDelay;
             MoveStartPoint();
         }
         
-        public void Init(ActorStat stat, Vector2 startDirection, Vector3 startPlayerPosition, Vector3 startPoint, float destroyDelay, Vector3 distance)
+        public void Init(ActorStat stat, Vector2 startDirection, Vector3 startPlayerPosition, Vector3 startPoint, float destroyDelay, Vector3 distance, float damage)
         {
-            Init(stat, startDirection, startPlayerPosition, startPoint, destroyDelay);
+            Init(stat, startDirection, startPlayerPosition, startPoint, destroyDelay, damage);
             _distance = distance;
         }
         
 
         public abstract void Fire();
-
-        public abstract void Hit(IHitted target);
         
         public virtual void OnTriggerEnter2D(Collider2D other)
         {
@@ -70,5 +70,7 @@ namespace Actor.Skill
         {
             Runner.Despawn(gameObject.GetComponent<NetworkObject>());
         }
+
+        public abstract void Hit(IHitted target);
     }
 }

@@ -30,6 +30,7 @@ GameObject:
   - component: {fileID: 2307849927788161782}
   - component: {fileID: 7719738946249355004}
   - component: {fileID: 8935782570634443004}
+  - component: {fileID: 3151739033697451259}
   m_Layer: 7
   m_Name: NetworkWorker
   m_TagString: Player
@@ -189,6 +190,7 @@ MonoBehaviour:
   _cri_damage: 0
   _speed: 0
   _coolTimePercent: 0
+  _damagePercent: 0
   moveSpeed: 10
   jumpTime: 0.3
   downSpeed: 15
@@ -214,6 +216,7 @@ MonoBehaviour:
   _velocity: {x: 0, y: 0, z: 0}
   _acceleration: {x: 0, y: 0, z: 0}
   onGound: 0
+  onGravity: 1
   isJumping: 0
   isPressing: 0
   _directionX: {x: 0, y: 0}
@@ -244,6 +247,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a7514aad439413bbd32713ec7c4353f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _anim: {fileID: 0}
   __canUse: 1
 --- !u!114 &407036373728366929
 MonoBehaviour:
@@ -288,6 +292,7 @@ MonoBehaviour:
   - {fileID: 2307849927788161782}
   - {fileID: 7719738946249355004}
   - {fileID: 8935782570634443004}
+  - {fileID: 3151739033697451259}
 --- !u!114 &407036373728366900
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -424,6 +429,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c983e2e23f2540209fbac6573734bcc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _anim: {fileID: 0}
   __canUse: 1
 --- !u!114 &2307849927788161782
 MonoBehaviour:
@@ -437,12 +443,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0afcbc3fd6c243f4964842cd31c3ceff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _anim: {fileID: 0}
   __canUse: 1
   explodePosition:
-  - {x: -2, y: 0.5, z: 0}
+  - {x: 1, y: 0.5, z: 0}
   - {x: 2, y: 0.5, z: 0}
-  - {x: -1, y: 1.5, z: 0}
-  - {x: 1, y: 1.5, z: 0}
+  - {x: -1, y: 0.5, z: 0}
+  - {x: -2, y: 0.5, z: 0}
+  - {x: 0, y: 0.5, z: 0}
 --- !u!114 &7719738946249355004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -455,6 +463,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56a7b91f7e1446b3ae3d4a158b8162b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _anim: {fileID: 0}
   __canUse: 1
 --- !u!114 &8935782570634443004
 MonoBehaviour:
@@ -468,4 +477,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47b517d7972249fc95090b9e2950c9e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _anim: {fileID: 0}
   __canUse: 1
+--- !u!114 &3151739033697451259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 407036373728366916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be54f6c6d980459292f7d95fcd0e9db6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _anim: {fileID: 0}
+  __canUse: 1
+  explodePosition:
+  - {x: -2, y: 0, z: 0}
+  - {x: 2, y: 0, z: 0}
+  - {x: 0, y: 2, z: 0}
+  - {x: 0, y: -2, z: 0}

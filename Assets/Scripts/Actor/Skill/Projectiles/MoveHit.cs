@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Actor.Skill
 {
-    public class MoveHit : Projectile, IHit
+    public class MoveHit : Projectile
     {
         private NetworkTransform _transform;
         private bool isFiring = false;
@@ -15,7 +15,7 @@ namespace Actor.Skill
         {
             if (!HasStateAuthority) return;
             if (target == null) return;
-            target.Hitted(_stat.atk);
+            target.Hitted(_stat.atk * _damage);
             _animator.SetTrigger("isHitted");
         }
 
