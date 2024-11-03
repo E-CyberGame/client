@@ -7,7 +7,7 @@ namespace Actor.Skill
     {
         //데미지 퍼센트
         protected float _damage = 1f;
-        protected NetworkMecanimAnimator _animator;
+        public NetworkMecanimAnimator _animator;
         //발사한 플레이어의 LayerMask
         protected LayerMask _playerLayer;
         //protected WrapBody _body;
