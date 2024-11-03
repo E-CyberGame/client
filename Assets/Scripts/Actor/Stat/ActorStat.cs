@@ -21,6 +21,7 @@ public class ActorStat : NetworkBehaviour
     public Action CriDamageStatChanged = null;
     public Action SpeedStatChanged = null;
     public Action CoolTimePercentStatChanged = null;
+    public Action DamagePercentStatChanged = null;
     
     //Fluid Stat : 게임 중 유동적인 변화가 가장 큰 스탯
     [Networked] public float hp { get; set; }
@@ -50,6 +51,9 @@ public class ActorStat : NetworkBehaviour
 
     public GameStat CoolTimePercent;
     [Networked] public float coolTimePercent { get; set; }
+    
+    public GameStat DamagePercent;
+    [Networked] public float damagePercent { get; set; }
 
 
     //캐릭터마다 다른 거. (움직임에 영향 주는 것.)
@@ -68,12 +72,13 @@ public class ActorStat : NetworkBehaviour
         maxMP = 100;         // 최대 MP
         atk = 15;            // 공격력
         def = 5;             // 방어력
-        cri_percent = 20;    // 치명타 확률
+        cri_percent = 20f;    // 치명타 확률
         cri_damage = 1.5f;   // 치명타 피해 배율
         speed = 3;           // 속도
         hp = maxHP;          // 현재 HP를 최대 HP로 초기화
-        mp = maxMP;          // 현재 MP를 최대 MP로 초기화
+        mp = 0;         
         coolTimePercent = 1.0f;
+        damagePercent = 1f;
 
         MaxHP = new GameStat(maxHP);
         MaxMP = new GameStat(maxMP);
@@ -83,9 +88,32 @@ public class ActorStat : NetworkBehaviour
         CriDamage = new GameStat(cri_damage);
         Speed = new GameStat(speed);
         CoolTimePercent = new GameStat(coolTimePercent);
+        DamagePercent = new GameStat(damagePercent);
     }
 
     #endregion
+    
+    System.Random random = new System.Random();
+    public void Attack(float damage)
+    {
+        if (damage < 0) return;
+        if (random.Next(1, 101) < cri_percent)
+        {
+            damage *= cri_damage;
+        }
+        hp -= damage * damagePercent;
+    }
+
+    public void Heal(float healAmount)
+    {
+        if (healAmount < 0) return;
+        hp += healAmount;
+    }
+
+    void Update()
+    {
+        Debug.Log(damagePercent);
+    }
 
     public override void Spawned()
     {
@@ -142,6 +170,11 @@ public class ActorStat : NetworkBehaviour
                 case nameof(coolTimePercent):
                     CoolTimePercentStatChanged?.Invoke();
                     CoolTimePercent.SetValue(coolTimePercent);
+                    break;
+                
+                case nameof(damagePercent):
+                    DamagePercentStatChanged?.Invoke();
+                    DamagePercent.SetValue(damagePercent);
                     break;
             }
             
