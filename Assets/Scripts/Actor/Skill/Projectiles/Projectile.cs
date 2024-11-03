@@ -27,6 +27,7 @@ namespace Actor.Skill
             _startPlayerPosition = startPlayerPosition;
             _startPoint = startPoint;
             _animator = GetComponent<NetworkMecanimAnimator>();
+            _playerLayer = _stat.gameObject.layer;
             MoveStartPoint();
         }
 
@@ -35,7 +36,6 @@ namespace Actor.Skill
             Init(stat, startPlayerPosition, startPoint);
             _startDirection = startDirection;
             _destroyDelay = destroyDelay;
-            _playerLayer = _stat.gameObject.layer;
             MoveStartPoint();
         }
         
