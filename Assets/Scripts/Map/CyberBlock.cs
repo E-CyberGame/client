@@ -59,6 +59,7 @@ public class CyberBlock : NetworkBehaviour
     [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
     private void Rpc_newBlock()
     {
+        box.enabled = true;
         if (randomcolor == 0) StartCoroutine(BlueBlock());
         else if(randomcolor == 1) StartCoroutine(GreenBlock());
     }
