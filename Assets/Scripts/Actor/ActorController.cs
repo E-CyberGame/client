@@ -59,6 +59,8 @@ namespace Actor
                     _skill.UseSkill(SkillSlot.slot2);
                 if (input.SkillButtons.WasPressed(PreviousSkillButtons, SkillButton.D))
                     _skill.UseSkill(SkillSlot.slot3);
+                if (input.SkillButtons.WasPressed(PreviousSkillButtons, SkillButton.C))
+                    _skill.UseSkill(SkillSlot.slot4);
                 if (input.SkillButtons.WasPressed(PreviousSkillButtons, SkillButton.Attack))
                     _skill.PlainAttack();
                 

@@ -10,7 +10,8 @@ namespace UI.Scene
         {
             cool1,
             cool2,
-            cool3
+            cool3,
+            cool4
         }
         private Animator[] cool = new Animator[4];
         private void Awake()
@@ -27,6 +28,7 @@ namespace UI.Scene
             cool[0] = Get<Animator>((int)CoolAnimators.cool1);
             cool[1] = Get<Animator>((int)CoolAnimators.cool2);
             cool[2] = Get<Animator>((int)CoolAnimators.cool3);
+            cool[3] = Get<Animator>((int)CoolAnimators.cool4);
         }
 
         public void StartCoolTimeAnimation(int slot, float coolTime)
