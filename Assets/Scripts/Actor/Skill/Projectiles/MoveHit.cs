@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Actor.Skill
 {
-    public class MoveHit : Projectile, IHit
+    public class MoveHit : Projectile
     {
         private NetworkTransform _transform;
         private bool isFiring = false;

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Actor.Skill
 {
-    public abstract class Projectile : NetworkBehaviour
+    public abstract class Projectile : NetworkBehaviour, IHit
     {
         //데미지 퍼센트
         protected float _damage = 1f;
@@ -49,8 +49,6 @@ namespace Actor.Skill
         
 
         public abstract void Fire();
-
-        public abstract void Hit(IHitted target);
         
         public virtual void OnTriggerEnter2D(Collider2D other)
         {
@@ -72,5 +70,7 @@ namespace Actor.Skill
         {
             Runner.Despawn(gameObject.GetComponent<NetworkObject>());
         }
+
+        public abstract void Hit(IHitted target);
     }
 }
