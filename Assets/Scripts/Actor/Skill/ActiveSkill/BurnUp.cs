@@ -26,13 +26,15 @@ namespace Actor.Skill
         private void Explode()
         {
             Vector3 primaryPosition = _stat.transform.position;
-            
+
             for (int i = 0; i < explodePosition.Count; i++)
-            { 
+            {
                 Projectile ball = Generate(0);
                 if (ball is null) continue;
                 ball.Init(_stat, primaryPosition, explodePosition[i], 1.5f);
             }
+
+            _body.transform.position += (Vector3)(_body.currentDirectionX * explodePosition.Count);
         }
     }
 }
