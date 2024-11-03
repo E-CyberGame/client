@@ -3,9 +3,6 @@ using UnityEngine;
 
 namespace Actor.Skill
 {
-    using DG.Tweening;
-    //발사체에 붙는 컴포넌트
-    //현재 문제 : objectPath를 발사체 자체가 갖고 있음 안됨...
     public abstract class Projectile : NetworkBehaviour
     {
         protected NetworkMecanimAnimator _animator;
