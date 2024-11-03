@@ -12,6 +12,7 @@ namespace Actor
         OnAir,
         OnDash,
         OnHitted,
+        OnHit,
         NoControl,
     }
 
@@ -37,7 +38,8 @@ namespace Actor
             _states.Add(States.NoControl, new NoControlState(_body, animator, animController, this));
             _states.Add(States.OnDash, new OnDashState(_body, animator, animController, this));
             _states.Add(States.OnHitted, new OnHittedState(_body, animator, animController, this));
-
+            _states.Add(States.OnHit, new OnHitState(_body, animator, animController, this));
+            
             CurrentState = States.OnGround;
         }
         
