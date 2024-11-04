@@ -1,17 +1,18 @@
+using Actor.Skill;
 using Boss.Skill;
 using Fusion;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Falling : NetworkBehaviour
+public class Falling : NetworkBehaviour, BHit
 {
     public float speed = 0.03f;
     NetworkObject rock_net;
     private bool move = false;
     private Vector3 origin_pos;
     public float delay;
-
+    [SerializeField] int _damage = 8;
 
     public override void Spawned()
     {
@@ -45,6 +46,23 @@ public class Falling : NetworkBehaviour
     {
         yield return new WaitForSeconds(0.2f);
         Runner.Despawn(rock_net);
+    }
+    public void Hit(IHitted target)
+    {
+        Debug.Log("Hit");
+        if (!HasStateAuthority) return;
+        if (target == null) return;
+        target.Hitted(_damage);
+    }
+
+    public void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log("TriggerEnter");
+        //추후 때려야 할 애들 레이어로...
+        if (!other.gameObject.layer.Equals("Enemy"))
+        {
+            Hit(other.GetComponent<IHitted>());
+        }
     }
 
 }

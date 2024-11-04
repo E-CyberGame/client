@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5750739755560096209}
   - component: {fileID: 1268397625296920421}
   - component: {fileID: 3504630374764673550}
+  - component: {fileID: -3619377673662150648}
   m_Layer: 0
   m_Name: Cloud
   m_TagString: Untagged
@@ -99,6 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0cd1c4ca475f5940b94a71275bfa0fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _damage: 8
 --- !u!114 &1268397625296920421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,3 +136,19 @@ MonoBehaviour:
   SyncParent: 0
   _autoAOIOverride: 1
   DisableSharedModeInterpolation: 0
+--- !u!70 &-3619377673662150648
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8042704205768399884}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1.5, y: 0.7}
+  m_Direction: 1
