@@ -1,42 +1,68 @@
+using Actor.Skill;
+using Boss.Skill;
+using Fusion;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Falling : MonoBehaviour
+public class Falling : NetworkBehaviour, BHit
 {
-    private Transform _transform;
-    private Rigidbody2D _rigidbody;
-    private RaycastHit2D _hitGround;
-    private float groundCheckLine = 1.0f;
-    private LayerMask groundLayer;
-    GameObject _rock;
+    public float speed = 0.03f;
+    NetworkObject rock_net;
+    private bool move = false;
+    private Vector3 origin_pos;
+    public float delay;
+    [SerializeField] int _damage = 8;
 
-    public void Init(GameObject rock)
+    public override void Spawned()
     {
-        _transform = transform;
-        _rigidbody = GetComponent<Rigidbody2D>();
-        groundLayer = LayerMask.GetMask("Ground");
-        _rock = rock;
-    }
-    public void Wake()
-    {
-        _rigidbody.WakeUp();
+        rock_net = GetComponent<NetworkObject>();
+        origin_pos = transform.position;
+        StartCoroutine(BeforeFall());
     }
 
-    public void FixedUpdate()
+    public override void FixedUpdateNetwork()
     {
-        Debug.DrawRay(_transform.position, Vector3.down * groundCheckLine, Color.red);
-        _hitGround = Physics2D.Raycast(_transform.position, Vector3.down, groundCheckLine, groundLayer);
-        if (_hitGround)
+        Vector3 current = transform.position;
+        Vector3 target = origin_pos + new Vector3(0, -5.5f, 0);
+        if (current == target && HasStateAuthority)
         {
-            Debug.Log("바닥 Hit");
+            move = false;
             StartCoroutine(HitGround());
         }
+        if (move)
+        {
+            transform.position = Vector3.MoveTowards(current, target, speed);
+        }
+    }
+
+    IEnumerator BeforeFall()
+    {
+        yield return new WaitForSeconds(delay);
+        move = true;
     }
 
     IEnumerator HitGround()
     {
         yield return new WaitForSeconds(0.2f);
-        GameObject.Destroy(_rock);
+        Runner.Despawn(rock_net);
     }
+    public void Hit(IHitted target)
+    {
+        Debug.Log("Hit");
+        if (!HasStateAuthority) return;
+        if (target == null) return;
+        target.Hitted(_damage);
+    }
+
+    public void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log("TriggerEnter");
+        //추후 때려야 할 애들 레이어로...
+        if (!other.gameObject.layer.Equals("Enemy"))
+        {
+            Hit(other.GetComponent<IHitted>());
+        }
+    }
+
 }

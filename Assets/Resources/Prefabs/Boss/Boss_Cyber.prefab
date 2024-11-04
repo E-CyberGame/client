@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7106913800239635879}
   - component: {fileID: 7878979007568503869}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Mirror
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,8 @@ GameObject:
   - component: {fileID: 7956496160024124167}
   - component: {fileID: 5788146164316471698}
   - component: {fileID: 3997830312612358135}
-  m_Layer: 0
+  - component: {fileID: 7064158134352228535}
+  m_Layer: 8
   m_Name: Explosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -185,6 +186,19 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1.28
+--- !u!114 &7064158134352228535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5104689669029980138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3789605abc0d54c4ea8e538ba3612e67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damage: 10
 --- !u!1 &7695072403731521023
 GameObject:
   m_ObjectHideFlags: 0
@@ -197,9 +211,10 @@ GameObject:
   - component: {fileID: 7695072403731521009}
   - component: {fileID: 7695072403731521022}
   - component: {fileID: 1085959770}
-  - component: {fileID: 3723833571960952168}
   - component: {fileID: 1796871002516251822}
-  m_Layer: 0
+  - component: {fileID: -8655299244865670646}
+  - component: {fileID: -626781786729408963}
+  m_Layer: 8
   m_Name: Boss_Cyber
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -308,26 +323,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0805ce15f4c142448a1d816bfb3c5063, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vertical: {fileID: 0}
-  horizontal: {fileID: 0}
-  mirror: {fileID: 3723833571960952168}
-  explosion: {fileID: 1796871002516251822}
-  cloud: {fileID: 0}
-  Boss_Cyber: {fileID: 0}
-  Explosion: {fileID: 0}
---- !u!114 &3723833571960952168
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7695072403731521023}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8937da822cd795f4aa079606c37e4764, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mirror: {fileID: 4728836350734811002}
 --- !u!114 &1796871002516251822
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -341,3 +336,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explode: {fileID: 5104689669029980138}
+--- !u!114 &-8655299244865670646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7695072403731521023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SortKey: 605485636
+  ObjectInterest: 1
+  Flags: 262145
+  NestedObjects: []
+  NetworkedBehaviours:
+  - {fileID: 1085959770}
+  - {fileID: -626781786729408963}
+  - {fileID: 7064158134352228535}
+--- !u!114 &-626781786729408963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7695072403731521023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 158639473, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncScale: 0
+  SyncParent: 0
+  _autoAOIOverride: 1
+  DisableSharedModeInterpolation: 0

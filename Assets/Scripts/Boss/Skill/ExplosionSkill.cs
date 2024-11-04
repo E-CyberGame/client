@@ -1,3 +1,5 @@
+using Actor.Skill;
+using Fusion;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,4 +21,5 @@ public class ExplosionSkill : MonoBehaviour, BSkill
         yield return new WaitForSeconds(0.8f);
         explode.SetActive(false);
     }
+
 }

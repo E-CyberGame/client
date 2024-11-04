@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 8734883634509507356}
   - component: {fileID: 8734883634509507345}
   - component: {fileID: 8734883634509507358}
-  - component: {fileID: 8734883634509507359}
+  - component: {fileID: 5918419655118290675}
+  - component: {fileID: -8680721419140154998}
   m_Layer: 0
   m_Name: LaySource
   m_TagString: Untagged
@@ -27,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8734883634509507357}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.5, y: 5, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -143,28 +144,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75b6000c8195bb6409c3c78fc89393ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _distanceX: 0
-  _distanceY: -15
-  _distanceZ: 0
+  __distanceX: 0
+  __distanceY: 0
+  __distanceZ: 0
   _pre_width: 0.1
   _width: 1
   _pre_color: {r: 1, g: 0, b: 0, a: 0.5}
   _color: {r: 0, g: 1, b: 0, a: 0.5}
   _lay_damage: 10
---- !u!61 &8734883634509507359
-BoxCollider2D:
+  _lay_min: 0
+  _lay_max: 10
+--- !u!114 &5918419655118290675
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8734883634509507357}
-  m_Enabled: 0
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SortKey: 1839190466
+  ObjectInterest: 1
+  Flags: 262145
+  NestedObjects: []
+  NetworkedBehaviours:
+  - {fileID: 8734883634509507358}
+--- !u!60 &-8680721419140154998
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8734883634509507357}
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 9.5, y: 0}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -174,6 +195,10 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 20, y: 1}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0, y: 1}
+      - {x: -0.95105654, y: 0.30901697}
+      - {x: -0.5877852, y: -0.80901706}
+      - {x: 0.58778536, y: -0.80901694}
+      - {x: 0.9510565, y: 0.30901712}
