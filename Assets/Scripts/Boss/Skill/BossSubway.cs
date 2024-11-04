@@ -34,7 +34,7 @@ namespace Boss.Skill
         }
         
         private static BossSubway _subwaysingleton;
-        private int skill_num = 4;
+        private int skill_num = 5;
         private int vlaynum = 5;
         private int hlaynum = 3;
         private int fallnum = 10;

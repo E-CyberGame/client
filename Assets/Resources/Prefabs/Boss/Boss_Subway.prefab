@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1664414235}
   - component: {fileID: 7538226620669941958}
   - component: {fileID: 1596773255842578098}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Boss_Subway
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -155,6 +155,7 @@ MonoBehaviour:
   NetworkedBehaviours:
   - {fileID: 514113450}
   - {fileID: 1596773255842578098}
+  - {fileID: 2732963726756882325}
 --- !u!114 &1596773255842578098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,7 +183,8 @@ GameObject:
   - component: {fileID: 4992335774064020267}
   - component: {fileID: 6858690059833895652}
   - component: {fileID: 3815938156095087222}
-  m_Layer: 0
+  - component: {fileID: 2732963726756882325}
+  m_Layer: 8
   m_Name: Explosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -272,3 +274,16 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1.28
+--- !u!114 &2732963726756882325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7990850236794966579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3789605abc0d54c4ea8e538ba3612e67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damage: 10
