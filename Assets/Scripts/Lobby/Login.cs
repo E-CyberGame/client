@@ -1,23 +1,51 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Web;
 
 public class Login : MonoBehaviour
 {
+    [SerializeField] private WebConnection _webConnection;
+    
     [SerializeField]
     TMP_InputField _id, _password;
 
     [SerializeField]
     TextMeshProUGUI _errortext;
 
-    [SerializeField]
-    GameObject _errorScreen;
+    [SerializeField] private GameObject _successScreen;
+    [SerializeField] GameObject _errorScreen;
 
     private string id_admin = "admin";
     private string ps_admin = "admin";
+
+    public void TryCreateAccount()
+    {
+        if (_id.text == "" || _id.text == null)
+        {
+            _errortext.text = "Create Account Error!\n Need ID";
+            _errorScreen.SetActive(true); return;
+        }
+        if (_password.text == "" || _password.text == null)
+        {
+            _errortext.text = "Create Account Error!\n Need Password";
+            _errorScreen.SetActive(true); return;
+        }
+        _webConnection.SendPost(
+            "members/register", new LoginDTO(_id.text, _password.text),
+        s =>
+        {
+            _successScreen.SetActive(true);
+        },
+        ()=> {
+            _errortext.text = "Create Account Error!\n Something goes wrong";
+            _errorScreen.SetActive(true);
+        });
+    }
 
     public void TryLogin()
     {
@@ -31,23 +59,38 @@ public class Login : MonoBehaviour
             _errortext.text = "Login Error!\n Need Password";
             _errorScreen.SetActive(true); return;
         }
-        else if (_id.text != id_admin)
+        /*else if (_id.text != id_admin)
         {
-            // ¾ÆÀÌµð°¡ DB¿¡ ¾øÀ» ½Ã
+            // ï¿½ï¿½ï¿½Ìµï¿½ DBï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
             _errortext.text = "Login Error!\n Invalid ID";
             _errorScreen.SetActive(true); return;
         }
         else if (_password.text != ps_admin)
         {
-            // ºñ¹Ð¹øÈ£°¡ ´Ù¸¦ ½Ã
+            // ï¿½ï¿½Ð¹ï¿½È£ï¿½ï¿½ ï¿½Ù¸ï¿½ ï¿½ï¿½
             _errortext.text = "Login Error!\n Invalid Password";
             _errorScreen.SetActive(true); return;
-        }
-        moveScene();
+        }*/
+        
+        _webConnection.SendPost(
+            "members/login", new LoginDTO(_id.text, _password.text),
+            s =>
+            {
+                _successScreen.SetActive(true);
+            },
+            ()=> {
+                _errortext.text = "Login Error!\n Invalid ID or Password";
+                _errorScreen.SetActive(true);
+            });
     }
 
-    void moveScene()
+    public void moveScene()
     {
         SceneManager.LoadScene("MainRoom");
+    }
+
+    public void moveFirstScene()
+    {
+        SceneManager.LoadScene("CreateCharacter");
     }
 }
