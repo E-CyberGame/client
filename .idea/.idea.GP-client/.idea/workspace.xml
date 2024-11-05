@@ -6,7 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="48512494-4aeb-4d91-a298-89a062182807" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GP-client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GP-client/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Assets/UIAnimation/EnterFadein.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Assets/UIAnimation/EnterFadein.anim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Assets/UIAnimation/IDInputFadein.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Assets/UIAnimation/IDInputFadein.anim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/MatchingRoom/PVPLobby.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/MatchingRoom/PVPLobby.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/KSY-test/Lobby.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/KSY-test/Lobby.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +69,7 @@
 }</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="$USER_HOME$/Desktop/TestBuild\GP-client.exe" />
+      <option name="EXE_PATH" value="$USER_HOME$/Desktop/LoginTestBuild\GP-client.exe" />
       <option name="PROGRAM_PARAMETERS" value="" />
       <option name="WORKING_DIRECTORY" value="C:\Users\syeon\Desktop\빌드본\졸프 빌드본" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -156,6 +162,7 @@
       <workItem from="1730706824803" duration="2551000" />
       <workItem from="1730709650089" duration="3414000" />
       <workItem from="1730718501199" duration="4612000" />
+      <workItem from="1730801654101" duration="1122000" />
     </task>
     <servers />
   </component>
