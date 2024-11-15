@@ -112,7 +112,7 @@ public class ActorStat : NetworkBehaviour
 
     void Update()
     {
-        Debug.Log(damagePercent);
+        //Debug.Log(damagePercent);
     }
 
     public override void Spawned()
