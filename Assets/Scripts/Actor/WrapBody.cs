@@ -190,7 +190,7 @@ public class WrapBody : NetworkBehaviour
 
     public float GetDashTime()
     {
-        return _stat.dashTime / _stat.speed;
+        return _stat.dashTime / _stat.GetSpeed.Value;
     }
 
     public void DashOff()

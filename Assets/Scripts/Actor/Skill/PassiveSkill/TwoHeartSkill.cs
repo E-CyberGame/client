@@ -9,7 +9,7 @@ namespace Actor.Skill
         {
             if (HasStateAuthority)
             {
-                _stat.maxHP *= (_skillLevel * 0.1f) + 1f;
+                _stat.SetMaxHP *= (_skillLevel * 0.1f) + 1f;
             }
         }
     }

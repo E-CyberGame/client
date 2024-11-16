@@ -12,7 +12,7 @@ namespace UI.Scene
         {
             _view = GetComponent<UI_Status>();
             _model = GameObject.FindWithTag("Player").GetOrAddComponent<ActorStat>();
-            _model.HpStatChanged += delegate { _view.UpdateHp(_model.maxHP, _model.hp); };
+            _model.HpStatChanged += delegate { _view.UpdateHp(_model.GetMaxHP.Value, _model.hp); };
         }
         
         public override void Spawned()
