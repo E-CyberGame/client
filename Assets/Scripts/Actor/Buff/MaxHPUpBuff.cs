@@ -12,13 +12,13 @@ public class MaxHPUpBuff : IBuff
 
     public void OnBuff()
     {
-        _stat.MaxHP.percent += 0.1f;
-        _stat.Atk.percent += 0.1f;
+        _stat.GetMaxHP.percent += 0.1f;
+        _stat.GetAtk.percent += 0.1f;
     }
 
     public void OffBuff()
     {
-        _stat.MaxHP.percent -= 0.1f;
-        _stat.Atk.percent -= 0.1f;
+        _stat.GetMaxHP.percent -= 0.1f;
+        _stat.GetAtk.percent -= 0.1f;
     }
 }

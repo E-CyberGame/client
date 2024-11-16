@@ -17,7 +17,7 @@ namespace Actor.Skill
             if (!HasStateAuthority) return;
             if (other.gameObject.layer == _playerLayer)
             {
-                other.GetComponent<ActorStat>().damagePercent = 0.4f;
+                other.GetComponent<ActorStat>().SetDamagePercent = 0.4f;
             }
         }
         
@@ -25,7 +25,7 @@ namespace Actor.Skill
         {
             if (other.gameObject.layer == _playerLayer)
             {
-                other.GetComponent<ActorStat>().damagePercent = 1f;
+                other.GetComponent<ActorStat>().SetDamagePercent = 1f;
             }
         }
         
