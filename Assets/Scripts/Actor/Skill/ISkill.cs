@@ -24,7 +24,7 @@ public abstract class ISkill : NetworkBehaviour
     protected IEnumerator CoolDown(float coolTime)
     {
         //_anim이 null일 수 있고, 이건 확실히... 다른 쪽으로 넘기는 게 맞음.
-        float realCoolTime = coolTime * _stat.CoolTimePercent.Value;
+        float realCoolTime = coolTime * _stat.GetCoolTimePercent.Value;
         if(HasStateAuthority) _canUse = false;
         SkillStart?.Invoke(realCoolTime);
         yield return new WaitForSeconds(realCoolTime);

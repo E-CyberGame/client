@@ -29,31 +29,31 @@ public class ActorStat : NetworkBehaviour
     
     //Game Stat : Read > Write
     //get, buff 등은 MaxHP 사용하고, set은 maxHP 사용하는 방식으로 ㄱㄱ
-    public GameStat MaxHP;
-    [Networked] public float maxHP { get; set; }
-    public GameStat MaxMP;
-    [Networked] public float maxMP { get; set; }
+    public GameStat GetMaxHP;
+    [Networked] public float SetMaxHP { get; set; }
+    public GameStat GetMaxMP;
+    [Networked] public float SetMaxMP { get; set; }
 
-    public GameStat Atk;
-    [Networked] public float atk { get; set; }
+    public GameStat GetAtk;
+    [Networked] public float SetAtk { get; set; }
 
-    public GameStat Def;
-    [Networked] public float def { get; set; }
+    public GameStat GetDef;
+    [Networked] public float SetDef { get; set; }
 
-    public GameStat CriPercent;
-    [Networked] public float cri_percent { get; set; }
+    public GameStat GetCriPercent;
+    [Networked] public float SetCriPercent { get; set; }
 
-    public GameStat CriDamage;
-    [Networked] public float cri_damage { get; set; }
+    public GameStat GetCriDamage;
+    [Networked] public float SetCriDamage { get; set; }
 
-    public GameStat Speed;
-    [Networked] public float speed { get; set; }
+    public GameStat GetSpeed;
+    [Networked] public float SetSpeed { get; set; }
 
-    public GameStat CoolTimePercent;
-    [Networked] public float coolTimePercent { get; set; }
+    public GameStat GetCoolTimePercent;
+    [Networked] public float SetCoolTimePercent { get; set; }
     
-    public GameStat DamagePercent;
-    [Networked] public float damagePercent { get; set; }
+    public GameStat GetDamagePercent;
+    [Networked] public float SetDamagePercent { get; set; }
 
 
     //캐릭터마다 다른 거. (움직임에 영향 주는 것.)
@@ -68,27 +68,27 @@ public class ActorStat : NetworkBehaviour
 
     private void InitStat()
     {
-        maxHP = 150;         // 최대 HP
-        maxMP = 100;         // 최대 MP
-        atk = 15;            // 공격력
-        def = 5;             // 방어력
-        cri_percent = 20f;    // 치명타 확률
-        cri_damage = 1.5f;   // 치명타 피해 배율
-        speed = 3;           // 속도
-        hp = maxHP;          // 현재 HP를 최대 HP로 초기화
+        SetMaxHP = 150;         // 최대 HP
+        SetMaxMP = 100;         // 최대 MP
+        SetAtk = 15;            // 공격력
+        SetDef = 5;             // 방어력
+        SetCriPercent = 20f;    // 치명타 확률
+        SetCriDamage = 1.5f;   // 치명타 피해 배율
+        SetSpeed = 3;           // 속도
+        hp = SetMaxHP;          // 현재 HP를 최대 HP로 초기화
         mp = 0;         
-        coolTimePercent = 1.0f;
-        damagePercent = 1f;
+        SetCoolTimePercent = 1.0f;
+        SetDamagePercent = 1f;
 
-        MaxHP = new GameStat(maxHP);
-        MaxMP = new GameStat(maxMP);
-        Atk = new GameStat(atk);
-        Def = new GameStat(def);
-        CriPercent = new GameStat(cri_percent);
-        CriDamage = new GameStat(cri_damage);
-        Speed = new GameStat(speed);
-        CoolTimePercent = new GameStat(coolTimePercent);
-        DamagePercent = new GameStat(damagePercent);
+        GetMaxHP = new GameStat(SetMaxHP);
+        GetMaxMP = new GameStat(SetMaxMP);
+        GetAtk = new GameStat(SetAtk);
+        GetDef = new GameStat(SetDef);
+        GetCriPercent = new GameStat(SetCriPercent);
+        GetCriDamage = new GameStat(SetCriDamage);
+        GetSpeed = new GameStat(SetSpeed);
+        GetCoolTimePercent = new GameStat(SetCoolTimePercent);
+        GetDamagePercent = new GameStat(SetDamagePercent);
     }
 
     #endregion
@@ -97,22 +97,17 @@ public class ActorStat : NetworkBehaviour
     public void Attack(float damage)
     {
         if (damage < 0) return;
-        if (random.Next(1, 101) < cri_percent)
+        if (random.Next(1, 101) < SetCriPercent)
         {
-            damage *= cri_damage;
+            damage *= SetCriDamage;
         }
-        hp -= damage * damagePercent;
+        hp -= damage * SetDamagePercent;
     }
 
     public void Heal(float healAmount)
     {
         if (healAmount < 0) return;
         hp += healAmount;
-    }
-
-    void Update()
-    {
-        Debug.Log(damagePercent);
     }
 
     public override void Spawned()
@@ -133,48 +128,48 @@ public class ActorStat : NetworkBehaviour
                 case nameof(mp):
                     MpStatChanged?.Invoke();
                     break;
-                case nameof(maxHP):
+                case nameof(SetMaxHP):
                     MaxHpStatChanged?.Invoke();
-                    MaxHP.SetValue(maxHP);
+                    GetMaxHP.SetValue(SetMaxHP);
                     break;
-                case nameof(maxMP):
+                case nameof(SetMaxMP):
                     MaxMpStatChanged?.Invoke();
-                    MaxMP.SetValue(maxMP);
+                    GetMaxMP.SetValue(SetMaxMP);
                     break;
 
-                case nameof(atk):
+                case nameof(SetAtk):
                     AtkStatChanged?.Invoke();
-                    Atk.SetValue(atk);
+                    GetAtk.SetValue(SetAtk);
                     break;
 
-                case nameof(def):
+                case nameof(SetDef):
                     DefStatChanged?.Invoke();
-                    Def.SetValue(def);
+                    GetDef.SetValue(SetDef);
                     break;
 
-                case nameof(cri_percent):
+                case nameof(SetCriPercent):
                     CriPercentStatChanged?.Invoke();
-                    CriPercent.SetValue(cri_percent);
+                    GetCriPercent.SetValue(SetCriPercent);
                     break;
 
-                case nameof(cri_damage):
+                case nameof(SetCriDamage):
                     CriDamageStatChanged?.Invoke();
-                    CriDamage.SetValue(cri_damage);
+                    GetCriDamage.SetValue(SetCriDamage);
                     break;
 
-                case nameof(speed):
+                case nameof(SetSpeed):
                     SpeedStatChanged?.Invoke();
-                    Speed.SetValue(speed);
+                    GetSpeed.SetValue(SetSpeed);
                     break;
                 
-                case nameof(coolTimePercent):
+                case nameof(SetCoolTimePercent):
                     CoolTimePercentStatChanged?.Invoke();
-                    CoolTimePercent.SetValue(coolTimePercent);
+                    GetCoolTimePercent.SetValue(SetCoolTimePercent);
                     break;
                 
-                case nameof(damagePercent):
+                case nameof(SetDamagePercent):
                     DamagePercentStatChanged?.Invoke();
-                    DamagePercent.SetValue(damagePercent);
+                    GetDamagePercent.SetValue(SetDamagePercent);
                     break;
             }
             

@@ -27,7 +27,8 @@ namespace Actor.Skill
             if (!_canUse) return;
             base.Activate();
             StartCoroutine(Chain());
-            _buff.AddBuff(new StatDurationBuff(_stat.MaxHP, 10, 0.1f), 10f);
+            _buff.AddBuff(new StatDurationBuff(_stat.GetMaxHP, 10, 0.1f), 10f);
+            Debug.Log(_stat.GetMaxHP.Value);
         }
         
         IEnumerator Chain()

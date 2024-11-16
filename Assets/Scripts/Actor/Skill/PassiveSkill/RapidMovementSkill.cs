@@ -6,7 +6,7 @@ namespace Actor.Skill
         {
             if (HasStateAuthority)
             {
-                _stat.coolTimePercent *= (_skillLevel * 0.1f) + 1f;
+                _stat.SetCoolTimePercent *= (_skillLevel * 0.1f) + 1f;
             }
         }
     }
