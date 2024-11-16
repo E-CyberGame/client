@@ -8,6 +8,7 @@ using Unity.VisualScripting.Antlr3.Runtime;
 using Unity.VisualScripting;
 using UnityEngine;
 using static Fusion.NetworkBehaviour;
+using Actor;
 
 public class BossBehaviour : NetworkBehaviour, IHitted
 {
@@ -75,9 +76,21 @@ public class BossBehaviour : NetworkBehaviour, IHitted
             {
                 isAlive = false;
                 Debug.Log("¸·Å¸: " + GetDamage.Peek().Item2);
+                GiveBuff(GetDamage.Peek().Item2);
                 Runner.Despawn(gameObject.GetComponent<NetworkObject>());
             }
             GetDamage.Dequeue();
+        }
+    }
+
+    public void GiveBuff(int layer)
+    {
+        foreach (PlayerObject player in PlayerRegistry.Players)
+        {
+            if (player.GetLayer() == layer)
+            {
+                player.GetComponent<ActorController>().Hitted(new BossKillBuff (player.GetComponent<ActorStat>()), 10.0f);
+            }
         }
     }
 

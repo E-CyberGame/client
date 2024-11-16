@@ -123,6 +123,10 @@ public class PlayerObject : NetworkBehaviour
     {
         gameObject.layer = layer;
     }
+    public int GetLayer()
+    {
+        return gameObject.layer;
+    }
 
     public void InitPlayerPosition(MapType type)
     {
