@@ -20,28 +20,35 @@ public class CloudMove : NetworkBehaviour, BHit
 
     public override void FixedUpdateNetwork()
     {
-        Vector3 current = transform.position;
-        Vector3 target = BossCyber.Singleton.GetTransform() + new Vector3 (0, -1.0f,0);
-        if(current == target && HasStateAuthority)
+        if (BossCyber.Singleton == null)
         {
-            BossCyber.Singleton.CloudReady();
             Runner.Despawn(cloud_net);
         }
-        transform.position = Vector3.MoveTowards(current, target, speed);
+        else
+        {
+            Vector3 current = transform.position;
+            Vector3 target = BossCyber.Singleton.GetTransform() + new Vector3(0, -1.0f, 0);
+            if (current == target && HasStateAuthority)
+            {
+                BossCyber.Singleton.CloudReady();
+                Runner.Despawn(cloud_net);
+            }
+            transform.position = Vector3.MoveTowards(current, target, speed);
+        }
     }
     public void Hit(IHitted target)
     {
         Debug.Log("Hit");
         if (!HasStateAuthority) return;
         if (target == null) return;
-        target.Hitted(_damage);
+        target.Hitted(_damage, LayerMask.NameToLayer("Enemy"));
     }
 
     public void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log("TriggerEnter");
         //추후 때려야 할 애들 레이어로...
-        if (!other.gameObject.layer.Equals("Enemy"))
+        if (other.gameObject.layer != LayerMask.NameToLayer("Enemy"))
         {
             Hit(other.GetComponent<IHitted>());
         }

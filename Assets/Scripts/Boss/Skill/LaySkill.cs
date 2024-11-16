@@ -138,7 +138,8 @@ namespace Boss.Skill
         {
             Debug.Log("TriggerEnter");
             //추후 때려야 할 애들 레이어로...
-            if (!other.gameObject.layer.Equals("Enemy"))
+            Debug.Log(other.gameObject.layer);
+            if (other.gameObject.layer != LayerMask.NameToLayer("Enemy"))
             {
                 Hit(other.GetComponent<IHitted>());
             }
@@ -149,7 +150,7 @@ namespace Boss.Skill
             Debug.Log("Hit");
             if (!HasStateAuthority) return;
             if (target == null) return;
-            target.Hitted(_lay_damage);
+            target.Hitted(_lay_damage, LayerMask.NameToLayer("Enemy"));
         }
     }
 }

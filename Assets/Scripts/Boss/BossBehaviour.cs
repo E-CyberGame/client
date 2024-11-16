@@ -3,6 +3,9 @@ using Fusion;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting.Antlr3.Runtime;
+using Unity.VisualScripting;
 using UnityEngine;
 using static Fusion.NetworkBehaviour;
 
@@ -37,6 +40,8 @@ public class BossBehaviour : NetworkBehaviour, IHitted
 
     [SerializeField] GameObject BossPrefab;
     [SerializeField] UI_BossStatus _view;
+    private bool isAlive = true;
+    public Queue<Tuple<float, int>> GetDamage = new Queue<Tuple<float, int>>();
 
     private void InitStat()
     {
@@ -60,6 +65,22 @@ public class BossBehaviour : NetworkBehaviour, IHitted
         HpStatChanged += delegate { _view.UpdateHp(maxHP, hp); };
     }
 
+    
+    public override void FixedUpdateNetwork()
+    {
+        if(GetDamage.Count > 0 && isAlive)
+        {
+            Attack(GetDamage.Peek().Item1);
+            if (hp < 0)
+            {
+                isAlive = false;
+                Debug.Log("막타: " + GetDamage.Peek().Item2);
+                Runner.Despawn(gameObject.GetComponent<NetworkObject>());
+            }
+            GetDamage.Dequeue();
+        }
+    }
+
     public void Attack(float damage)
     {
         if (damage < 0) return;
@@ -70,12 +91,12 @@ public class BossBehaviour : NetworkBehaviour, IHitted
         hp -= damage;
     }
 
-    public void Hitted(float damage)
+    public void Hitted(float damage, int hitter)
     {
         if (damage > 0)
         {
             Debug.Log("보스 타격 " + damage + "의 피해");
-            Attack(damage);
+            GetDamage.Enqueue(Tuple.Create(damage, hitter));
         }
     }
 

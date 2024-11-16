@@ -94,7 +94,7 @@ namespace Actor
             _stateMachine.ChangeState(States.NoControl);
         }
 
-        public void Hitted(float damage)
+        public void Hitted(float damage, int hitter)
         {
             if(damage < 0) _stat.Heal(-damage);
             else _stat.Attack(damage);

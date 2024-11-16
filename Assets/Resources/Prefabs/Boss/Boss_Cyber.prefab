@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7832186377819647069}
   - component: {fileID: 8675172293797494502}
   - component: {fileID: 1868198188544413246}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: BossHpBarBack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -288,7 +288,7 @@ GameObject:
   - component: {fileID: 6675047999379575478}
   - component: {fileID: 2191547433245886614}
   - component: {fileID: 3828048132128842948}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -636,7 +636,7 @@ GameObject:
   - component: {fileID: 7696867207867166271}
   - component: {fileID: 3141555220722260368}
   - component: {fileID: 8164751920329373980}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: BossHpBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
