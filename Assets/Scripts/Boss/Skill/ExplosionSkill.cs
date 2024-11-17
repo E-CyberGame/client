@@ -8,6 +8,9 @@ public class ExplosionSkill : MonoBehaviour, BSkill
 {
     [SerializeField]
     GameObject explode;
+    [SerializeField]
+    Animator animator;
+
 
     public void Activate()
     {
@@ -16,10 +19,11 @@ public class ExplosionSkill : MonoBehaviour, BSkill
 
     IEnumerator Explosion()
     {
-        yield return new WaitForSeconds(1.0f);
-        explode.SetActive(true);
+        animator.SetTrigger("boom");
+        yield return new WaitForSeconds(0.5f);
+        explode.GetComponent<CircleCollider2D>().enabled = true;
         yield return new WaitForSeconds(0.8f);
-        explode.SetActive(false);
+        explode.GetComponent<CircleCollider2D>().enabled = false;
     }
 
 }
