@@ -15,7 +15,7 @@ namespace Actor.Skill
         {
             if (!HasStateAuthority) return;
             if (target == null) return;
-            target.Hitted(_stat.atk * _damage, _playerLayer);
+            target.Hitted(_stat.GetAtk.Value * _damage, _playerLayer);
             _animator.SetTrigger("isHitted");
         }
 
