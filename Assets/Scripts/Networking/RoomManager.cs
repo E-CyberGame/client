@@ -21,6 +21,12 @@ public class RoomManager : NetworkBehaviour
     
     public Action<PVPData> ChangeGameSetting = null;
     public Action BeforeGameStart = null;
+    public Action AfterGameEnd = null;
+    public Action EnterPostGame = null;
+    public Action ScoreChanged = null;
+
+    [Networked] public int RedTeamDead { get; set; }= 0;
+    [Networked] public int BlueTeamDead { get; set; }= 0;
     
     public void UpdateGameSetting()
     {
@@ -40,6 +46,17 @@ public class RoomManager : NetworkBehaviour
     }
     #endregion
 
+    public void RespawnPlayer(PlayerRef player)
+    {
+        if (!HasStateAuthority) return;
+        PlayerObject ob = PlayerRegistry.GetPlayer(player);
+        ob.InitPlayerPosition(MapType);
+        if (ob.gameObject.layer == LayerMask.NameToLayer("BlueTeam")) BlueTeamDead++;
+        else RedTeamDead++;
+        
+        ScoreChanged?.Invoke();
+    }
+
     public override void Spawned()
     {
         Debug.Log("RoomManager");
@@ -51,5 +68,10 @@ public class RoomManager : NetworkBehaviour
     public void Rpc_LoadDone(PlayerRef player)
     {
         PlayerRegistry.GetPlayer(player).IsLoaded = true;
+    }
+
+    public void ExitRoom()
+    {
+        Runner.LoadScene("MainRoom");
     }
 }

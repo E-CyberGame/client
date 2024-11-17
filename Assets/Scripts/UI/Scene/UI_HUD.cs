@@ -25,12 +25,18 @@ public class UI_HUD : UI_Scene
         Bind<TextMeshProUGUI>(typeof(Images));
 
         _middlePanel = GetText((int)Images.MiddlePanel);
-        _middleAnimator = GetComponent<Animator>();
+        _middleAnimator = _middlePanel.gameObject.GetComponent<Animator>();
     }
     
     public void StartGame()
     {
         _middlePanel.text = "Start";
         _middleAnimator.Play("StartAnimation");
+    }
+
+    public void SetPanel(string panelText)
+    {
+        _middlePanel.text = panelText;
+        _middleAnimator.Play("StartAnimation", 0, 0f);
     }
 }

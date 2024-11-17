@@ -22,7 +22,7 @@ public class ActorStat : NetworkBehaviour
     public Action SpeedStatChanged = null;
     public Action CoolTimePercentStatChanged = null;
     public Action DamagePercentStatChanged = null;
-    
+
     //Fluid Stat : 게임 중 유동적인 변화가 가장 큰 스탯
     [Networked] public float hp { get; set; }
     [Networked] public float mp { get; set; }
@@ -68,7 +68,7 @@ public class ActorStat : NetworkBehaviour
 
     private void InitStat()
     {
-        SetMaxHP = 150;         // 최대 HP
+        SetMaxHP = 100;         // 최대 HP
         SetMaxMP = 100;         // 최대 MP
         SetAtk = 15;            // 공격력
         SetDef = 5;             // 방어력
@@ -124,6 +124,11 @@ public class ActorStat : NetworkBehaviour
             {
                 case nameof(hp):
                     HpStatChanged?.Invoke();
+                    if (hp <= 0)
+                    {
+                        RoomManager.Instance.RespawnPlayer(Runner.LocalPlayer);
+                        hp = GetMaxHP.Value;
+                    }
                     break;
                 case nameof(mp):
                     MpStatChanged?.Invoke();

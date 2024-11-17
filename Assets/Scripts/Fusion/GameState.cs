@@ -14,6 +14,8 @@ public class GameState : NetworkBehaviour
     [Networked] TickTimer Delay { get; set; }
     [Networked] EGameState DelayedState { get; set; }
 
+    [Networked] public float PlayTime { get; set; } = 30000f;
+
     protected StateMachine<EGameState> StateMachine = new StateMachine<EGameState>();
 
     public override void Spawned()
@@ -113,6 +115,7 @@ public class GameState : NetworkBehaviour
             if (Runner.IsServer)
             {
                 BossManager.Instance.GameStart();
+                Server_DelaySetState(EGameState.Outro, 3000000f);
             }
         };
 
@@ -122,6 +125,7 @@ public class GameState : NetworkBehaviour
 
         StateMachine[EGameState.Outro].onEnter = prev =>
         {
+            RoomManager.Instance.AfterGameEnd?.Invoke();
             /*
             GameManager.CalculateScores();
             UIScreen.activeScreen.BackTo(InterfaceManager.Instance.hud);
@@ -143,8 +147,7 @@ public class GameState : NetworkBehaviour
             }
             */
 
-            Server_DelaySetState(EGameState.Postgame, 5);
-
+            Server_DelaySetState(EGameState.Postgame, 3);
         };
 
         StateMachine[EGameState.Outro].onExit = next =>
@@ -154,12 +157,13 @@ public class GameState : NetworkBehaviour
 
         StateMachine[EGameState.Postgame].onEnter = prev =>
         {
+            RoomManager.Instance.EnterPostGame?.Invoke();
             /*
             Level.Unload();
             InterfaceManager.Instance.postgameUI.SetWinner(PlayerRegistry.OrderDesc(p => p.TotalScore).First());
             UIScreen.Focus(InterfaceManager.Instance.postgameUI.screen);
             */
-            Server_DelaySetState(EGameState.Pregame, 5);
+            //Server_DelaySetState(EGameState.Pregame, 5);
         };
 
         StateMachine[EGameState.Postgame].onUpdate = () =>
@@ -215,4 +219,5 @@ public class GameState : NetworkBehaviour
         Delay = TickTimer.CreateFromSeconds(Runner, delay);
         DelayedState = newState;
     }
+    
 }

@@ -105,8 +105,6 @@ public class PVPMatchingPresenter : NetworkBehaviour, IPlayerJoined, IPlayerLeft
             po.SetLayer(LayerMask.NameToLayer("BlueTeam"));
             po.TeamNumber = i;
         }
-
-        Debug.Log("설마이게여러번실행됨? 그럴리가");
         
         RoomManager.State.Server_SetState(GameState.EGameState.Loading);
         Runner.LoadScene(RoomManager.Instance.MapType.ToString());
