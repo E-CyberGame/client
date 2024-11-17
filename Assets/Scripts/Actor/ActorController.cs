@@ -85,6 +85,7 @@ namespace Actor
         public void SetPlayerLocation(Vector3 location)
         {
             transform.position = location;
+            Debug.Log("이동" + transform.position);
         }
 
         public void SetTimer(TickTimer timer)
