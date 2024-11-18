@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 42686556}
   - component: {fileID: 42686558}
   m_Layer: 5
-  m_Name: MiddleImage
+  m_Name: MiddlePanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 896097859755969833}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2410,6 +2410,8 @@ GameObject:
   - component: {fileID: 896097859755969836}
   - component: {fileID: 324526118}
   - component: {fileID: 1268748111}
+  - component: {fileID: 4106284198523279550}
+  - component: {fileID: 6138945505730118944}
   m_Layer: 5
   m_Name: PlayerCanvas
   m_TagString: Untagged
@@ -2435,6 +2437,9 @@ RectTransform:
   - {fileID: 7215094382350995152}
   - {fileID: 543906648}
   - {fileID: 2080656039}
+  - {fileID: 42686555}
+  - {fileID: 666156133819941456}
+  - {fileID: 1752620542411069426}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

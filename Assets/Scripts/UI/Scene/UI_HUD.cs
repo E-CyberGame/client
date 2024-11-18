@@ -44,5 +44,10 @@ public class UI_HUD : UI_Scene
         _bossAlert.SetActive(true);
         yield return new WaitForSeconds(4.0f);
         _bossAlert.SetActive(false);
+        
+    public void SetPanel(string panelText)
+    {
+        _middlePanel.text = panelText;
+        _middleAnimator.Play("StartAnimation", 0, 0f);
     }
 }

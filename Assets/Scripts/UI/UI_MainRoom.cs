@@ -34,7 +34,7 @@ public class UI_MainRoom : UI_Popup
 
         GetButton((int)Buttons.SoloButton).gameObject.BindUIEvent(SoloButtonClicked);
         GetButton((int)Buttons.MultiButton).gameObject.BindUIEvent(MultiButtonClicked);
-        //GetButton((int)Buttons.CharacterButton).gameObject.BindUIEvent(CharacterButtonClicked);
+        GetButton((int)Buttons.CharacterButton).gameObject.BindUIEvent(CharacterButtonClicked);
         //GetButton((int)Buttons.SpecialRaidButton).gameObject.BindUIEvent(SpecialRaidButtonClicked);
         //GetButton((int)Buttons.SettingButton).gameObject.BindUIEvent(SpecialRaidButtonClicked);
 
