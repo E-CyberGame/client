@@ -8,6 +8,7 @@ public class UI_HUD : UI_Scene
     //두개 합칠까 말까...
     private TextMeshProUGUI _middlePanel;
     private Animator _middleAnimator;
+    [SerializeField] private GameObject _bossAlert;
     
     enum Images
     {
@@ -26,11 +27,22 @@ public class UI_HUD : UI_Scene
 
         _middlePanel = GetText((int)Images.MiddlePanel);
         _middleAnimator = GetComponent<Animator>();
+
+        StartCoroutine(BossAlarm());
     }
     
     public void StartGame()
     {
         _middlePanel.text = "Start";
         _middleAnimator.Play("StartAnimation");
+    }
+
+    IEnumerator BossAlarm()
+    {
+        Debug.Log("알람");
+        yield return new WaitForSeconds(15.0f);
+        _bossAlert.SetActive(true);
+        yield return new WaitForSeconds(4.0f);
+        _bossAlert.SetActive(false);
     }
 }
