@@ -109,7 +109,7 @@ public class ActorStat : NetworkBehaviour
         if (healAmount < 0) return;
         hp += healAmount;
     }
-
+    
     public override void Spawned()
     {
         _changeDetector = GetChangeDetector(ChangeDetector.Source.SimulationState);

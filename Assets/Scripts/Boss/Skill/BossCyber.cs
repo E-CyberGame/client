@@ -90,7 +90,7 @@ namespace Boss.Skill
             horizontal.SetRandomY();
             vertical.Lay(vlaynum);
             horizontal.Lay(hlaynum);
-            yield return new WaitForSeconds(4.0f);
+            yield return new WaitForSeconds(8.0f);
             CyberSkill();
         }
 
@@ -105,7 +105,7 @@ namespace Boss.Skill
             Debug.Log("구름 소환");
             cloud.CloudSpawn();
             is_Cloud = true;
-            yield return new WaitForSeconds(3.0f);
+            yield return new WaitForSeconds(6.0f);
             CyberSkill();
         }
 
@@ -114,7 +114,7 @@ namespace Boss.Skill
         {
             Debug.Log("폭발");
             Rpc_ActivateExplosion();
-            yield return new WaitForSeconds(3.0f);
+            yield return new WaitForSeconds(6.0f);
             CyberSkill();
         }
 

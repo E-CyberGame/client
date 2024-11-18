@@ -14,7 +14,7 @@ namespace Actor.Skill
         {
             if (!HasStateAuthority) return;
             if (target == null) return;
-            target.Hitted(_stat.GetAtk.Value * atkPercent);
+            target.Hitted(_stat.GetAtk.Value * atkPercent, _playerLayer);
         }
     }
 }

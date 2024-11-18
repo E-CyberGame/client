@@ -89,14 +89,14 @@ namespace Boss.Skill
         {
             Debug.Log("¼¼·Î ºö");
             vertical.Lay(vlaynum);
-            yield return new WaitForSeconds(4.0f);
+            yield return new WaitForSeconds(8.0f);
             SubwaySkill();
         }
         IEnumerator VLaySkill()
         {
             Debug.Log("°¡·Î ºö");
             horizontal.Lay(hlaynum);
-            yield return new WaitForSeconds(4.0f);
+            yield return new WaitForSeconds(8.0f);
             SubwaySkill();
         }
 
@@ -104,14 +104,14 @@ namespace Boss.Skill
         {
             Debug.Log("¿î¼®");
             fall.Fall(fallnum);
-            yield return new WaitForSeconds(6.0f);
+            yield return new WaitForSeconds(10.0f);
             SubwaySkill();
         }
         IEnumerator LateFallSkill()
         {
             Debug.Log("Áö¿¬¼ú+ ¿î¼®");
             fall.LateFall(fallnum);
-            yield return new WaitForSeconds(10.0f);
+            yield return new WaitForSeconds(15.0f);
             SubwaySkill();
         }
 
@@ -119,7 +119,7 @@ namespace Boss.Skill
         {
             Debug.Log("Æø¹ß");
             Rpc_ActivateExplosion();
-            yield return new WaitForSeconds(3.0f);
+            yield return new WaitForSeconds(6.0f);
             SubwaySkill();
         }
 

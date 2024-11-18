@@ -29,7 +29,7 @@ public class BossManager : NetworkBehaviour
 
     IEnumerator BossSpawnRoutine()
     {
-        yield return new WaitForSeconds(10.0f);
+        yield return new WaitForSeconds(20.0f);
         Runner.Spawn(BossPrefab);
     }
 }
