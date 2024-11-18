@@ -24,7 +24,7 @@ public class UI_CharacterManaging : UI_Popup
         Character3,
         Character4,
         */
-        Skill1, Skill2, Skill3, Skill4, Skill5,
+        Skill1, Skill2, Skill3, Skill4,
         PollutionClearButton,
         PollutionPopupCancle, PollutionPopupAccept,
         Plus10Button, Minus10Button, Plus100Button,
@@ -51,7 +51,6 @@ public class UI_CharacterManaging : UI_Popup
         GetButton((int)Buttons.Skill2).gameObject.BindUIEvent(SkillButtonClicked);
         GetButton((int)Buttons.Skill3).gameObject.BindUIEvent(SkillButtonClicked);
         GetButton((int)Buttons.Skill4).gameObject.BindUIEvent(SkillButtonClicked);
-        GetButton((int)Buttons.Skill5).gameObject.BindUIEvent(SkillButtonClicked);
         GetButton((int)Buttons.PollutionClearButton).gameObject.BindUIEvent(PollutionClearButtonClicked);
         GetButton((int)Buttons.PollutionPopupCancle).gameObject.BindUIEvent(PollutionPopupCancleClicked);
         GetButton((int)Buttons.PollutionPopupAccept).gameObject.BindUIEvent(PollutionPopupAcceptClicked);
