@@ -44,10 +44,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SEI-test/PVP.unity
     guid: 4e97f8114aa23614697bd7c228787b01
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/SEI-test/CharacterManaging.unity
     guid: d75ba3c787220ae47812f51f8b2c6dff
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/SEI-test/SkillManaging.unity
     guid: ae589618cf2cd384587dde7b540264ef
   - enabled: 0
