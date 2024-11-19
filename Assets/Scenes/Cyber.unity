@@ -752,7 +752,8 @@ MonoBehaviour:
   ObjectInterest: 1
   Flags: 262145
   NestedObjects: []
-  NetworkedBehaviours: []
+  NetworkedBehaviours:
+  - {fileID: 199019628}
 --- !u!114 &199019628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -765,7 +766,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa5feb42181172240a996742032c3b44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _hp: 0
+  _maxHP: 0
+  _atk: 0
+  _cri_percent: 0
+  _cri_damage: 0
   BossPrefab: {fileID: 7695072403731521023, guid: 69d741ec734d9c145874fdd3ce60e4b5, type: 3}
+  _view: {fileID: 0}
 --- !u!4 &199019629
 Transform:
   m_ObjectHideFlags: 0
