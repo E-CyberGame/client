@@ -26,7 +26,7 @@ public class UI_HUD : UI_Scene
         Bind<TextMeshProUGUI>(typeof(Images));
 
         _middlePanel = GetText((int)Images.MiddlePanel);
-        _middleAnimator = GetComponent<Animator>();
+        _middleAnimator = _middlePanel.gameObject.GetComponent<Animator>();
 
         StartCoroutine(BossAlarm());
     }
