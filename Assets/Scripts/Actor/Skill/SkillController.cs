@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Actor.Skill;
@@ -51,13 +52,15 @@ public class SkillController : NetworkBehaviour
     //만약 스킬 설정 때문에 뭐... 어케 해야 하면 새로 오브젝트 파서 게임 시작할 때 생성
     public void skillSlotInit()
     {
-        skillSlotDict = new Dictionary<SkillSlot, ISkill>()
+        ISkill[] skills = gameObject.GetComponents<ISkill>();
+        skillSlotDict = new Dictionary<SkillSlot, ISkill>();
+
+        int index = 1; //PlainAttack 제외
+        foreach(SkillSlot slot in Enum.GetValues(typeof(SkillSlot)))
         {
-            { SkillSlot.slot1, gameObject.GetComponent<TripleExplosion>() },
-            { SkillSlot.slot2, gameObject.GetComponent<BurnUp>() },
-            { SkillSlot.slot3, gameObject.GetComponent<HealSpace>() },
-            { SkillSlot.slot4, gameObject.GetComponent<BlueRotation>() }
-        };
+            if(index < skills.Length) skillSlotDict.Add(slot, skills[index]);
+            index++;
+        }
     }
 
     public void UseSkill(SkillSlot slot)
