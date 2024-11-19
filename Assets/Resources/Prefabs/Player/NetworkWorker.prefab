@@ -31,6 +31,7 @@ GameObject:
   - component: {fileID: 7719738946249355004}
   - component: {fileID: 8935782570634443004}
   - component: {fileID: 3151739033697451259}
+  - component: {fileID: -6314042769023002200}
   m_Layer: 7
   m_Name: NetworkWorker
   m_TagString: Player
@@ -293,6 +294,7 @@ MonoBehaviour:
   - {fileID: 7719738946249355004}
   - {fileID: 8935782570634443004}
   - {fileID: 3151739033697451259}
+  - {fileID: -6314042769023002200}
 --- !u!114 &407036373728366900
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -498,3 +500,17 @@ MonoBehaviour:
   - {x: 2, y: 0, z: 0}
   - {x: 0, y: 2, z: 0}
   - {x: 0, y: -2, z: 0}
+--- !u!114 &-6314042769023002200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 407036373728366916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24a62934c46142d8affe495dd692d31e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _anim: {fileID: 0}
+  __canUse: 1
