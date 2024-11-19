@@ -2363,7 +2363,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05d8183b620ddb547b3dee740a54b7f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bossAlert: {fileID: 5445416732348051915, guid: 00000000000000000000000000000000, type: 0}
+  _bossAlert: {fileID: 0}
 --- !u!114 &1268748111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3004,7 +3004,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3798578886369327335, guid: db136acd84ad0c9418edd517adf74452, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db136acd84ad0c9418edd517adf74452, type: 3}
