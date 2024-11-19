@@ -26,7 +26,7 @@ namespace UI.Scene
 
         public void UpdateScore(int Red, int Blue)
         {
-            _score.text = $"{Red} : {Blue}";
+            _score.text = $"<color=#DC143C>{Red}</color> : <color=#0000CD>{Blue}</color>";
         }
     }
 }

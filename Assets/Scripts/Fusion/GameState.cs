@@ -115,7 +115,7 @@ public class GameState : NetworkBehaviour
             if (Runner.IsServer)
             {
                 BossManager.Instance.GameStart();
-                Server_DelaySetState(EGameState.Outro, 3000000f);
+                Server_DelaySetState(EGameState.Outro, 3f);
             }
         };
 

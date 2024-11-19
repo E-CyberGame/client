@@ -12,7 +12,7 @@ public class HUDController : MonoBehaviour
     public void Awake()
     {
         _view = GetComponent<UI_HUD>();
-        _result = GetComponent<UI_Result>();
+        _result = GetComponentInChildren<UI_Result>();
         _score = GetComponent<UI_Score>();
     }
 

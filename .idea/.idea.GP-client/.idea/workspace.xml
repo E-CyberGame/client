@@ -6,9 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="48512494-4aeb-4d91-a298-89a062182807" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GP-client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GP-client/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/CreateCharacter.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/CreateCharacter.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Login.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Login.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Player/NetworkWorker.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/Player/NetworkWorker.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/TestPrefabs/PlayerCanvas.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/TestPrefabs/PlayerCanvas.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Fusion/GameState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Fusion/GameState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/Scene/HUDController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/Scene/HUDController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/Scene/UI_Result.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/Scene/UI_Result.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/Scene/UI_Score.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/Scene/UI_Score.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +66,7 @@
     ]
   }
 }</component>
-  <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
+  <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor &amp; Play">
     <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="$USER_HOME$/Desktop/TestBuild\GP-client.exe" />
       <option name="PROGRAM_PARAMETERS" value="" />
@@ -158,7 +161,11 @@
       <workItem from="1730706824803" duration="2551000" />
       <workItem from="1730709650089" duration="3414000" />
       <workItem from="1730718501199" duration="4612000" />
-      <workItem from="1730801654101" duration="1999000" />
+      <workItem from="1730801654101" duration="2558000" />
+      <workItem from="1731757040904" duration="4316000" />
+      <workItem from="1731837700269" duration="2534000" />
+      <workItem from="1731842568493" duration="8993000" />
+      <workItem from="1731926242367" duration="3874000" />
     </task>
     <servers />
   </component>
