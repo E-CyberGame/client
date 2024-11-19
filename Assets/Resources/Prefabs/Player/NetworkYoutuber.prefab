@@ -23,6 +23,12 @@ GameObject:
   - component: {fileID: 609365612162539355}
   - component: {fileID: 2852878929368029844}
   - component: {fileID: 806149037562277683}
+  - component: {fileID: -5558218753875420904}
+  - component: {fileID: 4781529439688206053}
+  - component: {fileID: -1932639318301412993}
+  - component: {fileID: -4676947441831770068}
+  - component: {fileID: -9193500113094228710}
+  - component: {fileID: -9017102794105803923}
   m_Layer: 7
   m_Name: NetworkYoutuber
   m_TagString: Player
@@ -174,18 +180,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hp: 0
   _mp: 0
-  _maxHP: 0
-  _maxMP: 0
-  _atk: 0
-  _def: 0
-  _cri_percent: 0
-  _cri_damage: 0
-  _speed: 0
+  _SetMaxHP: 0
+  _SetMaxMP: 0
+  _SetAtk: 0
+  _SetDef: 0
+  _SetCriPercent: 0
+  _SetCriDamage: 0
+  _SetSpeed: 0
+  _SetCoolTimePercent: 0
+  _SetDamagePercent: 0
   moveSpeed: 4
   jumpTime: 0.3
   downSpeed: 15
   dashSpeedRatio: 1.7
   dashTime: 0.3
+  gravity: 1
   MaxJumpCount: 2
 --- !u!114 &407036373728366925
 MonoBehaviour:
@@ -199,9 +208,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5318f6652b8a79749ad973dacdd63b4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundCheckLine: 1.05
+  groundCheckLine: 0.35
   jumpHeight: 3
-  dashLength: 5
+  dashLength: 3
+  _velocity: {x: 0, y: 0, z: 0}
+  _acceleration: {x: 0, y: 0, z: 0}
+  onGound: 0
+  onGravity: 1
+  isJumping: 0
   isPressing: 0
   _directionX: {x: 0, y: 0}
   beforeDirectionX: {x: 0, y: 0}
@@ -217,6 +231,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29f79c1064c11454393ce42bfb726e9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PassiveSkills: []
+  PlainSkill: {fileID: 0}
 --- !u!114 &407036373728366928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -267,6 +283,12 @@ MonoBehaviour:
   - {fileID: 407036373728366928}
   - {fileID: 407036373728366900}
   - {fileID: 806149037562277683}
+  - {fileID: -5558218753875420904}
+  - {fileID: 4781529439688206053}
+  - {fileID: -1932639318301412993}
+  - {fileID: -4676947441831770068}
+  - {fileID: -9193500113094228710}
+  - {fileID: -9017102794105803923}
 --- !u!114 &407036373728366900
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -343,3 +365,106 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _CurrentAnim: 0
+--- !u!114 &-5558218753875420904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 407036373728366916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40892edb973972a42876081d6758a8fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Index: 0
+  _Controller: {fileID: 407036373728366927}
+  _Nickname: 
+  _Color: {r: 0, g: 0, b: 0, a: 0}
+  IsReady: 0
+  _Character: 1
+  _TeamNumber: 0
+  _IsLoaded: 0
+  _IsSpectator: 0
+  _Strokes: 0
+  _TimeTaken: 0
+  _Scores: 
+--- !u!114 &4781529439688206053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 407036373728366916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c983e2e23f2540209fbac6573734bcc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _anim: {fileID: 0}
+  __canUse: 1
+--- !u!114 &-1932639318301412993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 407036373728366916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0afcbc3fd6c243f4964842cd31c3ceff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _anim: {fileID: 0}
+  __canUse: 1
+  explodePosition:
+  - {x: 1, y: 0.5, z: 0}
+  - {x: 2, y: 0.5, z: 0}
+  - {x: -1, y: 0.5, z: 0}
+  - {x: -2, y: 0.5, z: 0}
+  - {x: 0, y: 0.5, z: 0}
+--- !u!114 &-4676947441831770068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 407036373728366916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be54f6c6d980459292f7d95fcd0e9db6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _anim: {fileID: 0}
+  __canUse: 1
+  explodePosition:
+  - {x: -2, y: 0, z: 0}
+  - {x: 2, y: 0, z: 0}
+  - {x: 0, y: 2, z: 0}
+  - {x: 0, y: -2, z: 0}
+--- !u!114 &-9193500113094228710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 407036373728366916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a7514aad439413bbd32713ec7c4353f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _anim: {fileID: 0}
+  __canUse: 1
+--- !u!114 &-9017102794105803923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 407036373728366916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da25b16303cf465ab9e60144e3d01ee7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
