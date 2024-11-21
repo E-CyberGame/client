@@ -7,17 +7,17 @@ using Web.DTO;
 public class CharacterInfoDTO : DTO
 {
     public string name { get; set; }
-    public int character { get; set; }
-    public int level { get; set; }
+    public CharacterType character { get; set; }
+    public int exp { get; set; }
     public int crystal { get; set; }
-    public int gold { get; set; }
+    public int decay { get; set; }
 
-    public CharacterInfoDTO(string name, CharacterType type, int level, int crystal, int gold)
+    public CharacterInfoDTO(string name, CharacterType character, int exp, int crystal, int decay)
     {
         this.name = name;
-        this.character = (int)type;
-        this.level = level;
+        this.character = character;
+        this.exp = exp;
         this.crystal = crystal;
-        this.gold = gold;
+        this.decay = decay;
     }
 }
