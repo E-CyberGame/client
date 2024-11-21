@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,8 @@ public class GameStat : Stat
 {
     public float percent = 1;
     public int number = 0;
+
+    public Action StatChanged = null;
 
     public new float Value
     {

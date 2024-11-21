@@ -5,12 +5,12 @@ using Web.DTO;
 
 public class LoginDTO : DTO
 {
-    public string username { get; set; }
+    public string userid { get; set; }
     public string password { get; set; }
 
-    public LoginDTO(string username, string password)
+    public LoginDTO(string userid, string password)
     {
-        this.username = username;
+        this.userid = userid;
         this.password = password;
     }
 }
