@@ -66,7 +66,7 @@ public class SkillController : NetworkBehaviour
     public void UseSkill(SkillSlot slot)
     {
         if (!HasStateAuthority) return;
-        skillSlotDict[slot].Activate();
+        skillSlotDict[slot]?.Activate();
     }
 
     public void PlainAttack()
