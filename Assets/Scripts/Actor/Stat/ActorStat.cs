@@ -13,15 +13,6 @@ public class ActorStat : NetworkBehaviour
 
     public Action HpStatChanged = null;
     public Action MpStatChanged = null;
-    public Action MaxHpStatChanged = null;
-    public Action MaxMpStatChanged = null;
-    public Action AtkStatChanged = null;
-    public Action DefStatChanged = null;
-    public Action CriPercentStatChanged = null;
-    public Action CriDamageStatChanged = null;
-    public Action SpeedStatChanged = null;
-    public Action CoolTimePercentStatChanged = null;
-    public Action DamagePercentStatChanged = null;
 
     //Fluid Stat : 게임 중 유동적인 변화가 가장 큰 스탯
     [Networked] public float hp { get; set; }
@@ -134,46 +125,46 @@ public class ActorStat : NetworkBehaviour
                     MpStatChanged?.Invoke();
                     break;
                 case nameof(SetMaxHP):
-                    MaxHpStatChanged?.Invoke();
+                    GetMaxHP.StatChanged?.Invoke();
                     GetMaxHP.SetValue(SetMaxHP);
                     break;
                 case nameof(SetMaxMP):
-                    MaxMpStatChanged?.Invoke();
+                    GetMaxMP.StatChanged?.Invoke();
                     GetMaxMP.SetValue(SetMaxMP);
                     break;
 
                 case nameof(SetAtk):
-                    AtkStatChanged?.Invoke();
+                    GetAtk.StatChanged?.Invoke();
                     GetAtk.SetValue(SetAtk);
                     break;
 
                 case nameof(SetDef):
-                    DefStatChanged?.Invoke();
+                    GetDef.StatChanged?.Invoke();
                     GetDef.SetValue(SetDef);
                     break;
 
                 case nameof(SetCriPercent):
-                    CriPercentStatChanged?.Invoke();
+                    GetCriPercent.StatChanged?.Invoke();
                     GetCriPercent.SetValue(SetCriPercent);
                     break;
 
                 case nameof(SetCriDamage):
-                    CriDamageStatChanged?.Invoke();
+                    GetCriDamage.StatChanged?.Invoke();
                     GetCriDamage.SetValue(SetCriDamage);
                     break;
 
                 case nameof(SetSpeed):
-                    SpeedStatChanged?.Invoke();
+                    GetSpeed.StatChanged?.Invoke();
                     GetSpeed.SetValue(SetSpeed);
                     break;
                 
                 case nameof(SetCoolTimePercent):
-                    CoolTimePercentStatChanged?.Invoke();
+                    GetCoolTimePercent.StatChanged?.Invoke();
                     GetCoolTimePercent.SetValue(SetCoolTimePercent);
                     break;
                 
                 case nameof(SetDamagePercent):
-                    DamagePercentStatChanged?.Invoke();
+                    GetDamagePercent.StatChanged?.Invoke();
                     GetDamagePercent.SetValue(SetDamagePercent);
                     break;
             }
