@@ -79,42 +79,42 @@ namespace UI.Scene
             }
         }
 
-        [Rpc(RpcSources.All, RpcTargets.All)]
+        [Rpc(RpcSources.InputAuthority, RpcTargets.All)]
         public void RPC_UpdateR1HP()
         {
             Debug.Log("R1");
             _view._RteamhpBar1.fillAmount = R_actors[0].hp / R_actors[0].SetMaxHP;
         }
 
-        [Rpc(RpcSources.All, RpcTargets.All)]
+        [Rpc(RpcSources.InputAuthority, RpcTargets.All)]
         public void RPC_UpdateR2HP()
         {
             Debug.Log("R2");
             _view._RteamhpBar2.fillAmount = R_actors[1].hp / R_actors[1].SetMaxHP;
         }
 
-        [Rpc(RpcSources.All, RpcTargets.All)]
+        [Rpc(RpcSources.InputAuthority, RpcTargets.All)]
         public void RPC_UpdateR3HP()
         {
             Debug.Log("R3");
             _view._RteamhpBar3.fillAmount = R_actors[2].hp / R_actors[2].SetMaxHP;
         }
 
-        [Rpc(RpcSources.All, RpcTargets.All)]
+        [Rpc(RpcSources.InputAuthority, RpcTargets.All)]
         public void RPC_UpdateB1HP()
         {
             Debug.Log("B1");
             _view._BteamhpBar1.fillAmount = B_actors[0].hp / B_actors[0].SetMaxHP;
         }
 
-        [Rpc(RpcSources.All, RpcTargets.All)]
+        [Rpc(RpcSources.InputAuthority, RpcTargets.All)]
         public void RPC_UpdateB2HP()
         {
             Debug.Log("B2");
             _view._BteamhpBar2.fillAmount = B_actors[1].hp / B_actors[1].SetMaxHP;
         }
 
-        [Rpc(RpcSources.All, RpcTargets.All)]
+        [Rpc(RpcSources.InputAuthority, RpcTargets.All)]
         public void RPC_UpdateB3HP()
         {
             Debug.Log("B3");
