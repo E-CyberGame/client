@@ -8,7 +8,7 @@ namespace Actor.Skill
         {
             base.Awake();
             _coolTime = 0.6f;
-            projectileList.Add(Resources.Load<GameObject>("TestPrefabs/Fireball"));
+            projectileList.Add(Resources.Load<GameObject>("Skill/Projectiles/Fireball"));
         }
         
         public override void Activate()
