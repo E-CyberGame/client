@@ -39,7 +39,6 @@ public class UI_HUD : UI_Scene
 
     IEnumerator BossAlarm()
     {
-        Debug.Log("알람");
         yield return new WaitForSeconds(15.0f);
         _bossAlert.SetActive(true);
         yield return new WaitForSeconds(4.0f);

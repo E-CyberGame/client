@@ -92,7 +92,15 @@ public class PVPMatchingPresenter : NetworkBehaviour, IPlayerJoined, IPlayerLeft
 
     public void GameStart()
     {
-        for(int i = 0; i < RedTeam.Count; i++)
+        Rpc_SetTeam();
+        RoomManager.State.Server_SetState(GameState.EGameState.Loading);
+        Runner.LoadScene(RoomManager.Instance.MapType.ToString());
+    }
+
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    public void Rpc_SetTeam()
+    {
+        for (int i = 0; i < RedTeam.Count; i++)
         {
             PlayerObject po = PlayerRegistry.GetPlayer(RedTeam[i]);
             po.SetLayer(LayerMask.NameToLayer("RedTeam"));
@@ -105,9 +113,6 @@ public class PVPMatchingPresenter : NetworkBehaviour, IPlayerJoined, IPlayerLeft
             po.SetLayer(LayerMask.NameToLayer("BlueTeam"));
             po.TeamNumber = i;
         }
-        
-        RoomManager.State.Server_SetState(GameState.EGameState.Loading);
-        Runner.LoadScene(RoomManager.Instance.MapType.ToString());
     }
 
     [Rpc(RpcSources.All, RpcTargets.All)]
