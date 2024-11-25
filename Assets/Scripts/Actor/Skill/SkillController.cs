@@ -44,8 +44,12 @@ public class SkillController : NetworkBehaviour
     //이거 봐서 가능하면... 그냥 끌어오기로 바꾸기... 그냥 component로 찾아서... 하는 걸로...
     public void PassiveSkillinit()
     {
-        PassiveSkills.Add(gameObject.GetComponent<TwoHeartSkill>());
-        PassiveSkills.Add(gameObject.GetComponent<RapidMovementSkill>());
+        PassiveSkill[] passiveSkills = gameObject.GetComponents<PassiveSkill>();
+
+        foreach (PassiveSkill passiveSkill in passiveSkills)
+        {
+            PassiveSkills.Add(passiveSkill);
+        }
     }
     
     //Network Behaviour은 스폰 전에 부착해야 함.
