@@ -18,10 +18,16 @@ public class WrapBody : NetworkBehaviour
     private NetworkTransform _nettransform;
     
     private LayerMask groundLayer;
-    
+    private LayerMask WallLayer;
+
     private float dashVelocity = 1.0f;
     private RaycastHit2D _hitGround;
+    private RaycastHit2D _hitWallR;
+    private RaycastHit2D _hitWallL;
 
+    private bool dashable = true;
+
+    public float wallCheckLine = 0.3f;
     public float groundCheckLine = 1f;
     public float jumpHeight = 2.0f;
     public float dashLength = 3.0f;
@@ -65,6 +71,7 @@ public class WrapBody : NetworkBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
         _transform = transform;
         groundLayer = LayerMask.GetMask("Ground");
+        WallLayer = LayerMask.GetMask("Wall");
     }
 
     public bool OnGround()
@@ -78,6 +85,25 @@ public class WrapBody : NetworkBehaviour
         _hitGround = Physics2D.Raycast(_transform.position, Vector3.down, groundCheckLine
             , groundLayer);
         if(_hitGround)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    private bool LWallCheck()
+    {
+        _hitWallL = Physics2D.Raycast(_transform.position, Vector3.left, wallCheckLine, WallLayer);
+        if (_hitWallL)
+        {
+            return true;
+        }
+        return false;
+    }
+    private bool RWallCheck()
+    {
+        _hitWallR = Physics2D.Raycast(_transform.position, Vector3.right, wallCheckLine, WallLayer);
+        if (_hitWallR)
         {
             return true;
         }
@@ -123,6 +149,15 @@ public class WrapBody : NetworkBehaviour
             _velocity += _acceleration * Runner.DeltaTime;
             if (isDashing || !onGravity) 
                 _velocity.y = 0;
+
+            if (LWallCheck() && _velocity.x < 0)
+            {
+                _velocity.x = 0;
+
+            }
+
+            if (RWallCheck() && _velocity.x > 0)
+                _velocity.x = 0;
 
             _transform.position += _velocity;
 
@@ -183,9 +218,14 @@ public class WrapBody : NetworkBehaviour
 
     public void DashOn()
     {
-        GravityOFF();
-        isDashing = true;
-        _acceleration.x = currentDirectionX.x * (dashLength / _stat.dashTime);
+        if (dashable)
+        {
+            GravityOFF();
+            isDashing = true;
+            _acceleration.x = currentDirectionX.x * (dashLength / _stat.dashTime);
+            dashable = false;
+            StartCoroutine(DashCoolDown());
+        }
     }
 
     public float GetDashTime()
@@ -198,5 +238,11 @@ public class WrapBody : NetworkBehaviour
         GravityOn();
         isDashing = false;
         _acceleration.x = 0;
+    }
+    
+    IEnumerator DashCoolDown()
+    {
+        yield return new WaitForSeconds(1.0f);
+        dashable = true;
     }
 }

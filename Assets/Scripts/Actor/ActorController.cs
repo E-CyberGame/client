@@ -21,7 +21,6 @@ namespace Actor
 
         [Networked]
         public TickTimer PlayerTimer { get; set; }
-
         private bool _startTimer = false;
 
         void Awake()
@@ -63,7 +62,7 @@ namespace Actor
                     _skill.UseSkill(SkillSlot.slot4);
                 if (input.SkillButtons.WasPressed(PreviousSkillButtons, SkillButton.Attack))
                     _skill.PlainAttack();
-                
+
                 if (input.Direction.x == 1.0f)
                     transform.eulerAngles = Vector3.down * -180f;
                 else if (input.Direction.x == -1.0f) transform.eulerAngles = Vector3.zero;
