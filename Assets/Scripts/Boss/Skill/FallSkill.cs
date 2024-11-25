@@ -25,14 +25,14 @@ namespace Boss.Skill
 
         void StartFall()
         {
-            GameObject _rock = Resources.Load<GameObject>("Prefabs/Rock".ToString());
+            GameObject _rock = Resources.Load<GameObject>("Prefabs/Boss/Rock".ToString());
             Runner.Spawn(_rock, position: this.transform.position, onBeforeSpawned: ObjBeforeSpawn);
             Falling falling = _rock.GetComponent<Falling>();
         }
 
         IEnumerator LateStartFall()
         {
-            GameObject _rock = Resources.Load<GameObject>("Prefabs/Rock".ToString());
+            GameObject _rock = Resources.Load<GameObject>("Prefabs/Boss/Rock".ToString());
             Runner.Spawn(_rock, position: this.transform.position, onBeforeSpawned: LateObjBeforeSpawn);
             yield return new WaitForSeconds(_late);
             Rpc_SetClock(false);

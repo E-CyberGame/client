@@ -16,7 +16,7 @@ public class CloudSkill : NetworkBehaviour, BSkill
 
     IEnumerator CloudSpawn()
     {
-        _cloud = Resources.Load<GameObject>("Prefabs/Cloud".ToString());
+        _cloud = Resources.Load<GameObject>("Prefabs/Boss/Cloud".ToString());
         Runner.Spawn(_cloud, position: this.transform.position) ;
         yield return new WaitForSeconds(_pre);
     }
