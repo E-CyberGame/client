@@ -6,15 +6,18 @@ using System;
 using TMPro;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using Data;
 
 public class UI_CharacterManaging : UI_Popup
 {
     private int spend_crystal;
-    private int poll_rate = 99;
+    private int poll_rate;
     private GameObject pollutionPopup;
     [SerializeField] private TextMeshProUGUI cost_text;
+    [SerializeField] private TextMeshProUGUI before_poll;
     [SerializeField] private TextMeshProUGUI after_poll;
     [SerializeField] private TextMeshProUGUI pollusion;
+    [SerializeField] private TextMeshProUGUI _playername, _playercrystal, _playergold;
     enum Buttons
     {
         BackButton,
@@ -58,6 +61,13 @@ public class UI_CharacterManaging : UI_Popup
         GetButton((int)Buttons.Minus10Button).gameObject.BindUIEvent(ReduceCrystal10);
         GetButton((int)Buttons.Plus100Button).gameObject.BindUIEvent(AddCrystal100);
 
+        _playername.text = PlayerInfo.Instance.info.name;
+        _playercrystal.text = PlayerInfo.Instance.info.crystal.ToString();
+        _playergold.text = PlayerInfo.Instance.info.gold.ToString();
+        pollusion.text = PlayerInfo.Instance.info.decay.ToString() + "%";
+        before_poll.text = PlayerInfo.Instance.info.decay.ToString() + "%";
+        after_poll.text = PlayerInfo.Instance.info.decay.ToString() + "%";
+        poll_rate = PlayerInfo.Instance.info.decay;
     }
     public void BackButtonClicked(PointerEventData eventData)
     {
@@ -86,7 +96,10 @@ public class UI_CharacterManaging : UI_Popup
     public void PollutionPopupAcceptClicked(PointerEventData eventData)
     {
         Debug.Log("PollutionPopupAccept Clicked");
-        pollusion.text = poll_rate.ToString() + "%";
+        PlayerInfo.Instance.info.decay = poll_rate;
+        PlayerInfo.Instance.info.crystal -= spend_crystal;
+        pollusion.text = PlayerInfo.Instance.info.decay.ToString() + "%";
+        _playercrystal.text = PlayerInfo.Instance.info.crystal.ToString();
         pollutionPopup.SetActive(false);
     }
     public void AddCrystal10(PointerEventData eventData)
