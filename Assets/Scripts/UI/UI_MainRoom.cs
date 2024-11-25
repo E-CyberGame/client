@@ -6,10 +6,10 @@ using System;
 using TMPro;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using Data;
 
 public class UI_MainRoom : UI_Popup
 {
-    private string _name = "Test-Player", _level = "10", _crystal = "987654321", _gold = "123456789";
 
     [SerializeField] private TextMeshProUGUI _playername, _playerlevel, _playercrystal, _playergold; 
 
@@ -38,10 +38,10 @@ public class UI_MainRoom : UI_Popup
         //GetButton((int)Buttons.SpecialRaidButton).gameObject.BindUIEvent(SpecialRaidButtonClicked);
         //GetButton((int)Buttons.SettingButton).gameObject.BindUIEvent(SpecialRaidButtonClicked);
 
-        _playername.text = _name;
-        _playerlevel.text = _level;
-        _playercrystal.text = _crystal;
-        _playergold.text = _gold;
+        _playername.text = PlayerInfo.Instance.info.name;
+        _playerlevel.text = PlayerInfo.Instance.info.level.ToString();
+        _playercrystal.text = PlayerInfo.Instance.info.crystal.ToString();
+        _playergold.text = PlayerInfo.Instance.info.gold.ToString();
 
     }
     public void SoloButtonClicked(PointerEventData eventData)
