@@ -26,7 +26,7 @@ public class CreateCharacterInfo : MonoBehaviour
         CharacterType type = CharacterType.Youtuber;
         if (_worker.isOn) type = CharacterType.Worker;
         
-        CharacterInfoDTO data = new CharacterInfoDTO(_name.text, type, 1, 0, 0);
+        CharacterInfoDTO data = new CharacterInfoDTO(_name.text, type, 1, 1, 0, 0, 0);
         //웹에다 POST로 저장
     }
 }
