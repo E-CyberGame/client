@@ -25,7 +25,7 @@ namespace Data
         public CharacterData(CharacterType characterType)
         {
             CharacterType = characterType;
-            CardImage = Resources.Load<Sprite>("Arts/Character/card_" + CharacterType.ToString().ToLower());
+            CardImage = Resources.Load<Sprite>("Arts/Character/card_" + CharacterType.ToString());
             //Animator = animator;
         }
     }

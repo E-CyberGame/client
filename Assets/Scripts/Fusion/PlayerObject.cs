@@ -31,11 +31,12 @@ public class PlayerObject : NetworkBehaviour
     // User Settings
     [Networked, OnChangedRender(nameof(StatChanged))]
     public string Nickname { get; set; }
-    [Networked, OnChangedRender(nameof(StatChanged))]
-    public Color Color { get; set; }
+    
+    [Networked] 
+    public CharacterType Character { get; set; }
+
     public bool IsReady;
 
-    [Networked] public CharacterType Character { get; set; }
 
     // State & Gameplay Info
     
@@ -64,7 +65,6 @@ public class PlayerObject : NetworkBehaviour
 
         Ref = pRef;
         Index = index;
-        Color = Random.ColorHSV(0, 1, 0.5f, 1, 0.5f, 1);
     }
 
     public override void Spawned()
@@ -82,8 +82,12 @@ public class PlayerObject : NetworkBehaviour
         {
             Local = this;
             IsReady = false;
+            Debug.Log("PlayerInfo" + Ref + PlayerInfo.Instance.info.name + PlayerInfo.Instance.info.character);
+            Rpc_SetInfo(PlayerInfo.Instance.info.name, PlayerInfo.Instance.info.character);
             //Rpc_SetNickname(!string.IsNullOrWhiteSpace(UserData.Nickname) ? UserData.Nickname : $"Golfer{Random.Range(100, 1000)}");
         }
+        
+        Debug.Log("PlayerObject" + Ref + Nickname + Character.ToString());
 
         PlayerRegistry.PlayerJoined(Object.InputAuthority);
         
@@ -135,15 +139,12 @@ public class PlayerObject : NetworkBehaviour
     }
 
     [Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority)]
-    void Rpc_SetNickname(string nick)
+    public void Rpc_SetInfo(string nick, CharacterType characterType)
     {
         Nickname = nick;
-    }
-
-    [Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority)]
-    public void Rpc_SetColor(Color color)
-    {
-        Color = color;
+        Character = characterType;
+        
+        Debug.Log("SetInfo" + Nickname + Character);
     }
 
     [Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority)]
