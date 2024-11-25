@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Web;
+using Web.DTO;
 
 public class Login : MonoBehaviour
 {
@@ -72,8 +73,8 @@ public class Login : MonoBehaviour
             _errorScreen.SetActive(true); return;
         }*/
         
-        _webConnection.SendPost(
-            "members/login", new LoginDTO(_id.text, _password.text),
+        _webConnection.SendPost<LoginResponse>(
+            "login", new LoginDTO(_id.text, _password.text),
             s =>
             {
                 _successScreen.SetActive(true);
