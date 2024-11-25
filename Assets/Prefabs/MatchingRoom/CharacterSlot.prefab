@@ -392,7 +392,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c6bdecc96c693b4aaef59e9a7da9ebe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nickName: {fileID: 0}
+  characterImage: {fileID: 8921933136943564714}
+  nickName: {fileID: 8921933136147072016}
   ready: {fileID: 1948660139028075597}
 --- !u!1 &8921933136147072014
 GameObject:
