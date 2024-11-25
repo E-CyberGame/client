@@ -5,6 +5,7 @@ using Fusion;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Image = UnityEngine.UI.Image;
 
 public class CharacterSlot : NetworkBehaviour
 {
@@ -26,6 +27,14 @@ public class CharacterSlot : NetworkBehaviour
     {
         // characterImage.sprite = Database.CharacterData.GetData(Player.Character).CardImage;
         // nickName.name = Player.name;
+    }
+
+    public void SetData(CharacterType characterType, string nickname)
+    {
+        Debug.Log(Database.CharacterData.GetData(characterType).CardImage);
+        Debug.Log(nickname);
+        characterImage.sprite = Database.CharacterData.GetData(characterType).CardImage;
+        nickName.text = nickname;
     }
 
     public void SetReady(bool areReady)

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Data;
 using Fusion;
 using UnityEngine;
@@ -44,7 +45,6 @@ public class PVPMatchingPresenter : NetworkBehaviour, IPlayerJoined, IPlayerLeft
             SettingPanel.ChangeSetting += RPC_ChangeData;
         }
         
-        
         foreach (var player in RedTeam)
         {
             SetPlayerPanel(player);
@@ -54,6 +54,8 @@ public class PVPMatchingPresenter : NetworkBehaviour, IPlayerJoined, IPlayerLeft
         {
             SetPlayerPanel(player);
         }
+
+        RPC_SetPanelDataRequest();
     }
 
     public override void FixedUpdateNetwork()
@@ -133,6 +135,7 @@ public class PVPMatchingPresenter : NetworkBehaviour, IPlayerJoined, IPlayerLeft
     {
         if(HasStateAuthority) SetPlayerTeam(player);
         SetPlayerPanel(player);
+        RPC_SetPanelDataRequest();
     }
 
     private void SetPlayerTeam(PlayerRef player)
@@ -145,30 +148,39 @@ public class PVPMatchingPresenter : NetworkBehaviour, IPlayerJoined, IPlayerLeft
         if (redTeam < blueTeam)
         {
             RedTeam.Add(player);
-            /*po.SetLayer(LayerMask.NameToLayer("RedTeam"));
-            if(RedTeam.Count is 0) po.TeamNumber = 0;
-            else
-            {
-                PlayerRegistry.GetPlayer(RedTeam[0]).TeamNumber = 0;
-                po.TeamNumber = 1;
-            }*/
         }
         else
         {
             BlueTeam.Add(player);
-            /*po.SetLayer(LayerMask.NameToLayer("BlueTeam"));
-            if(BlueTeam.Count is 0) po.TeamNumber = 0;
-            else
-            {
-                PlayerRegistry.GetPlayer(BlueTeam[0]).TeamNumber = 0;
-                po.TeamNumber = 1;
-            }*/
         }
+    }
+
+    [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
+    public void RPC_SetPanelDataRequest()
+    {
+        foreach (var player in PlayerRegistry.Instance.ObjectByRef)
+        {
+            player.Value.OnStatChanged += delegate
+            {
+                RPC_SetPanelData(player.Key, player.Value.Character, player.Value.Nickname);
+            };
+            
+            Debug.Log("RPC_SetPanelDataRequest" + player.Key + " " + player.Value.Character + " " + player.Value.Nickname);
+            RPC_SetPanelData(player.Key, player.Value.Character, player.Value.Nickname);
+        }
+    }
+    
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    public void RPC_SetPanelData(PlayerRef player, CharacterType character, string nickname)
+    {
+        Debug.Log("RPC_SetPanelData" + player + " " + character + " " + nickname);
+        panels[player].GetComponent<CharacterSlot>().SetData(character, nickname);
     }
 
     private void SetPlayerPanel(PlayerRef player)
     {
         GameObject go = Instantiate(CharacterPanel);
+        
         panels[player] = go;
 
         if (RedTeam.Contains(player))
