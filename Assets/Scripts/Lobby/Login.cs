@@ -65,7 +65,7 @@ public class Login : MonoBehaviour
 
     public void moveScene()
     {
-        SceneManager.LoadScene("MainRoom");
+        SceneManager.LoadScene("FirstLoginStory");
     }
 
     public void moveFirstScene()
