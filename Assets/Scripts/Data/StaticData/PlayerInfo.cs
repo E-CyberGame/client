@@ -5,6 +5,7 @@ namespace Data
 {
     public class PlayerInfo : MonoSingleton<PlayerInfo>
     {
+        public string userID;
         public CharacterInfoDTO info { get; set; } = new CharacterInfoDTO(
             "SYEON.K", CharacterType.Youtuber, 100, 1, 500, 10, 30);
         public CharacterStatDTO stat { get; set; } = new CharacterStatDTO(
