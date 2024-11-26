@@ -4647,8 +4647,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cost_text: {fileID: 858383729}
+  before_poll: {fileID: 462726042}
   after_poll: {fileID: 1283284215}
   pollusion: {fileID: 470119654}
+  _playername: {fileID: 909529794}
+  _playercrystal: {fileID: 1837212751}
+  _playergold: {fileID: 1837212750}
 --- !u!1 &1619856600
 GameObject:
   m_ObjectHideFlags: 0
@@ -5751,6 +5755,28 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 85435926721910222, guid: 15010f407c3f7ff40a007467d6623532, type: 3}
   m_PrefabInstance: {fileID: 1837212748}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1837212750 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 85435926334225496, guid: 15010f407c3f7ff40a007467d6623532, type: 3}
+  m_PrefabInstance: {fileID: 1837212748}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1837212751 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 85435926984999668, guid: 15010f407c3f7ff40a007467d6623532, type: 3}
+  m_PrefabInstance: {fileID: 1837212748}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1863459290
 GameObject:
   m_ObjectHideFlags: 0
