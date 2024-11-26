@@ -24,30 +24,6 @@ public class Login : MonoBehaviour
     private string id_admin = "admin";
     private string ps_admin = "admin";
 
-    public void TryCreateAccount()
-    {
-        if (_id.text == "" || _id.text == null)
-        {
-            _errortext.text = "Create Account Error!\n Need ID";
-            _errorScreen.SetActive(true); return;
-        }
-        if (_password.text == "" || _password.text == null)
-        {
-            _errortext.text = "Create Account Error!\n Need Password";
-            _errorScreen.SetActive(true); return;
-        }
-        _webConnection.SendPost(
-            "register", new RegisterDTO(_id.text, _password.text, "Hunter"),
-        s =>
-        {
-            _successScreen.SetActive(true);
-        },
-        ()=> {
-            _errortext.text = "Create Account Error!\n Something goes wrong";
-            _errorScreen.SetActive(true);
-        });
-    }
-
     public void TryLogin()
     {
         if (_id.text == "" || _id.text == null)
