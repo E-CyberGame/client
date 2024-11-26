@@ -11,7 +11,9 @@ using Data;
 public class UI_MainRoom : UI_Popup
 {
 
-    [SerializeField] private TextMeshProUGUI _playername, _playerlevel, _playercrystal, _playergold; 
+    [SerializeField] private TextMeshProUGUI _playername, _playerlevel, _playercrystal, _playergold;
+    [SerializeField]
+    private Image characterstanding;
 
     enum Buttons
     {
@@ -42,7 +44,7 @@ public class UI_MainRoom : UI_Popup
         _playerlevel.text = PlayerInfo.Instance.info.level.ToString();
         _playercrystal.text = PlayerInfo.Instance.info.crystal.ToString();
         _playergold.text = PlayerInfo.Instance.info.gold.ToString();
-
+        characterstanding.sprite = Resources.Load<Sprite>("Arts/Character/card_" + PlayerInfo.Instance.info.character.ToString());
     }
     public void SoloButtonClicked(PointerEventData eventData)
     {
