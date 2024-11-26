@@ -37,7 +37,7 @@ public class Login : MonoBehaviour
             _errorScreen.SetActive(true); return;
         }
         _webConnection.SendPost(
-            "members/register", new LoginDTO(_id.text, _password.text),
+            "register", new RegisterDTO(_id.text, _password.text, "Hunter"),
         s =>
         {
             _successScreen.SetActive(true);
@@ -78,6 +78,8 @@ public class Login : MonoBehaviour
             s =>
             {
                 _successScreen.SetActive(true);
+                if (s.userName.userNickname is null) s.userName.userNickname = "SYEON";
+                _successScreen.transform.Find("ErrorText").GetComponent<TextMeshProUGUI>().text = "Welcome, " + s.userName.userNickname;
             },
             ()=> {
                 _errortext.text = "Login Error!\n Invalid ID or Password";
