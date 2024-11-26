@@ -33,7 +33,7 @@ public class CharacterSlot : NetworkBehaviour
     {
         Debug.Log(Database.CharacterData.GetData(characterType).CardImage);
         Debug.Log(nickname);
-        characterImage.sprite = Database.CharacterData.GetData(characterType).CardImage;
+        characterImage.sprite = Database.CharacterData.GetData(characterType).SlotImage;
         nickName.text = nickname;
     }
 

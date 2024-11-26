@@ -18,6 +18,9 @@ public class UI_CharacterManaging : UI_Popup
     [SerializeField] private TextMeshProUGUI after_poll;
     [SerializeField] private TextMeshProUGUI pollusion;
     [SerializeField] private TextMeshProUGUI _playername, _playercrystal, _playergold;
+    [SerializeField] GameObject _errorScreen;
+    [SerializeField] TextMeshProUGUI _errortext;
+
     enum Buttons
     {
         BackButton,
@@ -46,10 +49,6 @@ public class UI_CharacterManaging : UI_Popup
         Bind<Button>(typeof(Buttons));
 
         GetButton((int)Buttons.BackButton).gameObject.BindUIEvent(BackButtonClicked);
-        //GetButton((int)Buttons.Character1).gameObject.BindUIEvent(CharacterButtonClicked);
-        //GetButton((int)Buttons.Character2).gameObject.BindUIEvent(CharacterButtonClicked);
-        //GetButton((int)Buttons.Character3).gameObject.BindUIEvent(CharacterButtonClicked);
-        //GetButton((int)Buttons.Character4).gameObject.BindUIEvent(CharacterButtonClicked);
         GetButton((int)Buttons.Skill1).gameObject.BindUIEvent(SkillButtonClicked);
         GetButton((int)Buttons.Skill2).gameObject.BindUIEvent(SkillButtonClicked);
         GetButton((int)Buttons.Skill3).gameObject.BindUIEvent(SkillButtonClicked);
@@ -58,8 +57,8 @@ public class UI_CharacterManaging : UI_Popup
         GetButton((int)Buttons.PollutionPopupCancle).gameObject.BindUIEvent(PollutionPopupCancleClicked);
         GetButton((int)Buttons.PollutionPopupAccept).gameObject.BindUIEvent(PollutionPopupAcceptClicked);
         GetButton((int)Buttons.Plus10Button).gameObject.BindUIEvent(AddCrystal10);
-        GetButton((int)Buttons.Minus10Button).gameObject.BindUIEvent(ReduceCrystal10);
         GetButton((int)Buttons.Plus100Button).gameObject.BindUIEvent(AddCrystal100);
+        GetButton((int)Buttons.Minus10Button).gameObject.BindUIEvent(ReduceCrystal10);
 
         _playername.text = PlayerInfo.Instance.info.name;
         _playercrystal.text = PlayerInfo.Instance.info.crystal.ToString();
@@ -91,16 +90,25 @@ public class UI_CharacterManaging : UI_Popup
     public void PollutionPopupCancleClicked(PointerEventData eventData)
     {
         Debug.Log("PollutionPopupCancle Clicked");
+        poll_rate = PlayerInfo.Instance.info.decay;
+        spend_crystal = 0;
+        cost_text.text = spend_crystal.ToString();
+        after_poll.text = poll_rate.ToString() + "%";
         pollutionPopup.SetActive(false);
     }
     public void PollutionPopupAcceptClicked(PointerEventData eventData)
     {
         Debug.Log("PollutionPopupAccept Clicked");
-        PlayerInfo.Instance.info.decay = poll_rate;
-        PlayerInfo.Instance.info.crystal -= spend_crystal;
-        pollusion.text = PlayerInfo.Instance.info.decay.ToString() + "%";
-        _playercrystal.text = PlayerInfo.Instance.info.crystal.ToString();
-        pollutionPopup.SetActive(false);
+        if(spend_crystal > PlayerInfo.Instance.info.crystal)
+        {
+            _errortext.text = "크리스탈이 부족합니다.";
+            _errorScreen.SetActive(true); return;
+        }
+            PlayerInfo.Instance.info.decay = poll_rate;
+            PlayerInfo.Instance.info.crystal -= spend_crystal;
+            pollusion.text = PlayerInfo.Instance.info.decay.ToString() + "%";
+            _playercrystal.text = PlayerInfo.Instance.info.crystal.ToString();
+            pollutionPopup.SetActive(false);
     }
     public void AddCrystal10(PointerEventData eventData)
     {
