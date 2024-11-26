@@ -468,6 +468,7 @@ MonoBehaviour:
   _playerlevel: {fileID: 498451597}
   _playercrystal: {fileID: 1948996079}
   _playergold: {fileID: 1496963876}
+  characterstanding: {fileID: 1816598595}
 --- !u!224 &310370072 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5935311234862512364, guid: 97754cbf1ba48d2419c77789b6e1b579, type: 3}
@@ -1588,7 +1589,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -299.99994, y: 470}
+  m_AnchoredPosition: {x: -450, y: 470}
   m_SizeDelta: {x: 1000, y: 1000}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1816598595
