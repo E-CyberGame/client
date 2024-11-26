@@ -20,12 +20,14 @@ namespace Data
     {
         public CharacterType CharacterType;
         public Sprite CardImage;
+        public Sprite SlotImage;
         public Animator Animator;
         
         public CharacterData(CharacterType characterType)
         {
             CharacterType = characterType;
             CardImage = Resources.Load<Sprite>("Arts/Character/card_" + CharacterType.ToString());
+            SlotImage = Resources.Load<Sprite>("Arts/Character/slot_" + CharacterType.ToString());
             //Animator = animator;
         }
     }
