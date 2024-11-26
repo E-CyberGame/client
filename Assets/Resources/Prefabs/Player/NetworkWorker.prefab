@@ -158,10 +158,10 @@ MonoBehaviour:
   _SetSpeed: 0
   _SetCoolTimePercent: 0
   _SetDamagePercent: 0
-  moveSpeed: 10
+  moveSpeed: 5
   jumpTime: 0.3
-  downSpeed: 15
-  dashSpeedRatio: 1.7
+  downSpeed: 10
+  dashSpeedRatio: 1.2
   dashTime: 0.3
   gravity: 3
   MaxJumpCount: 2
@@ -180,7 +180,7 @@ MonoBehaviour:
   wallCheckLine: 0.3
   groundCheckLine: 0.35
   jumpHeight: 3
-  dashLength: 3
+  dashLength: 1
   _velocity: {x: 0, y: 0, z: 0}
   _acceleration: {x: 0, y: 0, z: 0}
   onGound: 0
@@ -336,9 +336,8 @@ MonoBehaviour:
   _Index: 0
   _Controller: {fileID: 0}
   _Nickname: 
-  _Color: {r: 0, g: 0, b: 0, a: 0}
-  IsReady: 0
   _Character: 0
+  IsReady: 0
   _TeamNumber: 0
   _IsLoaded: 0
   _IsSpectator: 0
