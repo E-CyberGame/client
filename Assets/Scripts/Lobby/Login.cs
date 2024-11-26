@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Net;
+using Data;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -48,12 +49,13 @@ public class Login : MonoBehaviour
             _errortext.text = "Login Error!\n Invalid Password";
             _errorScreen.SetActive(true); return;
         }*/
-        
+
         _webConnection.SendPost<LoginResponse>(
             "login", new LoginDTO(_id.text, _password.text),
             s =>
             {
                 _successScreen.SetActive(true);
+                PlayerInfo.Instance.userID = s.userName.userName;
                 if (s.userName.userNickname is null) s.userName.userNickname = "SYEON";
                 _successScreen.transform.Find("ErrorText").GetComponent<TextMeshProUGUI>().text = "Welcome, " + s.userName.userNickname;
             },

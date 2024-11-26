@@ -10,12 +10,12 @@ namespace Web
     {
         private const string _endpoint = "http://18.224.19.4:8080/api/";
 
-        public void SentGet<T>(string request, Action<T> successAction, Action failAction)
+        public void SendGet<T>(string request, Action<T> successAction, Action failAction = null)
         {
             StartCoroutine(SendGetRequest<T>(request, successAction, failAction));
         }
         
-        public void SentGet(string request, Action<string> successAction, Action failAction)
+        public void SendGet(string request, Action<string> successAction, Action failAction = null)
         {
             StartCoroutine(SendGetRequest(request, successAction, failAction));
         }
@@ -35,7 +35,7 @@ namespace Web
         #region private
         private IEnumerator SendGetRequest<T>(string request, Action<string> successAction, Action failAction = null)
         {
-            using (UnityWebRequest webRequest = new UnityWebRequest(_endpoint + request, "GET"))
+            using (UnityWebRequest webRequest = UnityWebRequest.Get(_endpoint + request))
             {
                 // 요청 보내기
                 yield return webRequest.SendWebRequest();
@@ -62,10 +62,12 @@ namespace Web
 
         private IEnumerator SendGetRequest<T>(string request, Action<T> successAction, Action failAction = null)
         {
-            using (UnityWebRequest webRequest = new UnityWebRequest(_endpoint + request, "GET"))
+            using (UnityWebRequest webRequest = UnityWebRequest.Get(_endpoint + request))
             {
                 // 요청 보내기
                 yield return webRequest.SendWebRequest();
+                
+                Debug.Log("url : " + _endpoint + request);
 
                 if (webRequest.result != UnityWebRequest.Result.Success)
                 {
