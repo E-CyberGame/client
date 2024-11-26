@@ -134,7 +134,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0762505ba94e234c92664ddf64b5e33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wallCheckLine: 0.3
 --- !u!114 &407036373728366924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,10 +157,10 @@ MonoBehaviour:
   _SetSpeed: 0
   _SetCoolTimePercent: 0
   _SetDamagePercent: 0
-  moveSpeed: 4
+  moveSpeed: 5
   jumpTime: 0.3
-  downSpeed: 15
-  dashSpeedRatio: 1.7
+  downSpeed: 10
+  dashSpeedRatio: 1.2
   dashTime: 0.3
   gravity: 1
   MaxJumpCount: 2
@@ -177,9 +176,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5318f6652b8a79749ad973dacdd63b4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wallCheckLine: 0.3
   groundCheckLine: 0.35
   jumpHeight: 3
-  dashLength: 3
+  dashLength: 1
   _velocity: {x: 0, y: 0, z: 0}
   _acceleration: {x: 0, y: 0, z: 0}
   onGound: 0
@@ -334,9 +334,8 @@ MonoBehaviour:
   _Index: 0
   _Controller: {fileID: 407036373728366927}
   _Nickname: 
-  _Color: {r: 0, g: 0, b: 0, a: 0}
-  IsReady: 0
   _Character: 1
+  IsReady: 0
   _TeamNumber: 0
   _IsLoaded: 0
   _IsSpectator: 0
