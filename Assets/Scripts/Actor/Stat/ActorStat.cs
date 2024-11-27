@@ -1,11 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Data;
 using Fusion;
 using UnityEngine;
 using UnityEngine.Serialization;
-using Web.DTO;
 
 public class ActorStat : NetworkBehaviour
 {
@@ -59,24 +57,20 @@ public class ActorStat : NetworkBehaviour
     public float gravity = 1f;
     public int MaxJumpCount = 2;
 
-
-    #endregion
-
-    [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
-    public void Rpc_SetActorStat(float maxHP, float maxMP, float atk, float def, float cri_percent, float cri_damage, float speed)
+    private void InitStat()
     {
-        SetMaxHP = maxHP;
-        SetMaxMP = maxMP;
-        SetAtk = atk;
-        SetDef = def;
-        SetCriPercent = cri_percent;
-        SetCriDamage = cri_damage;
-        SetSpeed = speed;  
+        SetMaxHP = 100;         // 최대 HP
+        SetMaxMP = 100;         // 최대 MP
+        SetAtk = 15;            // 공격력
+        SetDef = 5;             // 방어력
+        SetCriPercent = 20f;    // 치명타 확률
+        SetCriDamage = 1.5f;   // 치명타 피해 배율
+        SetSpeed = 3;           // 속도
         hp = SetMaxHP;          // 현재 HP를 최대 HP로 초기화
-        mp = 0;
+        mp = 0;         
         SetCoolTimePercent = 1.0f;
         SetDamagePercent = 1f;
-        
+
         GetMaxHP = new GameStat(SetMaxHP);
         GetMaxMP = new GameStat(SetMaxMP);
         GetAtk = new GameStat(SetAtk);
@@ -87,6 +81,8 @@ public class ActorStat : NetworkBehaviour
         GetCoolTimePercent = new GameStat(SetCoolTimePercent);
         GetDamagePercent = new GameStat(SetDamagePercent);
     }
+
+    #endregion
     
     System.Random random = new System.Random();
     public void Attack(float damage)
@@ -108,8 +104,7 @@ public class ActorStat : NetworkBehaviour
     public override void Spawned()
     {
         _changeDetector = GetChangeDetector(ChangeDetector.Source.SimulationState);
-        CharacterStatDTO data = PlayerInfo.Instance.stat;
-        Rpc_SetActorStat(data.max_hp, data.max_mp, data.atk, data.def, data.cri_percent, data.cri_damage, data.speed);
+        InitStat();
     }
     
     public override void Render()
@@ -130,47 +125,47 @@ public class ActorStat : NetworkBehaviour
                     MpStatChanged?.Invoke();
                     break;
                 case nameof(SetMaxHP):
-                    GetMaxHP?.StatChanged?.Invoke();
-                    GetMaxHP?.SetValue(SetMaxHP);
+                    GetMaxHP.StatChanged?.Invoke();
+                    GetMaxHP.SetValue(SetMaxHP);
                     break;
                 case nameof(SetMaxMP):
-                    GetMaxMP?.StatChanged?.Invoke();
-                    GetMaxMP?.SetValue(SetMaxMP);
+                    GetMaxMP.StatChanged?.Invoke();
+                    GetMaxMP.SetValue(SetMaxMP);
                     break;
 
                 case nameof(SetAtk):
-                    GetAtk?.StatChanged?.Invoke();
-                    GetAtk?.SetValue(SetAtk);
+                    GetAtk.StatChanged?.Invoke();
+                    GetAtk.SetValue(SetAtk);
                     break;
 
                 case nameof(SetDef):
-                    GetDef?.StatChanged?.Invoke();
-                    GetDef?.SetValue(SetDef);
+                    GetDef.StatChanged?.Invoke();
+                    GetDef.SetValue(SetDef);
                     break;
 
                 case nameof(SetCriPercent):
-                    GetCriPercent?.StatChanged?.Invoke();
-                    GetCriPercent?.SetValue(SetCriPercent);
+                    GetCriPercent.StatChanged?.Invoke();
+                    GetCriPercent.SetValue(SetCriPercent);
                     break;
 
                 case nameof(SetCriDamage):
-                    GetCriDamage?.StatChanged?.Invoke();
-                    GetCriDamage?.SetValue(SetCriDamage);
+                    GetCriDamage.StatChanged?.Invoke();
+                    GetCriDamage.SetValue(SetCriDamage);
                     break;
 
                 case nameof(SetSpeed):
-                    GetSpeed?.StatChanged?.Invoke();
-                    GetSpeed?.SetValue(SetSpeed);
+                    GetSpeed.StatChanged?.Invoke();
+                    GetSpeed.SetValue(SetSpeed);
                     break;
                 
                 case nameof(SetCoolTimePercent):
-                    GetCoolTimePercent?.StatChanged?.Invoke();
-                    GetCoolTimePercent?.SetValue(SetCoolTimePercent);
+                    GetCoolTimePercent.StatChanged?.Invoke();
+                    GetCoolTimePercent.SetValue(SetCoolTimePercent);
                     break;
                 
                 case nameof(SetDamagePercent):
-                    GetDamagePercent?.StatChanged?.Invoke();
-                    GetDamagePercent?.SetValue(SetDamagePercent);
+                    GetDamagePercent.StatChanged?.Invoke();
+                    GetDamagePercent.SetValue(SetDamagePercent);
                     break;
             }
             
