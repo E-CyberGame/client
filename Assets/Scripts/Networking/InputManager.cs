@@ -51,9 +51,9 @@ public class InputManager : SimulationBehaviour, IBeforeUpdate, INetworkRunnerCa
             Vector2 moveDirection = Vector2.zero;
             
             if (Input.GetKey(KeyCode.LeftArrow))
-                moveDirection += Vector2.left;
+                moveDirection = Vector2.left;
             if (Input.GetKey(KeyCode.RightArrow))
-                moveDirection += Vector2.right;
+                moveDirection = Vector2.right;
 
             accumulatedInput.Direction += moveDirection;
             moveButtons.Set(InputButton.Jump, Input.GetKey(KeyCode.UpArrow));

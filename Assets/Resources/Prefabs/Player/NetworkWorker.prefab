@@ -158,10 +158,10 @@ MonoBehaviour:
   _SetSpeed: 0
   _SetCoolTimePercent: 0
   _SetDamagePercent: 0
-  moveSpeed: 5
+  moveSpeed: 7
   jumpTime: 0.3
   downSpeed: 10
-  dashSpeedRatio: 1.2
+  dashSpeedRatio: 1.4
   dashTime: 0.3
   gravity: 3
   MaxJumpCount: 2
