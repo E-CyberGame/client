@@ -21,6 +21,9 @@ public class PVPMatchingPresenter : NetworkBehaviour, IPlayerJoined, IPlayerLeft
 
     private Dictionary<PlayerRef, GameObject> panels = new Dictionary<PlayerRef, GameObject>();
 
+    [SerializeField]
+    public GameObject LoadingPanel;
+
     //임시. Ready하면 바로 고하게 설정해뒀는데 이렇게 했더니 씬이 여러번 불려와서 에러남.
     private bool GameIsStarted = false;
     
@@ -74,7 +77,7 @@ public class PVPMatchingPresenter : NetworkBehaviour, IPlayerJoined, IPlayerLeft
         if (areAllReady && !GameIsStarted)
         {
             GameIsStarted = true;
-            GameStart();
+            StartCoroutine(GameStart());
         }
     }
 
@@ -92,10 +95,12 @@ public class PVPMatchingPresenter : NetworkBehaviour, IPlayerJoined, IPlayerLeft
         SettingPanel.SetData(new PVPData(mapType, decay, crystal));
     }
 
-    public void GameStart()
+    IEnumerator GameStart()
     {
         Rpc_SetTeam();
         RoomManager.State.Server_SetState(GameState.EGameState.Loading);
+        LoadingPanel.gameObject.SetActive(true);
+        yield return new WaitForSeconds(3.0f);
         Runner.LoadScene(RoomManager.Instance.MapType.ToString());
     }
 
