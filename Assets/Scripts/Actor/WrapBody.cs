@@ -31,6 +31,7 @@ public class WrapBody : NetworkBehaviour
     public float groundCheckLine = 1f;
     public float jumpHeight = 2.0f;
     public float dashLength = 3.0f;
+    public float slideRatio = 5.0f;
 
     [SerializeField]
     private Vector3 _velocity = new Vector3(0f, 0f, 0f);
@@ -48,6 +49,28 @@ public class WrapBody : NetworkBehaviour
     private bool isDashing = false;
     
     public Vector2 currentDirectionX { get { return directionX == Vector2.zero ? beforeDirectionX : directionX; } }
+    private float _directionAmount = 0.0f;
+
+    private float DirectionAmount
+    {
+        get
+        {
+            return _directionAmount;
+        }
+        set
+        {
+            if (value > 1.0f)
+            {
+                _directionAmount = 1.0f;
+            }
+
+            else if (value < -1.0f)
+            {
+                _directionAmount = -1.0f;
+            }
+            else _directionAmount = value;
+        }
+    }
     [SerializeField]
     private Vector2 _directionX = Vector2.zero;
     
@@ -56,6 +79,10 @@ public class WrapBody : NetworkBehaviour
         get { return _directionX;}
         set
         {
+            if (_directionX != value)
+            {
+                SyncDirectionX = _directionX;
+            }
             _directionX = value;
             if (directionX != Vector2.zero)
                 beforeDirectionX = directionX;
@@ -63,6 +90,7 @@ public class WrapBody : NetworkBehaviour
     }
 
     public Vector2 beforeDirectionX = Vector2.left;
+    public Vector2 SyncDirectionX = Vector2.zero;
     #endregion
 
     public void Awake()
@@ -124,8 +152,24 @@ public class WrapBody : NetworkBehaviour
     {
         if (HasStateAuthority)
         {
+            if (directionX.x != SyncDirectionX.x)
+            {
+                if (directionX.x == 0)
+                {
+                    DirectionAmount += Time.deltaTime * (-SyncDirectionX.x) * slideRatio;
+                    if (SyncDirectionX.x == -1.0f && DirectionAmount > 0f)
+                    {
+                        DirectionAmount = 0f;
+                    }
+                    else if (SyncDirectionX.x == 1.0f && DirectionAmount < 0f)
+                    {
+                        DirectionAmount = 0f;
+                    }
+                }
+                else DirectionAmount += Time.deltaTime * directionX.x * slideRatio;
+            }
             if(!isDashing)
-                _velocity.x = directionX.x * (_stat.moveSpeed * Runner.DeltaTime);
+                _velocity.x = DirectionAmount * (_stat.moveSpeed * Runner.DeltaTime);
 
             if (GroundCheck())
             {
@@ -147,14 +191,12 @@ public class WrapBody : NetworkBehaviour
             
             
             _velocity += _acceleration * Runner.DeltaTime;
+            
             if (isDashing || !onGravity) 
                 _velocity.y = 0;
 
             if (LWallCheck() && _velocity.x < 0)
-            {
                 _velocity.x = 0;
-
-            }
 
             if (RWallCheck() && _velocity.x > 0)
                 _velocity.x = 0;
@@ -190,7 +232,7 @@ public class WrapBody : NetworkBehaviour
     
     public void Down()
     {
-        _velocity.y -= 0.5f;
+        _velocity.y -= 0.2f;
         //_rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _stat.downSpeed * -1);
     }
 
