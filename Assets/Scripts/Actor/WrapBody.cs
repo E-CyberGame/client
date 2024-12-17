@@ -12,6 +12,7 @@ public class WrapBody : NetworkBehaviour
     #region Reference
     private ActorStat _stat;
     private Transform _transform;
+    private BoxCollider2D _colider;
     private Rigidbody2D _rigidbody;
     #endregion
     
@@ -95,6 +96,7 @@ public class WrapBody : NetworkBehaviour
 
     public void Awake()
     {
+        _colider = GetComponent<BoxCollider2D>();
         _stat = GetComponent<ActorStat>();
         _rigidbody = GetComponent<Rigidbody2D>();
         _transform = transform;
@@ -114,6 +116,10 @@ public class WrapBody : NetworkBehaviour
             , groundLayer);
         if(_hitGround)
         {
+            BoxCollider2D ground = _hitGround.collider as BoxCollider2D;
+            float overlap = ground.bounds.max.y - _colider.bounds.min.y;
+            if (overlap > 0)
+                _transform.position += new Vector3(0, overlap, 0);
             return true;
         }
         return false;
