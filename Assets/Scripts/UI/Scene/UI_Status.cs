@@ -17,6 +17,7 @@ public class UI_Status : UI_Scene
 
     enum Images
     {
+        characterHead,
         HpBar,
         RTeam1HpBar,
         RTeam2HpBar,
@@ -54,5 +55,11 @@ public class UI_Status : UI_Scene
     public void SetHPbar()
     {
 
+    }
+
+    public void SetHeadImage(Sprite headImage)
+    {
+        Debug.Log(GetImage((int)Images.characterHead) is null);
+        GetImage((int)Images.characterHead).sprite = headImage;
     }
 }

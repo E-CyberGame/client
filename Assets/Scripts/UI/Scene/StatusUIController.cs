@@ -1,3 +1,4 @@
+using Data;
 using Fusion;
 using UnityEngine;
 
@@ -19,6 +20,8 @@ namespace UI.Scene
         
         public override void Spawned()
         {
+            _view.SetHeadImage(Resources.Load<Sprite>("Arts/Character/face_" + PlayerInfo.Instance.info.character.ToString()));
+
             Debug.Log("Spawned");
             RoomManager.Instance.Rpc_LoadDone(Runner.LocalPlayer);
             SetHPbar(PlayerRegistry.GetPlayer(Runner.LocalPlayer), _model);
