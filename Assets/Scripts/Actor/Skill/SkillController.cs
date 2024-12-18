@@ -12,7 +12,6 @@ public enum SkillSlot
     slot1,
     slot2,
     slot3,
-    slot4
 }
 public class SkillController : NetworkBehaviour
 {
