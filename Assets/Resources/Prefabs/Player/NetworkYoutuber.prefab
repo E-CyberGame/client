@@ -337,6 +337,7 @@ MonoBehaviour:
   _Character: 1
   IsReady: 0
   _TeamNumber: 0
+  _death: 0
   _IsLoaded: 0
   _IsSpectator: 0
   _Strokes: 0
