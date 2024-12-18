@@ -14,10 +14,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SEI-test/Start.unity
     guid: d522430767099034fbcb61afe238af29
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/CutScene/StartingStory.unity
     guid: 65efe156bdb5b9c48bf0330333c92d7b
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Login.unity
     guid: dd88ddbf71b9be4438406b8305c2308c
   - enabled: 1

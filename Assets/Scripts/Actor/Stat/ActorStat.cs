@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Data;
 using Fusion;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -17,7 +18,7 @@ public class ActorStat : NetworkBehaviour
     //Fluid Stat : 게임 중 유동적인 변화가 가장 큰 스탯
     [Networked] public float hp { get; set; }
     [Networked] public float mp { get; set; }
-    
+
     //Game Stat : Read > Write
     //get, buff 등은 MaxHP 사용하고, set은 maxHP 사용하는 방식으로 ㄱㄱ
     public GameStat GetMaxHP;
@@ -67,7 +68,7 @@ public class ActorStat : NetworkBehaviour
         SetCriDamage = 1.5f;   // 치명타 피해 배율
         SetSpeed = 3;           // 속도
         hp = SetMaxHP;          // 현재 HP를 최대 HP로 초기화
-        mp = 0;         
+        mp = 0;
         SetCoolTimePercent = 1.0f;
         SetDamagePercent = 1f;
 
@@ -117,8 +118,11 @@ public class ActorStat : NetworkBehaviour
                     HpStatChanged?.Invoke();
                     if (hp <= 0)
                     {
-                        RoomManager.Instance.RespawnPlayer(Runner.LocalPlayer);
-                        hp = GetMaxHP.Value;
+                        PlayerObject ob = GetComponent<PlayerObject>();
+                        ob.death++;
+                        ob.InitPlayerPosition(RoomManager.Instance.MapType);
+                        RoomManager.Instance.RespawnPlayer();
+                        hp = GetMaxHP.Value;                        
                     }
                     break;
                 case nameof(mp):
