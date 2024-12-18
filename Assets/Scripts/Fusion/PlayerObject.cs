@@ -42,7 +42,9 @@ public class PlayerObject : NetworkBehaviour
     
     //팀에서 몇번째 플레이어인지
     [Networked] public int TeamNumber { get; set; }
-    
+    [Networked] public int death { get; set; }
+
+
     [Networked]
     public bool IsLoaded { get; set; }
     [Networked, OnChangedRender(nameof(SpectatorChanged))]
@@ -90,7 +92,9 @@ public class PlayerObject : NetworkBehaviour
         Debug.Log("PlayerObject" + Ref + Nickname + Character.ToString());
 
         PlayerRegistry.PlayerJoined(Object.InputAuthority);
-        
+
+        death = 0;
+
         DontDestroyOnLoad(this);
     }
 
@@ -117,6 +121,7 @@ public class PlayerObject : NetworkBehaviour
     {
         Strokes = 0;
         TimeTaken = TIME_UNSET;
+        death = 0;
         for (int i = 0; i < Scores.Length; i++)
         {
             Scores.Set(i, 0);

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Actor;
 using Data;
 using Fusion;
 using UnityEngine;
@@ -46,14 +47,32 @@ public class RoomManager : NetworkBehaviour
     }
     #endregion
 
-    public void RespawnPlayer(PlayerRef player)
+    public void RespawnPlayer()
     {
-        if (!HasStateAuthority) return;
-        PlayerObject ob = PlayerRegistry.GetPlayer(player);
-        ob.InitPlayerPosition(MapType);
-        if (ob.gameObject.layer == LayerMask.NameToLayer("BlueTeam")) BlueTeamDead++;
-        else RedTeamDead++;
-        
+        //if (!HasStateAuthority) return;
+        //PlayerObject ob = PlayerRegistry.GetPlayer(player);
+        //ob.InitPlayerPosition(MapType);
+
+        BlueTeamDead = 0;
+        RedTeamDead = 0;
+
+        foreach (PlayerObject players in PlayerRegistry.Players)
+        {
+            if (players.GetLayer() == LayerMask.NameToLayer("BlueTeam"))
+            {
+                BlueTeamDead += players.death;
+            }
+            else if (players.GetLayer() == LayerMask.NameToLayer("RedTeam"))
+            {
+                RedTeamDead += players.death;
+            }
+        }
+        Rpc_ScoreLoad();
+    }
+
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    public void Rpc_ScoreLoad()
+    {
         ScoreChanged?.Invoke();
     }
 
